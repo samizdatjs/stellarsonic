@@ -13,16 +13,23 @@
     <main class="container ${showNav ? 'hidden' : ''}"
       css="background: radial-gradient(ellipse at top, ${post.palette.primary}, transparent);"
     >
-      <a class="button top-right" route-href="route: home; params.bind: {pick: post._id}">
-        <i class="fal fa-bars"></i>
-      </a>
-      <a class="button top-left" href="">
-        <i class="fal fa-volume"></i>
-      </a>
+      <div class="top-right content">
+        <a class="button" route-href="route: home; params.bind: {pick: post._id}">
+          <i class="fal fa-bars"></i>
+        </a>
+      </div>
+      <div class="top-left content">
+        <a if.bind="player.playlist" class="button" href="#posts/${player.playlist._id}">
+          <i class="fal fa-music"></i>
+        </a>
+      </div>
       <section class="cover-section">
         <div class="grid">
           <div class="cover">
-            <div class="cover-frame au-animate">
+            <div class="cover-frame">
+              <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
+            </div>
+            <div class="cover-frame shadow">
               <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
             </div>
           </div>

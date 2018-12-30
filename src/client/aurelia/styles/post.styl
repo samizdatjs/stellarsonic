@@ -64,6 +64,12 @@
   height: 260px;
   bottom: 0;
 
+.shadow
+  transform: translateY(calc(100% + 20px)) scaleY(-1);
+  opacity: 0.1;
+  -webkit-mask-image: -webkit-gradient(linear, left 0%, left bottom, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+  z-index: -1;
+
 .grid
   position: absolute;
   width: 100%;
@@ -126,10 +132,6 @@ footer
   margin: 0 auto;
   padding: 100px 0;
   
-.post
-  .cover-frame
-    -webkit-box-reflect: below 20px -webkit-linear-gradient(bottom, rgba(255,255,255,0.1) 0%, transparent 75%, transparent 100%);
-
 .cover-section
   width: 100vw;
   height: 100vh;

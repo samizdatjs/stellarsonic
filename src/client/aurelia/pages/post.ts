@@ -1,4 +1,5 @@
 import {PostView} from '../../ziggurat/views';
+import {Player} from '../services/player';
 import {autoinject} from 'aurelia-framework';
 import * as moment from 'moment';
 
@@ -17,6 +18,7 @@ export class Post {
 
   public constructor(
     private postView: PostView,
+    private player: Player
   ) {}
 
   activate(params: any) {

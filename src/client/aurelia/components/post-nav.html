@@ -4,18 +4,26 @@
   <main class="carousel container"
     css="background: radial-gradient(ellipse at top, ${posts.data[selected].palette.primary}, transparent);"
   >
-    <a if.bind="selected > 0" class="post-prev button content" href="" click.delegate="slideLeft()">
-      <i class="fal fa-chevron-left"></i>
-    </a>
-    <a if.bind="selected < posts.data.length - 1" class="post-next button content" href="" click.delegate="slideRight()">
-      <i class="fal fa-chevron-right"></i>
-    </a>
-    <a if.bind="pick" class="top-right button" href="#posts/${pick}">
-      <i class="fal fa-bars"></i>
-    </a>
-    <a if.bind="pick" class="top-left button" href="">
-      <i class="fal fa-volume"></i>
-    </a>
+    <div class="mid-left content">
+      <a if.bind="selected > 0" class="button" href="" click.delegate="slideLeft()">
+        <i class="fal fa-chevron-left"></i>
+      </a>
+    </div>
+    <div class="mid-right content">
+      <a if.bind="selected < posts.data.length - 1" class="button" href="" click.delegate="slideRight()">
+        <i class="fal fa-chevron-right"></i>
+      </a>
+    </div>
+    <div if.bind="pick" class="top-right content">
+      <a class="button" href="#posts/${pick}">
+        <i class="fal fa-bars"></i>
+      </a>
+    </div>
+    <div if.bind="pick && player.playlist" class="top-left content">
+      <a class="button" href="#posts/${player.playlist._id}">
+        <i class="fal fa-music"></i>
+      </a>
+    </div>
     <section class="cover-section">
       <ul class="carousel-list">
         <li repeat.for="post of posts.data" class="carousel-item ${selected === $index ? 'selected' : ''}"
@@ -26,6 +34,9 @@
               <a class="cover-frame" href="#posts/${post._id}">
                 <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
               </a>
+              <div class="cover-frame shadow" href="#posts/${post._id}">
+                <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
+              </div>
             </div>
             <div class="title">
               <h1>${post.headline}</h1>

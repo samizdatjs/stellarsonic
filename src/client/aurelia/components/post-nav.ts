@@ -1,5 +1,6 @@
-import {Term} from '@ziggurat/nabu';
 import {PostFeed, PostCategories} from '../../ziggurat/views';
+import {Player} from '../services/player';
+import {Term} from '@ziggurat/nabu';
 import {autoinject, bindable} from 'aurelia-framework';
 
 @autoinject
@@ -13,7 +14,8 @@ export class PostNavCustomElement {
 
   public constructor(
     private allPosts: PostFeed,
-    private categories: PostCategories
+    private categories: PostCategories,
+    private player: Player
   ) {
     this.posts = allPosts;
     this.posts.on('data-updated', () => {
