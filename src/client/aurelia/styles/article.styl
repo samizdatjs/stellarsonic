@@ -1,0 +1,61 @@
+@import 'settings';
+
+.post-content
+  article
+    padding: 60px 50px;
+    max-width: 700px;
+    color: color-text;
+    font-family: font-primary;
+    position: relative;
+    min-height: 50vh;
+    margin: 0 auto;
+
+    a
+      color: #cd9023;
+      text-decoration: none;
+      font-style: italic;
+
+    img
+      width: 100%;
+      margin: 30px 0;
+
+    h1, h2, h3, h4, h5, h6
+      font-weight: 300;
+
+    p
+      margin: 40px 0;
+
+    hr
+      border: 0;
+      margin: 30px 0;
+      position: relative;
+      height: 1px;
+
+      &:after
+        background-color: #cd9023;
+        content: "";
+        height: 1px;
+        left: 50%;
+        margin-left: -18px;
+        position: absolute;
+        width: 36px;
+
+  @media screen and (min-width: 900px)
+    .align-left
+      float: left;
+      margin: 5px 30px 15px 0;
+      max-width: 450px;
+      margin-left: -120px;
+
+      p, img
+        margin: 0
+
+    @media screen and (min-width: 900px)
+      .expand
+        display: inline-block;
+        width: 940px;
+        margin-left: -120px;
+
+        p
+          margin: 0
+

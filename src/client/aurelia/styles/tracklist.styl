@@ -1,0 +1,61 @@
+@import 'settings';
+
+.playlist
+  ul
+    display: inline;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    list-style-position: outside;
+    font-family: inherit;
+    padding: 0;
+    overflow: hidden;
+
+  li
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+
+    &:hover
+      background: linear-gradient(
+        rgba(0, 0, 0,.06) 0%,
+        rgba(0, 0, 0, 0) 15%, 
+        rgba(0, 0, 0, 0) 85%, 
+        rgba(0, 0, 0,.06) 100%
+      );
+
+    .track-index
+      width: 30px;
+      float: left;
+      padding: 10px;
+      height: 30px;
+      margin-right: 20px;
+      margin-top: 3px;
+      color: color-primary;
+      font-family: font-primary;
+
+    .track-info
+      font-size: 0.9rem;
+      color: color-primary;
+      font-family: font-primary;
+      font-weight: 300;
+      display: block;
+
+    h1
+      color: #fff;
+      margin: 0px;
+      font-size: 1rem;
+
+  @media screen and (min-width: 800px)
+    column-count: 2;
+
+    li
+      text-align: left;
+
+    li.first-half
+      text-align: right;

@@ -1,0 +1,46 @@
+<template>
+  <require from="styles/post-nav.styl"></require>
+
+  <main class="carousel container"
+  >
+    <a if.bind="posts.data.length > 1" class="post-prev button content" href="" click.delegate="slideLeft()">
+      <i class="fal fa-chevron-left"></i>
+    </a>
+    <a if.bind="posts.data.length > 1" class="post-next button content" href="" click.delegate="slideRight()">
+      <i class="fal fa-chevron-right"></i>
+    </a>
+    <a if.bind="pick" class="top-right button" href="#posts/${pick}">
+      <i class="fal fa-bars"></i>
+    </a>
+    <a if.bind="pick" class="top-left button" href="">
+      <i class="fal fa-volume"></i>
+    </a>
+    <section class="cover-section">
+      <ul class="carousel-list">
+        <li repeat.for="post of posts.data" class="carousel-item ${selected === $index ? 'selected' : ''}"
+          css="background: radial-gradient(ellipse at top, ${post.palette.primary}, transparent);">
+          <div class="grid">
+            <div class="cover">
+              <a class="cover-frame" href="#posts/${post._id}">
+                <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
+              </a>
+            </div>
+            <div class="title">
+              <h1>${post.headline}</h1>
+              <h2>
+                <span repeat.for="category of post.categories">${category}</span>
+              </h2>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <footer class="categories content">
+      <ul>
+        <li repeat.for="c of categories.data" class="${c._id == category ? 'active' : ''}">
+          <a class="button" href="" click.delegate="toggleCategory(c)">${c.name}</a>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</template>

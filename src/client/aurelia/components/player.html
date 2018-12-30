@@ -1,0 +1,27 @@
+<template>
+  <require from="components/mix"></require>
+  <require from="styles/player.styl"></require>
+  <require from="styles/timeline.styl"></require>
+
+  <section class="track-details content">
+    <h1>${currentTrack.name}</h1>
+    <h2>${currentTrack.byArtist.name} · ${currentTrack.copyrightYear}</h2>
+  </section>
+  <section class="track-controls content">
+    <span class="timestamp time">${currentTime | time}</span>
+    <a click.delegate="player.skipBackward()" class="skip-backward button">
+      <i class="fal fa-step-backward"></i>
+    </a>
+    <a click.delegate="togglePlay()" class="play button">
+      <i class="fal ${!loaded || player.audio.paused ? 'fa-play-circle' : 'fa-pause-circle'}"></i>
+    </a>
+    <a click.delegate="player.skipForward()" class="skip-forward button">
+      <i class="fal fa-step-forward"></i>
+    </a>
+    <span class="timestamp duration">${duration | time}</span>
+
+    <section class="track-timeline">
+      <input type="range" min="0" max.bind="duration" value.bind="currentTime" step="0.1">
+    </section>
+  </section>
+</template>

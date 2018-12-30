@@ -1,0 +1,51 @@
+<template>
+  <require from="components/post-nav"></require>
+  <require from="components/color"></require>
+  <require from="components/showdown"></require>
+  <require from="components/player"></require>
+  <require from="components/tracklist"></require>
+  <require from="styles/app.styl"></require>
+  <require from="styles/post.styl"></require>
+  <require from="styles/article.styl"></require>
+  <require from="styles/volume.styl"></require>
+
+  <div class="au-animate post" color-bg.bind="post.palette.dark">
+    <main class="container ${showNav ? 'hidden' : ''}"
+      css="background: radial-gradient(ellipse at top, ${post.palette.primary}, transparent);"
+    >
+      <a class="button top-right" route-href="route: home; params.bind: {pick: post._id}">
+        <i class="fal fa-bars"></i>
+      </a>
+      <a class="button top-left" href="">
+        <i class="fal fa-volume"></i>
+      </a>
+      <section class="cover-section">
+        <div class="grid">
+          <div class="cover">
+            <div class="cover-frame au-animate">
+              <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
+            </div>
+          </div>
+          <div class="title">
+            <h1>${post.headline}</h1>
+            <h2>
+              <span repeat.for="category of post.categories">${category}</span>
+            </h2>
+          </div>
+          <footer>
+            <player post.bind="post" class="player"></player>
+          </footer>
+        </div>
+      </section>
+      <section class="playlist-section content">
+        <tracklist mix.bind="post"></tracklist>
+      </section>
+      <section class="content-section post-content">
+        <section class="excerpt content-section">
+          <p>${post.description}</p>
+        </section>
+        <showdown markdown.bind="post.text"></showdown>
+      </section>
+    </main>
+  </div>
+</template>
