@@ -2,11 +2,12 @@
   <require from="styles/post-nav.styl"></require>
 
   <main class="carousel container"
+    css="background: radial-gradient(ellipse at top, ${posts.data[selected].palette.primary}, transparent);"
   >
-    <a if.bind="posts.data.length > 1" class="post-prev button content" href="" click.delegate="slideLeft()">
+    <a if.bind="selected > 0" class="post-prev button content" href="" click.delegate="slideLeft()">
       <i class="fal fa-chevron-left"></i>
     </a>
-    <a if.bind="posts.data.length > 1" class="post-next button content" href="" click.delegate="slideRight()">
+    <a if.bind="selected < posts.data.length - 1" class="post-next button content" href="" click.delegate="slideRight()">
       <i class="fal fa-chevron-right"></i>
     </a>
     <a if.bind="pick" class="top-right button" href="#posts/${pick}">
@@ -18,7 +19,8 @@
     <section class="cover-section">
       <ul class="carousel-list">
         <li repeat.for="post of posts.data" class="carousel-item ${selected === $index ? 'selected' : ''}"
-          css="background: radial-gradient(ellipse at top, ${post.palette.primary}, transparent);">
+          css="margin-left: ${100 * ($index - selected)}vw;"
+        >
           <div class="grid">
             <div class="cover">
               <a class="cover-frame" href="#posts/${post._id}">

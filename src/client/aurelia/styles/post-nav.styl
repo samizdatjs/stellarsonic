@@ -16,6 +16,7 @@
 
 .carousel
   overflow: hidden;
+  transition: background 0.5s;
 
 .carousel-list
   margin: 0;
@@ -25,19 +26,16 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
-  opacity: 0;
   z-index: 0;
   left: 0;
-  transition: all 0.3s;
+  transition: all 0.5s;
+  transition-timing-function: ease;
 
-  .cover-frame
+  .grid
     transform: scale(0.8);
   
   &.selected
-    opacity: 1;
     z-index: 1;
-    .cover-frame
-      margin-left: 0;
 
     .cover-image
       transition: .2s;

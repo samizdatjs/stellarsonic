@@ -13,27 +13,25 @@
     transform: scale(1);
   100%
     transform: scale(0.8);
-    -webkit-box-reflect: below 20px -webkit-linear-gradient(bottom, rgba(255,255,255,0.1) 0%, transparent 25%, transparent 100%);
 
 @keyframes coverFrameEnter
   0%
     transform: scale(0.8);
-    -webkit-box-reflect: below 20px -webkit-linear-gradient(bottom, rgba(255,255,255,0.1) 0%, transparent 25%, transparent 100%);
   100%
     transform: scale(1);
 
 @keyframes playerEnter
-  0% {transform: translateY(300px);}
+  0% {transform: translateY(260px);}
   100% {transform: translateY(0px);}
 
 @keyframes playerLeave
   0% {transform: translateY(0px);}
-  100% {transform: translateY(300px);}
+  100% {transform: translateY(260px);}
 
 .post.au-enter-active
   animation: postEnter 0.5s;
 
-  .cover-frame
+  .grid
     animation: coverFrameEnter 0.5s;
   .player
     animation: playerEnter 0.5s;
@@ -43,7 +41,7 @@
 
   animation: postLeave 0.5s;
 
-  .cover-frame
+  .grid
     animation: coverFrameLeave 0.5s;
   .player
     animation: playerLeave 0.5s;
@@ -60,7 +58,16 @@
 .content-section
   background: #fff;
 
+.cover-footer
+  position: absolute;
+  width: 100vw;
+  height: 260px;
+  bottom: 0;
+
 .grid
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: auto calc((100vh - 400px) * 1.618) auto;
   grid-template-rows: 140px calc(100vh - 400px) 260px;
@@ -73,7 +80,8 @@
     grid-template-columns: auto 100vw auto;
 
     .cover-frame
-      padding: 40px 0;
+      width: calc(100% + 80px);
+      margin-left: -40px;
 
 footer
   grid-row: 3;
@@ -118,9 +126,6 @@ footer
   margin: 0 auto;
   padding: 100px 0;
   
-.cover-frame
-  -webkit-box-reflect: below 20px -webkit-linear-gradient(bottom, rgba(255,255,255,0.1) 0%, transparent 25%, transparent 100%);
-
 .post
   .cover-frame
     -webkit-box-reflect: below 20px -webkit-linear-gradient(bottom, rgba(255,255,255,0.1) 0%, transparent 75%, transparent 100%);

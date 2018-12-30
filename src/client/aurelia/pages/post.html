@@ -32,10 +32,10 @@
               <span repeat.for="category of post.categories">${category}</span>
             </h2>
           </div>
-          <footer>
-            <player post.bind="post" class="player"></player>
-          </footer>
         </div>
+        <footer class="cover-footer">
+          <player post.bind="post" class="player"></player>
+        </footer>
       </section>
       <section class="playlist-section content">
         <tracklist mix.bind="post"></tracklist>
