@@ -1,6 +1,7 @@
 <template>
   <require from="components/post-nav"></require>
   <require from="components/color"></require>
+  <require from="components/cover.html"></require>
   <require from="components/showdown"></require>
   <require from="components/player"></require>
   <require from="components/tracklist"></require>
@@ -24,22 +25,7 @@
         </a>
       </div>
       <section class="cover-section">
-        <div class="grid">
-          <div class="cover">
-            <div class="cover-frame">
-              <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
-            </div>
-            <div class="cover-frame shadow">
-              <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
-            </div>
-          </div>
-          <div class="title">
-            <h1>${post.headline}</h1>
-            <h2>
-              <span repeat.for="category of post.categories">${category}</span>
-            </h2>
-          </div>
-        </div>
+        <cover post.bind="post"></cover>
         <footer class="cover-footer">
           <player post.bind="post" class="player"></player>
         </footer>

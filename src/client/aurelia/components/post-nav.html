@@ -1,4 +1,5 @@
 <template>
+  <require from="components/cover.html"></require>
   <require from="styles/post-nav.styl"></require>
 
   <main class="carousel container"
@@ -26,25 +27,11 @@
     </div>
     <section class="cover-section">
       <ul class="carousel-list">
-        <li repeat.for="post of posts.data" class="carousel-item ${selected === $index ? 'selected' : ''}"
+        <li repeat.for="post of posts.data"
+          class="carousel-item ${selected === $index ? 'selected' : ''}"
           css="margin-left: ${100 * ($index - selected)}vw;"
         >
-          <div class="grid">
-            <div class="cover">
-              <a class="cover-frame" href="#posts/${post._id}">
-                <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
-              </a>
-              <div class="cover-frame shadow" href="#posts/${post._id}">
-                <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
-              </div>
-            </div>
-            <div class="title">
-              <h1>${post.headline}</h1>
-              <h2>
-                <span repeat.for="category of post.categories">${category}</span>
-              </h2>
-            </div>
-          </div>
+          <cover post.bind="post" link="true"></cover>
         </li>
       </ul>
     </section>
