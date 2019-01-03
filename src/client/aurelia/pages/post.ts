@@ -1,5 +1,6 @@
-import {PostView} from '../../ziggurat/views';
+import {State} from '../services/state';
 import {Player} from '../services/player';
+import {Mix} from '../../../models';
 import {autoinject} from 'aurelia-framework';
 import * as moment from 'moment';
 
@@ -11,29 +12,18 @@ export class DateFormatValueConverter {
 
 @autoinject
 export class Post {
-  showNav = false;
-  activateNav = false;
-  post: any = null;
-  active = false;
+  post: Mix | undefined;
 
   public constructor(
-    private postView: PostView,
+    private state: State,
     private player: Player
   ) {}
 
-  activate(params: any) {
-    this.active = false;
-    this.postView.on('data-updated', data => {
-      this.post = data[0];
-      this.active = true;
-    });
-    
-    this.showNav = false;
-    this.postView.id.value = params.id;
+  async activate(params: any) {
+    this.post = await this.state.changePost(params.id);
   }
 
   detached() {
-    this.post = null;
-    this.active = false;
+    this.post = undefined;
   }
 }

@@ -1,29 +1,26 @@
 import {PostFeed, PostCategories} from '../../ziggurat/views';
 import {Player} from '../services/player';
+import {State} from '../services/state';
 import {Term} from '@ziggurat/nabu';
-import {autoinject, bindable} from 'aurelia-framework';
+import {autoinject} from 'aurelia-framework';
 
 @autoinject
 export class PostNavCustomElement {
-  @bindable pick: any;
-  
   private selected: number = 0;
   public category: string = '';
 
-  posts: any;
-
   public constructor(
-    private allPosts: PostFeed,
+    private posts: PostFeed,
     private categories: PostCategories,
-    private player: Player
+    private player: Player,
+    private state: State
   ) {
-    this.posts = allPosts;
-    this.posts.on('data-updated', () => {
+    posts.on('data-updated', () => {
       if (this.category === '') {
-        this.pickPost(this.pick)
+        this.pickPost(state.post ? state.post._id : '');
       }
     });
-    this.posts.category.value = 'all';
+    posts.category.value = 'all';
   }
 
   slideLeft() {
@@ -44,9 +41,5 @@ export class PostNavCustomElement {
     this.selected = id
       ? this.posts.data.findIndex((post: any) => post._id === id)
       : 0;
-  }
-
-  pickChanged(id: any) {
-    this.pickPost(id);
   }
 }

@@ -8,7 +8,6 @@ import {Articles, Categories} from './collections';
 @viewOf(Articles)
 export class PostView extends View<Mix> {
   id = new SelectorFilter<string>({
-    observe: ['value'],
     compile: value => ({_id: value})
   });
 }

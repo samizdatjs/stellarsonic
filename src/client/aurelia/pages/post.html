@@ -11,11 +11,11 @@
   <require from="styles/volume.styl"></require>
 
   <div class="au-animate post" color-bg.bind="post.palette.dark">
-    <main class="container ${showNav ? 'hidden' : ''}"
+    <main class="container"
       css="background: radial-gradient(ellipse at top, ${post.palette.primary}, transparent);"
     >
       <div class="top-right content">
-        <a class="button" route-href="route: home; params.bind: {pick: post._id}">
+        <a class="button" route-href="route: home;">
           <i class="fal fa-bars"></i>
         </a>
       </div>
