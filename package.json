@@ -1,13 +1,13 @@
 {
   "name": "music-blog",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
     "start": "node ./dist/server/main.js",
     "build": "npm run build-server && npm run build-client",
     "build-server": "tsc -p ./src/server --outDir ./dist",
-    "build-client": "webpack",
+    "build-client": "webpack --env prod",
     "dev": "npm run build-server && node ./dist/server/main.js --dev=true"
   },
   "dependencies": {
