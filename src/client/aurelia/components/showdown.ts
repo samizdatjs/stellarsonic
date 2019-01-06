@@ -2,10 +2,11 @@ import {bindable} from 'aurelia-framework';
 import * as showdown from 'showdown';
 
 require('showdown-youtube');
+let targetBlank = require('showdown-target-blank');
 
 export class ShowdownCustomElement {
   converter: any = new showdown.Converter({
-    extensions: ['youtube']
+    extensions: ['youtube', targetBlank]
   });
 
   @bindable markdown: string | undefined;
