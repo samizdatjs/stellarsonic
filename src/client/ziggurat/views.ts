@@ -17,9 +17,9 @@ export class PostCategories extends View<Term> {}
 
 @viewOf(Articles)
 export class PostFeed extends View<Mix> {
-  feed = new FeedFilter(this, {
-    limit: 8,
-    increment: 6
+  feed = new FeedFilter({
+    limit: 3,
+    increment: 3
   });
 
   dateSort = new SortingFilter({

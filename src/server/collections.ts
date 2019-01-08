@@ -1,10 +1,9 @@
 import {collection, Controller} from '@ziggurat/isimud';
 import {file, directory} from '@ziggurat/isimud-fs';
 import {yaml} from '@ziggurat/isimud-yaml';
-import {Article, Person, Term, Taxonomy, classification} from '@ziggurat/nabu';
+import {Person, Term, Taxonomy, classification} from '@ziggurat/nabu';
 import {intersection} from 'lodash';
 import {Mix} from '../models';
-import { array, string } from '@ziggurat/amelatu';
 
 
 @collection({
@@ -46,7 +45,6 @@ export class Authors extends Controller<Person> {
   source: directory({
     path: 'content/posts',
     extension: 'md',
-    watch: true,
     serializer: yaml({
       frontMatter: true, 
       contentKey: 'text'

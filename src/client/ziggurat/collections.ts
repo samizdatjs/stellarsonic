@@ -5,7 +5,7 @@ import {Mix} from '../../models';
 
 @collection({
   name: 'authors',
-  source: remote('/api/authors', 'authors')
+  source: remote('/api/authors')
 })
 export class Authors extends Controller<Person> {
   model = Person;
@@ -13,7 +13,7 @@ export class Authors extends Controller<Person> {
 
 @collection({
   name: 'articles',
-  source: remote('/api/posts', 'articles'),
+  source: remote('/api/posts'),
   middleware: [
     join({key: 'author', foreign: Authors})
   ]
@@ -24,7 +24,7 @@ export class Articles extends Controller<Mix> {
 
 @collection({
   name: 'categories',
-  source: remote('/api/categories', 'categories')
+  source: remote('/api/categories')
 })
 export class Categories extends Taxonomy {
   model = Term;
@@ -32,7 +32,7 @@ export class Categories extends Taxonomy {
 
 @collection({
   name: 'tags',
-  source: remote('/api/tags', 'tags')
+  source: remote('/api/tags')
 })
 export class Tags extends Taxonomy {
   model = Term;
