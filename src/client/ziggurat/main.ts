@@ -1,6 +1,6 @@
 import {component, inject, Injector, ServiceIdentifier} from '@ziggurat/tiamat';
 import {Isimud} from '@ziggurat/isimud';
-import {idCache, queryCache, rangeCache} from '@ziggurat/isimud-caching';
+import {IsimudReceiver} from '@ziggurat/isimud-receiver';
 import {IsimudLoki} from '@ziggurat/isimud-loki';
 import {Nabu} from '@ziggurat/nabu';
 import {PostFeed, PostCategories, PostView} from './views';
@@ -14,16 +14,16 @@ import {ModelRegistry} from '@ziggurat/amelatu';
     Articles, Authors, Categories, Tags,
     PostView, PostFeed, PostCategories
   ],
-  dependencies: [Isimud, IsimudLoki, Nabu],
+  dependencies: [Isimud, IsimudLoki, IsimudReceiver, Nabu],
   definitions: {
     'amelatu.Models': [Mix, Palette],
-    'isimud.Middleware': [idCache(), queryCache(), rangeCache()],
-  }
+  },
 })
 export class ZigguratClient {
   constructor(
     @inject('tiamat.Injector') private injector: Injector,
-    @inject('amelatu.ModelRegistry') private reg: ModelRegistry
+    @inject('amelatu.ModelRegistry') private reg: ModelRegistry,
+    @inject('isimud.Receiver') rec: any
   ) {
     reg.add(Palette);
   }

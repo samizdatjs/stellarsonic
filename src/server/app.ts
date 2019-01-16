@@ -9,7 +9,6 @@ import {AppServerFactory} from './router';
 import {Articles, Authors, Categories, Tags} from './collections';
 import {Mix, Palette} from '../models';
 
-
 @component({
   providers: [
     AppServerFactory,
@@ -19,7 +18,7 @@ import {Mix, Palette} from '../models';
     Nabu, Isimud, IsimudFS, IsimudLoki, Tashmetu
   ],
   definitions: {
-    'amelatu.Models': [Mix, Palette]
+    'amelatu.Models': [Mix, Palette],
   }
 })
 export class Application {

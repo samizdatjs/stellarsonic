@@ -29,7 +29,7 @@ export class Tags extends Taxonomy {
 }
 
 @collection({
-  name: 'http://midnightexcursions.com/api/authors',
+  name: 'authors',
   source: directory({
     path: 'content/authors',
     extension: 'yaml',
@@ -41,7 +41,7 @@ export class Authors extends Controller<Person> {
 }
 
 @collection({
-  name: 'http://midnightexcursions.com/api/articles',
+  name: 'articles',
   source: directory({
     path: 'content/posts',
     extension: 'md',
