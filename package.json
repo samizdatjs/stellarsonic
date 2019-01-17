@@ -1,6 +1,6 @@
 {
   "name": "music-blog",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
