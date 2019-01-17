@@ -12,18 +12,16 @@ export class DateFormatValueConverter {
 
 @autoinject
 export class Post {
-  post: Mix | undefined;
-
   public constructor(
     private state: State,
     private player: Player
   ) {}
 
   async activate(params: any) {
-    this.post = await this.state.changePost(params.id);
+    await this.state.changePost(params.id);
   }
 
-  detached() {
-    this.post = undefined;
+  get post() {
+    return this.state.post;
   }
 }
