@@ -29,7 +29,7 @@ export class ZigguratClient {
   }
   // A list of service identifiers that should be registerd with aurelia.
   keys: ServiceIdentifier<any>[] = [
-    PostFeed, PostCategories, PostView
+    PostFeed, PostCategories, PostView, 'amelatu.Transformer'
   ];
 
   configureAurelia(aurelia: Aurelia) {

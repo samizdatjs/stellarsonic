@@ -1,6 +1,5 @@
 import {State} from '../services/state';
 import {Player} from '../services/player';
-import {Mix} from '../../../models';
 import {autoinject} from 'aurelia-framework';
 import * as moment from 'moment';
 
