@@ -1,13 +1,14 @@
 import {component, inject, Injector, ServiceIdentifier} from '@ziggurat/tiamat';
-import {Isimud} from '@ziggurat/isimud';
+import {Isimud, DatabaseConfig} from '@ziggurat/isimud';
 import {IsimudReceiver} from '@ziggurat/isimud-receiver';
 import {IsimudLoki} from '@ziggurat/isimud-loki';
 import {Nabu} from '@ziggurat/nabu';
+import {idCache, queryCache, rangeCache} from '@ziggurat/isimud-caching';
+import {Aurelia} from 'aurelia-framework';
 import {PostFeed, PostCategories, PostView} from './views';
 import {Articles, Authors, Categories, Tags} from './collections';
-import {Aurelia} from 'aurelia-framework';
 import {Mix, Palette} from '../../models';
-import {ModelRegistry} from '@ziggurat/amelatu';
+import siteConfig from '../../config';
 
 @component({
   providers: [
@@ -17,15 +18,19 @@ import {ModelRegistry} from '@ziggurat/amelatu';
   dependencies: [Isimud, IsimudLoki, IsimudReceiver, Nabu],
   definitions: {
     'amelatu.Models': [Mix, Palette],
+    'isimud.DatabaseConfig': {
+      baseUrl: siteConfig.url,
+      middleware: [idCache(), queryCache(), rangeCache()],
+    } as DatabaseConfig
   },
 })
 export class ZigguratClient {
   constructor(
     @inject('tiamat.Injector') private injector: Injector,
-    @inject('amelatu.ModelRegistry') private reg: ModelRegistry,
-    @inject('isimud.Receiver') rec: any
   ) {
-    reg.add(Palette);
+    if (location.hostname === 'localhost') {
+      injector.get('isimud.Receiver');
+    }
   }
   // A list of service identifiers that should be registerd with aurelia.
   keys: ServiceIdentifier<any>[] = [

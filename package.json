@@ -1,6 +1,6 @@
 {
   "name": "music-blog",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
@@ -20,7 +20,7 @@
     "@ziggurat/isimud-logging": "^0.2.9",
     "@ziggurat/isimud-loki": "^0.1.5",
     "@ziggurat/isimud-persistence": "^0.3.1",
-    "@ziggurat/isimud-receiver": "^0.1.3",
+    "@ziggurat/isimud-receiver": "^0.1.4",
     "@ziggurat/isimud-rest": "^0.3.3",
     "@ziggurat/isimud-transmitter": "^0.2.2",
     "@ziggurat/isimud-view": "^0.2.1",
