@@ -1,6 +1,6 @@
 {
   "name": "music-blog",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@ziggurat/amelatu": "^0.8.7",
-    "@ziggurat/isimud": "^0.32.6",
+    "@ziggurat/isimud": "^0.32.7",
     "@ziggurat/isimud-caching": "^0.1.1",
     "@ziggurat/isimud-collect": "^0.1.1",
     "@ziggurat/isimud-fs": "^0.6.12",
@@ -29,7 +29,7 @@
     "@ziggurat/ningal": "^0.4.8",
     "@ziggurat/tashmetu": "^0.8.7",
     "@ziggurat/tashmetu-logging": "^0.1.2",
-    "@ziggurat/tiamat": "^0.10.2",
+    "@ziggurat/tiamat": "^0.10.3",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "2.1.1",
     "aurelia-event-aggregator": "1.0.1",
