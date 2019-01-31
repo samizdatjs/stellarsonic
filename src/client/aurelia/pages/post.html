@@ -25,12 +25,11 @@
         </a>
       </div>
       <section class="cover-section">
+        <div class="title">
+          <h1>${post.headline}</h1>
+        </div>
         <cover post.bind="post"></cover>
-        <footer class="cover-footer">
-          <player post.bind="post" class="player"></player>
-        </footer>
-      </section>
-      <section class="playlist-section content">
+        <player post.bind="post" class="player"></player>
         <tracklist mix.bind="post"></tracklist>
       </section>
       <section class="content-section post-content">
