@@ -33,10 +33,15 @@
         <tracklist mix.bind="post"></tracklist>
       </section>
       <section class="content-section post-content">
-        <section class="excerpt content-section">
-          <p>${post.description}</p>
-        </section>
-        <showdown markdown.bind="post.text"></showdown>
+        <div class="text">
+          <section class="excerpt content-section">
+            <p>${post.description}</p>
+          </section>
+          <showdown markdown.bind="post.text"></showdown>
+        </div>
+        <div class="comments">
+
+        </div>
       </section>
     </main>
   </div>
