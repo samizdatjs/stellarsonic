@@ -1,10 +1,13 @@
 import * as express from 'express';
 import {readOnly} from '@ziggurat/isimud-rest';
-import {inject} from '@ziggurat/tiamat';
 import {middleware, router, ServerFactory} from '@ziggurat/tashmetu';
 import {requestLogger} from '@ziggurat/tashmetu-logging';
 import {Articles, Authors, Categories, Tags} from './collections';
+import {provider, Container} from '@ziggurat/tiamat';
 
+@provider({
+  inject: ['app.Config']
+})
 @middleware([
   {path: '*',               producer: requestLogger({})},
   {path: '/api/authors',    producer: router(readOnly(Authors))},
@@ -14,12 +17,12 @@ import {Articles, Authors, Categories, Tags} from './collections';
 ])
 export class AppServerFactory extends ServerFactory {
   public constructor(
-    @inject('app.Config') private appConfig: any,
+    private appConfig: any,
   ) {
     super();
   }
 
-  app() {
+  app(container: Container) {
     if (this.appConfig.dev) {
       let webpack = require('webpack');
       let webpackDevMiddleware = require('webpack-dev-middleware');
@@ -28,7 +31,7 @@ export class AppServerFactory extends ServerFactory {
 
       let compiler = webpack(config);
 
-      return super.app()
+      return super.app(container)
         .use(webpackDevMiddleware(compiler, {
           publicPath: '/',
           stats: {colors: true}
@@ -37,7 +40,7 @@ export class AppServerFactory extends ServerFactory {
           log: console.log
         }));
     } else {
-      return super.app()
+      return super.app(container)
         .use(express.static('dist/client'));
     }
   }

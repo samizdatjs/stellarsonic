@@ -1,4 +1,4 @@
-import {component, inject} from '@ziggurat/tiamat';
+import {component} from '@ziggurat/tiamat';
 import {Tashmetu} from '@ziggurat/tashmetu';
 import {Isimud} from '@ziggurat/isimud';
 import {IsimudFS} from '@ziggurat/isimud-fs';
@@ -19,11 +19,14 @@ import {Mix, Palette} from '../models';
   ],
   definitions: {
     'amelatu.Models': [Mix, Palette],
-  }
+  },
+  inject: ['http.Server', Articles]
 })
 export class Application {
-  @inject('http.Server') private server: http.Server;
-  @inject(Articles) private articles: Articles;
+  constructor(
+    private server: http.Server,
+    private articles: Articles
+  ) {}
 
   async run(port: string | number) {
     await this.articles.populate();

@@ -1,4 +1,4 @@
-import {component, inject, Injector, ServiceIdentifier} from '@ziggurat/tiamat';
+import {component, Container, ServiceIdentifier} from '@ziggurat/tiamat';
 import {Isimud, DatabaseConfig} from '@ziggurat/isimud';
 import {IsimudReceiver} from '@ziggurat/isimud-receiver';
 import {IsimudLoki} from '@ziggurat/isimud-loki';
@@ -23,13 +23,14 @@ import siteConfig from '../../config';
       middleware: [idCache(), queryCache(), rangeCache()],
     } as DatabaseConfig
   },
+  inject: ['tiamat.Container']
 })
 export class ZigguratClient {
   constructor(
-    @inject('tiamat.Injector') private injector: Injector,
+    private container: Container,
   ) {
     if (location.hostname === 'localhost') {
-      injector.get('isimud.Receiver');
+      container.get('isimud.Receiver');
     }
   }
   // A list of service identifiers that should be registerd with aurelia.
@@ -39,7 +40,7 @@ export class ZigguratClient {
 
   configureAurelia(aurelia: Aurelia) {
     for (let key of this.keys) {
-      aurelia.container.registerInstance(key, this.injector.get(key));
+      aurelia.container.registerInstance(key, this.container.get(key));
     }
   }
 }

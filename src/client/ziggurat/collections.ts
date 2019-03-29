@@ -1,11 +1,11 @@
-import {collection, Controller, remote} from '@ziggurat/isimud';
+import {collection, Controller, http} from '@ziggurat/isimud';
 import {join} from '@ziggurat/isimud-join';
 import {Person, Term, Taxonomy} from '@ziggurat/nabu';
 import {Mix} from '../../models';
 
 @collection({
   name: 'authors',
-  source: remote('/api/authors')
+  source: http({path: '/api/authors'})
 })
 export class Authors extends Controller<Person> {
   model = Person;
@@ -13,7 +13,7 @@ export class Authors extends Controller<Person> {
 
 @collection({
   name: 'articles',
-  source: remote('/api/posts'),
+  source: http({path: '/api/posts'}),
   middleware: [
     join({key: 'author', foreign: Authors})
   ]
@@ -24,7 +24,7 @@ export class Articles extends Controller<Mix> {
 
 @collection({
   name: 'categories',
-  source: remote('/api/categories')
+  source: http({path: '/api/categories'})
 })
 export class Categories extends Taxonomy {
   model = Term;
@@ -32,7 +32,7 @@ export class Categories extends Taxonomy {
 
 @collection({
   name: 'tags',
-  source: remote('/api/tags')
+  source: http({path: '/api/tags'})
 })
 export class Tags extends Taxonomy {
   model = Term;

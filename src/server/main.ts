@@ -1,4 +1,5 @@
 import {bootstrap} from '@ziggurat/tiamat';
+import {container} from '@ziggurat/tiamat-inversify';
 import {MiddlewareProducer} from '@ziggurat/isimud';
 import {idCache, queryCache, rangeCache} from '@ziggurat/isimud-caching';
 import {collectionLogger, LoggingLevel} from '@ziggurat/isimud-logging';
@@ -12,7 +13,7 @@ let argv = yargs.option('dev', {
   default: false
 }).argv;
 
-bootstrap(Application, async injector => {
+bootstrap(container(), Application, async c => {
   let middleware: MiddlewareProducer[] = [
     collectionLogger({level: LoggingLevel.Info}),
     idCache(),
@@ -24,10 +25,10 @@ bootstrap(Application, async injector => {
     middleware.push(transmitter());
   }
 
-  injector.registerInstance('app.Config', {dev: argv.dev});
-  injector.registerInstance('isimud.DatabaseConfig', {
+  c.registerInstance('app.Config', {dev: argv.dev});
+  c.registerInstance('isimud.DatabaseConfig', {
     baseUrl: siteConfig.url,
     middleware: middleware
   });
-  injector.registerInstance('isimud.FileSystemConfig', {watch: argv.dev});
+  c.registerInstance('isimud.FileSystemConfig', {watch: argv.dev});
 }).then(app => app.run(process.env.PORT || 8080));
