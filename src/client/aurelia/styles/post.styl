@@ -11,8 +11,10 @@
 @keyframes coverFrameLeave
   0%
     transform: scale(1);
+    opacity: 1;
   100%
     transform: scale(0.8);
+    opacity: 0;
 
 @keyframes coverFrameEnter
   0%
@@ -21,18 +23,44 @@
     transform: scale(1);
 
 @keyframes playerEnter
-  0% {transform: translateY(260px);}
-  100% {transform: translateY(0px);}
+  0%
+    transform: translateY(200px);
+    opacity: 0;
+  100%
+    transform: translateY(0px);
+    opacity: 1;
 
 @keyframes playerLeave
-  0% {transform: translateY(0px);}
-  100% {transform: translateY(260px);}
+  0% 
+    transform: translateY(0px);
+    opacity: 1;
+  100% 
+    transform: translateY(200px);
+    opacity: 0;
+
+@keyframes tracklistEnter
+  0%
+    transform: translateX(200px);
+    opacity: 0;
+  100%
+    transform: translateX(0px);
+    opacity: 1;
+
+@keyframes tracklistLeave
+  0% 
+    transform: translateX(0px);
+    opacity: 1;
+  100% 
+    transform: translateX(200px);
+    opacity: 0;
 
 .post.au-enter-active
   animation: postEnter 0.5s;
 
   cover
     animation: coverFrameEnter 0.5s;
+  tracklist
+    animation: tracklistEnter 0.5s;
   .player
     animation: playerEnter 0.5s;
 
@@ -43,6 +71,8 @@
 
   cover
     animation: coverFrameLeave 0.5s;
+  tracklist
+    animation: tracklistLeave 0.5s;
   .player
     animation: playerLeave 0.5s;
 
@@ -98,13 +128,17 @@
   letter-spacing: 0.02em;
   word-spacing: 0.1em;
   color: rgba(0,0,0,0.62);
-  width: calc(100vw - 200px);
-  max-width: 900px;
   text-align: center;
   margin: 0 auto;
   position: relative;
   padding: 5px 60px;
   box-sizing: border-box;
+  width: calc(100vw - 200px);
+  max-width: 900px;
+  
+  @media screen and (min-width: 1200px)
+    width: 100%;
+    max-width: 100%;
 
   &:after
     bottom: 0;

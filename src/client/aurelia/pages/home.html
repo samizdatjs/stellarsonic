@@ -1,7 +1,36 @@
 <template>
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
-  <require from="components/post-nav"></require>
+  <require from="styles/post-list.styl"></require>
+  <require from="styles/home.styl"></require>
+  <require from="components/grid"></require>
+  <require from="components/card.html"></require>
 
-  <post-nav class="post-nav au-animate"></post-nav>
+  <main class="au-animate home">
+    <grid breakpoints.one-time="[1024, 1600, 2160]" columns.two-way="cols" class="post-list cols-${cols}">
+      <card 
+        repeat.for="post of posts.data"
+        color="${post.palette.primary}"
+        image.bind="post.image"
+        url="#posts/${post._id}"
+      >
+        <article>
+          <h1>${post.headline}</h1>
+        </article>
+        <footer>
+          <ul class="card-meta">
+            <li>
+              <i class="fa fa-tags"></i>
+              <span repeat.for="category of post.categories">${category}</span>
+            </li>
+          </ul>
+        </footer>
+      </card>
+    </grid>
+    <section class="post-list-footer">
+      <div class="button" if.bind="posts.feed.hasMore">
+        <a href="#" click.delegate="posts.feed.loadMore()">load more</a>
+      </div>
+    </section>
+  </main>
 </template>

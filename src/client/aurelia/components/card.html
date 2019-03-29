@@ -1,0 +1,15 @@
+<template bindable="color, image, url">
+  <require from="styles/card.styl"></require>
+
+  <div class="card" style="background: ${color};">
+    <a class="card-image" href.bind="url">
+      <div class="card-image-inner" style="background-image: url(${image}); color: ${color};">
+        <div class="card-image-overlay" 
+          style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0), ${color});"></div>
+      </div>
+    </a>
+    <div class="card-content">
+      <slot></slot>
+    </div>
+  </div>
+</template>
