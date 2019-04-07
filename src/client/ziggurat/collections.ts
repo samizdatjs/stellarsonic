@@ -5,35 +5,31 @@ import {Mix} from '../../models';
 
 @collection({
   name: 'authors',
+  model: Person,
   source: http({path: '/api/authors'})
 })
-export class Authors extends Controller<Person> {
-  model = Person;
-}
+export class Authors extends Controller<Person> {}
 
 @collection({
   name: 'articles',
+  model: Mix,
   source: http({path: '/api/posts'}),
   middleware: [
     join({key: 'author', foreign: Authors})
   ]
 })
-export class Articles extends Controller<Mix> {
-  model = Mix;
-}
+export class Articles extends Controller<Mix> {}
 
 @collection({
   name: 'categories',
+  model: Term,
   source: http({path: '/api/categories'})
 })
-export class Categories extends Taxonomy {
-  model = Term;
-}
+export class Categories extends Taxonomy {}
 
 @collection({
   name: 'tags',
+  model: Term,
   source: http({path: '/api/tags'})
 })
-export class Tags extends Taxonomy {
-  model = Term;
-}
+export class Tags extends Taxonomy {}

@@ -8,40 +8,38 @@ import {Mix} from '../models';
 
 @collection({
   name: 'categories',
+  model: Term,
   source: file({
     path: 'content/categories.yaml',
     serializer: yaml()
   })
 })
-export class Categories extends Taxonomy {
-  model = Term;
-}
+export class Categories extends Taxonomy {}
 
 @collection({
   name: 'tags',
+  model: Term,
   source: file({
     path: 'content/tags.yaml',
     serializer: yaml()
   })
 })
-export class Tags extends Taxonomy {
-  model = Term;
-}
+export class Tags extends Taxonomy {}
 
 @collection({
   name: 'authors',
+  model: Person,
   source: directory({
     path: 'content/authors',
     extension: 'yaml',
     serializer: yaml()
   })
 })
-export class Authors extends Controller<Person> {
-  model = Person;
-}
+export class Authors extends Controller<Person> {}
 
 @collection({
   name: 'articles',
+  model: Mix,
   source: directory({
     path: 'content/posts',
     extension: 'md',
@@ -70,6 +68,4 @@ export class Authors extends Controller<Person> {
     */
   ]
 })
-export class Articles extends Controller<Mix> {
-  model = Mix;
-}
+export class Articles extends Controller<Mix> {}
