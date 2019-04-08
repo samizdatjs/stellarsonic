@@ -1,6 +1,6 @@
 {
   "name": "music-blog",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
@@ -30,6 +30,7 @@
     "@ziggurat/tashmetu": "^0.10.0",
     "@ziggurat/tashmetu-logging": "^0.1.2",
     "@ziggurat/tiamat": "^0.13.0",
+    "@ziggurat/tiamat-aurelia": "^0.1.0",
     "@ziggurat/tiamat-inversify": "^0.3.0",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "2.1.1",
