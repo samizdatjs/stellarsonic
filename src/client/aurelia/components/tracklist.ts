@@ -4,7 +4,7 @@ import {Player} from '../services/player';
 
 @autoinject
 export class TracklistCustomElement {
-  @bindable mix: Mix;
+  @bindable mix!: Mix;
 
   public constructor(private player: Player) {}
 

@@ -5,7 +5,7 @@ import {Mix} from '../../../models';
 
 @autoinject
 export class PlayerCustomElement {
-  @bindable post: Mix;
+  @bindable post!: Mix;
   
   public constructor(private player: Player) {}
 

@@ -4,7 +4,7 @@ import {PLATFORM} from 'aurelia-pal';
 
 @autoinject
 export class App {
-  router: Router;
+  router!: Router;
 
   configureRouter(config: RouterConfiguration, router: Router): void {
     this.router = router;

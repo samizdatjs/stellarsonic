@@ -13,8 +13,8 @@ export class ColorBgCustomAttribute {
 
 @autoinject
 export class ColorFgCustomAttribute {
-  private value: string;
-  private _color: Color;
+  private value!: string;
+  private _color!: Color;
 
   constructor(private element: Element) {}
 

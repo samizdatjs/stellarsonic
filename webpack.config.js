@@ -4,6 +4,7 @@ const { AureliaPlugin } = require('aurelia-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { TsConfigPathsPlugin, CheckerPlugin } = require('awesome-typescript-loader');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 
 module.exports = (env) => {
@@ -72,16 +73,21 @@ module.exports = (env) => {
 
     node: {
       fs: 'empty'
+    },
+
+    optimization: {
+      minimize: false
     }
   };
   
   if (env === 'prod') {
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+    config.optimization.minimize = true;
     config.plugins.push(new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
     }));
+    config.plugins.push(new CompressionPlugin());
   } else if (env === 'dev') {
     config.devtool = 'cheap-module-eval-source-map';
     config.devServer = {
