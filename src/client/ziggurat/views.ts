@@ -1,6 +1,5 @@
 import {SortingOrder} from '@ziggurat/isimud';
-import {viewOf, View, FeedFilter, SelectorFilter,
-  SortingFilter} from '@ziggurat/isimud-view';
+import {viewOf, View, FeedFilter, SelectorFilter, SortingFilter} from '@ziggurat/isimud-view';
 import {Term} from '@ziggurat/nabu';
 import {Mix} from '../../models';
 import {Articles, Categories} from './collections';

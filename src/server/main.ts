@@ -4,6 +4,7 @@ import {MiddlewareProducer} from '@ziggurat/isimud';
 import {idCache, queryCache, rangeCache} from '@ziggurat/isimud-caching';
 import {collectionLogger, LoggingLevel} from '@ziggurat/isimud-logging';
 import {transmitter} from '@ziggurat/isimud-transmitter';
+import {Container} from 'inversify';
 import * as yargs from 'yargs';
 import {Application} from './app';
 import siteConfig from '../config';
@@ -13,7 +14,7 @@ let argv = yargs.option('dev', {
   default: false
 }).argv;
 
-bootstrap(container(), Application, async c => {
+bootstrap(container(new Container()), Application, async c => {
   let middleware: MiddlewareProducer[] = [
     collectionLogger({level: LoggingLevel.Info}),
     idCache(),
