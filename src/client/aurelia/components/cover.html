@@ -2,20 +2,11 @@
   <require from="styles/cover.styl"></require>
 
   <div class="cover">
-    <a if.bind="link" class="cover-frame" href="#posts/${post._id}">
-      <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
-    </a>
-    <div if.bind="!link" class="cover-frame">
+    <div class="cover-frame">
       <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
     </div>
     <div class="cover-frame shadow">
       <div class="cover-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
     </div>
-  </div>
-  <div class="title">
-    <h1>${post.headline}</h1>
-    <h2>
-      <span repeat.for="category of post.categories">${category}</span>
-    </h2>
   </div>
 </template>

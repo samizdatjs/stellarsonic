@@ -1,9 +1,14 @@
 @import 'settings';
 
 player
-  position: absolute;
+  grid-row: 3;
+  grid-column: 1;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  
+  @media screen and (min-width: 900px)
+    padding: 0 60px;
 
   &.active
     transition: margin-top 1s;

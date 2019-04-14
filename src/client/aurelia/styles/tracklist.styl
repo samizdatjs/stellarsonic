@@ -21,6 +21,9 @@
     box-sizing: border-box;
     text-align: center;
 
+    &:last-child
+      border-bottom: 0;
+
     &:hover
       background: linear-gradient(
         rgba(0, 0, 0,.06) 0%,
@@ -51,7 +54,11 @@
       margin: 0px;
       font-size: 1rem;
 
-  @media screen and (min-width: 800px)
+  @media screen and (min-width: 1200px)
+    li
+      text-align: left;
+
+  @media screen and (min-width: 700px) and (max-width: 1200px)
     column-count: 2;
 
     li
