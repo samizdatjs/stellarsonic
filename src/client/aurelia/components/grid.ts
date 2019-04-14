@@ -3,8 +3,8 @@ import {each} from 'lodash';
 
 @autoinject
 export class GridCustomElement {
-  @bindable breakpoints: number[];
-  @bindable columns: number;
+  @bindable breakpoints!: number[];
+  @bindable columns!: number;
 
   private width = 0;
 

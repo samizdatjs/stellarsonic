@@ -3,7 +3,7 @@ import {autoinject, observable} from 'aurelia-framework';
 
 @autoinject
 export class Home {
-  @observable cols: number;
+  @observable cols!: number;
 
   public constructor(
     private posts: PostFeed,
