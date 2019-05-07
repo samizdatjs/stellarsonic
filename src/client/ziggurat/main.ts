@@ -1,8 +1,6 @@
 import {component, Container} from '@ziggurat/tiamat';
-import {Isimud, DatabaseConfig} from '@ziggurat/isimud';
-import {IsimudReceiver} from '@ziggurat/isimud-receiver';
-import {IsimudLoki} from '@ziggurat/isimud-loki';
-import {Nabu} from '@ziggurat/nabu';
+import {DatabaseConfig} from '@ziggurat/isimud';
+import {JsonldMiddleware} from '@ziggurat/json';
 import {idCache, queryCache, rangeCache} from '@ziggurat/isimud-caching';
 import {PostFeed, PostCategories, PostView} from './views';
 import {Articles, Authors, Categories, Tags} from './collections';
@@ -14,20 +12,28 @@ import siteConfig from '../../config';
     Articles, Authors, Categories, Tags,
     PostView, PostFeed, PostCategories
   ],
-  dependencies: [Isimud, IsimudLoki, IsimudReceiver, Nabu],
+  dependencies: [
+    import('@ziggurat/isimud'),
+    import('@ziggurat/isimud-mingo'),
+    import('@ziggurat/nabu')
+    // import('@ziggurat/isimud-receiver')
+  ],
   definitions: {
-    'amelatu.Models': [Mix, Palette],
     'isimud.DatabaseConfig': {
       baseUrl: siteConfig.url,
       middleware: [idCache(), queryCache(), rangeCache()],
-    } as DatabaseConfig
+    } as DatabaseConfig,
+    'ziggurat.TransformerConfig': {
+      models: [Mix, Palette],
+      middleware: [
+        () => new JsonldMiddleware()
+      ]
+    }
   },
   inject: ['tiamat.Container']
 })
 export class ZigguratClient {
-  constructor(
-    private container: Container,
-  ) {
+  constructor(container: Container) {
     if (location.hostname === 'localhost') {
       container.get('isimud.Receiver');
     }

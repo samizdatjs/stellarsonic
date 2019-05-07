@@ -1,13 +1,8 @@
 import {component} from '@ziggurat/tiamat';
-import {Tashmetu} from '@ziggurat/tashmetu';
-import {Isimud} from '@ziggurat/isimud';
-import {IsimudFS} from '@ziggurat/isimud-fs';
-import {IsimudLoki} from '@ziggurat/isimud-loki';
-import {Nabu} from '@ziggurat/nabu';
 import * as http from 'http';
 import {AppServerFactory} from './router';
 import {Articles, Authors, Categories, Tags} from './collections';
-import {Mix, Palette} from '../models';
+import * as SocketIO from 'socket.io';
 
 @component({
   providers: [
@@ -15,11 +10,13 @@ import {Mix, Palette} from '../models';
     Articles, Authors, Categories, Tags,
   ],
   dependencies: [
-    Nabu, Isimud, IsimudFS, IsimudLoki, Tashmetu
+    import('@ziggurat/common'),
+    import('@ziggurat/isimud'),
+    import('@ziggurat/isimud-fs'),
+    import('@ziggurat/isimud-loki'),
+    import('@ziggurat/tashmetu'),
+    import('@ziggurat/nabu')
   ],
-  definitions: {
-    'amelatu.Models': [Mix, Palette],
-  },
   inject: ['http.Server', Articles]
 })
 export class Application {

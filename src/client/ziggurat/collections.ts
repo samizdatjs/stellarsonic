@@ -1,6 +1,6 @@
 import {collection, Controller, http} from '@ziggurat/isimud';
-import {join} from '@ziggurat/isimud-join';
-import {Person, Term, Taxonomy} from '@ziggurat/nabu';
+// import {join} from '@ziggurat/isimud-join';
+import {Taxonomy, Person, Term} from '@ziggurat/nabu';
 import {Mix} from '../../models';
 
 @collection({
@@ -15,7 +15,7 @@ export class Authors extends Controller<Person> {}
   model: Mix,
   source: http({path: '/api/posts'}),
   middleware: [
-    join({key: 'author', foreign: Authors})
+    // join({key: 'author', foreign: Authors})
   ]
 })
 export class Articles extends Controller<Mix> {}

@@ -11,7 +11,6 @@ export class Home {
   ) {}
 
   async activate() {
-    // await this.featuredPosts.refresh();
     this.categories.refresh();
   }
 

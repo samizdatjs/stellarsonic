@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import {Transformer} from '@ziggurat/amelatu';
+import {Transformer} from '@ziggurat/common';
 import {PostView} from '../../ziggurat/views';
 import {Mix} from '../../../models';
 
@@ -9,7 +9,7 @@ export class Schema {
   ) {}
 }
 
-@inject(PostView, 'amelatu.Transformer')
+@inject(PostView, 'ziggurat.Transformer')
 export class State {
   public post: Mix | undefined;
   

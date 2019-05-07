@@ -1,8 +1,8 @@
 import {collection, Controller} from '@ziggurat/isimud';
 import {file, directory} from '@ziggurat/isimud-fs';
-import {yaml} from '@ziggurat/isimud-yaml';
+import {yaml} from '@ziggurat/yaml';
 import {Person, Term, Taxonomy, classification} from '@ziggurat/nabu';
-import {intersection} from 'lodash';
+// import intersection from 'lodash/intersection';
 import {Mix} from '../models';
 
 

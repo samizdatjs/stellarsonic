@@ -12,6 +12,7 @@
     "preserveConstEnums": true,
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": false,
-    "noResolve": false
+    "noResolve": false,
+    "esModuleInterop": false
   }
 }

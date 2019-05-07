@@ -1,7 +1,6 @@
 <template>
   <require from="components/color"></require>
   <require from="components/cover.html"></require>
-  <require from="components/showdown"></require>
   <require from="components/player"></require>
   <require from="components/tracklist"></require>
   <require from="styles/app.styl"></require>
@@ -36,7 +35,7 @@
           <section class="excerpt content-section">
             <p>${post.description}</p>
           </section>
-          <showdown markdown.bind="post.text"></showdown>
+          <article innerhtml.bind="post.text"></article>
         </div>
         <div class="comments">
 

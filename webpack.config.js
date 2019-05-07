@@ -5,14 +5,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { TsConfigPathsPlugin, CheckerPlugin } = require('awesome-typescript-loader');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 module.exports = (env) => {
   let config = {
+    context: __dirname + '/src/client',
+
     entry: [
       'aurelia-bootstrapper',
-      'webpack-dev-server/client?http://localhost:8080',
-      'webpack-hot-middleware/client'
     ],
     
     output: {
@@ -53,7 +54,10 @@ module.exports = (env) => {
         {
           test: /\.ts$/i,
           loader: 'awesome-typescript-loader',
-          exclude: path.resolve(__dirname, 'dist/client')
+          exclude: [
+            path.resolve(__dirname, 'dist/client'),
+            path.resolve(__dirname, 'src/server')
+          ]
         },
         {
           test: /\.html$/,
@@ -65,10 +69,11 @@ module.exports = (env) => {
     plugins: [
       new AureliaPlugin(),
       new HtmlWebpackPlugin({
-        template: 'src/client/aurelia/index.html'
+        template: 'aurelia/index.html'
       }),
       new TsConfigPathsPlugin(),
-      new webpack.HotModuleReplacementPlugin()
+      new BundleAnalyzerPlugin(),
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ],
 
     node: {
@@ -89,10 +94,14 @@ module.exports = (env) => {
     }));
     config.plugins.push(new CompressionPlugin());
   } else if (env === 'dev') {
+    config.entry.push('webpack-dev-server/client?http://localhost:8080');
+    config.entry.push('webpack-hot-middleware/client');
+
     config.devtool = 'cheap-module-eval-source-map';
     config.devServer = {
       stats: 'errors-only'
     };
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
   }
   
   return config;
