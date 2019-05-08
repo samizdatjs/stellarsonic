@@ -6,10 +6,13 @@
       <div class="card-image-inner" style="background-image: url(${image}); color: ${color};">
         <div class="card-image-overlay" 
           style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0), ${color});"></div>
+        <article class="card-title">
+          <slot name="title"></slot>
+        </article>
       </div>
     </a>
-    <div class="card-content">
-      <slot></slot>
-    </div>
+    <footer class="card-footer">
+      <slot name="footer"></slot>
+    </footer>
   </div>
 </template>

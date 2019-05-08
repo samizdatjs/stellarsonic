@@ -10,21 +10,17 @@
     <grid breakpoints.one-time="[1024, 1600, 2160]" columns.two-way="cols" class="post-list cols-${cols}">
       <card 
         repeat.for="post of posts.data"
-        color="${post.palette.primary}"
+        color="${post.palette.dark}"
         image.bind="post.image"
         url="#posts/${post._id}"
       >
-        <article>
-          <h1>${post.headline}</h1>
-        </article>
-        <footer>
-          <ul class="card-meta">
-            <li>
-              <i class="fa fa-tags"></i>
-              <span repeat.for="category of post.categories">${category}</span>
-            </li>
-          </ul>
-        </footer>
+        <h1 slot="title">${post.headline}</h1>
+        <ul slot="footer" class="card-meta">
+          <li>
+            <i class="fa fa-tags"></i>
+            <span repeat.for="category of post.categories">${category}</span>
+          </li>
+        </ul>
       </card>
     </grid>
     <section class="post-list-footer">
