@@ -22,23 +22,25 @@
           <i class="fal fa-music"></i>
         </a>
       </div>
+      <div class="title">
+        <h1>${post.headline}</h1>
+      </div>
       <section class="cover-section">
-        <div class="title">
-          <h1>${post.headline}</h1>
-        </div>
         <cover post.bind="post"></cover>
         <player post.bind="post" class="player"></player>
         <tracklist mix.bind="post"></tracklist>
       </section>
       <section class="content-section post-content">
-        <div class="text">
-          <section class="excerpt content-section">
-            <p>${post.description}</p>
-          </section>
-          <article innerhtml.bind="post.text"></article>
-        </div>
-        <div class="comments">
+        <div class="post-content-inner">
+          <div class="text">
+            <section class="excerpt content-section">
+              <p>${post.description}</p>
+            </section>
+            <article innerhtml.bind="post.text"></article>
+          </div>
+          <div class="comments">
 
+          </div>
         </div>
       </section>
     </main>
