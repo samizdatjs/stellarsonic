@@ -21,7 +21,7 @@
     "@ziggurat/isimud-join": "^0.2.0",
     "@ziggurat/isimud-logging": "^0.3.0",
     "@ziggurat/isimud-loki": "^0.3.0",
-    "@ziggurat/isimud-mingo": "^0.2.0",
+    "@ziggurat/isimud-mingo": "^0.2.1",
     "@ziggurat/isimud-persistence": "^0.5.1",
     "@ziggurat/isimud-receiver": "^0.2.0",
     "@ziggurat/isimud-rest": "^0.5.0",
