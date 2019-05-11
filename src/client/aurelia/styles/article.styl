@@ -2,13 +2,12 @@
 
 .post-content
   article
-    padding: 60px 50px;
     max-width: 700px;
     color: color-text;
     font-family: font-primary;
     position: relative;
     min-height: 50vh;
-    margin: 0 auto;
+    margin: 50px auto;
 
     a
       color: #cd9023;
@@ -40,24 +39,41 @@
         position: absolute;
         width: 36px;
 
-  @media screen and (min-width: 900px)
-    .align-left
-      float: left;
-      margin: 5px 30px 15px 0;
-      max-width: 450px;
-      margin-left: -120px;
-
-      p, img
-        margin: 0
+    .expand
+      width: 100vw;
+      margin-left: -60px; // content padding
 
     @media screen and (min-width: 900px)
+      .align-left
+        float: left;
+        margin: 5px 30px 15px 0;
+        width: 512px;
+        margin-left: -162px;
+
+        p, img
+          margin: 0
+
+    @media screen and (min-width: 1600px)
+      .align-left
+        margin-left: -244px;
+
+    @media screen and (min-width: 800px)
+      .expand
+        margin-left: calc(-50px + (800px - 100vw)/2);
+
+    @media screen and (min-width: 1024px)
       .expand
         display: inline-block;
-        width: 940px;
-        margin-left: -120px;
+        width: 1024px;
+        margin-left: -162px;
 
         p
           margin: 0
+
+    @media screen and (min-width: 1600px)
+      .expand
+        width: calc((1920px / 1.618) - 60px);
+        margin-left: -244px;
 
 @media screen and (min-width: 980px)
   .video
