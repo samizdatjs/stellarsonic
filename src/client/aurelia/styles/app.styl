@@ -1,5 +1,8 @@
 @import 'settings';
 
+
+// General
+//-----------------------------------------------------------------------------
 body
   margin: 0;
   min-height: 100vh;
@@ -9,6 +12,7 @@ body
 h1
   font-family: font-primary;
   font-weight: 200;
+  font-size: 1.5em;
 
 p
   font-family: font-primary;
@@ -17,14 +21,50 @@ p
   letter-spacing: 0.02em;
   word-spacing: 0.1em;
 
+a
+  font-family: font-secondary;
+  text-decoration: none;
+  color: color-primary-darken;
+
+  &:hover
+    color: color-primary-lighten;
+
+img
+  width: 100%;
+
+.button
+  color: color-primary-lighten;
+  font-size: 1.5em;
+  transition: opacity .2s;
+  text-decoration: none;
+
+  &:hover
+    cursor: pointer;
+    opacity: 1;
+    color: #fff;
+
+
+// Image
+//-----------------------------------------------------------------------------
+.blend-bottom
+  -webkit-mask-image: -webkit-gradient(linear, left 70%, left bottom, from(#000), to(rgba(0,0,0,0)));
+
+
+// Content
+//-----------------------------------------------------------------------------
 .container
   width: 100vw;
   height: 100vh;
   display: block;
   position: fixed;
-  transition: all 0.5s;
   overflow: auto;
   overflow-x: hidden;
+
+.content
+  position: relative;
+  padding: 0 content-padding;
+  margin: content-padding 0;
+  box-sizing: border-box;
 
 .screen
   width: 100vw;
@@ -34,58 +74,38 @@ p
   left: 0;
 
 .right
-  right: 0;
+  right: scrollbar-width;
 
-.content
-  padding-left: 60px
-  padding-right: 60px;
+.pad
+  padding: 0 content-padding;
+
+.pad-xsmall-up
+  @media screen and (min-width: bp-xsmall)
+    padding: 0 content-padding;
+
+.pad-small-up
+  @media screen and (min-width: bp-small)
+    padding: 0 content-padding;
+
+.pad-medium-up
+  @media screen and (min-width: bp-medium)
+    padding: 0 content-padding;
   
-  @media screen and (max-width: 1200px)
-    padding-left: 50px;
-    padding-right: 50px;
-
-.top-left, .top-right
-  top: 20px;
-  position: absolute;
-  z-index: 2;
-
-.top-left
-  left: 0;
-
-.top-right
-  right: 0;
-
-.mid-left, .mid-right
-  top: 50vh;
-  position: absolute;
-  z-index: 2
-
-.mid-left
-  left: 0;
-
-.mid-right
-  right: 0;
-
-.button
-  color: #f7c8ab;
-  font-size: 1.5em;
-  opacity: 0.4;
-  transition: opacity .2s;
-  text-decoration: none;
-
-  &:hover
-    cursor: pointer;
-    opacity: 1;
-    color: #fff;
-
-.container
-  transition: all 0.5s;
+.segment
+  @media screen and (min-width: bp-medium)
+    width: 100%;
+    max-width: bp-large;
+    margin: 0 auto;
+    box-sizing: border-box;
+  
+  @media screen and (min-width: bp-xlarge)
+    max-width: bp-xxlarge;
 
 
 // Scrollbar
 //-----------------------------------------------------------------------------
 ::-webkit-scrollbar
-  width: 5px;
+  width: scrollbar-width;
 
 ::-webkit-scrollbar-track
   box-shadow: inset 0 0 5px grey; 
@@ -93,3 +113,55 @@ p
 
 ::-webkit-scrollbar-thumb
   background: color-primary;
+
+
+// Title bar
+//-----------------------------------------------------------------------------
+.title
+  text-align: center;
+  box-sizing: border-box;
+  margin-top: 0;
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  padding: 15px (content-padding / 2);
+  background: rgba(0,0,0,.2);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  box-shadow: title-shadow;
+  height: content-padding;
+
+  h1
+    margin: 0;
+  
+  
+// Text
+//-----------------------------------------------------------------------------
+.excerpt
+  font-size: 1.2em;
+  letter-spacing: 0.02em;
+  word-spacing: 0.1em;
+  color: rgba(0,0,0,0.62);
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  padding: 5px 60px;
+  box-sizing: border-box;
+  max-width: 900px;
+  
+  @media screen and (min-width: bp-xlarge)
+    width: 100%;
+    max-width: 100%;
+
+  &:after
+    bottom: 0;
+  &:before
+    top: 0;
+
+  &:before, &:after
+    background-color: #cd9023;
+    content: "";
+    height: 1px;
+    left: 50%;
+    margin-left: -18px;
+    position: absolute;
+    width: 36px;

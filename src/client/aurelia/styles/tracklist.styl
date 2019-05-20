@@ -1,6 +1,12 @@
 @import 'settings';
 
-.playlist
+tracklist
+  display: block;
+  padding: content-padding 0;
+  
+  @media screen and (max-width: bp-xlarge)
+    background: rgba(0,0,0,.07);
+
   ul
     display: inline;
     font-size: 1rem;
@@ -17,7 +23,6 @@
     padding: 10px 20px;
     cursor: pointer;
     transition: all 0.3s;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     text-align: center;
 
@@ -45,7 +50,7 @@
     .track-info
       font-size: 0.9rem;
       color: color-primary;
-      font-family: font-primary;
+      font-family: font-secondary;
       font-weight: 300;
       display: block;
 
@@ -53,14 +58,15 @@
       color: #fff;
       margin: 0px;
       font-size: 1rem;
+  
+  @media screen and (min-width: bp-xsmall)
+    column-count: 2;
 
-  @media screen and (min-width: 1600px)
+  @media screen and (min-width: bp-xlarge)
     li
       text-align: left;
 
-  @media screen and (min-width: 700px) and (max-width: 1600px)
-    column-count: 2;
-
+  @media screen and (min-width: bp-xsmall) and (max-width: bp-xlarge)
     li
       text-align: left;
 

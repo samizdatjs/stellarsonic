@@ -25,7 +25,7 @@ export class State {
   public async changePost(id: string): Promise<Mix> {
     this.postView.id.value = id;
     let post = (await this.postView.refresh())[0];
-    this.schemaTag.text = JSON.stringify(await this.transformer.toPlain(post, 'relay'), null, 2);
+    this.schemaTag.text = JSON.stringify(await this.transformer.toPlain(post, 'publication'), null, 2);
     return post;
   }
 

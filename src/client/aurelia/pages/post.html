@@ -1,48 +1,56 @@
 <template>
-  <require from="components/color"></require>
-  <require from="components/cover.html"></require>
   <require from="components/player"></require>
   <require from="components/tracklist"></require>
+  <require from="components/scroll"></require>
+  <require from="components/blog-post"></require>
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
   <require from="styles/article.styl"></require>
   <require from="styles/volume.styl"></require>
 
-  <div class="au-animate post" color-bg="#000">
-    <main class="container"
-      css="background: radial-gradient(ellipse at top, ${post.palette.primary}, transparent);"
-    >
-      <div class="top-right content">
-        <a class="button" route-href="route: home;">
-          <i class="fal fa-bars"></i>
-        </a>
-      </div>
-      <div class="top-left content">
-        <a if.bind="player.playlist" class="button" href="#posts/${player.playlist._id}">
-          <i class="fal fa-music"></i>
-        </a>
-      </div>
-      <div class="title">
-        <h1>${post.headline}</h1>
-      </div>
-      <section class="cover-section">
-        <cover post.bind="post"></cover>
-        <player post.bind="post" class="player"></player>
-        <tracklist mix.bind="post"></tracklist>
-      </section>
-      <section class="content-section post-content">
-        <div class="post-content-inner">
-          <div class="text">
-            <section class="excerpt content-section">
-              <p>${post.description}</p>
-            </section>
-            <article innerhtml.bind="post.text"></article>
-          </div>
-          <div class="comments">
 
-          </div>
+  <blog-post class="au-animate" 
+    color.bind="post.palette.dark"
+    bg-color.bind="post.palette.primary"
+    bg-image.bind="post.image"
+  >
+    <h1 slot="title">${post.headline}</h1>
+
+    <!--
+    <section slot="menu">
+      <div class="content">
+        <player></player>
+      </div>
+    </section>
+    -->
+    
+    <section slot="cover-main">
+      <img src.bind="post.image" class="blend-bottom">
+      <div class="content cover-content">
+        <player playlist.bind="post"></player>
+      </div>
+      <div class="content">
+        <div class="info">
+          <a href.bind="post.audio.contentUrl">
+            <i class="fal fa-download"></i> Download
+          </a>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+    </section>
+
+    <section slot="cover-side">
+      <tracklist slot="side" playlist.bind="post"></tracklist>
+    </section>
+
+    <section slot="content-main">
+      <div class="excerpt">
+        <p>${post.description}</p>
+      </div>
+      <article innerhtml.bind="post.text"></article>
+    </section>
+            
+    <section slot="content-side">
+      <div id="disqus_thread"></div>
+    </section>
+  </blog-post>
 </template>

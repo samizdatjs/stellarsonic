@@ -1,22 +1,26 @@
-import {MusicRecording} from '@ziggurat/nabu';
+import {MusicPlaylist, MusicRecording} from '@ziggurat/nabu';
 import {autoinject, bindable} from 'aurelia-framework';
 import {Player} from '../services/player';
-import {Mix} from '../../../models';
 
 @autoinject
 export class PlayerCustomElement {
-  @bindable post!: Mix;
+  @bindable playlist!: MusicPlaylist;
   
   public constructor(private player: Player) {}
 
   get loaded(): boolean {
-    return this.post && this.post === this.player.playlist;
+    return this.playlist && this.playlist === this.player.playlist;
+    /*
+    return this.playlist
+      ? this.playlist === this.player.playlist
+      : this.player.playlist !== undefined;
+      */
   }
 
   get currentTrack(): MusicRecording | undefined {
-    return this.post
-      ? (<MusicRecording[]>this.post.tracks)[this.loaded ? this.player.currentTrackNumber : 0]
-      : undefined;
+    return this.playlist
+      ? (<MusicRecording[]>this.playlist.tracks)[this.loaded ? this.player.currentTrackNumber : 0]
+      : this.player.playlist ? (<MusicRecording[]>this.player.playlist.tracks)[this.player.currentTrackNumber] : undefined;
   }
 
   get duration(): number {
@@ -24,7 +28,9 @@ export class PlayerCustomElement {
   }
 
   get currentTime(): any {
-    return this.loaded ? this.player.currentTrackTime : 0;
+    return this.playlist 
+      ? (this.loaded ? this.player.currentTrackTime : 0)
+      : this.player.currentTrackTime || 0;
   }
 
   set currentTime(t: any) {
@@ -36,7 +42,7 @@ export class PlayerCustomElement {
 
   togglePlay() {
     if (!this.loaded) {
-      this.player.play(this.post);
+      this.player.play(this.playlist);
     } else if (this.player.audio.paused) {
       this.player.audio.play()
     } else {

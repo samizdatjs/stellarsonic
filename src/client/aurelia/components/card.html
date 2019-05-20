@@ -1,16 +1,13 @@
 <template bindable="color, image, url">
   <require from="styles/card.styl"></require>
 
-  <div class="card" style="background: ${color};">
+  <div class="card" css="background: ${color};">
     <a class="card-image" href.bind="url">
-      <div class="card-image-inner" style="background-image: url(${image}); color: ${color};">
-        <div class="card-image-overlay" 
-          style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0), ${color});"></div>
-        <article class="card-title">
-          <slot name="title"></slot>
-        </article>
-      </div>
+      <div class="card-image-inner" css="background-image: url(${image}); color: ${color};"></div>
     </a>
+    <article class="card-title">
+      <slot name="title"></slot>
+    </article>
     <footer class="card-footer">
       <slot name="footer"></slot>
     </footer>

@@ -1,7 +1,10 @@
 import {State} from '../services/state';
 import {Player} from '../services/player';
+import siteConfig from '../../../config';
 import {autoinject} from 'aurelia-framework';
 import * as moment from 'moment';
+
+declare var DISQUS: any;
 
 export class DateFormatValueConverter {
   toView(value: string) {
@@ -20,7 +23,24 @@ export class Post {
     await this.state.changePost(params.id);
   }
 
+  attached() {
+    /*
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.identifier = this.post._id;
+        this.page.url = `${siteConfig.url}/#posts/${this.post._id}`;
+        this.page.title = this.post.headline;
+      }
+    });
+    */
+  }
+
   get post() {
     return this.state.post;
+  }
+
+  get navScrollStyle() {
+    return {'post-body': 'hello'};
   }
 }

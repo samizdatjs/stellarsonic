@@ -1,15 +1,15 @@
+import {MusicPlaylist} from '@ziggurat/nabu';
 import {autoinject, bindable} from 'aurelia-framework';
-import {Mix} from '../../../models';
 import {Player} from '../services/player';
 
 @autoinject
 export class TracklistCustomElement {
-  @bindable mix!: Mix;
+  @bindable playlist!: MusicPlaylist;
 
   public constructor(private player: Player) {}
 
   isCurrent(track: number): boolean {
-    return this.mix === this.player.playlist && this.player.currentTrackNumber === track;
+    return this.playlist === this.player.playlist && this.player.currentTrackNumber === track;
   }
 
   togglePlay(track: number) {
@@ -20,7 +20,7 @@ export class TracklistCustomElement {
         this.player.audio.pause();
       }
     } else {
-      this.player.play(this.mix, track);
+      this.player.play(this.playlist, track);
     }
   }
 }

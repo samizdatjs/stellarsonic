@@ -1,0 +1,10 @@
+<template bindable="background, attached">
+  <require from="styles/spread.styl"></require>
+
+    <main css="background: ${background}">
+      <slot></slot>
+    </main>
+    <aside css="background: ${background}">
+      <slot name="side"></slot>
+    </aside>
+</template>

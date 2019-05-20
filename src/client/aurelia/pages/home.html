@@ -7,6 +7,8 @@
   <require from="components/card.html"></require>
 
   <main class="au-animate home">
+    <div class="segment pad-xsmall-up">
+
     <grid breakpoints.one-time="[1024, 1600, 2160]" columns.two-way="cols" class="post-list cols-${cols}">
       <card 
         repeat.for="post of posts.data"
@@ -23,10 +25,13 @@
         </ul>
       </card>
     </grid>
-    <section class="post-list-footer">
-      <div class="button" if.bind="posts.feed.hasMore">
-        <a href="#" click.delegate="posts.feed.loadMore()">load more</a>
-      </div>
-    </section>
+    </div>
+    <div class="segment pad">
+      <section class="post-list-footer">
+        <a href="#" click.delegate="posts.feed.loadMore()" class="load-more button" if.bind="posts.feed.hasMore">
+          load more
+        </a>
+      </section>
+    </div>
   </main>
 </template>

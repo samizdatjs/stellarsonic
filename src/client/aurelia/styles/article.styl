@@ -1,98 +1,87 @@
 @import 'settings';
 
-.post-content
-  article
-    max-width: 700px;
-    color: color-text;
-    font-family: font-primary;
+article
+  color: color-text;
+  font-family: font-primary;
+  position: relative;
+  margin: 50px auto;
+  padding: 0 content-padding;
+
+  @media screen and (min-width: bp-small)
+    padding: 0 (2 * content-padding);
+  
+  @media screen and (min-width: bp-medium)
+    padding: 0 (3 * content-padding);
+
+  a
+    color: #cd9023;
+    text-decoration: none;
+    font-style: italic;
+
+  img
+    width: 100%;
+    margin: 30px 0;
+
+  h1, h2, h3, h4, h5, h6
+    font-weight: 300;
+
+  p
+    margin: 40px 0;
+
+  hr
+    border: 0;
+    margin: 30px 0;
     position: relative;
-    min-height: 50vh;
-    margin: 50px auto;
+    height: 1px;
 
-    a
-      color: #cd9023;
-      text-decoration: none;
-      font-style: italic;
+    &:after
+      background-color: #cd9023;
+      content: "";
+      height: 1px;
+      left: 50%;
+      margin-left: -18px;
+      position: absolute;
+      width: 36px;
 
-    img
-      width: 100%;
-      margin: 30px 0;
-
-    h1, h2, h3, h4, h5, h6
-      font-weight: 300;
+  .expand
+    display: inline-block;
+    width: "calc(100% + %s)" % (2 * content-padding);
+    margin-left: -(content-padding);
 
     p
-      margin: 40px 0;
+      margin: 0
+    
+    @media screen and (min-width: bp-small)
+      width: "calc(100% + %s)" % (4 * content-padding);
+      margin-left: -(2 * content-padding);
+  
+    @media screen and (min-width: bp-medium)
+      width: "calc(100% + %s)" % (6 * content-padding);
+      margin-left: -(3 * content-padding);
 
-    hr
-      border: 0;
-      margin: 30px 0;
-      position: relative;
-      height: 1px;
 
-      &:after
-        background-color: #cd9023;
-        content: "";
-        height: 1px;
-        left: 50%;
-        margin-left: -18px;
-        position: absolute;
-        width: 36px;
+  .align-left
+    @media screen and (min-width: bp-small)
+      float: left;
+      margin: 5px 30px 15px 0;
+      width: 60%;
+      margin-left: -(2 * content-padding);
 
-    .expand
-      width: 100vw;
-      margin-left: -60px; // content padding
+    @media screen and (min-width: bp-medium)
+      width: 75%;
+      margin-left: -(3 * content-padding);
 
-    @media screen and (min-width: 900px)
-      .align-left
-        float: left;
-        margin: 5px 30px 15px 0;
-        width: 512px;
-        margin-left: -162px;
-
-        p, img
-          margin: 0
-
-    @media screen and (min-width: 1600px)
-      .align-left
-        margin-left: -244px;
-
-    @media screen and (min-width: 800px)
-      .expand
-        margin-left: calc(-50px + (800px - 100vw)/2);
-
-    @media screen and (min-width: 1024px)
-      .expand
-        display: inline-block;
-        width: 1024px;
-        margin-left: -162px;
-
-        p
-          margin: 0
-
-    @media screen and (min-width: 1600px)
-      .expand
-        width: calc((1920px / 1.618) - 60px);
-        margin-left: -244px;
-
-@media screen and (min-width: 980px)
-  .video
-    width: 940px;
-    margin-left: -120px;
-	  padding-bottom: 528px!important;
+      p, img
+        margin: 0
 
 .video
 	position: relative;
-	// padding-bottom: 56.25%; /* 16:9 */
-	padding-bottom: 528px!important;
-	padding-top: 25px;
+	padding-bottom: video-aspect-ratio;
 	height: 0;
-  
-
 
 .video iframe
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;

@@ -2,6 +2,11 @@
 
 .post-list
   display: grid;
+  margin: 100px auto;
+    
+  @media screen and (min-width: bp-xsmall)
+    grid-column-gap: content-padding;
+    grid-row-gap: content-padding;
 
   &.cols-1
     grid-template-columns: 1fr;
@@ -19,10 +24,15 @@
     grid-template-columns: repeat(5, 1fr);
 
 .post-list-footer
-  padding: 50px 0;
+  margin: 100px 0;
 
-  .button
+  .load-more
+    display: block;
     width: 100%;
+    border: 1px solid color-primary-darken;
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
 
     a
       justify-content: center;

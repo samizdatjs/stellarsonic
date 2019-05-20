@@ -1,13 +1,11 @@
 <template>
   <require from="styles/tracklist.styl"></require>
 
-  <div class="playlist">
-    <ul>
-      <li repeat.for="track of mix.tracks" click.delegate="togglePlay($index)" 
-        class.one-time="$index < mix.tracks.length / 2 ? 'first-half' : ''">
-        <h1 class="track-title">${track.name}</h1>
-        <span class="track-info">${track.byArtist.name} · ${track.copyrightYear}</span>
-      </li>
-    </ul>
-  </div>
+  <ul>
+    <li repeat.for="track of playlist.tracks" click.delegate="togglePlay($index)" 
+      class.one-time="$index < playlist.tracks.length / 2 ? 'first-half' : ''">
+      <h1 class="track-title">${track.name}</h1>
+      <span class="track-info">${track.byArtist.name} · ${track.copyrightYear}</span>
+    </li>
+  </ul>
 </template>

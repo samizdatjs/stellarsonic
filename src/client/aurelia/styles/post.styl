@@ -1,5 +1,5 @@
-@import 'settings';
-
+// Animation
+//-----------------------------------------------------------------------------
 @keyframes postEnter
   0% {opacity: 1;}
   100% {opacity: 1;}
@@ -10,17 +10,15 @@
 
 @keyframes coverFrameLeave
   0%
-    transform: scale(1);
     opacity: 1;
   100%
-    transform: scale(0.8);
-    opacity: 0;
+    opacity: 0.5;
 
 @keyframes coverFrameEnter
   0%
-    transform: scale(0.8);
+    opacity: 0;
   100%
-    transform: scale(1);
+    opacity: 1;
 
 @keyframes playerEnter
   0%
@@ -58,7 +56,8 @@
   animation: postEnter 0.5s;
 
   cover
-    animation: coverFrameEnter 0.5s;
+    img
+      animation: coverFrameEnter 0.5s;
   tracklist
     animation: tracklistEnter 0.5s;
   .player
@@ -68,148 +67,13 @@
   animation: postLeave 0.5s;
 
   cover
-    animation: coverFrameLeave 0.5s;
+    img
+      animation: coverFrameLeave 0.5s;
   tracklist
     animation: tracklistLeave 0.5s;
   .player
     animation: playerLeave 0.5s;
 
-.hidden
-  display: none!important;
 
-.post
-  transition: background 0.3s;
-
-.playlist-section
-  margin: 100px 0;
-
-.content-section
-  background: #fff;
-
-.cover-footer
-  position: absolute;
-  width: 100vw;
-  height: 260px;
-  bottom: 0;
-
-.post-content
-  margin: 0 auto;
-  background: #f1f0ef;
-  
-  @media screen and (min-width: 1200px)
-    padding: 50px 0;
-  
-  @media screen and (min-width: 1600px) and (max-width: 1920px)
-    padding: 0;
-
-.cover-section
-  display: grid;
-  width: 100vw;
-  min-height: 100vh;
-  max-width: 1024px;
-  margin: 0 auto;
-  grid-template-rows: auto auto 1fr;
-  
-  @media screen and (min-width: 1600px)
-    grid-template-columns: 1.618fr 1fr;
-    grid-template-rows: auto 1fr;
-    max-width: 1920px;
-
-.post-page
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
-  margin: 0 20px;
-
-.post
-  width: 100vw;
-  height: 100vh;
-
-  .post-body
-    overflow-y: auto;
-
-.excerpt
-  font-size: 1.2em;
-  letter-spacing: 0.02em;
-  word-spacing: 0.1em;
-  color: rgba(0,0,0,0.62);
+.info
   text-align: center;
-  margin: 0 auto;
-  position: relative;
-  padding: 5px 60px;
-  box-sizing: border-box;
-  max-width: 900px;
-  
-  @media screen and (min-width: 1600px)
-    width: 100%;
-    max-width: 100%;
-
-  &:after
-    bottom: 0;
-  &:before
-    top: 0;
-
-  &:before, &:after
-    background-color: #cd9023;
-    content: "";
-    height: 1px;
-    left: 50%;
-    margin-left: -18px;
-    position: absolute;
-    width: 36px;
-
-cover
-  grid-row: 1;
-  grid-column: 1;
-
-tracklist
-  margin: 90px 0;
-  grid-row: 3;
-  
-  @media screen and (min-width: 1600px)
-    grid-row: 1;
-    grid-row-end: 3;
-    grid-column: 2;
-    padding-left: 0;
-    padding-right: 60px;
-
-.title
-  padding: 12px 0;
-  text-align: center;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
-  background: rgba(0,0,0,0.2);
-  height: 60px;
-  box-sizing: border-box;
-
-  h1
-    margin: 0;
-    font-family: font-primary;
-    font-size: 1.5em;
-
-  h2
-    font-family: font-primary;
-    font-weight: 300;
-    font-size: 1em;
-    margin: 0;
-    letter-spacing: 0.2em;
-    word-spacing: 0.15em;
-    color: color-accent;
-
-    span:after
-      content: "/";
-      margin: 0 10px;
-    span:last-child:after
-      content: "";
-
-.post-content-inner
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 100px 0;
-  background: #fff;
-  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.25);
-
-  .text
-    padding: 0 60px;
-  
-  @media screen and (min-width: 1600px)
-    display: grid;
-    grid-template-columns: 1.618fr 1fr;
-    max-width: 1920px;
