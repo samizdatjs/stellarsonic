@@ -39,8 +39,4 @@ export class Post {
   get post() {
     return this.state.post;
   }
-
-  get navScrollStyle() {
-    return {'post-body': 'hello'};
-  }
 }
