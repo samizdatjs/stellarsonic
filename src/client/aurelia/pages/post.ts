@@ -4,8 +4,6 @@ import siteConfig from '../../../config';
 import {autoinject} from 'aurelia-framework';
 import * as moment from 'moment';
 
-declare var DISQUS: any;
-
 export class DateFormatValueConverter {
   toView(value: string) {
     return moment(value).format('MMM Do YYYY');
@@ -23,17 +21,8 @@ export class Post {
     await this.state.changePost(params.id);
   }
 
-  attached() {
-    /*
-    DISQUS.reset({
-      reload: true,
-      config: function () {
-        this.page.identifier = this.post._id;
-        this.page.url = `${siteConfig.url}/#posts/${this.post._id}`;
-        this.page.title = this.post.headline;
-      }
-    });
-    */
+  get url() {
+    return this.post ? `${siteConfig.url}/#posts/${(<any>this.post)._id}` : undefined;
   }
 
   get post() {

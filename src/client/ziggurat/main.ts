@@ -28,7 +28,8 @@ import siteConfig from '../../config';
       middleware: [
         () => new JsonldMiddleware()
       ]
-    }
+    },
+    'disqus.Shortname': siteConfig.disqus
   },
   inject: ['tiamat.Container']
 })
