@@ -18,6 +18,7 @@ export class State {
     private transformer: Transformer
   ) {
     postView.on('data-updated', data => {
+      console.log('data-updated');
       this.post = data[0];
     });
   }

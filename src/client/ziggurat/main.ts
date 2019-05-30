@@ -16,7 +16,6 @@ import siteConfig from '../../config';
     import('@ziggurat/isimud'),
     import('@ziggurat/isimud-mingo'),
     import('@ziggurat/nabu')
-    // import('@ziggurat/isimud-receiver')
   ],
   definitions: {
     'isimud.DatabaseConfig': {
@@ -35,7 +34,7 @@ import siteConfig from '../../config';
 })
 export class ZigguratClient {
   constructor(container: Container) {
-    if (location.hostname === 'localhost') {
+    if (process.env.NODE_ENV === 'development') {
       container.get('isimud.Receiver');
     }
   }

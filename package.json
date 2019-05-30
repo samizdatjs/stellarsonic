@@ -1,6 +1,6 @@
 {
   "name": "music-blog",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
@@ -23,10 +23,10 @@
     "@ziggurat/isimud-loki": "^0.3.0",
     "@ziggurat/isimud-mingo": "^0.2.1",
     "@ziggurat/isimud-persistence": "^0.5.1",
-    "@ziggurat/isimud-receiver": "^0.2.0",
+    "@ziggurat/isimud-receiver": "^0.3.1",
     "@ziggurat/isimud-rest": "^0.5.0",
     "@ziggurat/isimud-transmitter": "^0.4.0",
-    "@ziggurat/isimud-view": "^0.6.2",
+    "@ziggurat/isimud-view": "^0.6.3",
     "@ziggurat/json": "^0.2.0",
     "@ziggurat/markdown": "^0.1.0",
     "@ziggurat/nabu": "^0.18.0",

@@ -18,8 +18,8 @@ module.exports = (env) => {
     
     output: {
       path: path.resolve(__dirname, 'dist/client'),
-      filename: '[name].js',
-      chunkFilename: '[name].js'
+      filename: '[name].bundle.js',
+      chunkFilename: '[name].bundle.js'
     },
     
     resolve: {
@@ -84,14 +84,15 @@ module.exports = (env) => {
       minimize: false
     }
   };
+    
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: env === 'prod' ? JSON.stringify('production') : JSON.stringify('development')
+    }
+  }));
   
   if (env === 'prod') {
     config.optimization.minimize = true;
-    config.plugins.push(new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }));
     config.plugins.push(new CompressionPlugin());
   } else if (env === 'dev') {
     config.entry.push('webpack-dev-server/client?http://localhost:8080');
