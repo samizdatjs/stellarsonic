@@ -4,11 +4,11 @@ spread
   display: grid;
 
   &.attached
-    @media screen and (max-width: bp-xlarge)
+    @media screen and (max-width: bp-large)
       box-shadow: spread-shadow;
     
   &:not(.attached)
-    @media screen and (max-width: bp-xlarge)
+    @media screen and (max-width: bp-large)
       main
         box-shadow: spread-shadow;
 
@@ -19,9 +19,9 @@ spread
   main
     grid-column: 1;
 
-  @media screen and (min-width: bp-xlarge)
+  @media screen and (min-width: bp-large)
     grid-template-columns: 1.618fr 1fr;
-    grid-column-gap: content-padding;
+    grid-column-gap: 40px;
     box-shadow: none;
 
     main
@@ -30,7 +30,7 @@ spread
   aside
     z-index: 6;
 
-    @media screen and (min-width: bp-xlarge)
+    @media screen and (min-width: bp-large)
       grid-column: 2;
       background: none!important;
       box-shadow: none!important;

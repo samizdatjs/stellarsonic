@@ -10,7 +10,7 @@ article
   @media screen and (min-width: bp-small)
     padding: 0 (2 * content-padding);
   
-  @media screen and (min-width: bp-medium)
+  @media screen and (min-width: bp-medium) and (max-width: bp-large)
     padding: 0 (3 * content-padding);
 
   a
@@ -31,7 +31,7 @@ article
       width: "calc(100% + %s)" % (4 * content-padding);
       margin-left: -(2 * content-padding);
   
-    @media screen and (min-width: bp-medium)
+    @media screen and (min-width: bp-medium) and (max-width: bp-large)
       width: "calc(100% + %s)" % (6 * content-padding);
       margin-left: -(3 * content-padding);
 
@@ -42,7 +42,7 @@ article
       width: 60%;
       margin-left: -(2 * content-padding);
 
-    @media screen and (min-width: bp-medium)
+    @media screen and (min-width: bp-medium) and (max-width: bp-large)
       width: 75%;
       margin-left: -(3 * content-padding);
 
