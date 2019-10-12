@@ -1,9 +1,10 @@
 import {directory, file, yaml, markdown} from '@ziggurat/nabu';
 import {component} from '@ziggurat/tiamat';
+import * as showdown from 'showdown';
 import * as http from 'http';
 import {AppServerFactory} from './router';
 
-// require('showdown-youtube');
+require('showdown-youtube');
 
 @component({
   providers: [
@@ -21,12 +22,12 @@ import {AppServerFactory} from './router';
           path: 'content/posts',
           extension: 'md',
           serializer: yaml({
-            frontMatter: markdown({
+            frontMatter: markdown(new showdown.Converter({
               extensions: [
-                // 'showdown-youtube',
+               'youtube',
                 require('showdown-target-blank'),
               ]
-            }),
+            })),
             contentKey: 'text'
           })
         }),

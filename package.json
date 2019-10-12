@@ -1,6 +1,6 @@
 {
   "name": "music-blog",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": true,
   "scripts": {
     "clean": "rimraf dist",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@types/socket.io": "^2.1.2",
-    "@ziggurat/nabu": "^0.20.1",
+    "@ziggurat/nabu": "^0.20.2",
     "@ziggurat/tashmetu": "^0.13.1",
     "@ziggurat/tiamat": "^0.17.1",
     "@ziggurat/tiamat-aurelia": "^0.3.0",
