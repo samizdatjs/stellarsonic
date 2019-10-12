@@ -1,10 +1,10 @@
-import {MusicPlaylist, MusicRecording} from '@ziggurat/nabu';
 import {autoinject, bindable} from 'aurelia-framework';
 import {Player} from '../services/player';
+import * as duration from 'iso8601-duration';
 
 @autoinject
 export class PlayerCustomElement {
-  @bindable playlist!: MusicPlaylist;
+  @bindable playlist!: any;
   
   public constructor(private player: Player) {}
 
@@ -17,14 +17,14 @@ export class PlayerCustomElement {
       */
   }
 
-  get currentTrack(): MusicRecording | undefined {
+  get currentTrack(): any {
     return this.playlist
-      ? (<MusicRecording[]>this.playlist.tracks)[this.loaded ? this.player.currentTrackNumber : 0]
-      : this.player.playlist ? (<MusicRecording[]>this.player.playlist.tracks)[this.player.currentTrackNumber] : undefined;
+      ? (this.playlist.tracks)[this.loaded ? this.player.currentTrackNumber : 0]
+      : this.player.playlist ? (this.player.playlist.tracks)[this.player.currentTrackNumber] : undefined;
   }
 
   get duration(): number {
-    return this.currentTrack ? this.currentTrack.duration.asSeconds() : 0;
+    return this.currentTrack ?  duration.toSeconds(duration.parse(this.currentTrack.duration)) : 0;
   }
 
   get currentTime(): any {

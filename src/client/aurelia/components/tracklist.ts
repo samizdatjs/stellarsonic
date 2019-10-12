@@ -1,10 +1,9 @@
-import {MusicPlaylist} from '@ziggurat/nabu';
 import {autoinject, bindable} from 'aurelia-framework';
 import {Player} from '../services/player';
 
 @autoinject
 export class TracklistCustomElement {
-  @bindable playlist!: MusicPlaylist;
+  @bindable playlist!: any;
 
   public constructor(private player: Player) {}
 

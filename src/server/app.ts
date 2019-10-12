@@ -1,32 +1,59 @@
+import {directory, file, yaml, markdown} from '@ziggurat/nabu';
 import {component} from '@ziggurat/tiamat';
 import * as http from 'http';
 import {AppServerFactory} from './router';
-import {Articles, Authors, Categories, Tags} from './collections';
-import * as SocketIO from 'socket.io';
+
+// require('showdown-youtube');
 
 @component({
   providers: [
     AppServerFactory,
-    Articles, Authors, Categories, Tags,
   ],
   dependencies: [
-    import('@ziggurat/common'),
-    import('@ziggurat/isimud'),
-    import('@ziggurat/isimud-fs'),
-    import('@ziggurat/isimud-loki'),
+    import('@ziggurat/ziggurat'),
+    import('@ziggurat/nabu'),
     import('@ziggurat/tashmetu'),
-    import('@ziggurat/nabu')
   ],
-  inject: ['http.Server', Articles]
+  instances: {
+    'ziggurat.DatabaseConfig': {
+      collections: {
+        'articles': directory({
+          path: 'content/posts',
+          extension: 'md',
+          serializer: yaml({
+            frontMatter: markdown({
+              extensions: [
+                // 'showdown-youtube',
+                require('showdown-target-blank'),
+              ]
+            }),
+            contentKey: 'text'
+          })
+        }),
+        'authors': directory({
+          path: 'content/authors',
+          extension: 'yaml',
+          serializer: yaml()
+        }),
+        'categories': file({
+          path: 'content/categories.yaml',
+          serializer: yaml()
+        }),
+        'tags': file({
+          path: 'content/tags.yaml',
+          serializer: yaml()
+        }),
+      }
+    }
+  },
+  inject: ['http.Server'],
 })
 export class Application {
   constructor(
     private server: http.Server,
-    private articles: Articles
   ) {}
 
   async run(port: string | number) {
-    await this.articles.populate();
     this.server.listen(port);
   }
 }

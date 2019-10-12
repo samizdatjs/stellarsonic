@@ -1,19 +1,17 @@
 import * as express from 'express';
-import {readOnly} from '@ziggurat/isimud-rest';
-import {middleware, router, ServerFactory} from '@ziggurat/tashmetu';
-import {requestLogger} from '@ziggurat/tashmetu-logging';
-import {Articles, Authors, Categories, Tags} from './collections';
+import * as morgan from 'morgan';
+import {middleware, router, resource, ServerFactory} from '@ziggurat/tashmetu';
 import {provider, Container} from '@ziggurat/tiamat';
 
 @provider({
   inject: ['app.Config']
 })
 @middleware([
-  {path: '*',               producer: requestLogger({})},
-  {path: '/api/authors',    producer: router(readOnly(Authors))},
-  {path: '/api/posts',      producer: router(readOnly(Articles))},
-  {path: '/api/tags',       producer: router(readOnly(Tags))},
-  {path: '/api/categories', producer: router(readOnly(Categories))},
+  {path: '*', producer: () => morgan('tiny')},
+  {path: '/api/posts',      producer: router(resource('articles', {readOnly: true}))},
+  {path: '/api/authors',    producer: router(resource('authors', {readOnly: true}))},
+  {path: '/api/tags',       producer: router(resource('tags', {readOnly: true}))},
+  {path: '/api/categories', producer: router(resource('categories', {readOnly: true}))},
 ])
 export class AppServerFactory extends ServerFactory {
   public constructor(

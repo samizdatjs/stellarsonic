@@ -2,11 +2,10 @@ import {State} from '../services/state';
 import {Player} from '../services/player';
 import siteConfig from '../../../config';
 import {autoinject} from 'aurelia-framework';
-import * as moment from 'moment';
 
 export class DateFormatValueConverter {
   toView(value: string) {
-    return moment(value).format('MMM Do YYYY');
+    return new Date(value).toLocaleDateString('en-US');
   }
 }
 

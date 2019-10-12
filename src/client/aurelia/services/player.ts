@@ -1,8 +1,8 @@
-import {AudioObject, MusicRecording, MusicPlaylist} from '@ziggurat/nabu';
+import * as duration from 'iso8601-duration';
 
 export class Player {
   public audio: HTMLAudioElement;
-  public playlist: MusicPlaylist | undefined;
+  public playlist: any;
   private offsets: number[] = [];
 
   public constructor() {
@@ -31,16 +31,16 @@ export class Player {
     return track < this.offsets.length ? this.offsets[track] : 0;
   }
 
-  public play(playlist: MusicPlaylist, track = 0) {
+  public play(playlist: any, track = 0) {
     this.playlist = playlist;
-    if (playlist.audio instanceof AudioObject) {
+    if (playlist.audio) {
       if (this.audio.src !== playlist.audio.contentUrl) {
         this.audio.src = playlist.audio.contentUrl;
         this.audio.load();
         this.offsets = [0];
         let prevOffset = 0;
-        for (let t of <MusicRecording[]>playlist.tracks) {
-          prevOffset = prevOffset + t.duration.asSeconds();
+        for (let t of playlist.tracks) {
+          prevOffset = prevOffset + duration.toSeconds(duration.parse(t.duration));
           this.offsets.push(prevOffset);
         }
       }
@@ -50,9 +50,9 @@ export class Player {
     this.audio.play();
   }
 
-  public get currentTrack(): MusicRecording | undefined {
+  public get currentTrack(): any {
     return this.playlist 
-      ? (<MusicRecording[]>this.playlist.tracks)[this.currentTrackNumber]
+      ? this.playlist.tracks[this.currentTrackNumber]
       : undefined;
   }
 

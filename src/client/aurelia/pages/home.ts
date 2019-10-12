@@ -1,4 +1,4 @@
-import {PostFeed, PostCategories} from '../../ziggurat/views';
+import {PostFeed, PostCategories} from '../main';
 import {autoinject, observable} from 'aurelia-framework';
 
 @autoinject

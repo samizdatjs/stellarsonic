@@ -1,32 +1,22 @@
 import {inject} from 'aurelia-framework';
-import {Transformer} from '@ziggurat/common';
-import {PostView} from '../../ziggurat/views';
-import {Mix} from '../../../models';
+import {PostView} from '../main';
 
-export class Schema {
-  public constructor(
-    private transformer: Transformer 
-  ) {}
-}
-
-@inject(PostView, 'ziggurat.Transformer')
+@inject(PostView)
 export class State {
-  public post: Mix | undefined;
+  public post: any;
   
   public constructor(
     private postView: PostView,
-    private transformer: Transformer
   ) {
     postView.on('data-updated', data => {
-      console.log('data-updated');
       this.post = data[0];
     });
   }
 
-  public async changePost(id: string): Promise<Mix> {
+  public async changePost(id: string): Promise<any> {
     this.postView.id.value = id;
     let post = (await this.postView.refresh())[0];
-    this.schemaTag.text = JSON.stringify(await this.transformer.toPlain(post, 'publication'), null, 2);
+    this.schemaTag.text = JSON.stringify(post);
     return post;
   }
 

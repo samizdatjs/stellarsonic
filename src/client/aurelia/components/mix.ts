@@ -1,14 +1,10 @@
-import {min, max, map, padStart} from 'lodash';
-import {MusicRecording} from '@ziggurat/nabu';
-import {Mix} from '../../../models';
-
 export class MixYearRangeValueConverter {
-  toView(mix: Mix) {
+  toView(mix: any) {
     if (!mix) {
       return '';
     }
-    const yMin = min(map((<MusicRecording[]>mix.tracks), 'copyrightYear'));
-    const yMax = max(map((<MusicRecording[]>mix.tracks), 'copyrightYear'));
+    const yMin = Math.min(...mix.tracks.map('copyrightYear'));
+    const yMax = Math.max(...mix.tracks.map('copyrightYear'));
     return yMin === yMax ? yMin : `${yMin} – ${yMax}`;
   }
 }
@@ -21,7 +17,7 @@ export class MinutesValueConverter {
 
 export class TimeValueConverter {
   toView(value: number) {
-    return padStart(Math.floor(value / 60).toString(), 2, '0') + ":" +
-           padStart(Math.floor(value % 60).toString(), 2, '0');
+    return String('00' + Math.floor(value / 60).toString()).slice(-2) + ":" +
+           String('00' + Math.floor(value % 60).toString()).slice(-2);
   }
 }

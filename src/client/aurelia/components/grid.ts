@@ -1,5 +1,4 @@
 import {autoinject, bindable, BindingEngine} from 'aurelia-framework';
-import {each} from 'lodash';
 
 @autoinject
 export class GridCustomElement {
@@ -27,7 +26,7 @@ export class GridCustomElement {
 
   updateDisplayMode(width: number) {
     let cols = this.breakpoints.length + 1;
-    each(this.breakpoints, (bp: number, i: number) => {
+    this.breakpoints.forEach((bp: number, i: number) => {
       if (width < bp) {
         cols = i + 1;
         return false;
