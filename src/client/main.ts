@@ -14,7 +14,7 @@ import {
   SortingOrder
 } from '@ziggurat/ziggurat';
 
-import siteConfig from '../../config';
+import siteConfig from '../config';
 import 'aurelia-animator-css';
 
 @viewOf('articles')

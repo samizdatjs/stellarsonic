@@ -32,7 +32,7 @@ module.exports = (env) => {
         '.tsx',
       ],
       modules: [
-        'src/client/aurelia',
+        'src/client',
         'node_modules'
       ]
     },
@@ -69,7 +69,7 @@ module.exports = (env) => {
     plugins: [
       new AureliaPlugin(),
       new HtmlWebpackPlugin({
-        template: 'aurelia/index.html'
+        template: 'index.html'
       }),
       new TsConfigPathsPlugin(),
       new BundleAnalyzerPlugin(),

@@ -1,6 +1,6 @@
 import {State} from '../services/state';
 import {Player} from '../services/player';
-import siteConfig from '../../../config';
+import siteConfig from '../../config';
 import {autoinject} from 'aurelia-framework';
 
 export class DateFormatValueConverter {
