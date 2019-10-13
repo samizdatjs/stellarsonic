@@ -3,8 +3,8 @@ import {bootstrapWithContainer, provide} from '@ziggurat/tiamat';
 import {component, Container} from '@ziggurat/tiamat';
 import {container} from '@ziggurat/tiamat-aurelia';
 import {
+  caching,
   http,
-  cached,
   viewOf,
   DatabaseConfig,
   View,
@@ -57,11 +57,12 @@ export class PostFeed extends View {
   instances: {
     'ziggurat.DatabaseConfig': {
       collections: {
-        'articles': cached(http({path: '/api/posts'})),
-        'authors': cached(http({path: '/api/authors'})),
-        'categories': cached(http({path: '/api/categories'})),
-        'tags': cached(http({path: '/api/tags'})),
-      }
+        'articles': http({path: '/api/posts'}),
+        'authors': http({path: '/api/authors'}),
+        'categories': http({path: '/api/categories'}),
+        'tags': http({path: '/api/tags'}),
+      },
+      use: [caching()]
     } as DatabaseConfig,
     'disqus.Shortname': siteConfig.disqus
   },
