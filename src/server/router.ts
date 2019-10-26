@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as morgan from 'morgan';
-import {middleware, router, resource, ServerFactory} from '@ziggurat/tashmetu';
+import {middleware, resource, ServerFactory} from '@ziggurat/tashmetu';
 import {provider, Container} from '@ziggurat/tiamat';
 
 @provider({
@@ -8,10 +8,10 @@ import {provider, Container} from '@ziggurat/tiamat';
 })
 @middleware({
   '*':               () => morgan('tiny'),
-  '/api/posts':      router(resource('articles', {readOnly: true})),
-  '/api/authors':    router(resource('authors', {readOnly: true})),
-  '/api/tags':       router(resource('tags', {readOnly: true})),
-  '/api/categories': router(resource('categories', {readOnly: true})),
+  '/api/posts':      resource({collection: 'articles', readOnly: true}),
+  '/api/authors':    resource({collection: 'authors', readOnly: true}),
+  '/api/tags':       resource({collection: 'tags', readOnly: true}),
+  '/api/categories': resource({collection: 'categories', readOnly: true}),
 })
 export class AppServerFactory extends ServerFactory {
   public constructor(
