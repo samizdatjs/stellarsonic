@@ -6,13 +6,13 @@ import {provider, Container} from '@ziggurat/tiamat';
 @provider({
   inject: ['app.Config']
 })
-@middleware([
-  {path: '*', producer: () => morgan('tiny')},
-  {path: '/api/posts',      producer: router(resource('articles', {readOnly: true}))},
-  {path: '/api/authors',    producer: router(resource('authors', {readOnly: true}))},
-  {path: '/api/tags',       producer: router(resource('tags', {readOnly: true}))},
-  {path: '/api/categories', producer: router(resource('categories', {readOnly: true}))},
-])
+@middleware({
+  '*':               () => morgan('tiny'),
+  '/api/posts':      router(resource('articles', {readOnly: true})),
+  '/api/authors':    router(resource('authors', {readOnly: true})),
+  '/api/tags':       router(resource('tags', {readOnly: true})),
+  '/api/categories': router(resource('categories', {readOnly: true})),
+})
 export class AppServerFactory extends ServerFactory {
   public constructor(
     private appConfig: any,
