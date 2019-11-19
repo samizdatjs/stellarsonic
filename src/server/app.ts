@@ -1,15 +1,11 @@
 import {directory, file, yaml, markdown} from '@ziggurat/nabu';
 import {component} from '@ziggurat/tiamat';
+import {Server} from '@ziggurat/tashmetu';
 import * as showdown from 'showdown';
-import * as http from 'http';
-import {AppServerFactory} from './router';
 
 require('showdown-youtube');
 
 @component({
-  providers: [
-    AppServerFactory,
-  ],
   dependencies: [
     import('@ziggurat/ziggurat'),
     import('@ziggurat/nabu'),
@@ -45,16 +41,16 @@ require('showdown-youtube');
           serializer: yaml()
         }),
       }
-    }
+    },
   },
-  inject: ['http.Server'],
+  inject: ['tashmetu.Server'],
 })
 export class Application {
   constructor(
-    private server: http.Server,
+    private server: Server,
   ) {}
 
-  async run(port: string | number) {
+  async run(port: number) {
     this.server.listen(port);
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@samizdat/stellarsonic",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": false,
   "scripts": {
     "clean": "rimraf dist",
@@ -13,7 +13,7 @@
   "dependencies": {
     "@types/socket.io": "^2.1.2",
     "@ziggurat/nabu": "^0.20.2",
-    "@ziggurat/tashmetu": "^0.15.0",
+    "@ziggurat/tashmetu": "^0.17.0",
     "@ziggurat/tiamat": "^0.17.1",
     "@ziggurat/tiamat-aurelia": "^0.3.0",
     "@ziggurat/ziggurat": "^0.41.16",
@@ -44,6 +44,7 @@
     "@types/fs-extra": "^4.0.3",
     "@types/lodash": "^4.14.91",
     "@types/morgan": "^1.7.37",
+    "@types/node": "^12.12.10",
     "@types/showdown": "^1.7.2",
     "@types/webpack": "4.4.0",
     "@types/webpack-env": "1.13.0",
