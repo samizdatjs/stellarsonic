@@ -1,5 +1,5 @@
 import {directory, file, yaml, markdown} from '@ziggurat/nabu';
-import {component} from '@ziggurat/tiamat';
+import {component, Provider} from '@ziggurat/tiamat';
 import {Server} from '@ziggurat/tashmetu';
 import * as showdown from 'showdown';
 
@@ -11,8 +11,8 @@ require('showdown-youtube');
     import('@ziggurat/nabu'),
     import('@ziggurat/tashmetu'),
   ],
-  instances: {
-    'ziggurat.DatabaseConfig': {
+  providers: [
+    Provider.ofInstance('ziggurat.DatabaseConfig', {
       collections: {
         'articles': directory({
           path: 'content/posts',
@@ -41,8 +41,8 @@ require('showdown-youtube');
           serializer: yaml()
         }),
       }
-    },
-  },
+    }),
+  ],
   inject: ['tashmetu.Server'],
 })
 export class Application {

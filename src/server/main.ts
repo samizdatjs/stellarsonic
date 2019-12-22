@@ -1,9 +1,10 @@
 import * as express from 'express';
 import * as morgan from 'morgan';
-import {bootstrap} from '@ziggurat/tiamat';
+import {bootstrap, Provider} from '@ziggurat/tiamat';
 import {resource, ServerConfig} from '@ziggurat/tashmetu';
 import * as yargs from 'yargs';
 import {Application} from './app';
+import { FileSystemConfig } from '@ziggurat/nabu';
 
 let argv = yargs.option('dev', {
   type: 'boolean', 
@@ -34,8 +35,10 @@ bootstrap(Application, async c => {
     rootMiddleware = [express.static('dist/client')];
   }
 
-  c.registerInstance('nabu.FileSystemConfig', {watch: argv.dev});
-  c.registerInstance('tashmetu.ServerConfig', {
+  c.register(Provider.ofInstance<FileSystemConfig>('nabu.FileSystemConfig', {
+    watch: argv.dev
+  }));
+  c.register(Provider.ofInstance<ServerConfig>('tashmetu.ServerConfig', {
     middleware: {
       '/':               [...rootMiddleware, morgan('tiny')],
       '/api/posts':      resource({collection: 'articles', readOnly: true}),
@@ -43,5 +46,5 @@ bootstrap(Application, async c => {
       '/api/tags':       resource({collection: 'tags', readOnly: true}),
       '/api/categories': resource({collection: 'categories', readOnly: true}),
     }
-  } as ServerConfig)
+  }));
 }).then(app => app.run(parseInt(process.env.PORT || '8080')));

@@ -1,6 +1,6 @@
 {
   "name": "@samizdat/stellarsonic",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "private": false,
   "scripts": {
     "clean": "rimraf dist",
@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@types/socket.io": "^2.1.2",
-    "@ziggurat/nabu": "^0.20.2",
-    "@ziggurat/tashmetu": "^0.17.0",
-    "@ziggurat/tiamat": "^0.17.1",
+    "@ziggurat/nabu": "^0.22.0",
+    "@ziggurat/tashmetu": "^0.19.0",
+    "@ziggurat/tiamat": "^0.20.1",
     "@ziggurat/tiamat-aurelia": "^0.3.0",
-    "@ziggurat/ziggurat": "^0.41.16",
+    "@ziggurat/ziggurat": "^0.45.0",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "2.1.1",
     "aurelia-event-aggregator": "1.0.1",

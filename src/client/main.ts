@@ -1,5 +1,5 @@
 import {Aurelia, PLATFORM} from 'aurelia-framework';
-import {bootstrapWithContainer, provide} from '@ziggurat/tiamat';
+import {bootstrapWithContainer, Provider} from '@ziggurat/tiamat';
 import {component, Container} from '@ziggurat/tiamat';
 import {container} from '@ziggurat/tiamat-aurelia';
 import {
@@ -49,13 +49,10 @@ export class PostFeed extends View {
 
 @component({
   providers: [
-    PostView, PostFeed, PostCategories
-  ],
-  dependencies: [
-    import('@ziggurat/ziggurat'),
-  ],
-  instances: {
-    'ziggurat.DatabaseConfig': {
+    PostView,
+    PostFeed,
+    PostCategories,
+    Provider.ofInstance<DatabaseConfig>('ziggurat.DatabaseConfig', {
       collections: {
         'articles': http({path: '/api/posts'}),
         'authors': http({path: '/api/authors'}),
@@ -63,9 +60,12 @@ export class PostFeed extends View {
         'tags': http({path: '/api/tags'}),
       },
       use: [caching()]
-    } as DatabaseConfig,
-    'disqus.Shortname': siteConfig.disqus
-  },
+    }),
+    Provider.ofInstance('disqus.Shortname', siteConfig.disqus),
+  ],
+  dependencies: [
+    import('@ziggurat/ziggurat'),
+  ],
   inject: ['tiamat.Container']
 })
 export class Application {
