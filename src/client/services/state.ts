@@ -8,14 +8,14 @@ export class State {
   public constructor(
     private postView: PostView,
   ) {
-    postView.on('data-updated', data => {
-      this.post = data[0];
+    postView.on('item-updated', data => {
+      this.post = data;
     });
   }
 
   public async changePost(id: string): Promise<any> {
-    this.postView.id.value = id;
-    let post = (await this.postView.refresh())[0];
+    this.postView._id = id;
+    let post = (await this.postView.refresh());
     this.schemaTag.text = JSON.stringify(post);
     return post;
   }

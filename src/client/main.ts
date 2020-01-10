@@ -5,46 +5,40 @@ import {container} from '@ziggurat/tiamat-aurelia';
 import {
   caching,
   http,
-  viewOf,
+  view,
   DatabaseConfig,
-  View,
-  FeedFilter,
-  SelectorFilter,
-  SortingFilter,
+  Item,
+  ItemSet,
+  Feed,
+  filter,
+  sortBy,
   SortingOrder
 } from '@ziggurat/ziggurat';
 
 import siteConfig from '../config';
 import 'aurelia-animator-css';
 
-@viewOf('articles')
-export class PostView extends View {
-  id = new SelectorFilter<string>({
-    compile: value => ({_id: value})
-  });
+@view({collection: 'articles'})
+export class PostView extends Item {
+  @filter() _id: string = '';
 }
 
-@viewOf('categories')
-export class PostCategories extends View {}
+@view({collection: 'categories'})
+export class PostCategories extends ItemSet {}
 
-@viewOf('articles')
-export class PostFeed extends View {
-  feed = new FeedFilter({
-    limit: 3,
-    increment: 3
-  });
+@view({collection: 'articles'})
+export class PostFeed extends Feed {
+  limit = 3;
+  increment = 3;
 
-  dateSort = new SortingFilter({
-    key: 'datePublished',
-    order: SortingOrder.Descending
-  });
+  @sortBy('datePublished')
+  dateSort = SortingOrder.Descending;
 
-  category = new SelectorFilter<string>({
-    observe: ['value'],
+  @filter({
     compile: value => ({categories: {$contains: value}}),
-    value: 'all',
     disableOn: 'all'
-  });
+  })
+  category = 'all';
 }
 
 @component({

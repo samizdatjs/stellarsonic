@@ -15,8 +15,8 @@ export class Home {
   }
 
   colsChanged(cols: number) {
-    this.posts.feed.limit = cols > 3 ? cols : 6;
-    this.posts.feed.increment = this.cols > 2 ? this.cols * 2 : 6;
+    this.posts.limit = cols > 3 ? cols : 6;
+    this.posts.increment = this.cols > 2 ? this.cols * 2 : 6;
     this.posts.refresh();
   }
 }
