@@ -11,6 +11,13 @@
     "build-client": "webpack --env prod",
     "dev": "npm run build-server && node ./dist/server/main.js --dev=true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samizdatjs/stellarsonic"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@ziqquratu/caching": "^1.0.0-alpha.1",
     "@ziqquratu/ioc-aurelia": "^0.5.0",
