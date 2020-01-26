@@ -4,10 +4,8 @@
     "types": [
       "node"
     ],
-    "target": "es5",
+    "target": "esnext",
     "module": "commonjs",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "sourceMap": false,
