@@ -3,7 +3,7 @@ import {container} from '@ziqquratu/ioc-aurelia';
 import {caching} from '@ziqquratu/caching';
 import {view, Item, ItemSet, Feed, filter, sortBy} from '@ziqquratu/view';
 import {
-  bootstrap, component, http, Container, DatabaseConfig, Provider, SortingOrder
+  bootstrap, component, http, DatabaseConfig, Provider, SortingOrder
 } from '@ziqquratu/ziqquratu';
 
 import siteConfig from '../config';
@@ -48,17 +48,8 @@ export class PostFeed extends Feed {
     }),
     Provider.ofInstance('disqus.Shortname', siteConfig.disqus),
   ],
-  inject: ['ziqquratu.Container']
 })
-export class Application {
-  constructor(container: Container) {
-    /*
-    if (process.env.NODE_ENV === 'development') {
-      container.get('isimud.Receiver');
-    }
-    */
-  }
-}
+export class Application {}
 
 export async function configure(aurelia: Aurelia): Promise<void> {
   aurelia.use
@@ -68,11 +59,6 @@ export async function configure(aurelia: Aurelia): Promise<void> {
 
   await bootstrap(Application, {
     container: container(aurelia.container)
-  }, async container => {
-    if (process.env.NODE_ENV === 'development') {
-      // let receiver = (await import(/* webpackChunkName: "dev" */ '@ziggurat/isimud-receiver')).Receiver;
-      // provide(container, receiver);
-    }
   });
 
   await aurelia.start();
