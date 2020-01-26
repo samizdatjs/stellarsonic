@@ -11,6 +11,7 @@
     "build-client": "webpack --env prod",
     "dev": "npm run build-server && node ./dist/server/main.js --dev=true"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/samizdatjs/stellarsonic"
