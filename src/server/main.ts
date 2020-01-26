@@ -1,17 +1,20 @@
 import * as express from 'express';
-import * as morgan from 'morgan';
-import {bootstrap, Provider} from '@ziggurat/tiamat';
-import {resource, ServerConfig} from '@ziggurat/tashmetu';
+import {bootstrap, LogLevel, Provider} from '@ziqquratu/ziqquratu';
+import {resource, requestLogger, ServerConfig} from '@ziqquratu/tashmetu';
+import {FileSystemConfig} from '@ziqquratu/nabu';
+import {terminal} from '@ziqquratu/terminal';
 import * as yargs from 'yargs';
 import {Application} from './app';
-import { FileSystemConfig } from '@ziggurat/nabu';
 
 let argv = yargs.option('dev', {
   type: 'boolean', 
   default: false
 }).argv;
 
-bootstrap(Application, async c => {
+bootstrap(Application, {
+  logLevel: LogLevel.Info,
+  logFormat: terminal(),
+}, async c => {
   let rootMiddleware: express.RequestHandler[] = [];
 
   if (argv.dev) {
@@ -36,11 +39,11 @@ bootstrap(Application, async c => {
   }
 
   c.register(Provider.ofInstance<FileSystemConfig>('nabu.FileSystemConfig', {
-    watch: argv.dev
+    watch: true
   }));
   c.register(Provider.ofInstance<ServerConfig>('tashmetu.ServerConfig', {
     middleware: {
-      '/':               [...rootMiddleware, morgan('tiny')],
+      '/':               [...rootMiddleware, requestLogger()],
       '/api/posts':      resource({collection: 'articles', readOnly: true}),
       '/api/authors':    resource({collection: 'authors', readOnly: true}),
       '/api/tags':       resource({collection: 'tags', readOnly: true}),

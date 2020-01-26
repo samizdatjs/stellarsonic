@@ -1,18 +1,17 @@
-import {directory, file, yaml, markdown} from '@ziggurat/nabu';
-import {component, Provider} from '@ziggurat/tiamat';
-import {Server} from '@ziggurat/tashmetu';
+import {directory, file, yaml, markdown} from '@ziqquratu/nabu';
+import {component, Provider} from '@ziqquratu/ziqquratu';
+import {Server} from '@ziqquratu/tashmetu';
 import * as showdown from 'showdown';
 
 require('showdown-youtube');
 
 @component({
   dependencies: [
-    import('@ziggurat/ziggurat'),
-    import('@ziggurat/nabu'),
-    import('@ziggurat/tashmetu'),
+    import('@ziqquratu/nabu'),
+    import('@ziqquratu/tashmetu'),
   ],
   providers: [
-    Provider.ofInstance('ziggurat.DatabaseConfig', {
+    Provider.ofInstance('ziqquratu.DatabaseConfig', {
       collections: {
         'articles': directory({
           path: 'content/posts',

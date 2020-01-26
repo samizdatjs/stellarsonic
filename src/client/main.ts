@@ -1,19 +1,10 @@
 import {Aurelia, PLATFORM} from 'aurelia-framework';
-import {bootstrapWithContainer, Provider} from '@ziggurat/tiamat';
-import {component, Container} from '@ziggurat/tiamat';
-import {container} from '@ziggurat/tiamat-aurelia';
+import {container} from '@ziqquratu/ioc-aurelia';
+import {caching} from '@ziqquratu/caching';
+import {view, Item, ItemSet, Feed, filter, sortBy} from '@ziqquratu/view';
 import {
-  caching,
-  http,
-  view,
-  DatabaseConfig,
-  Item,
-  ItemSet,
-  Feed,
-  filter,
-  sortBy,
-  SortingOrder
-} from '@ziggurat/ziggurat';
+  bootstrap, component, http, Container, DatabaseConfig, Provider, SortingOrder
+} from '@ziqquratu/ziqquratu';
 
 import siteConfig from '../config';
 import 'aurelia-animator-css';
@@ -46,7 +37,7 @@ export class PostFeed extends Feed {
     PostView,
     PostFeed,
     PostCategories,
-    Provider.ofInstance<DatabaseConfig>('ziggurat.DatabaseConfig', {
+    Provider.ofInstance<DatabaseConfig>('ziqquratu.DatabaseConfig', {
       collections: {
         'articles': http({path: '/api/posts'}),
         'authors': http({path: '/api/authors'}),
@@ -57,10 +48,7 @@ export class PostFeed extends Feed {
     }),
     Provider.ofInstance('disqus.Shortname', siteConfig.disqus),
   ],
-  dependencies: [
-    import('@ziggurat/ziggurat'),
-  ],
-  inject: ['tiamat.Container']
+  inject: ['ziqquratu.Container']
 })
 export class Application {
   constructor(container: Container) {
@@ -78,7 +66,9 @@ export async function configure(aurelia: Aurelia): Promise<void> {
     .developmentLogging()
     .plugin(PLATFORM.moduleName("aurelia-animator-css"));
 
-  await bootstrapWithContainer(Application, container(aurelia.container), async container => {
+  await bootstrap(Application, {
+    container: container(aurelia.container)
+  }, async container => {
     if (process.env.NODE_ENV === 'development') {
       // let receiver = (await import(/* webpackChunkName: "dev" */ '@ziggurat/isimud-receiver')).Receiver;
       // provide(container, receiver);
