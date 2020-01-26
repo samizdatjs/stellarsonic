@@ -1,12 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-const { AureliaPlugin } = require('aurelia-webpack-plugin');
+const {AureliaPlugin} = require('aurelia-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { TsConfigPathsPlugin, CheckerPlugin } = require('awesome-typescript-loader');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
 const CompressionPlugin = require('compression-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 
 module.exports = (env) => {
   let config = {
@@ -72,7 +69,6 @@ module.exports = (env) => {
         template: 'index.html'
       }),
       new TsConfigPathsPlugin(),
-      new BundleAnalyzerPlugin(),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ],
 
