@@ -4,6 +4,7 @@
   "private": false,
   "scripts": {
     "clean": "rimraf dist",
+    "commit": "git-cz",
     "start": "node ./dist/server/main.js",
     "build": "npm run build-server && npm run build-client",
     "build-server": "tsc -p ./src/server --outDir ./dist/server",
@@ -45,8 +46,10 @@
     "@types/yargs": "^11.0.0",
     "aurelia-webpack-plugin": "3.0.0",
     "awesome-typescript-loader": "5.2.0",
+    "commitizen": "^4.0.3",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "2.1.0",
+    "cz-conventional-changelog": "^3.0.2",
     "html-loader": "0.5.1",
     "html-webpack-plugin": "3.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
@@ -60,5 +63,10 @@
     "webpack-dev-middleware": "^3.6.0",
     "webpack-dev-server": "3.3.0",
     "webpack-hot-middleware": "^2.20.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
