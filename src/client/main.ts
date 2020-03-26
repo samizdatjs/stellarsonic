@@ -3,7 +3,7 @@ import {container} from '@ziqquratu/ioc-aurelia';
 import {caching} from '@ziqquratu/caching';
 import {view, Item, ItemSet, Feed, filter, sortBy} from '@ziqquratu/view';
 import {
-  bootstrap, component, http, DatabaseConfig, Provider, SortingOrder
+  bootstrap, component, http, DatabaseConfig, Provider, SortingDirection
 } from '@ziqquratu/ziqquratu';
 
 import siteConfig from '../config';
@@ -23,7 +23,7 @@ export class PostFeed extends Feed {
   increment = 3;
 
   @sortBy('datePublished')
-  dateSort = SortingOrder.Descending;
+  dateSort = SortingDirection.Descending;
 
   @filter({
     compile: value => ({categories: {$contains: value}}),

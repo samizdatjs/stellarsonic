@@ -1,0 +1,74 @@
+$id: stellarsonic.MusicPlaylist
+$schema: http://json-schema.org/draft-07/schema#
+title: MusicPlaylist
+type: object
+properties:
+  audio:
+    type: object
+    description: An embedded audio object.
+    properties:
+      contentUrl:
+        type: string
+        format: uri
+        description: Actual bytes of the media object
+      duration:
+        type: string
+        description: The duration of the item in ISO 8601 date format.
+    required:
+      - contentUrl
+      - duration
+  author:
+    type: string
+    description: The author of this content
+  datePublished:
+    type: string
+    format: date-time
+    description: Date of first broadcast/publication.
+  description:
+    type: string
+    description: A description of the item.
+  genre:
+    type: array
+    items:
+      type: string
+  headline:
+    type: string
+    description: Headline of the article.
+  image:
+    type: string
+    format: uri
+  tags:
+    type: array
+    items:
+      type: string
+  text:
+    type: string
+    description: The textual content of this CreativeWork.
+  tracks:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        byArtist:
+          type: object
+          required: 
+            - name
+          properties:
+            name:
+              type: string
+        copyrightYear:
+          type: number
+        duration:
+          type: string
+      required: 
+        - name
+        - duration
+required: 
+  - audio
+  - author
+  - datePublished
+  - headline
+  - image
+  - text
