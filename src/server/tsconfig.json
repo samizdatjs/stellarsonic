@@ -11,6 +11,7 @@
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": false,
     "noResolve": false,
-    "esModuleInterop": false
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true
   }
 }

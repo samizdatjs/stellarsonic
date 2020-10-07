@@ -1,10 +1,32 @@
 import * as express from 'express';
-import {bootstrap, LogLevel, Provider} from '@ziqquratu/ziqquratu';
+import {bootstrap, component, LogLevel, Provider} from '@ziqquratu/ziqquratu';
 import {resource, requestLogger, ServerConfig} from '@ziqquratu/tashmetu';
 import {FileSystemConfig} from '@ziqquratu/nabu';
 import {terminal} from '@ziqquratu/terminal';
+import {Server} from '@ziqquratu/tashmetu';
 import * as yargs from 'yargs';
-import {Application} from './app';
+import { databaseConfig } from './databaseConfig';
+
+@component({
+  dependencies: [
+    import('@ziqquratu/nabu'),
+    import('@ziqquratu/tashmetu'),
+    import('@ziqquratu/schema'),
+  ],
+  providers: [
+    Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig),
+  ],
+  inject: ['tashmetu.Server'],
+})
+export class Application {
+  constructor(
+    private server: Server,
+  ) {}
+
+  async run(port: number) {
+    this.server.listen(port);
+  }
+}
 
 let argv = yargs.option('dev', {
   type: 'boolean', 
