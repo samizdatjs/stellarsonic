@@ -59,8 +59,14 @@ class CliApplication {
 
   public async createPost() {
     try {
+      const authorsCollection = await this.database.collection('authors');
+      const authors = await authorsCollection.find({}).toArray();
+
+      if (authors.length === 0) {
+        throw Error('Please add an author first');
+      }
       const posts = await this.database.collection('articles');
-      const data = await this.postInquiry()
+      const data = await this.postInquiry(authors);
       data._id = slugify(data.headline, {
         lower: true,
       });
@@ -72,8 +78,14 @@ class CliApplication {
     }
   }
 
-  private postInquiry() {
+  private postInquiry(authors: any[]) {
     const questions = [
+      {
+        name: 'author',
+        type: 'list',
+        message: 'Choose an author',
+        choices: authors.map(a => a._id),
+      },
       {
         name: 'headline',
         type: 'input',
