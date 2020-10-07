@@ -43,8 +43,18 @@ const articleTemplate = {
 class CliApplication {
   public constructor(private database: Database) {}
 
-  public async createAuthor(author: any) {
-    console.log('app.createAuthor');
+  public async createAuthor() {
+    try {
+      const authors = await this.database.collection('authors');
+      const data = await this.authorInquiry();
+      data._id = slugify(data.givenName + ' ' + data.familyName, {
+        lower: true,
+      });
+      await authors.insertOne(data);
+      console.log('Successfully created author: ' + data._id);
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   public async createPost() {
@@ -79,6 +89,34 @@ class CliApplication {
     ];
     return inquirer.prompt(questions);
   }
+
+  private authorInquiry() {
+    const questions = [
+      {
+        name: 'givenName',
+        type: 'input',
+        message: 'Enter given name',
+        validate: function( value: any ) {
+          if (value.length) {
+            return true;
+          } else {
+            return 'Please enter author given name';
+          }
+        }
+      },
+      {
+        name: 'familyName',
+        type: 'input',
+        message: 'Enter family name (optional)',
+      },
+      {
+        name: 'email',
+        type: 'input',
+        message: 'Enter email (optional)',
+      },
+    ];
+    return inquirer.prompt(questions);
+  }
 }
 
 bootstrap(CliApplication, {
@@ -100,7 +138,7 @@ bootstrap(CliApplication, {
     .name('create-author')
     .description('create a new author')
     .action(async () => {
-      await app.createAuthor({});
+      await app.createAuthor();
     })
 
   program

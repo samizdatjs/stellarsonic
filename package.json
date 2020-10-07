@@ -10,7 +10,8 @@
     "build-server": "tsc -p ./src/server --outDir ./dist/server",
     "build-client": "webpack --env prod",
     "dev": "npm run build-server && node ./dist/server/main.js --dev=true",
-    "create-post": "node ./dist/server/cli create-post"
+    "create-post": "node ./dist/server/cli create-post",
+    "create-author": "node ./dist/server/cli create-author"
   },
   "license": "MIT",
   "repository": {
