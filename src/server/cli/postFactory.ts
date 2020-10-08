@@ -1,12 +1,12 @@
 import {Database, provider} from '@ziqquratu/ziqquratu';
 import * as inquirer from 'inquirer';
-import { DocumentFactory } from './common';
+import { CreateDocumentCommand, DocumentFactory } from './common';
 
 @provider({
   inject: ['ziqquratu.Database']
 })
 export class PostFactory extends DocumentFactory {
-  public constructor(private database: Database) { super() }
+  public constructor(database: Database) { super(database) }
 
   public async create(): Promise<any> {
     const templateCollection = await this.database.collection('templates');
@@ -47,5 +47,14 @@ export class PostFactory extends DocumentFactory {
       },
     ];
     return inquirer.prompt(questions);
+  }
+}
+
+@provider({
+  inject: [PostFactory]
+})
+export class CreatePostCommand extends CreateDocumentCommand {
+  public constructor(fact: PostFactory) {
+    super('create-post', 'Create a new post', 'articles', fact);
   }
 }

@@ -1,10 +1,12 @@
-import {provider} from '@ziqquratu/ziqquratu';
+import {Database, provider} from '@ziqquratu/ziqquratu';
 import * as inquirer from 'inquirer';
-import { DocumentFactory } from './common';
+import { CreateDocumentCommand, DocumentFactory } from './common';
 
-@provider()
+@provider({
+  inject: ['ziqquratu.Database']
+})
 export class AuthorFactory extends DocumentFactory {
-  public constructor() { super() }
+  public constructor(database: Database) { super(database) }
 
   public async create(): Promise<any> {
     const data = await this.inquire();
@@ -37,5 +39,14 @@ export class AuthorFactory extends DocumentFactory {
       },
     ];
     return inquirer.prompt(questions);
+  }
+}
+
+@provider({
+  inject: [AuthorFactory]
+})
+export class CreateAuthorCommand extends CreateDocumentCommand {
+  public constructor(fact: AuthorFactory) {
+    super('create-author', 'Create a new author', 'authors', fact);
   }
 }

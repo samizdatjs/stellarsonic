@@ -2,11 +2,11 @@ import * as chalk from 'chalk';
 import * as figlet from 'figlet';
 import { Command } from 'commander';
 import { databaseConfig } from './databaseConfig';
-import {bootstrap, component, Database, LogLevel, Provider} from '@ziqquratu/ziqquratu';
+import {bootstrap, component, LogLevel, Provider} from '@ziqquratu/ziqquratu';
 import {terminal} from '@ziqquratu/terminal';
-import {PostFactory} from './postFactory';
-import {AuthorFactory} from './authorFactory';
-import {DocumentFactory} from './common';
+import {CreatePostCommand, PostFactory} from './postFactory';
+import {AuthorFactory, CreateAuthorCommand} from './authorFactory';
+import {CliCommand} from './common';
 
 @component({
   dependencies: [
@@ -17,51 +17,34 @@ import {DocumentFactory} from './common';
     Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig),
     PostFactory,
     AuthorFactory,
+    CreatePostCommand,
+    CreateAuthorCommand,
   ],
-  inject: ['ziqquratu.Database', PostFactory, AuthorFactory]
+  inject: [CreatePostCommand, CreateAuthorCommand]
 })
 class CliApplication {
-  private factories: Record<string, DocumentFactory> = {}
+  private commands: CliCommand[];
 
-  public constructor(private database: Database, postFact: PostFactory, authorFact: AuthorFactory) {
-    this.factories = {
-      'articles': postFact,
-      'authors': authorFact,
-    }
-  }
-
-  public async createDocument(collectionName: string) {
-    try {
-      const collection = await this.database.collection(collectionName);
-      const doc = await this.factories[collectionName].create()
-      await collection.insertOne(doc);
-      console.log(`Successfully added document ${doc._id} to ${collectionName}`);
-    } catch (err) {
-      console.log(err.message);
-    }
+  public constructor(createPost: CliCommand, createAuthor: CliCommand) {
+    this.commands = [createPost, createAuthor];
   }
 
   public run(args: any) {
     const program = new Command();
-
-    const createPost = new Command();
-    createPost
-      .name('create-post')
-      .description('create a new post')
-      .action(async () => await this.createDocument('articles'))
-
-    const createAuthor = new Command();
-    createAuthor
-      .name('create-author')
-      .description('create a new author')
-      .action(async () => await this.createDocument('authors'))
-
     program
       .name('stellarsonic-cli')
       .usage('Usage information')
       .version('0.7.1')
-      .addCommand(createPost)
-      .addCommand(createAuthor);
+
+    for (const c of this.commands) {
+      console.log(c);
+      const command = new Command();
+      command
+        .name(c.name)
+        .description(c.description)
+        .action(async () => await c.action())
+      program.addCommand(command);
+    }
     
     program.on('--help', () => {
       console.log('');
