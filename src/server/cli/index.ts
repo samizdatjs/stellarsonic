@@ -3,67 +3,42 @@ import * as figlet from 'figlet';
 import * as inquirer from 'inquirer';
 import { Command } from 'commander';
 import { databaseConfig } from './databaseConfig';
-import {bootstrap, component, Database, LogLevel, Provider} from '@ziqquratu/ziqquratu';
+import {bootstrap, component, Database, LogLevel, provider, Provider} from '@ziqquratu/ziqquratu';
 import {terminal} from '@ziqquratu/terminal';
 import slugify from 'slugify';
 
-@component({
-  dependencies: [
-    import('@ziqquratu/nabu'),
-    import('@ziqquratu/tashmetu'),
-    import('@ziqquratu/schema'),
-  ],
-  providers: [
-    Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig)
-  ],
+abstract class DocumentFactory {
+  public abstract create(): Promise<any>;
+
+  protected compile(name: string, ...data: any[]): any {
+    return Object.assign({}, ...data, {_id: slugify(name, { lower: true })});
+  }
+}
+
+@provider({
   inject: ['ziqquratu.Database']
 })
-class CliApplication {
-  public constructor(private database: Database) {}
+class PostFactory extends DocumentFactory {
+  public constructor(private database: Database) { super() }
 
-  public async createAuthor() {
-    try {
-      const authors = await this.database.collection('authors');
-      const data = await this.authorInquiry();
-      data._id = slugify(data.givenName + ' ' + data.familyName, {
-        lower: true,
-      });
-      await authors.insertOne(data);
-      console.log('Successfully created author: ' + data._id);
-    } catch (err) {
-      console.log(err.message);
+  public async create(): Promise<any> {
+    const templateCollection = await this.database.collection('templates');
+    const authorsCollection = await this.database.collection('authors');
+    const authors = await authorsCollection.find({}).toArray();
+    const template = await templateCollection.findOne({_id: 'post'});
+
+    if (authors.length === 0) {
+      throw Error('Please add an author first');
     }
+    const data = await this.inquire(authors);
+
+    return this.compile(data.headline, template, data, {
+      dateCreated: new Date().toISOString(),
+      datePublished: new Date().toISOString(),
+    });
   }
 
-  public async createPost() {
-    try {
-      const templateCollection = await this.database.collection('templates');
-      const authorsCollection = await this.database.collection('authors');
-      const authors = await authorsCollection.find({}).toArray();
-      const template = await templateCollection.findOne({_id: 'post'});
-
-      if (authors.length === 0) {
-        throw Error('Please add an author first');
-      }
-      const posts = await this.database.collection('articles');
-      const data = await this.postInquiry(authors);
-      const post = Object.assign({}, template, data, {
-        _id: this.createId(data.headline),
-        dateCreated: new Date().toISOString(),
-        datePublished: new Date().toISOString(),
-      });
-      await posts.insertOne(post);
-      console.log('Successfully created post: ' + post._id);
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
-
-  private createId(name: string) {
-    return slugify(name, { lower: true });
-  }
-
-  private postInquiry(authors: any[]) {
+  private inquire(authors: any[]) {
     const questions = [
       {
         name: 'author',
@@ -86,8 +61,20 @@ class CliApplication {
     ];
     return inquirer.prompt(questions);
   }
+}
 
-  private authorInquiry() {
+@provider({
+  inject: ['ziqquratu.Database']
+})
+class AuthorFactory extends DocumentFactory {
+  public constructor(private database: Database) { super() }
+
+  public async create(): Promise<any> {
+    const data = await this.inquire();
+    return this.compile(data.givenName + ' ' + data.familyName, data);
+  }
+
+  private inquire() {
     const questions = [
       {
         name: 'givenName',
@@ -116,6 +103,42 @@ class CliApplication {
   }
 }
 
+@component({
+  dependencies: [
+    import('@ziqquratu/nabu'),
+    import('@ziqquratu/tashmetu'),
+    import('@ziqquratu/schema'),
+  ],
+  providers: [
+    Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig),
+    PostFactory,
+    AuthorFactory,
+  ],
+  inject: ['ziqquratu.Database', PostFactory, AuthorFactory]
+})
+class CliApplication {
+  private factories: Record<string, DocumentFactory> = {}
+
+  public constructor(private database: Database, postFact: PostFactory, authorFact: AuthorFactory) {
+    this.factories = {
+      'articles': postFact,
+      'authors': authorFact,
+    }
+  }
+
+  public async createDocument(collectionName: string) {
+    try {
+      const collection = await this.database.collection(collectionName);
+      const doc = await this.factories[collectionName].create()
+      console.log(doc);
+      await collection.insertOne(doc);
+      console.log(`Successfully added document ${doc._id} to ${collectionName}`);
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+}
+
 bootstrap(CliApplication, {
   logLevel: LogLevel.Error,
   logFormat: terminal(),
@@ -127,7 +150,7 @@ bootstrap(CliApplication, {
     .name('create-post')
     .description('create a new post')
     .action(async () => {
-      await app.createPost();
+      await app.createDocument('articles');
     })
 
   const createAuthor = new Command();
@@ -135,7 +158,7 @@ bootstrap(CliApplication, {
     .name('create-author')
     .description('create a new author')
     .action(async () => {
-      await app.createAuthor();
+      await app.createDocument('authors');
     })
 
   program
