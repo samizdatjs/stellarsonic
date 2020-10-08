@@ -22,7 +22,10 @@ const articleTemplate = {
   author: '',
   dateCreated: new Date().toISOString(),
   datePublished: new Date().toISOString(),
-  text: 'Article content goes here',
+  description: `A short introduction before the article goes here. This is optional and can be removed if you don't want it`,
+  text: `
+    Article written [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet "Markdown cheatsheet")
+   `,
   palette: {
     dark: 'rgb(20, 20, 20)',
     primary: 'rgb(30, 30, 30)',
