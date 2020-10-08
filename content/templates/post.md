@@ -8,7 +8,22 @@ audio:
 image: 'https://picsum.photos/800/600'
 categories: []
 headline: ''
-tracks: []
+tracks: 
+  - name: First Track
+    byArtist:
+      name: Stellarsonic
+    copyrightYear: 2020
+    duration: PT3M30.5S
+  - name: Second Track
+    byArtist:
+      name: Stellarsonic
+    copyrightYear: 2020
+    duration: PT4M0S
+  - name: Third Track
+    byArtist:
+      name: Stellarsonic
+    copyrightYear: 2020
+    duration: PT2M40S
 author: ''
 dateCreated: ''
 datePublished: ''
