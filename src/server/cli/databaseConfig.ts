@@ -8,6 +8,14 @@ export const databaseConfig = {
       extension: 'yaml',
       serializer: yaml(),
     }),
+    'templates': directory({
+      path: 'content/templates',
+      extension: 'yaml',
+      serializer: yaml({
+        frontMatter: true,
+        contentKey: 'text'
+      }),
+    }),
     'articles': {
       source: directory({
         path: 'content/posts',

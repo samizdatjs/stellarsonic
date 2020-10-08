@@ -7,31 +7,6 @@ import {bootstrap, component, Database, LogLevel, Provider} from '@ziqquratu/ziq
 import {terminal} from '@ziqquratu/terminal';
 import slugify from 'slugify';
 
-const articleTemplate = {
-  '@context': "https://schema.org",
-  '@type': "MusicPlaylist",
-  audio: {
-    '@type': 'AudioObject',
-    contentUrl: 'http://path/to/my/audio.mp3',
-    duration: '0',
-  },
-  image: 'https://picsum.photos/800/600',
-  categories: [],
-  headline: '',
-  tracks: [],
-  author: '',
-  dateCreated: new Date().toISOString(),
-  datePublished: new Date().toISOString(),
-  description: `A short introduction before the article goes here. This is optional and can be removed if you don't want it`,
-  text: `
-    Article written [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet "Markdown cheatsheet")
-   `,
-  palette: {
-    dark: 'rgb(20, 20, 20)',
-    primary: 'rgb(30, 30, 30)',
-  }
-}
-
 @component({
   dependencies: [
     import('@ziqquratu/nabu'),
@@ -62,23 +37,30 @@ class CliApplication {
 
   public async createPost() {
     try {
+      const templateCollection = await this.database.collection('templates');
       const authorsCollection = await this.database.collection('authors');
       const authors = await authorsCollection.find({}).toArray();
+      const template = await templateCollection.findOne({_id: 'post'});
 
       if (authors.length === 0) {
         throw Error('Please add an author first');
       }
       const posts = await this.database.collection('articles');
       const data = await this.postInquiry(authors);
-      data._id = slugify(data.headline, {
-        lower: true,
+      const post = Object.assign({}, template, data, {
+        _id: this.createId(data.headline),
+        dateCreated: new Date().toISOString(),
+        datePublished: new Date().toISOString(),
       });
-      const post = Object.assign({}, articleTemplate, data);
       await posts.insertOne(post);
       console.log('Successfully created post: ' + post._id);
     } catch (err) {
       console.log(err.message)
     }
+  }
+
+  private createId(name: string) {
+    return slugify(name, { lower: true });
   }
 
   private postInquiry(authors: any[]) {
