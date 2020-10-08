@@ -1,7 +1,8 @@
-import {directory, file, yaml, markdown} from '@ziqquratu/nabu';
+import {directory, file, yaml} from '@ziqquratu/nabu';
 import {logging} from '@ziqquratu/ziqquratu';
 import {caching} from '@ziqquratu/caching';
 import {validation, ValidationPipeStrategy} from '@ziqquratu/schema';
+import {markdown} from '@ziqquratu/markdown';
 import * as showdown from 'showdown';
 
 require('showdown-youtube');
@@ -18,18 +19,22 @@ export const databaseConfig = {
         path: 'content/posts',
         extension: 'md',
         serializer: yaml({
-          frontMatter: markdown(new showdown.Converter({
-            extensions: [
-            'youtube',
-              require('showdown-target-blank'),
-            ]
-          })),
+          frontMatter: true,
           contentKey: 'text'
         })
       }),
       use: [
         logging(),
         caching(),
+        markdown({
+          key: 'text',
+          converter: new showdown.Converter({
+            extensions: [
+            'youtube',
+              require('showdown-target-blank'),
+            ]
+          }),
+        }),
         validation({
           schema: 'stellarsonic.MusicPlaylist',
           strategy: ValidationPipeStrategy.ErrorInFilterOut
