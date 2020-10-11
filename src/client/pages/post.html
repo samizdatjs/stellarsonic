@@ -68,7 +68,8 @@
       <div class="excerpt">
         <p>${post.description}</p>
       </div>
-      <article innerhtml.bind="post.text"></article>
+      <article if.bind="!edit" innerhtml.bind="post.text"></article>
+      <textarea show.bind="edit" id="editor">Hello Something</textarea>
     </section>
             
     <section slot="content-side">
