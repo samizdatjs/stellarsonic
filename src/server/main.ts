@@ -65,11 +65,11 @@ bootstrap(Application, {
   }));
   c.register(Provider.ofInstance<ServerConfig>('tashmetu.ServerConfig', {
     middleware: {
-      '/':               [...rootMiddleware, requestLogger()],
-      '/api/posts':      resource({collection: 'articles', readOnly: false}),
-      '/api/authors':    resource({collection: 'authors', readOnly: true}),
-      '/api/tags':       resource({collection: 'tags', readOnly: true}),
-      '/api/categories': resource({collection: 'categories', readOnly: true}),
+      '/':            [...rootMiddleware, requestLogger()],
+      '/api/posts':   resource({collection: 'articles', readOnly: false}),
+      '/api/authors': resource({collection: 'authors', readOnly: true}),
+      '/api/tags':    resource({collection: 'tags', readOnly: true}),
+      '/api/genres':  resource({collection: 'genres', readOnly: true}),
     }
   }));
 }).then(app => app.run(parseInt(process.env.PORT || '8080')));
