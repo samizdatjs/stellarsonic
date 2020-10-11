@@ -5,6 +5,12 @@
 
   <div class="post au-animate" css="background: ${bgColor}">
     <div class="background-image" css="background: url(${bgImage}) 50% 50% / cover no-repeat;"></div>
+    <div class="toggle-edit ${edit ? '' : 'save'}">
+      <a href="#" click.trigger="toggleEdit()">
+        <i if.bind="!edit" class="fal fa-edit"></i>
+        <i if.bind="edit" class="fal fa-save"></i>
+      </a>
+    </div>
     <div class="nav-button left">
       <a class="button" route-href="route: home;">
         <i class="fas fa-th"></i>
@@ -28,7 +34,7 @@
       <section id="post-cover">
         <div class="segment pad-medium-up">
           <spread class="attached" background.bind="color">
-            <div>
+            <div class="cover-main">
               <slot name="cover-main"></slot>
             </div>
             <div slot="side">

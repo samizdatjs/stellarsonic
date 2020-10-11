@@ -26,6 +26,7 @@ export const databaseConfig = {
       use: [
         logging(),
         caching(),
+        /*
         markdown({
           key: 'text',
           converter: new showdown.Converter({
@@ -35,6 +36,7 @@ export const databaseConfig = {
             ]
           }),
         }),
+        */
         validation({
           schema: 'stellarsonic.MusicPlaylist',
           strategy: ValidationPipeStrategy.ErrorInFilterOut

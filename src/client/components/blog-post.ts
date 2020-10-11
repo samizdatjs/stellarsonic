@@ -5,6 +5,9 @@ export class BlogPostCustomElement {
   @bindable color!: string;
   @bindable bgColor!: string;
   @bindable bgImage!: string;
+  @bindable toggleEdit!: any;
+  @bindable edit!: boolean;
+
   private slots: any;
 
   public constructor(

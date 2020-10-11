@@ -1,12 +1,14 @@
+import { Database } from '@ziqquratu/ziqquratu';
 import {inject} from 'aurelia-framework';
 import {PostView} from '../main';
 
-@inject(PostView)
+@inject(PostView, 'ziqquratu.Database')
 export class State {
   public post: any;
   
   public constructor(
     private postView: PostView,
+    private database: Database,
   ) {
     postView.on('item-updated', data => {
       this.post = data;
@@ -18,6 +20,12 @@ export class State {
     let post = (await this.postView.refresh());
     this.schemaTag.text = JSON.stringify(post);
     return post;
+  }
+
+  public async savePost(): Promise<any> {
+    const col = await this.database.collection('articles');
+    console.log(this.post);
+    return col.replaceOne({_id: this.post._id}, this.post);
   }
 
   private get schemaTag(): HTMLScriptElement {
