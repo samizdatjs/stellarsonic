@@ -4,6 +4,7 @@
   <require from="components/menu"></require>
   <require from="components/menu-item.html"></require>
   <require from="components/player"></require>
+  <require from="components/playlist-editor"></require>
   <require from="components/tracklist"></require>
   <require from="components/blog-post"></require>
   <require from="components/disqus"></require>
@@ -42,6 +43,7 @@
             </div>
           </menu-item>
           <menu-item title="Playlist" icon="fal fa-album-collection">
+            <playlist-editor data.bind="post"/>
           </menu-item>
           <menu-item title="Article" icon="fal fa-article">
             <editor value.bind="post.text"/>

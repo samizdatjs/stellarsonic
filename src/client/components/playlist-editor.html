@@ -1,0 +1,27 @@
+<template>
+  <require from="styles/playlist-editor.styl"></require>
+
+  <div class="playlist-editor">
+    <ul class="tracks">
+      <li 
+        repeat.for="track of data.tracks"
+        click.delegate="selectTrack($index)"
+        class="${selectedTrack === $index ? 'active': ''}"
+      >
+        ${track.name}
+      </li>
+    </ul>
+    <div class="track-edit">
+      <fieldset>
+        <label for="track-name">Name</label>
+        <input id="track-name" value.bind="track.name">
+        <label for="artist-name">Artist</label>
+        <input id="artist-name" value.bind="track.byArtist.name">
+        <label for="year">Year</label>
+        <input id="year" value.bind="track.copyrightYear">
+        <label for="duration">Duration</label>
+        <input id="duration" value.bind="track.duration">
+      </fieldset>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,25 @@
+.playlist-editor
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 30px;
+
+  .tracks
+    list-style: none;
+    padding: 0;
+
+    li
+      padding: 5px;
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      cursor: pointer;
+
+      &:hover, &.active
+        color: #cd9023;
+
+  .track-edit
+    fieldset
+      box-sizing: border-box;
+      border: 1px solid rgba(0,0,0,.1);
+
+    input
+      width: 100%;
+      box-sizing: border-box;
