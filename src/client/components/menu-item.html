@@ -1,0 +1,12 @@
+<template bindable="name, title, icon, toggle, active">
+  <require from="styles/menu.styl"></require>
+
+  <li class="menu-item ${active ? 'active' : ''}">
+    <a href="#" click.delegate="toggle(name)">
+      <i class="${icon}"></i> ${title}
+    </a>
+    <div show.bind="active" class="menu-item-content full-width">
+      <slot/>
+    </div>
+  </li>
+</template>

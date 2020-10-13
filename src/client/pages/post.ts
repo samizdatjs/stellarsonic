@@ -2,7 +2,6 @@ import {State} from '../services/state';
 import {Player} from '../services/player';
 import siteConfig from '../../config';
 import {autoinject} from 'aurelia-framework';
-import * as SimpleMDE from 'simplemde';
 
 const Vibrant = require('node-vibrant')
 
@@ -15,7 +14,7 @@ export class DateFormatValueConverter {
 @autoinject
 export class Post {
   private edit: boolean = false;
-  private editor: SimpleMDE | undefined;
+  private menuItem: string | undefined;
 
   public constructor(
     private state: State,
@@ -41,26 +40,8 @@ export class Post {
   async toggleEdit() {
     if (this.edit) {
       await this.state.savePost();
-      if (this.editor) {
-        this.editor.toTextArea();
-        this.editor = undefined;
-      }
-    } else {
-      const elem = document.getElementById("editor");
-      console.log(elem);
-      if (elem) {
-        if (!this.editor) {
-          this.editor = new SimpleMDE({ element: elem });
-          this.editor.value(this.post.text);
-        }
-      }
     }
-
     this.edit = !this.edit;
-
-    //(this.edit = true;
-
-    // console.log('edit in post');
   }
 
   LightenDarkenColor(col: any, amt: any) {
@@ -88,5 +69,9 @@ export class Post {
     else if  ( g < 0 ) g = 0;
 
     return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
+  }
+
+  toggleMenuItem(name: string) {
+    this.menuItem = this.menuItem === name ? undefined : name;
   }
 }

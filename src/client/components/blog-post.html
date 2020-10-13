@@ -16,16 +16,19 @@
         <i class="fas fa-th"></i>
       </a>
     </div>
+    <!--
     <div class="nav-button right" show.bind="slots.menu.children.length">
       <a class="button" click.delegate="showPanel = !showPanel">
         <i class="fal fa-bars"></i>
       </a>
     </div>
+  -->
 
     <main class="container">
       <div class="title">
         <slot name="title"></slot>
       </div>
+      <slot name="toolbar"></slot>
 
       <div class="panel-bottom au-animate" show.bind="showPanel" css="background: ${color}">
         <slot name="menu"></slot>
