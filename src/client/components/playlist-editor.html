@@ -1,6 +1,10 @@
 <template>
   <require from="styles/playlist-editor.styl"></require>
 
+  <div class="audio-stream">
+    <label for="audio-content-url">Audio URL</label>
+    <input id="audio-content-url" value.bind="data.audio.contentUrl">
+  </div>
   <div class="playlist-editor">
     <ul class="tracks">
       <li 
@@ -18,10 +22,11 @@
         <label for="artist-name">Artist</label>
         <input id="artist-name" value.bind="track.byArtist.name">
         <label for="year">Year</label>
-        <input id="year" value.bind="track.copyrightYear">
+        <input id="year" type="number" value.bind="track.copyrightYear">
         <label for="duration">Duration</label>
         <input id="duration" value.bind="track.duration">
       </fieldset>
     </div>
+  </div>
   </div>
 </template>
