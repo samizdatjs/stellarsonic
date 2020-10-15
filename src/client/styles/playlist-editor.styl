@@ -7,17 +7,28 @@
 
 .playlist-editor
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.618fr 1fr;
   grid-column-gap: 30px;
 
   .tracks
     list-style: none;
     padding: 0;
+    column-count: 2;
+    padding: 5px;
 
     li
-      padding: 5px;
-      border-bottom: 1px solid rgba(0,0,0,.1);
+      display: block;
+      box-sizing: border-box;
+      height: 50px;
+      padding: 10px; 10px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(0,0,0,0);
       cursor: pointer;
+      box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
+
+      .track-index
+        display: inline-block;
+        width: 20px;
 
       &:hover, &.active
         color: #cd9023;

@@ -11,9 +11,16 @@
       <li 
         repeat.for="track of data.tracks"
         click.delegate="selectTrack($index)"
-        class="${selectedTrack === $index ? 'active': ''}"
+        class="
+          ${selectedTrack === $index ? 'active': ''}
+          ${dragTarget === $index ? 'drag-target' : ''}
+          ${dragSource === $index ? 'drag-source' : ''}"
+        draggable="true"
+        dragstart.trigger="dragStart($event, $index)"
+        dragover.trigger="dragOver($event, $index)"
+        dragend.trigger="dragDrop($index)"
       >
-        ${track.name}
+        <span class="track-index">${$index + 1}</span> ${track.name}
       </li>
     </ul>
     <div class="track-edit">
