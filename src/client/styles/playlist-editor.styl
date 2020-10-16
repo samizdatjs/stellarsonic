@@ -1,9 +1,32 @@
+playlist-editor
+  height: 100vh;
+  overflow-y: auto;
+
 .audio-stream
   margin-bottom: 30px;
 
   input
     width: 100%;
     box-sizing: border-box;
+
+.timestamps
+  margin-bottom: 30px
+
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+    display: flex
+    box-shadow: inset 1px 1px 3px 0px rgba(0,0,0,0.5);
+
+    li
+      height: 30px
+      display: block
+      background: rgba(0,0,0,.075)
+      width: 40px
+
+      &:not(:last-child)
+        border-right: 1px solid rgba(0,0,0,.4)
 
 .playlist-editor
   display: grid;

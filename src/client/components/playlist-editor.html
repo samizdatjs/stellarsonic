@@ -6,6 +6,13 @@
     <label for="audio-content-url">Audio URL</label>
     <input id="audio-content-url" value.bind="data.audio.contentUrl">
   </div>
+
+  <div class="timestamps">
+    <ul id="timestamp-list">
+      <li repeat.for="track of data.tracks" css="width: ${trackWidth(track)}"></li>
+    </ul>
+  </div>
+
   <div class="playlist-editor">
     <ul class="tracks">
       <li 
@@ -32,7 +39,7 @@
         <label for="year">Year</label>
         <input id="year" type="number" value.bind="track.copyrightYear | integerFromInput">
         <label for="duration">Duration</label>
-        <input id="duration" value.bind="track.duration">
+        <input id="duration" value.bind="track.duration" change.call="onDurationChanged(track)">
       </fieldset>
     </div>
   </div>
