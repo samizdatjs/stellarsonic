@@ -8,9 +8,10 @@ import {
 
 import siteConfig from '../config';
 import 'aurelia-animator-css';
+import { MusicPlaylist } from '../interfaces';
 
 @view({collection: 'articles'})
-export class PostView extends Item {
+export class PostView extends Item<MusicPlaylist> {
   @filter() _id: string = '';
 }
 
@@ -18,7 +19,7 @@ export class PostView extends Item {
 export class PostCategories extends ItemSet {}
 
 @view({collection: 'articles'})
-export class PostFeed extends Feed {
+export class PostFeed extends Feed<MusicPlaylist> {
   limit = 3;
   increment = 3;
 

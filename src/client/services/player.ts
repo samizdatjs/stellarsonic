@@ -1,4 +1,5 @@
 import * as duration from 'iso8601-duration';
+import { MusicPlaylist, Track } from '../../interfaces';
 
 export class Player {
   public audio: HTMLAudioElement;
@@ -31,7 +32,7 @@ export class Player {
     return track < this.offsets.length ? this.offsets[track] : 0;
   }
 
-  public play(playlist: any, track = 0) {
+  public play(playlist: MusicPlaylist, track = 0) {
     this.playlist = playlist;
     if (playlist.audio) {
       if (this.audio.src !== playlist.audio.contentUrl) {
@@ -50,7 +51,7 @@ export class Player {
     this.audio.play();
   }
 
-  public get currentTrack(): any {
+  public get currentTrack(): Track {
     return this.playlist 
       ? this.playlist.tracks[this.currentTrackNumber]
       : undefined;

@@ -1,10 +1,11 @@
 import { Database } from '@ziqquratu/ziqquratu';
 import {inject} from 'aurelia-framework';
 import {PostView} from '../main';
+import { MusicPlaylist } from '../../interfaces';
 
 @inject(PostView, 'ziqquratu.Database')
 export class State {
-  public post: any;
+  public post!: MusicPlaylist;
   
   public constructor(
     private postView: PostView,
@@ -15,16 +16,15 @@ export class State {
     });
   }
 
-  public async changePost(id: string): Promise<any> {
+  public async changePost(id: string): Promise<MusicPlaylist | null> {
     this.postView._id = id;
     let post = (await this.postView.refresh());
     this.schemaTag.text = JSON.stringify(post);
     return post;
   }
 
-  public async savePost(): Promise<any> {
-    const col = await this.database.collection('articles');
-    console.log(this.post);
+  public async savePost(): Promise<MusicPlaylist | null> {
+    const col = await this.database.collection<MusicPlaylist>('articles');
     return col.replaceOne({_id: this.post._id}, this.post);
   }
 
