@@ -64,9 +64,9 @@ export const databaseConfig = {
     'tags': aggregation({
       from: 'articles',
       pipeline: [
-        {$project: {_id: 0, tags: 1}},
-        {$unwind: "$tags"},
-        {$group: {_id: "$tags", count: {$sum: 1 }}},
+        {$project: {_id: 0, keywords: { $split: ['$keywords', ', ']}}},
+        {$unwind: "$keywords"},
+        {$group: {_id: "$keywords", count: {$sum: 1 }}},
       ]
     }),
   }

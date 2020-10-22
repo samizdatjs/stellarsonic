@@ -1,15 +1,16 @@
-import {bindable, bindingMode, autoinject, observable} from 'aurelia-framework';
-import * as duration from 'iso8601-duration';
+import {bindable, bindingMode, autoinject} from 'aurelia-framework';
+import {MusicPlaylist} from '../../domain/models/music-playlist';
+import {Track} from '../../domain/models/track';
 
 @autoinject
 export class PlaylistEditorCustomElement {
-  @bindable({defaultBindingMode: bindingMode.twoWay}) data!: any;
+  @bindable({defaultBindingMode: bindingMode.twoWay}) data!: MusicPlaylist;
 
   private selectedTrack: number = 0;
   private dragSource: number | undefined;
   private dragTarget: number | undefined;
 
-  get track(): any {
+  get track(): Track {
     return this.data.tracks[this.selectedTrack];
   }
 
@@ -37,21 +38,11 @@ export class PlaylistEditorCustomElement {
     return true;
   }
 
-  get totalDuration(): number {
-    return this.data.tracks
-      .map((t: any) => this.trackDuration(t))
-      .reduce((a: number, b: number) => a + b, 0)
+  trackWidth(track: Track): string {
+    return ((track.duration.toSeconds() / this.data.durationInSeconds) * 100) + '%';
   }
 
-  trackDuration(track: any): number {
-    return duration.toSeconds(duration.parse(track.duration));
-  }
-
-  trackWidth(track: any) {
-    return ((this.trackDuration(track) / this.totalDuration) * 100) + '%';
-  }
-
-  onDurationChanged(track: any) {
+  onDurationChanged(track: Track) {
     console.log(track);
   }
 }

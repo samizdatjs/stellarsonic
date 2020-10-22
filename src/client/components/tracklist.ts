@@ -1,5 +1,5 @@
 import {autoinject, bindable} from 'aurelia-framework';
-import {Player} from '../services/player';
+import {Player} from '../../domain/player';
 
 @autoinject
 export class TracklistCustomElement {

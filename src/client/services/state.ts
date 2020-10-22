@@ -1,7 +1,7 @@
 import { Database } from '@ziqquratu/ziqquratu';
 import {inject} from 'aurelia-framework';
 import {PostView} from '../main';
-import { MusicPlaylist } from '../../interfaces';
+import { MusicPlaylist } from '../../domain/models/music-playlist';
 
 @inject(PostView, 'ziqquratu.Database')
 export class State {

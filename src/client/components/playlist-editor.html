@@ -14,6 +14,24 @@
   </div>
 
   <div class="playlist-editor">
+    <table>
+      <tr>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Artist</th>
+        <th>Year</th>
+        <th>Duration</th>
+      </tr>
+
+      <tr repeat.for="track of data.tracks">
+        <td>${ $index + 1}</td>
+        <td>${ track.name }</td>
+        <td>${ track.byArtist }</td>
+        <td>${ track.copyrightYear }</td>
+        <td>${ track.duration.value }</td>
+      </tr>
+    </table>
+    <!--
     <ul class="tracks">
       <li 
         repeat.for="track of data.tracks"
@@ -35,13 +53,13 @@
         <label for="track-name">Name</label>
         <input id="track-name" value.bind="track.name">
         <label for="artist-name">Artist</label>
-        <input id="artist-name" value.bind="track.byArtist.name">
+        <input id="artist-name" value.bind="track.byArtist">
         <label for="year">Year</label>
         <input id="year" type="number" value.bind="track.copyrightYear | integerFromInput">
         <label for="duration">Duration</label>
-        <input id="duration" value.bind="track.duration" change.call="onDurationChanged(track)">
+        <input id="duration" value.bind="track.duration.value" change.call="onDurationChanged(track)">
       </fieldset>
     </div>
-  </div>
+  -->
   </div>
 </template>

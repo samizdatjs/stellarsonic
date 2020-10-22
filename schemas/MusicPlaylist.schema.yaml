@@ -37,14 +37,12 @@ properties:
   image:
     type: string
     format: uri
-  tags:
-    type: array
-    items:
-      type: string
+  keywords:
+    type: string
   text:
     type: string
     description: The textual content of this CreativeWork.
-  tracks:
+  track:
     type: array
     items:
       type: object
@@ -52,12 +50,7 @@ properties:
         name:
           type: string
         byArtist:
-          type: object
-          required: 
-            - name
-          properties:
-            name:
-              type: string
+          type: string
         copyrightYear:
           type: number
         duration:

@@ -1,5 +1,5 @@
 import {State} from '../services/state';
-import {Player} from '../services/player';
+import {Player} from '../../domain/player';
 import siteConfig from '../../config';
 import {autoinject} from 'aurelia-framework';
 
@@ -22,6 +22,7 @@ export class Post {
   ) {}
 
   async activate(params: any) {
+    console.log(params);
     await this.state.changePost(params.id);
     const palette = await Vibrant.from(this.post.image).getPalette();
     this.post.palette.dark = this.LightenDarkenColor(palette['DarkMuted'].hex, -30);

@@ -1,10 +1,10 @@
 import {autoinject, bindable} from 'aurelia-framework';
-import {Player} from '../services/player';
-import * as duration from 'iso8601-duration';
+import {Player} from '../../domain/player';
+import {MusicPlaylist} from '../../domain/models/music-playlist';
 
 @autoinject
 export class PlayerCustomElement {
-  @bindable playlist!: any;
+  @bindable playlist!: MusicPlaylist;
   
   public constructor(private player: Player) {}
 
@@ -24,7 +24,7 @@ export class PlayerCustomElement {
   }
 
   get duration(): number {
-    return this.currentTrack ?  duration.toSeconds(duration.parse(this.currentTrack.duration)) : 0;
+    return this.currentTrack ?  this.currentTrack.duration.toSeconds() : 0;
   }
 
   get currentTime(): any {

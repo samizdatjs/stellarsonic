@@ -1,6 +1,7 @@
 import {Aurelia, PLATFORM} from 'aurelia-framework';
 import {container} from '@ziqquratu/ioc-aurelia';
 import {caching} from '@ziqquratu/caching';
+import {io, IOGate} from '@ziqquratu/pipe';
 import {view, Item, ItemSet, Feed, filter, sortBy} from '@ziqquratu/view';
 import {
   bootstrap, component, http, DatabaseConfig, Provider, SortingDirection
@@ -8,14 +9,14 @@ import {
 
 import siteConfig from '../config';
 import 'aurelia-animator-css';
-import { MusicPlaylist } from '../interfaces';
+import { MusicPlaylist } from '../domain/models/music-playlist';
 
 @view({collection: 'articles'})
 export class PostView extends Item<MusicPlaylist> {
   @filter() _id: string = '';
 }
 
-@view({collection: 'categories'})
+@view({collection: 'genres'})
 export class PostCategories extends ItemSet {}
 
 @view({collection: 'articles'})
@@ -27,10 +28,22 @@ export class PostFeed extends Feed<MusicPlaylist> {
   dateSort = SortingDirection.Descending;
 
   @filter({
-    compile: value => ({categories: {$contains: value}}),
+    compile: value => ({genres: {$contains: value}}),
     disableOn: 'all'
   })
-  category = 'all';
+  genre = 'all';
+}
+
+class PostTransformer implements IOGate {
+  public async input(post: MusicPlaylist): Promise<any> {
+    return post.toJSONLD();
+  }
+
+  public async output(data: any): Promise<any> {
+    const obj = MusicPlaylist.fromJSONLD(data);
+    // console.log(obj);
+    return obj;
+  }
 }
 
 @component({
@@ -40,9 +53,14 @@ export class PostFeed extends Feed<MusicPlaylist> {
     PostCategories,
     Provider.ofInstance<DatabaseConfig>('ziqquratu.DatabaseConfig', {
       collections: {
-        'articles': http({path: '/api/posts'}),
+        'articles': {
+          source: http({path: '/api/posts'}),
+          use: [
+            io(new PostTransformer())
+          ],
+        },
         'authors': http({path: '/api/authors'}),
-        'categories': http({path: '/api/categories'}),
+        'genres': http({path: '/api/genres'}),
         'tags': http({path: '/api/tags'}),
       },
       use: [caching()]
