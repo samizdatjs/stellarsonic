@@ -14,6 +14,7 @@ export class Track {
 
   public toJSONLD(): any {
     return {
+      '@type': 'MusicRecording',
       name: this.name,
       byArtist: this.byArtist,
       copyrightYear: this.copyrightYear,
