@@ -14,7 +14,7 @@ export class PlaylistEditorCustomElement {
   public constructor(private player: Player) {}
 
   get track(): Track | undefined {
-    return this.player.currentTrack || this.data.tracks[0];
+    return this.data.tracks[this.selectedTrack];
   }
 
   selectTrack(index: number) {

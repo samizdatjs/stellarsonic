@@ -3,26 +3,20 @@
   <require from="styles/app.styl"></require>
   <require from="styles/blog-post.styl"></require>
 
-  <div class="post au-animate" css="background: ${bgColor}">
+  <div class="post au-animate ${edit ? 'edit' : ''}" css="background: ${bgColor}">
     <div class="background-image" css="background: url(${bgImage}) 50% 50% / cover no-repeat;"></div>
-    <div class="toggle-edit ${edit ? '' : 'save'}">
-      <a href="#" click.trigger="toggleEdit()">
-        <i if.bind="!edit" class="fal fa-edit"></i>
-        <i if.bind="edit" class="fal fa-save"></i>
-      </a>
-    </div>
+
     <div class="nav-button left">
       <a class="button" route-href="route: home;">
         <i class="fas fa-th"></i>
       </a>
     </div>
-    <!--
-    <div class="nav-button right" show.bind="slots.menu.children.length">
-      <a class="button" click.delegate="showPanel = !showPanel">
-        <i class="fal fa-bars"></i>
+    <div class="nav-button right">
+      <a class="button" click.trigger="toggleEdit()">
+        <i if.bind="!edit" class="fal fa-edit"></i>
+        <i if.bind="edit" class="fal fa-save"></i>
       </a>
     </div>
-  -->
 
     <main class="container">
       <div class="title">

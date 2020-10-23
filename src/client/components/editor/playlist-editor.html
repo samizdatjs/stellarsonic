@@ -3,7 +3,7 @@
   <require from="components/editor/playlist-timeline"></require>
   <require from="styles/editor/playlist-editor.styl"></require>
 
-  <playlist-timeline playlist.bind="data"></playlist-timeline>
+  <playlist-timeline playlist.bind="data" selected.bind="selectedTrack" select.call="selectTrack(index)"></playlist-timeline>
   <div class="track-form">
     <div class="track-form-field">
       <label for="track-name">Name</label>

@@ -6,6 +6,8 @@ import {Track} from '../../../domain/models/track';
 @autoinject
 export class PlaylistTimelineCustomElement {
   @bindable @observable playlist!: MusicPlaylist;
+  @bindable select!: Function;
+  @bindable selected!: number;
   subscription: Disposable | undefined;
 
   public trackWidths: string[] = [];
