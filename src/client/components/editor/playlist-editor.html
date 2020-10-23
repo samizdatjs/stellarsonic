@@ -1,16 +1,8 @@
 <template>
   <require from="components/common"></require>
   <require from="components/editor/playlist-timeline"></require>
-  <require from="styles/playlist-editor.styl"></require>
+  <require from="styles/editor/playlist-editor.styl"></require>
 
-  <!--
-  <div class="audio-stream">
-    <label for="audio-content-url">Audio URL</label>
-    <input id="audio-content-url" value.bind="data.audio.contentUrl">
-  </div>
-
-  <player playlist.bind="data"></player>
--->
   <playlist-timeline playlist.bind="data"></playlist-timeline>
   <div class="track-form">
     <div class="track-form-field">

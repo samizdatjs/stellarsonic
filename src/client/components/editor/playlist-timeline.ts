@@ -1,4 +1,4 @@
-import {autoinject, bindable, observable, BindingEngine} from 'aurelia-framework';
+import {autoinject, bindable, observable, BindingEngine, Disposable} from 'aurelia-framework';
 import {Player} from '../../../domain/player';
 import {MusicPlaylist} from '../../../domain/models/music-playlist';
 import {Track} from '../../../domain/models/track';
@@ -6,26 +6,22 @@ import {Track} from '../../../domain/models/track';
 @autoinject
 export class PlaylistTimelineCustomElement {
   @bindable @observable playlist!: MusicPlaylist;
-  subscription: any;
+  subscription: Disposable | undefined;
 
-  private trackWidths: string[] = [];
+  public trackWidths: string[] = [];
   
   public constructor(
     private player: Player,
     private element: Element,
     private bindingEngine: BindingEngine,
-  ) {
-
-  }
+  ) {}
 
   updateTrackWidths() {
     this.trackWidths = this.playlist.tracks.map(t => this.trackWidth(t));
-    // console.log(this.playlist);
   }
 
   bind() {
     this.updateTrackWidths()
-    // console.log(this.playlist);
 
     this.subscription = this.bindingEngine
       .propertyObserver(this.playlist, 'durationInSeconds')
@@ -35,12 +31,9 @@ export class PlaylistTimelineCustomElement {
   }
 
   detached() {
-    this.subscription.dispose();
-  }
-
-  playlistChanged(newValue: MusicPlaylist, oldValue: MusicPlaylist) {
-    console.log(newValue);
-    // if ()
+    if (this.subscription) {
+      this.subscription.dispose();
+    }
   }
 
   trackWidth(track: Track): string {
@@ -55,7 +48,6 @@ export class PlaylistTimelineCustomElement {
     const width = this.element.getBoundingClientRect().width;
     const amount = (event as any).layerX / width;
     const time = this.playlist.durationInSeconds * amount;
-    console.log(time);
     this.player.audio.currentTime = time;
   }
 }

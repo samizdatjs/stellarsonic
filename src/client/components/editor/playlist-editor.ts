@@ -1,7 +1,7 @@
 import {bindable, bindingMode, autoinject} from 'aurelia-framework';
-import {MusicPlaylist} from '../../domain/models/music-playlist';
-import {Track} from '../../domain/models/track';
-import {Player} from '../../domain/player';
+import {MusicPlaylist} from '../../../domain/models/music-playlist';
+import {Track} from '../../../domain/models/track';
+import {Player} from '../../../domain/player';
 
 @autoinject
 export class PlaylistEditorCustomElement {
