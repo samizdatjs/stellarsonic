@@ -1,0 +1,26 @@
+.timestamps
+  position: relative;
+  cursor: pointer;
+
+  .progress
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(222,142,92,.5);
+
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+    display: flex
+    box-shadow: inset 1px 1px 3px 0px rgba(0,0,0,0.5);
+
+    li
+      height: 30px
+      display: block
+      background: rgba(0,0,0,.075)
+      width: 40px
+
+      &:not(:last-child)
+        border-right: 1px solid rgba(0,0,0,.4)

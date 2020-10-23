@@ -1,4 +1,4 @@
-import {PostFeed, PostCategories} from '../main';
+import {PostFeed, PostGenres} from '../main';
 import {autoinject, observable} from 'aurelia-framework';
 
 @autoinject
@@ -7,11 +7,11 @@ export class Home {
 
   public constructor(
     private posts: PostFeed,
-    private categories: PostCategories
+    private genres: PostGenres
   ) {}
 
   async activate() {
-    this.categories.refresh();
+    this.genres.refresh();
   }
 
   colsChanged(cols: number) {

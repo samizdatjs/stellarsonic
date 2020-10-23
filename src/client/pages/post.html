@@ -42,6 +42,9 @@
               <input id="cover-color" type="color" value.bind="post.palette.dark"/><br/>
             </div>
           </menu-item>
+          <menu-item title="Audio" icon="fal fa-cloud-music">
+            <input id="audio-content-url" value.bind="post.audio.contentUrl" style="width: 100%">
+          </menu-item>
           <menu-item title="Playlist" icon="fal fa-album-collection">
             <playlist-editor data.bind="post"/>
           </menu-item>

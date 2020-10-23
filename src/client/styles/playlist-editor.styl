@@ -1,66 +1,14 @@
-playlist-editor
-  height: 100vh;
-  overflow-y: auto;
+.track-form
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  width: 100%;
 
-.audio-stream
-  margin-bottom: 30px;
+.track-form-field
+  label
+    display: block;
 
   input
     width: 100%;
     box-sizing: border-box;
-
-.timestamps
-  margin-bottom: 30px
-
-  ul
-    list-style: none
-    margin: 0
-    padding: 0
-    display: flex
-    box-shadow: inset 1px 1px 3px 0px rgba(0,0,0,0.5);
-
-    li
-      height: 30px
-      display: block
-      background: rgba(0,0,0,.075)
-      width: 40px
-
-      &:not(:last-child)
-        border-right: 1px solid rgba(0,0,0,.4)
-
-.playlist-editor
-  display: grid;
-  grid-template-columns: 1.618fr 1fr;
-  grid-column-gap: 30px;
-
-  .tracks
-    list-style: none;
-    padding: 0;
-    column-count: 2;
-    padding: 5px;
-
-    li
-      display: block;
-      box-sizing: border-box;
-      height: 50px;
-      padding: 10px; 10px;
-      margin-bottom: 10px;
-      border: 1px solid rgba(0,0,0,0);
-      cursor: pointer;
-      box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
-
-      .track-index
-        display: inline-block;
-        width: 20px;
-
-      &:hover, &.active
-        color: #cd9023;
-
-  .track-edit
-    fieldset
-      box-sizing: border-box;
-      border: 1px solid rgba(0,0,0,.1);
-
-    input
-      width: 100%;
-      box-sizing: border-box;

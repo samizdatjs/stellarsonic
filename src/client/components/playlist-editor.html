@@ -1,67 +1,37 @@
 <template>
   <require from="components/common"></require>
-  <require from="components/player/player"></require>
+  <require from="components/editor/playlist-timeline"></require>
   <require from="styles/playlist-editor.styl"></require>
 
+  <!--
   <div class="audio-stream">
     <label for="audio-content-url">Audio URL</label>
     <input id="audio-content-url" value.bind="data.audio.contentUrl">
   </div>
 
-  <div class="timestamps">
-    <ul id="timestamp-list">
-      <li repeat.for="track of data.tracks" css="width: ${trackWidth(track)}"></li>
-    </ul>
-    <player playlist.bind="data" />
-  </div>
-
-  <div class="playlist-editor">
-    <table>
-      <tr>
-        <th>Index</th>
-        <th>Name</th>
-        <th>Artist</th>
-        <th>Year</th>
-        <th>Duration</th>
-      </tr>
-
-      <tr repeat.for="track of data.tracks">
-        <td>${ $index + 1}</td>
-        <td>${ track.name }</td>
-        <td>${ track.byArtist }</td>
-        <td>${ track.copyrightYear }</td>
-        <td>${ track.duration.value }</td>
-      </tr>
-    </table>
-    <!--
-    <ul class="tracks">
-      <li 
-        repeat.for="track of data.tracks"
-        click.delegate="selectTrack($index)"
-        class="
-          ${selectedTrack === $index ? 'active': ''}
-          ${dragTarget === $index ? 'drag-target' : ''}
-          ${dragSource === $index ? 'drag-source' : ''}"
-        draggable="true"
-        dragstart.trigger="dragStart($event, $index)"
-        dragover.trigger="dragOver($event, $index)"
-        dragend.trigger="dragDrop($index)"
-      >
-        <span class="track-index">${$index + 1}</span> ${track.name}
-      </li>
-    </ul>
-    <div class="track-edit">
-      <fieldset>
-        <label for="track-name">Name</label>
-        <input id="track-name" value.bind="track.name">
-        <label for="artist-name">Artist</label>
-        <input id="artist-name" value.bind="track.byArtist">
-        <label for="year">Year</label>
-        <input id="year" type="number" value.bind="track.copyrightYear | integerFromInput">
-        <label for="duration">Duration</label>
-        <input id="duration" value.bind="track.duration.value" change.call="onDurationChanged(track)">
-      </fieldset>
+  <player playlist.bind="data"></player>
+-->
+  <playlist-timeline playlist.bind="data"></playlist-timeline>
+  <div class="track-form">
+    <div class="track-form-field">
+      <label for="track-name">Name</label>
+      <input id="track-name" type="text" value.bind="track.name">
     </div>
-  -->
+    <div class="track-form-field">
+      <label for="track-artist">Artist</label>
+      <input id="track-artist" type="text" value.bind="track.byArtist">
+    </div>
+    <div class="track-form-field">
+      <label for="track-year">Year</label>
+      <input id="track-year" type="number" value.bind="track.copyrightYear | integerFromInput">
+    </div>
+    <div class="track-form-field">
+      <label for="track-minutes">Minutes</label>
+      <input id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
+    </div>
+    <div class="track-form-field">
+      <label for="track-seconds">Seconds</label>
+      <input id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
+    </div>
   </div>
 </template>

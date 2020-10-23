@@ -13,8 +13,8 @@ export class PlaylistEditorCustomElement {
 
   public constructor(private player: Player) {}
 
-  get track(): Track {
-    return this.data.tracks[this.selectedTrack];
+  get track(): Track | undefined {
+    return this.player.currentTrack || this.data.tracks[0];
   }
 
   selectTrack(index: number) {
@@ -39,10 +39,6 @@ export class PlaylistEditorCustomElement {
       this.data.tracks.splice(this.dragSource, 1, target);
     }
     return true;
-  }
-
-  trackWidth(track: Track): string {
-    return ((track.duration.toSeconds() / this.data.durationInSeconds) * 100) + '%';
   }
 
   onDurationChanged(track: Track) {

@@ -22,8 +22,8 @@ export class Post {
   ) {}
 
   async activate(params: any) {
-    console.log(params);
-    await this.state.changePost(params.id);
+    const p = await this.state.changePost(params.id);
+    console.log(p);
     const palette = await Vibrant.from(this.post.image).getPalette();
     this.post.palette.dark = this.LightenDarkenColor(palette['DarkMuted'].hex, -30);
     this.post.palette.primary = this.LightenDarkenColor(palette['DarkMuted'].hex, -10);

@@ -9,7 +9,7 @@ export class Track {
   ) {}
 
   public static fromJSONLD(data: any) {
-    return new Track(data.name, data.byArtist, data.copyrightYear, new Duration(data.duration));
+    return new Track(data.name, data.byArtist, data.copyrightYear, Duration.fromISO8601(data.duration));
   }
 
   public toJSONLD(): any {
@@ -18,7 +18,7 @@ export class Track {
       name: this.name,
       byArtist: this.byArtist,
       copyrightYear: this.copyrightYear,
-      duration: this.duration.value,
+      duration: this.duration.toISO8601(),
     };
   }
 }

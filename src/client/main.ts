@@ -17,7 +17,7 @@ export class PostView extends Item<MusicPlaylist> {
 }
 
 @view({collection: 'genres'})
-export class PostCategories extends ItemSet {}
+export class PostGenres extends ItemSet {}
 
 @view({collection: 'articles'})
 export class PostFeed extends Feed<MusicPlaylist> {
@@ -40,9 +40,7 @@ class PostTransformer implements IOGate {
   }
 
   public async output(data: any): Promise<any> {
-    const obj = MusicPlaylist.fromJSONLD(data);
-    // console.log(obj);
-    return obj;
+    return MusicPlaylist.fromJSONLD(data);
   }
 }
 
@@ -50,12 +48,12 @@ class PostTransformer implements IOGate {
   providers: [
     PostView,
     PostFeed,
-    PostCategories,
+    PostGenres,
     Provider.ofInstance<DatabaseConfig>('ziqquratu.DatabaseConfig', {
       collections: {
         'articles': {
           source: http({path: '/api/posts'}),
-          use: [
+          useBefore: [
             io(new PostTransformer())
           ],
         },
