@@ -1,5 +1,6 @@
 <template>
   <require from="components/common"></require>
+  <require from="components/player/player"></require>
   <require from="styles/playlist-editor.styl"></require>
 
   <div class="audio-stream">
@@ -11,6 +12,7 @@
     <ul id="timestamp-list">
       <li repeat.for="track of data.tracks" css="width: ${trackWidth(track)}"></li>
     </ul>
+    <player playlist.bind="data" />
   </div>
 
   <div class="playlist-editor">

@@ -71,7 +71,7 @@ export abstract class Player {
   }
 
   public play(playlist: MusicPlaylist, track = 0) {
-    if (!this.playlist || this.playlist._id !== playlist._id) {
+    if (!this.isLoaded(playlist)) {
       this.audio.src = playlist.audio.contentUrl;
       this.audio.load();
       this.playlist = playlist;
@@ -82,6 +82,20 @@ export abstract class Player {
     this.audio.play();
   }
 
+  public togglePlay(playlist: MusicPlaylist) {
+    if (!this.isLoaded(playlist)) {
+      this.play(playlist);
+    } else if (this.audio.paused) {
+      this.audio.play()
+    } else {
+      this.audio.pause();
+    }
+  }
+
+  public isLoaded(playlist: MusicPlaylist): boolean {
+    return this.playlist !== undefined && this.playlist._id === playlist._id;
+  }
+
   public get currentTrack(): Track | undefined {
     return this.playlist 
       ? this.playlist.tracks[this.currentTrackNumber]
@@ -90,6 +104,10 @@ export abstract class Player {
 
   public get currentTrackTime(): number {
     return this.audio.currentTime - this.offset(this.currentTrackNumber);
+  }
+
+  public set currentTrackTime(t: number) {
+    this.audio.currentTime = this.offset(this.currentTrackNumber) + t;
   }
 
   public get currentTrackNumber(): number {

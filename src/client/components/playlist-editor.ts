@@ -1,6 +1,7 @@
 import {bindable, bindingMode, autoinject} from 'aurelia-framework';
 import {MusicPlaylist} from '../../domain/models/music-playlist';
 import {Track} from '../../domain/models/track';
+import {Player} from '../../domain/player';
 
 @autoinject
 export class PlaylistEditorCustomElement {
@@ -9,6 +10,8 @@ export class PlaylistEditorCustomElement {
   private selectedTrack: number = 0;
   private dragSource: number | undefined;
   private dragTarget: number | undefined;
+
+  public constructor(private player: Player) {}
 
   get track(): Track {
     return this.data.tracks[this.selectedTrack];
