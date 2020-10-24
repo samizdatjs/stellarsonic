@@ -1,4 +1,5 @@
 import { Track } from "./track";
+import { Duration } from "./duration";
 import { AudioObject, Person } from '../interfaces';
 
 export class MusicPlaylist {
@@ -44,6 +45,16 @@ export class MusicPlaylist {
     return this.tracks.reduce((duration, track) => {
       return duration + track.duration.toSeconds();
     }, 0)
+  }
+
+  public addTrack(name: string, artist: string, year: number, duration: Duration): Track {
+    const track = new Track(name, artist, year, duration);
+    this.tracks.push(track);
+    return track;
+  }
+
+  public removeTrack(index: number) {
+    this.tracks.splice(index, 1);
   }
 
   public toJSONLD() {

@@ -23,12 +23,12 @@ export class PlaylistEditorCustomElement {
   }
 
   addTrack() {
-    this.data.tracks.push(new Track('New track', '', 2020, new Duration(3, 0)));
+    this.data.addTrack('New track', '', 2020, new Duration(3, 0));
     this.selectedTrack = this.data.tracks.length - 1;
   }
 
   removeTrack() {
-    this.data.tracks.splice(this.selectedTrack, 1);
+    this.data.removeTrack(this.selectedTrack);
     if (this.selectedTrack >= this.data.tracks.length) {
       this.selectedTrack = this.data.tracks.length - 1;
     }
