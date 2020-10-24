@@ -17,14 +17,16 @@
     margin: 0
     padding: 0
     display: flex
-    border-bottom: 1px solid rgba(0,0,0,.18);
 
     li
       height: 30px
       display: block
       background: rgba(0,0,0,.06)
       width: 40px
-      border-right: 1px solid rgba(0,0,0,.4)
+      border-bottom: 1px solid rgba(0,0,0,.1);
+
+      &:not(:last-child)
+        border-right: 1px solid rgba(0,0,0,.4)
 
 .track-handles
   list-style: none
@@ -38,7 +40,9 @@
     background: rgba(0,0,0,.075)
     border-bottom: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
-    border-right: 1px solid rgba(0,0,0,.4)
+
+    &:not(:last-child)
+      border-right: 1px solid rgba(0,0,0,.4)
 
     &:hover
       background: rgba(0,0,0,.03)
