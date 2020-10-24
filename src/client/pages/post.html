@@ -1,18 +1,18 @@
 <template>
-  <require from="components/cover-image.html"></require>
-  <require from="components/player/player"></require>
-  <require from="components/tracklist"></require>
-  <require from="components/blog-post"></require>
-  <require from="components/disqus"></require>
+  <require from="components/common/blog-post"></require>
+  <require from="components/common/cover-image.html"></require>
   <require from="components/editor/editor"></require>
   <require from="components/editor/menu"></require>
   <require from="components/editor/menu-item.html"></require>
   <require from="components/editor/playlist-editor"></require>
+  <require from="components/player/player"></require>
+  <require from="components/tracklist"></require>
+  <require from="components/disqus"></require>
+  <require from="styles/common/article.styl"></require>
+  <require from="styles/editor/post-edit.styl"></require>
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
-  <require from="styles/article.styl"></require>
   <require from="styles/volume.styl"></require>
-  <require from="styles/editor/post-edit.styl"></require>
 
   <blog-post class="au-animate" 
     color.bind="post.palette.dark"
