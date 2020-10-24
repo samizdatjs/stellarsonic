@@ -3,7 +3,12 @@
   <require from="components/editor/playlist-timeline"></require>
   <require from="styles/editor/playlist-editor.styl"></require>
 
-  <playlist-timeline playlist.bind="data" selected.bind="selectedTrack" select.call="selectTrack(index)"></playlist-timeline>
+  <div class="playlist-editor-tracks">
+    <playlist-timeline playlist.bind="data" selected.bind="selectedTrack" select.call="selectTrack(index)"></playlist-timeline>
+    <a href="#" class="add-track" click.delegate="addTrack()">
+      <i class="fal fa-plus-square"></i>
+    </a>
+  </div>
   <div class="track-form">
     <div class="track-form-field">
       <label for="track-name">Name</label>
@@ -25,5 +30,8 @@
       <label for="track-seconds">Seconds</label>
       <input id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
     </div>
+    <button click.delegate="removeTrack()">
+      <i class="fal fa-trash"></i>
+    </button>
   </div>
 </template>

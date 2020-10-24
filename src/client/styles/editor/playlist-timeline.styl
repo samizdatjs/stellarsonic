@@ -1,3 +1,6 @@
+.timeline
+  box-shadow: inset 0px 2px 3px 0px rgba(0,0,0,0.3)
+
 .timestamps
   position: relative;
   cursor: pointer;
@@ -7,23 +10,21 @@
     top: 0;
     bottom: 0;
     left: 0;
-    background: rgba(222,142,92,.5);
+    background: rgba(46,170,183,.22);
 
   ul
     list-style: none
     margin: 0
     padding: 0
     display: flex
-    box-shadow: inset 1px 1px 3px 0px rgba(0,0,0,0.5);
+    border-bottom: 1px solid rgba(0,0,0,.18);
 
     li
       height: 30px
       display: block
       background: rgba(0,0,0,.06)
       width: 40px
-
-      &:not(:last-child)
-        border-right: 1px solid rgba(0,0,0,.4)
+      border-right: 1px solid rgba(0,0,0,.4)
 
 .track-handles
   list-style: none
@@ -37,6 +38,7 @@
     background: rgba(0,0,0,.075)
     border-bottom: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
+    border-right: 1px solid rgba(0,0,0,.4)
 
     &:hover
       background: rgba(0,0,0,.03)
@@ -44,6 +46,3 @@
     &.selected
       background: #fff;
       border-bottom: none;
-
-    &:not(:last-child)
-      border-right: 1px solid rgba(0,0,0,.4)

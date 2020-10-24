@@ -2,6 +2,7 @@ import {bindable, bindingMode, autoinject} from 'aurelia-framework';
 import {MusicPlaylist} from '../../../domain/models/music-playlist';
 import {Track} from '../../../domain/models/track';
 import {Player} from '../../../domain/player';
+import { Duration } from '../../../domain/models/duration';
 
 @autoinject
 export class PlaylistEditorCustomElement {
@@ -19,6 +20,18 @@ export class PlaylistEditorCustomElement {
 
   selectTrack(index: number) {
     this.selectedTrack = index;
+  }
+
+  addTrack() {
+    this.data.tracks.push(new Track('New track', '', 2020, new Duration(3, 0)));
+    this.selectedTrack = this.data.tracks.length - 1;
+  }
+
+  removeTrack() {
+    this.data.tracks.splice(this.selectedTrack, 1);
+    if (this.selectedTrack >= this.data.tracks.length) {
+      this.selectedTrack = this.data.tracks.length - 1;
+    }
   }
 
   dragStart(event: DragEvent, index: number) {
