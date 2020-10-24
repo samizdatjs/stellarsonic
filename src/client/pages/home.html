@@ -13,7 +13,7 @@
       <card 
         repeat.for="post of posts.data"
         color="${post.palette.dark}"
-        image.bind="post.image"
+        image.bind="image(post)"
         url="#posts/${post._id}"
       >
         <h1 slot="title">${post.headline}</h1>

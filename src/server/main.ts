@@ -3,9 +3,17 @@ import {bootstrap, component, LogLevel, Provider} from '@ziqquratu/ziqquratu';
 import {resource, requestLogger, ServerConfig} from '@ziqquratu/tashmetu';
 import {FileSystemConfig} from '@ziqquratu/nabu';
 import {terminal} from '@ziqquratu/terminal';
-import {Server} from '@ziqquratu/tashmetu';
+import {Server, get, router} from '@ziqquratu/tashmetu';
 import * as yargs from 'yargs';
 import { databaseConfig } from './databaseConfig';
+import * as request from 'request';
+
+class ProxyImageRouter {
+  @get('/:path')
+  public async image(req: express.Request, res: express.Response): Promise<any> {
+    request.get(req.params.path).pipe(res);
+  }
+}
 
 @component({
   dependencies: [
@@ -15,6 +23,7 @@ import { databaseConfig } from './databaseConfig';
   ],
   providers: [
     Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig),
+    ProxyImageRouter,
   ],
   inject: ['tashmetu.Server'],
 })
@@ -70,6 +79,7 @@ bootstrap(Application, {
       '/api/authors': resource({collection: 'authors', readOnly: true}),
       '/api/tags':    resource({collection: 'tags', readOnly: true}),
       '/api/genres':  resource({collection: 'genres', readOnly: true}),
+      '/images':      router(ProxyImageRouter),
     }
   }));
 }).then(app => app.run(parseInt(process.env.PORT || '8080')));
