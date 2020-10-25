@@ -1,0 +1,15 @@
+<template>
+  <require from="styles/editor/color-picker.styl"></require>
+
+  <button class="color-picker" click.delegate="click()" css="background: ${color}">
+    <i class="fal fa-tint"></i>
+    <span>${name}</span>
+  </button>
+  <!--
+  <div class="color-picker" click.delegate="click()">
+    <div class="color" css="background: ${color}"></div>
+    <div class="name">${name}</div>
+  </div>
+-->
+  <input type="color" value.bind="color" class="color-picker-input"/>
+</template>

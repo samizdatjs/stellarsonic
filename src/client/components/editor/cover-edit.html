@@ -1,0 +1,18 @@
+<template>
+  <require from="components/editor/color-picker"></require>
+  <require from="styles/common/cover-image.styl"></require>
+  <require from="styles/editor/cover-edit.styl"></require>
+
+  <div class="content cover-edit">
+    <div class="cover-image">
+      <img src.bind="image" />
+    </div>
+    <div class="">
+      <input type="text" value.bind="post.image" style="width: 100%"/>
+      <div class="palette">
+        <color-picker name="Background" color.bind="post.palette.primary"></color-picker>
+        <color-picker name="Cover" color.bind="post.palette.dark"></color-picker>
+      </div>
+    </div>
+  </div>
+</template>

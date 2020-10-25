@@ -1,6 +1,7 @@
 <template>
   <require from="components/common/blog-post"></require>
   <require from="components/common/cover-image.html"></require>
+  <require from="components/editor/cover-edit"></require>
   <require from="components/editor/editor"></require>
   <require from="components/editor/menu"></require>
   <require from="components/editor/menu-item.html"></require>
@@ -29,21 +30,17 @@
       <div if.bind="edit" class="post-edit-toolbar au-animate animate-fade-in animate-fade-out">
         <menu>
           <menu-item title="Headline" icon="fal fa-heading">
-            <input type="text" value.bind="post.headline" style="width: 600px"/>
-          </menu-item>
-          <menu-item title="Image" icon="fal fa-image">
-            <input type="text" value.bind="post.image" style="width: 600px"/>
-          </menu-item>
-          <menu-item title="Palette" icon="fal fa-palette">
-            <div style="display: flex;">
-              <label for="background-color">Background color</label><br/>
-              <input id="background-color" type="color" value.bind="post.palette.primary"/><br/>
-              <label for="cover-color">Cover color</label><br/>
-              <input id="cover-color" type="color" value.bind="post.palette.dark"/><br/>
+            <div class="content">
+              <input type="text" value.bind="post.headline" style="width: 100%"/>
             </div>
           </menu-item>
+          <menu-item title="Image" icon="fal fa-image">
+            <cover-edit post.bind="post"></cover-edit>
+          </menu-item>
           <menu-item title="Audio" icon="fal fa-cloud-music">
-            <input id="audio-content-url" value.bind="post.audio.contentUrl" style="width: 100%">
+            <div class="content">
+              <input id="audio-content-url" value.bind="post.audio.contentUrl" style="width: 100%">
+            </div>
           </menu-item>
           <menu-item title="Playlist" icon="fal fa-album-collection">
             <playlist-editor data.bind="post"/>

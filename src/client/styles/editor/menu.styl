@@ -33,10 +33,13 @@ menu
     overflow-y: auto;
     max-height: calc(100vh - 60px);
 
+    .content
+      padding: 20px 60px;
+      margin: 0;
+
     &.full-width
       width: 100%;
       left: 0
-      // padding: 20px 60px;
       padding: 0;
       box-sizing: border-box;
 
@@ -49,3 +52,16 @@ menu
       padding: 10px;
       font-family: 'Open Sans Condensed', sans-serif;
       box-sizing: border-box;
+
+    button
+      color: #fff;
+      border: none;
+      text-align: center;
+      box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.7);
+      cursor: pointer;
+      padding: 10px 20px;
+
+      &:hover
+        opacity: 0.9;
+
+
