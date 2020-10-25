@@ -6,11 +6,13 @@
   <require from="components/editor/menu"></require>
   <require from="components/editor/menu-item.html"></require>
   <require from="components/editor/playlist-editor"></require>
+  <require from="components/editor/tag-list"></require>
   <require from="components/player/player"></require>
   <require from="components/tracklist"></require>
   <require from="components/disqus"></require>
   <require from="styles/common/article.styl"></require>
   <require from="styles/editor/post-edit.styl"></require>
+  <require from="styles/editor/tag-edit.styl"></require>
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
   <require from="styles/volume.styl"></require>
@@ -36,6 +38,12 @@
           </menu-item>
           <menu-item title="Image" icon="fal fa-image">
             <cover-edit post.bind="post"></cover-edit>
+          </menu-item>
+          <menu-item title="Tags" icon="fal fa-tags">
+            <div class="content tag-list-edit">
+              <tag-list title="Genres" tags.bind="post.genres"></tag-list>
+              <tag-list title="Keywords" tags.bind="post.keywords"></tag-list>
+            </div>
           </menu-item>
           <menu-item title="Audio" icon="fal fa-cloud-music">
             <div class="content">
