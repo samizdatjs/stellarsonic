@@ -1,0 +1,19 @@
+<template>
+  <require from="components/common/common"></require>
+  <require from="styles/editor/track-editor.styl"></require>
+
+  <label for="track-name">Name</label>
+  <input id="track-name" type="text" value.bind="track.name">
+  <label for="track-artist">Artist</label>
+  <input id="track-artist" type="text" value.bind="track.byArtist">
+  <label for="track-year">Year</label>
+  <input id="track-year" type="number" value.bind="track.copyrightYear | integerFromInput">
+  <label for="track-minutes">Minutes</label>
+  <input id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
+  <label for="track-seconds">Seconds</label>
+  <input id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
+  <button class="uk-button uk-button-default" click.delegate="editor.removeTrack()">
+    <i class="fal fa-trash"></i>
+    Remove
+  </button>
+</template>

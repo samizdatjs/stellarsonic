@@ -1,11 +1,11 @@
 import {autoinject} from 'aurelia-framework';
-import {State} from '../../services/state';
+import {Editor} from '../../services/editor';
 
 @autoinject
 export class ImageUploadCustomElement {
-  constructor(private element: Element, private state: State) {}
+  constructor(private element: Element, private editor: Editor) {}
 
   async upload(event: any) {
-    await this.state.uploadImage(event.target.files[0]);
+    await this.editor.uploadImage(event.target.files[0]);
   }
 }

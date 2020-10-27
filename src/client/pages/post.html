@@ -7,7 +7,7 @@
   <require from="components/editor/menu"></require>
   <require from="components/editor/menu-item.html"></require>
   <require from="components/editor/image-upload"></require>
-  <require from="components/editor/playlist-editor"></require>
+  <require from="components/editor/track-editor"></require>
   <require from="components/editor/playlist-timeline"></require>
   <require from="components/editor/tag-list"></require>
   <require from="components/player/player"></require>
@@ -20,7 +20,7 @@
   <require from="styles/post.styl"></require>
   <require from="styles/volume.styl"></require>
 
-  <div class="edit-panel menu au-animate animate-slide-in-left animate-slide-out-left" if.bind="selectedTrack === undefined">
+  <div class="edit-panel menu au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.menu">
     <ul uk-accordion>
       <li>
         <a class="uk-accordion-title" href="#">Headline</a>
@@ -54,41 +54,15 @@
     </ul>
   </div>
 
-  <div class="track-edit-panel menu au-animate animate-slide-in-right animate-slide-out-right" if.bind="selectedTrack !== undefined">
-  <div>
-    <div class="track-form-field">
-      <label for="track-name">Name</label>
-      <input id="track-name" type="text" value.bind="track.name">
-    </div>
-    <div class="track-form-field">
-      <label for="track-artist">Artist</label>
-      <input id="track-artist" type="text" value.bind="track.byArtist">
-    </div>
-    <div class="track-form-field">
-      <label for="track-year">Year</label>
-      <input id="track-year" type="number" value.bind="track.copyrightYear | integerFromInput">
-    </div>
-    <div class="track-form-field">
-      <label for="track-minutes">Minutes</label>
-      <input id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
-    </div>
-    <div class="track-form-field">
-      <label for="track-seconds">Seconds</label>
-      <input id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
-    </div>
-    <hr/>
-    <button class="uk-button uk-button-default" click.delegate="removeTrack()">
-      <i class="fal fa-trash"></i>
-      Remove
-    </button>
-  </div>
+  <div class="track-edit-panel menu au-animate animate-slide-in-right animate-slide-out-right" if.bind="!editor.menu">
+    <track-editor></track-editor>
   </div>
 
-  <div class="timeline-edit-panel" if.bind="edit">
-    <a class="post-edit-tab ${selectedTrack === undefined ? 'selected' : ''}" click.delegate="selectTrack()">
+  <div class="timeline-edit-panel" if.bind="editor.active">
+    <a class="post-edit-tab ${editor.menu ? 'selected' : ''}" click.delegate="editor.toggleMenu(true)">
       <i class="fal fa-bars"></i>
     </a>
-    <playlist-timeline playlist.bind="post" selected.bind="selectedTrack" select.call="selectTrack(index)"></playlist-timeline>
+    <playlist-timeline playlist.bind="post" selected.bind="editor.selectedTrackNumber" select.call="editor.selectTrack(index)"></playlist-timeline>
   </div>
 
   <blog-post class="au-animate" 
@@ -96,7 +70,7 @@
     bg-color.bind="post.palette.primary"
     bg-image.bind="post.image"
     toggle-edit.call="toggleEdit()" 
-    edit.bind="edit"
+    edit.bind="editor.active"
   >
     <h1 slot="title">
       <span>${post.headline}</span>

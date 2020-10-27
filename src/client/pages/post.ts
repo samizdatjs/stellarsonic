@@ -2,6 +2,7 @@ import {State} from '../services/state';
 import {Player} from '../../domain/player';
 import siteConfig from '../../config';
 import {autoinject} from 'aurelia-framework';
+import {Editor} from '../services/editor';
 
 const Vibrant = require('node-vibrant')
 
@@ -19,7 +20,8 @@ export class Post {
 
   public constructor(
     private state: State,
-    private player: Player
+    public player: Player,
+    public editor: Editor,
   ) {}
 
   async activate(params: any) {
@@ -55,7 +57,7 @@ export class Post {
       await this.state.savePost();
     }
     */
-    this.edit = !this.edit;
+    this.editor.toggleActive();
   }
 
   LightenDarkenColor(col: any, amt: any) {
