@@ -1,0 +1,18 @@
+<template>
+  <require from="styles/editor/image-upload.styl"></require>
+
+  <input type="file" value.bind="file" change.delegate="upload($event)">
+
+  <div class="content">
+    <fieldset class="image-upload">
+      <legend>Images</legend>
+      <ul>
+        <li repeat.for="img of state.images">
+          <div class="cover-image">
+            <img src="/images/${state.post._id}/${img}" />
+          </div>
+        </li>
+      </ul>
+    </fieldset>
+  </div>
+</template>

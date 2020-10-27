@@ -1,9 +1,9 @@
-import {bindable} from 'aurelia-framework';
+import {bindable, autoinject} from 'aurelia-framework';
+import {State} from '../../services/state';
 
+@autoinject
 export class CoverEditCustomElement {
   @bindable post!: any;
 
-  get image() {
-    return `/images/${encodeURIComponent(this.post.image)}`
-  }
+  constructor(public state: State) {}
 }

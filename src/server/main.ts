@@ -1,12 +1,13 @@
 import * as express from 'express';
 import {bootstrap, component, LogLevel, Provider} from '@ziqquratu/ziqquratu';
-import {resource, requestLogger, ServerConfig} from '@ziqquratu/tashmetu';
+import {resource, requestLogger, ServerConfig, middleware, post} from '@ziqquratu/tashmetu';
 import {FileSystemConfig} from '@ziqquratu/nabu';
 import {terminal} from '@ziqquratu/terminal';
-import {Server, get, router} from '@ziqquratu/tashmetu';
+import {Server, get} from '@ziqquratu/tashmetu';
 import * as yargs from 'yargs';
 import { databaseConfig } from './databaseConfig';
 import * as request from 'request';
+import {diskContent, DiskContentRouterFactory} from './routers/diskContent';
 
 class ProxyImageRouter {
   @get('/:path')
@@ -24,6 +25,9 @@ class ProxyImageRouter {
   providers: [
     Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig),
     ProxyImageRouter,
+  ],
+  factories: [
+    DiskContentRouterFactory
   ],
   inject: ['tashmetu.Server'],
 })
@@ -79,7 +83,12 @@ bootstrap(Application, {
       '/api/authors': resource({collection: 'authors', readOnly: true}),
       '/api/tags':    resource({collection: 'tags', readOnly: true}),
       '/api/genres':  resource({collection: 'genres', readOnly: true}),
-      '/images':      router(ProxyImageRouter),
+      '/images':      diskContent({
+        destination: (postId) => `./public/uploads/${postId}/images`,
+        fieldName: 'image'
+      })
+      // '/images':      router(ProxyImageRouter),
+      // '/content':     router(PostContentRouter),
     }
   }));
 }).then(app => app.run(parseInt(process.env.PORT || '8080')));

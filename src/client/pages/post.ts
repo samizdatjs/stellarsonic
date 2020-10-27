@@ -39,10 +39,6 @@ export class Post {
     return this.state.post;
   }
 
-  get image() {
-    return `/images/${encodeURIComponent(this.post.image)}`
-  }
-
   async toggleEdit() {
     if (this.edit) {
       await this.state.savePost();

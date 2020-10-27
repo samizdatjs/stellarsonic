@@ -36,7 +36,6 @@ properties:
     description: Headline of the article.
   image:
     type: string
-    format: uri
   keywords:
     type: string
   text:

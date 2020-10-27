@@ -5,6 +5,7 @@
   <require from="components/editor/editor"></require>
   <require from="components/editor/menu"></require>
   <require from="components/editor/menu-item.html"></require>
+  <require from="components/editor/image-upload"></require>
   <require from="components/editor/playlist-editor"></require>
   <require from="components/editor/tag-list"></require>
   <require from="components/player/player"></require>
@@ -37,7 +38,7 @@
             </div>
           </menu-item>
           <menu-item title="Image" icon="fal fa-image">
-            <cover-edit post.bind="post"></cover-edit>
+            <cover-edit></cover-edit>
           </menu-item>
           <menu-item title="Tags" icon="fal fa-tags">
             <div class="content tag-list-edit">
@@ -56,12 +57,15 @@
           <menu-item title="Article" icon="fal fa-article">
             <editor value.bind="post.text"/>
           </menu-item>
+          <menu-item title="Content" icon="fal fa-file-upload">
+            <image-upload></image-upload>
+          </menu-item>
         </menu>
       </div>
     </div>
 
     <section slot="cover-main">
-      <cover-image src.bind="image"></cover-image>
+      <cover-image src.bind="post.image"></cover-image>
       <div class="content cover-content">
         <player playlist.bind="post"></player>
       </div>
