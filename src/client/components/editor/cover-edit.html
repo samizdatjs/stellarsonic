@@ -1,9 +1,8 @@
 <template>
   <require from="components/editor/color-picker"></require>
-  <require from="styles/common/cover-image.styl"></require>
   <require from="styles/editor/cover-edit.styl"></require>
 
-  <div class="content cover-edit">
+  <div class="cover-edit">
     <select value.bind="state.post.image">
       <option value="images/${state.post._id}/${image}" repeat.for="image of state.images">${image}</option>
     </select>

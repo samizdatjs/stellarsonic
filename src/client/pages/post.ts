@@ -15,6 +15,7 @@ export class DateFormatValueConverter {
 export class Post {
   private edit: boolean = false;
   private menuItem: string | undefined;
+  public selectedTrack: number | undefined;
 
   public constructor(
     private state: State,
@@ -31,6 +32,15 @@ export class Post {
     */
   }
 
+  selectTrack(index: number | undefined) {
+    console.log(index);
+    this.selectedTrack = index;
+  }
+
+  get track() {
+    return this.selectedTrack !== undefined ? this.post.tracks[this.selectedTrack] : undefined;
+  }
+
   get url() {
     return this.post ? `${siteConfig.url}/#posts/${(<any>this.post)._id}` : undefined;
   }
@@ -40,9 +50,11 @@ export class Post {
   }
 
   async toggleEdit() {
+    /*
     if (this.edit) {
       await this.state.savePost();
     }
+    */
     this.edit = !this.edit;
   }
 

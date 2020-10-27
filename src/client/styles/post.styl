@@ -77,3 +77,144 @@
 
 .info
   text-align: center;
+
+@keyframes SlideInRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes SlideOutRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes SlideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes SlideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-in-right.au-enter {
+  transform: translateX(100%);
+}
+
+.animate-slide-in-right.au-enter-active {
+  animation: SlideInRight 0.3s;
+}
+
+.animate-slide-out-right.au-leave-active {
+  animation: SlideOutRight 0.3s;
+}
+
+.animate-slide-in-left.au-enter {
+  transform: translateX(-100%);
+}
+
+.animate-slide-in-left.au-enter-active {
+  animation: SlideInLeft 0.3s;
+}
+
+.animate-slide-out-left.au-leave-active {
+  animation: SlideOutLeft 0.3s;
+}
+
+.au-animate {
+  animation-timing-function: ease-in-out	
+ }
+ 
+
+.edit-panel
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  padding: 10px 60px;
+  color: rgba(0,0,0,.62);
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 200;
+  box-sizing: border-box;
+
+  input
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    border: 1px solid rgba(0,0,0,.2);
+    background: rgba(0,0,0,.03);
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+
+.track-edit-panel
+  position: absolute;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  padding: 10px 60px;
+  color: rgba(0,0,0,.62);
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 200;
+  box-sizing: border-box;
+
+.timeline-edit-panel
+  position: absolute;
+  top: 0;
+  height: 60px;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+
+.post-edit-tab
+  display: block;
+  border-right: 1px solid rgba(0,0,0,.3);
+  background:#646360;
+  text-align: center;
+  color: #fff;
+  padding: 15px 0;
+  font-size: 1.3em;
+
+  &.selected
+    background: #e8e5df
+    color: rgba(0,0,0,.62);
+    cursor: unset;
+
+/*
+.edit-panel.au-enter-active
+  animation: editPanelEnter 0.5s;
+
+.edit-panel.au-leave-active
+  animation: editPanelLeave 0.5s;
+  */
+
+/*
+.track-edit-panel.au-enter-active
+  animation: trackEditPanelEnter 0.5s;
+
+.track-edit-panel.au-leave-active
+  animation: trackEditPanelLeave 0.5s;
+*/

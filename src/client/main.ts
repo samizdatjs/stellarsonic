@@ -72,7 +72,7 @@ export async function configure(aurelia: Aurelia): Promise<void> {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin(PLATFORM.moduleName("aurelia-animator-css"));
+    .plugin(PLATFORM.moduleName("aurelia-animator-css"), (cfg: any) => cfg.useAnimationDoneClasses = true);
 
   await bootstrap(Application, {
     container: container(aurelia.container)

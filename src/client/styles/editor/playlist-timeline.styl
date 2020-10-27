@@ -21,11 +21,12 @@
     display: flex
 
     li
-      height: 30px
+      height: 40px
       display: block
       background: rgba(0,0,0,.06)
       width: 40px
       border-bottom: 1px solid rgba(0,0,0,.1);
+      box-sizing: border-box;
 
       &:not(:last-child)
         border-right: 1px solid rgba(0,0,0,.4)
@@ -37,11 +38,12 @@
   display: flex
 
   li
-    height: 15px
+    height: 20px
     display: block
     background: rgba(0,0,0,.075)
     border-bottom: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
+    box-sizing: border-box;
 
     &:not(:last-child)
       border-right: 1px solid rgba(0,0,0,.4)
@@ -50,5 +52,5 @@
       background: rgba(0,0,0,.03)
 
     &.selected
-      background: #fff;
+      background: #e8e5df;
       border-bottom: none;

@@ -1,4 +1,5 @@
 <template>
+  <require from="components/common/common"></require>
   <require from="components/common/blog-post"></require>
   <require from="components/common/cover-image.html"></require>
   <require from="components/editor/cover-edit"></require>
@@ -7,6 +8,7 @@
   <require from="components/editor/menu-item.html"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/playlist-editor"></require>
+  <require from="components/editor/playlist-timeline"></require>
   <require from="components/editor/tag-list"></require>
   <require from="components/player/player"></require>
   <require from="components/tracklist"></require>
@@ -17,6 +19,77 @@
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
   <require from="styles/volume.styl"></require>
+
+  <div class="edit-panel menu au-animate animate-slide-in-left animate-slide-out-left" if.bind="selectedTrack === undefined">
+    <ul uk-accordion>
+      <li>
+        <a class="uk-accordion-title" href="#">Headline</a>
+        <div class="uk-accordion-content">
+          <input type="text" value.bind="post.headline">
+        </div>
+      </li>
+      <li>
+        <a class="uk-accordion-title" href="#">Cover</a>
+        <div class="uk-accordion-content">
+          <cover-edit></cover-edit>
+        </div>
+      </li>
+      <li>
+        <a class="uk-accordion-title" href="#">Images</a>
+        <div class="uk-accordion-content">
+          <image-upload></image-upload>
+        </div>
+      </li>
+      <li>
+        <a class="uk-accordion-title" href="#">Audio</a>
+        <div class="uk-accordion-content">
+        </div>
+      </li>
+      <li>
+        <a class="uk-accordion-title" href="#">Text</a>
+        <div class="uk-accordion-content">
+          <textarea value.bind="post.text" rows="20" spellcheck="false"></textarea>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="track-edit-panel menu au-animate animate-slide-in-right animate-slide-out-right" if.bind="selectedTrack !== undefined">
+  <div>
+    <div class="track-form-field">
+      <label for="track-name">Name</label>
+      <input id="track-name" type="text" value.bind="track.name">
+    </div>
+    <div class="track-form-field">
+      <label for="track-artist">Artist</label>
+      <input id="track-artist" type="text" value.bind="track.byArtist">
+    </div>
+    <div class="track-form-field">
+      <label for="track-year">Year</label>
+      <input id="track-year" type="number" value.bind="track.copyrightYear | integerFromInput">
+    </div>
+    <div class="track-form-field">
+      <label for="track-minutes">Minutes</label>
+      <input id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
+    </div>
+    <div class="track-form-field">
+      <label for="track-seconds">Seconds</label>
+      <input id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
+    </div>
+    <hr/>
+    <button class="uk-button uk-button-default" click.delegate="removeTrack()">
+      <i class="fal fa-trash"></i>
+      Remove
+    </button>
+  </div>
+  </div>
+
+  <div class="timeline-edit-panel" if.bind="edit">
+    <a class="post-edit-tab ${selectedTrack === undefined ? 'selected' : ''}" click.delegate="selectTrack()">
+      <i class="fal fa-bars"></i>
+    </a>
+    <playlist-timeline playlist.bind="post" selected.bind="selectedTrack" select.call="selectTrack(index)"></playlist-timeline>
+  </div>
 
   <blog-post class="au-animate" 
     color.bind="post.palette.dark"
@@ -30,6 +103,7 @@
     </h1>
     
     <div slot="toolbar">
+      <!--
       <div if.bind="edit" class="post-edit-toolbar au-animate animate-fade-in animate-fade-out">
         <menu>
           <menu-item title="Headline" icon="fal fa-heading">
@@ -62,6 +136,7 @@
           </menu-item>
         </menu>
       </div>
+    -->
     </div>
 
     <section slot="cover-main">

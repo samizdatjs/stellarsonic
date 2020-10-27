@@ -1,18 +1,21 @@
 <template>
   <require from="styles/editor/image-upload.styl"></require>
 
-  <input type="file" value.bind="file" change.delegate="upload($event)">
+  <!--<input type="file" value.bind="file" change.delegate="upload($event)">-->
 
-  <div class="content">
-    <fieldset class="image-upload">
-      <legend>Images</legend>
-      <ul>
-        <li repeat.for="img of state.images">
-          <div class="cover-image">
-            <img src="/images/${state.post._id}/${img}" />
-          </div>
-        </li>
-      </ul>
-    </fieldset>
+  <div class="js-upload uk-placeholder uk-text-center">
+    <span uk-icon="icon: cloud-upload"></span>
+    <span class="uk-text-middle">Attach images by dropping them here or</span>
+    <div uk-form-custom>
+      <input type="file" multiple>
+      <span class="uk-link">selecting one</span>
+    </div>
   </div>
+  <ul class="image-gallery">
+    <li repeat.for="img of state.images">
+      <div class="cover-image">
+        <img src="/images/${state.post._id}/${img}" />
+     </div>
+    </li>
+  </ul>
 </template>
