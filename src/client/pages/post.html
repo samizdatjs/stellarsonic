@@ -76,43 +76,6 @@
       <span>${post.headline}</span>
     </h1>
     
-    <div slot="toolbar">
-      <!--
-      <div if.bind="edit" class="post-edit-toolbar au-animate animate-fade-in animate-fade-out">
-        <menu>
-          <menu-item title="Headline" icon="fal fa-heading">
-            <div class="content">
-              <input type="text" value.bind="post.headline" style="width: 100%"/>
-            </div>
-          </menu-item>
-          <menu-item title="Image" icon="fal fa-image">
-            <cover-edit></cover-edit>
-          </menu-item>
-          <menu-item title="Tags" icon="fal fa-tags">
-            <div class="content tag-list-edit">
-              <tag-list title="Genres" tags.bind="post.genres"></tag-list>
-              <tag-list title="Keywords" tags.bind="post.keywords"></tag-list>
-            </div>
-          </menu-item>
-          <menu-item title="Audio" icon="fal fa-cloud-music">
-            <div class="content">
-              <input id="audio-content-url" value.bind="post.audio.contentUrl" style="width: 100%">
-            </div>
-          </menu-item>
-          <menu-item title="Playlist" icon="fal fa-album-collection">
-            <playlist-editor data.bind="post"/>
-          </menu-item>
-          <menu-item title="Article" icon="fal fa-article">
-            <editor value.bind="post.text"/>
-          </menu-item>
-          <menu-item title="Content" icon="fal fa-file-upload">
-            <image-upload></image-upload>
-          </menu-item>
-        </menu>
-      </div>
-    -->
-    </div>
-
     <section slot="cover-main">
       <cover-image src.bind="post.image"></cover-image>
       <div class="content cover-content">
