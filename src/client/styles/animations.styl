@@ -1,0 +1,99 @@
+@keyframes SlideInTop {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes SlideOutTop {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes SlideInRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes SlideOutRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes SlideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes SlideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-in-top.au-enter {
+  transform: translateY(-100%);
+}
+
+.animate-slide-in-top.au-enter-active {
+  animation: SlideInTop 0.3s;
+}
+
+.animate-slide-in-top.au-leave-active {
+  animation: SlideOutTop 0.3s;
+}
+
+.animate-slide-in-right.au-enter {
+  transform: translateX(100%);
+}
+
+.animate-slide-in-right.au-enter-active {
+  animation: SlideInRight 0.3s;
+}
+
+.animate-slide-out-right.au-leave-active {
+  animation: SlideOutRight 0.3s;
+}
+
+.animate-slide-in-left.au-enter {
+  transform: translateX(-100%);
+}
+
+.animate-slide-in-left.au-enter-active {
+  animation: SlideInLeft 0.3s;
+}
+
+.animate-slide-out-left.au-leave-active {
+  animation: SlideOutLeft 0.3s;
+}
+
+.au-animate {
+  animation-timing-function: ease-in-out	
+ }
