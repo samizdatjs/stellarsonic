@@ -1,7 +1,6 @@
 <template>
   <require from="components/common/common"></require>
   <require from="components/common/blog-post"></require>
-  <require from="components/common/cover-image.html"></require>
   <require from="components/editor/cover-edit"></require>
   <require from="components/editor/editor"></require>
   <require from="components/editor/menu"></require>
@@ -14,6 +13,7 @@
   <require from="components/tracklist"></require>
   <require from="components/disqus"></require>
   <require from="styles/common/article.styl"></require>
+  <require from="styles/common/cover-image.styl"></require>
   <require from="styles/editor/post-edit.styl"></require>
   <require from="styles/editor/tag-edit.styl"></require>
   <require from="styles/app.styl"></require>
@@ -77,7 +77,9 @@
     </h1>
     
     <section slot="cover-main">
-      <cover-image src.bind="post.image"></cover-image>
+      <div class="cover-image">
+        <img src.bind="post.image" class="blend-bottom" />
+      </div>
       <div class="content cover-content">
         <player playlist.bind="post"></player>
       </div>
