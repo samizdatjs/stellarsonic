@@ -20,7 +20,7 @@
   <require from="styles/post.styl"></require>
   <require from="styles/volume.styl"></require>
 
-  <div class="edit-panel menu au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.menu">
+  <div class="edit-panel menu au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.menu">
     <ul uk-accordion>
       <li>
         <a class="uk-accordion-title" href="#">Headline</a>
@@ -54,11 +54,11 @@
     </ul>
   </div>
 
-  <div class="track-edit-panel menu au-animate animate-slide-in-right animate-slide-out-right" if.bind="!editor.menu">
+  <div class="track-edit-panel menu au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && !editor.menu">
     <track-editor></track-editor>
   </div>
 
-  <div class="timeline-edit-panel" if.bind="editor.active">
+  <div class="timeline-edit-panel au-animate animate-slide-in-top" if.bind="editor.active">
     <a class="post-edit-tab ${editor.menu ? 'selected' : ''}" click.delegate="editor.toggleMenu(true)">
       <i class="fal fa-bars"></i>
     </a>
