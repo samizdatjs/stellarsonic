@@ -14,7 +14,18 @@
       <div class="uk-inline-clip uk-transition-toggle cover-image uk-box-shadow-medium" tabindex.bind="$index">
         <img src="/images/${editor.post._id}/${img}" alt=""/>
         <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-bottom">
-          <p class="uk-h4 uk-margin-remove">Remove</p>
+          <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Remove</button>
+
+          <div id="modal-example" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-dark">
+              <h2 class="uk-modal-title">Remove</h2>
+                <p uk-dark>Are you sure you want to remove this image?</p>
+                <p class="uk-text-right">
+                  <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                  <button class="uk-button uk-button-primary" type="button">Remove</button>
+                </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
