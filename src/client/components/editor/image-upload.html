@@ -1,8 +1,6 @@
 <template>
   <require from="styles/editor/image-upload.styl"></require>
 
-  <!--<input type="file" value.bind="file" change.delegate="upload($event)">-->
-
   <div class="js-upload uk-placeholder uk-text-center">
     <span uk-icon="icon: cloud-upload"></span>
     <span class="uk-text-middle">Attach images by dropping them here or</span>
@@ -11,11 +9,14 @@
       <span class="uk-link">selecting one</span>
     </div>
   </div>
-  <ul class="image-gallery">
-    <li repeat.for="img of editor.images">
-      <div class="cover-image">
-        <img src="/images/${editor.post._id}/${img}" />
-     </div>
-    </li>
-  </ul>
+  <div class="uk-child-width-1-2 uk-grid-match uk-grid-small" uk-grid>
+    <div class="uk-text-center" repeat.for="img of editor.images">
+      <div class="uk-inline-clip uk-transition-toggle cover-image" tabindex.bind="$index">
+        <img src="/images/${editor.post._id}/${img}" alt=""/>
+        <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-bottom">
+          <p class="uk-h4 uk-margin-remove">Remove</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
