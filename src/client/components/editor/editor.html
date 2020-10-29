@@ -30,7 +30,7 @@
   </div>
 
   <div class="edit-panel" if.bind="editor.active && editor.mode === 'text'">
-    <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
+    <textarea class="uk-textarea" value.bind="editor.post.text" spellcheck="false" style="height: 100%"></textarea>
   </div>
 
   <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'content'">
