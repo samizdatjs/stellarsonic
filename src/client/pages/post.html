@@ -17,19 +17,19 @@
   <require from="styles/post.styl"></require>
   <require from="styles/volume.styl"></require>
 
-  <div class="edit-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.mode === 'settings'">
+  <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'settings'">
      <cover-edit></cover-edit>
   </div>
 
-  <div class="edit-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.mode === 'text'">
+  <div class="edit-panel" if.bind="editor.active && editor.mode === 'text'">
     <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
   </div>
 
-  <div class="edit-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.mode === 'content'">
+  <div class="edit-panel" if.bind="editor.active && editor.mode === 'content'">
     <image-upload></image-upload>
   </div>
 
-  <div class="track-edit-panel menu au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.mode === 'tracks'">
+  <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'tracks'">
     <track-editor></track-editor>
   </div>
 
