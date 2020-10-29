@@ -13,7 +13,6 @@
   <require from="components/tracklist"></require>
   <require from="components/disqus"></require>
   <require from="styles/common/article.styl"></require>
-  <require from="styles/common/cover-image.styl"></require>
   <require from="styles/editor/post-edit.styl"></require>
   <require from="styles/editor/tag-edit.styl"></require>
   <require from="styles/app.styl"></require>
@@ -77,8 +76,8 @@
     </h1>
     
     <section slot="cover-main">
-      <div class="cover-image">
-        <img src.bind="post.image" class="blend-bottom" />
+      <div class="aspect-phi-landscape">
+        <img src.bind="post.image" class="blend-bottom object-fit-cover" />
       </div>
       <div class="content cover-content">
         <player playlist.bind="post"></player>

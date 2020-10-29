@@ -10,8 +10,8 @@
     <div class="uk-child-width-expand@s" uk-grid>
       <div repeat.for="post of posts.data">
         <div>
-          <a href="#posts/${post._id}" class="uk-transition-toggle square uk-box-shadow-medium" tabindex.bind="$index" style="overflow: hidden; display: block">
-            <img class="uk-transition-scale-up uk-transition-opaque" src.bind="post.image">
+          <a href="#posts/${post._id}" class="uk-transition-toggle aspect-square uk-box-shadow-medium" tabindex.bind="$index" style="overflow: hidden; display: block">
+            <img class="uk-transition-scale-up uk-transition-opaque object-fit-cover" src.bind="post.image">
           </a>
           <div class="uk-padding-small uk-padding-remove-bottom uk-dark" style="color: rgba(0,0,0,.65)">
             <h1>

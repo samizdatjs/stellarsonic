@@ -11,8 +11,8 @@
   </div>
   <div class="uk-child-width-1-2 uk-grid-match uk-grid-small" uk-grid>
     <div class="uk-text-center" repeat.for="img of editor.images">
-      <div class="uk-inline-clip uk-transition-toggle cover-image uk-box-shadow-medium" tabindex.bind="$index">
-        <img src="/images/${editor.post._id}/${img}" alt=""/>
+      <div class="uk-inline-clip uk-transition-toggle aspect-square uk-box-shadow-medium" tabindex.bind="$index">
+        <img src="/images/${editor.post._id}/${img}" alt="" class="object-fit-cover"/>
         <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-bottom">
           <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Remove</button>
 
