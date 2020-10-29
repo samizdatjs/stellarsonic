@@ -3,8 +3,6 @@
   <require from="components/common/blog-post"></require>
   <require from="components/editor/cover-edit"></require>
   <require from="components/editor/editor"></require>
-  <require from="components/editor/menu"></require>
-  <require from="components/editor/menu-item.html"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/track-editor"></require>
   <require from="components/editor/playlist-timeline"></require>
@@ -19,12 +17,12 @@
   <require from="styles/post.styl"></require>
   <require from="styles/volume.styl"></require>
 
-  <div class="edit-panel menu au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.menu">
+  <div class="edit-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.menu">
     <ul uk-accordion>
       <li>
         <a class="uk-accordion-title" href="#">Headline</a>
         <div class="uk-accordion-content">
-          <input type="text" value.bind="post.headline">
+          <input class="uk-input" type="text" value.bind="post.headline">
         </div>
       </li>
       <li>
@@ -47,7 +45,7 @@
       <li>
         <a class="uk-accordion-title" href="#">Text</a>
         <div class="uk-accordion-content">
-          <textarea value.bind="post.text" rows="20" spellcheck="false"></textarea>
+          <textarea class="uk-textarea" value.bind="post.text" rows="20" spellcheck="false"></textarea>
         </div>
       </li>
     </ul>

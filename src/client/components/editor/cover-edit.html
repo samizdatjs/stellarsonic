@@ -3,10 +3,16 @@
   <require from="styles/editor/cover-edit.styl"></require>
 
   <div class="cover-edit">
-    <select value.bind="state.post.image">
-      <option value="images/${state.post._id}/${image}" repeat.for="image of state.images">${image}</option>
-    </select>
-    <color-picker name="Background" color.bind="state.post.palette.primary"></color-picker>
-    <color-picker name="Cover" color.bind="state.post.palette.dark"></color-picker>
+    <div class="uk-margin">
+      <select class="uk-select" value.bind="editor.post.image">
+        <option value="images/${editor.post._id}/${image}" repeat.for="image of editor.images">${image}</option>
+      </select>
+    </div>
+    <div class="uk-margin">
+      <color-picker name="Background" color.bind="state.post.palette.primary"></color-picker>
+    </div>
+    <div class="uk-margin">
+      <color-picker name="Cover" color.bind="state.post.palette.dark"></color-picker>
+    </div>
   </div>
 </template>

@@ -1,9 +1,13 @@
 import {bindable, autoinject} from 'aurelia-framework';
-import {State} from '../../services/state';
+import {Editor} from '../../services/editor';
 
 @autoinject
 export class CoverEditCustomElement {
   @bindable post!: any;
 
-  constructor(public state: State) {}
+  constructor(public editor: Editor) {}
+
+  bind() {
+    console.log(this.editor.images);
+  }
 }
