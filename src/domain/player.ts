@@ -82,7 +82,7 @@ export abstract class Player {
     this.audio.play();
   }
 
-  public togglePlay(playlist: MusicPlaylist) {
+  public togglePlay(playlist: MusicPlaylist, track?: number) {
     if (!this.isLoaded(playlist)) {
       this.play(playlist);
     } else if (this.audio.paused) {
