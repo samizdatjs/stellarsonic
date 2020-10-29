@@ -10,7 +10,7 @@ export class Editor {
   public images: string[] = [];
   public selectedTrackNumber: number | undefined;
   public active: boolean = false;
-  public menu: boolean = true;
+  public mode: string = 'settings';
   
   public constructor(
     private postView: PostView,
@@ -38,14 +38,14 @@ export class Editor {
       : undefined;
   }
 
-  public toggleMenu(show: boolean) {
-    this.menu = show;
+  public setMode(mode: string) {
+    this.mode = mode;
     this.selectedTrackNumber = undefined;
   }
 
   public selectTrack(index: number | undefined) {
     this.selectedTrackNumber = index;
-    this.menu = false;
+    this.mode = 'tracks';
   }
 
   public toggleActive() {
