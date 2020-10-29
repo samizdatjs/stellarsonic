@@ -1,6 +1,5 @@
 <template>
   <require from="components/common/common"></require>
-  <require from="components/common/blog-post"></require>
   <require from="components/editor/cover-edit"></require>
   <require from="components/editor/editor"></require>
   <require from="components/editor/image-upload"></require>
@@ -56,46 +55,64 @@
     <playlist-timeline playlist.bind="post" selected.bind="editor.selectedTrackNumber" select.call="editor.selectTrack(index)"></playlist-timeline>
   </div>
 
-  <blog-post class="au-animate" 
-    color.bind="post.palette.dark"
-    bg-color.bind="post.palette.primary"
-    bg-image.bind="post.image"
-    toggle-edit.call="toggleEdit()" 
-    edit.bind="editor.active"
-  >
-    <h1 slot="title">
-      <span>${post.headline}</span>
-    </h1>
-    
-    <section slot="cover-main">
-      <div class="aspect-phi-landscape">
-        <img src.bind="post.image" class="blend-bottom object-fit-cover" />
-      </div>
-      <div class="content cover-content">
-        <player playlist.bind="post"></player>
-      </div>
-      <div class="content">
-        <div class="info">
-          <a href.bind="post.audio.contentUrl">
-            <i class="fal fa-download"></i> Download
-          </a>
+  <div class="post au-animate ${editor.active ? 'edit' : ''}" css="background: ${post.palette.primary}">
+    <div class="background-image" css="background: url(${bgImage}) 50% 50% / cover no-repeat;"></div>
+
+    <div class="nav-button left">
+      <a class="button" route-href="route: home;">
+        <i class="fas fa-th"></i>
+      </a>
+    </div>
+    <div class="nav-button right">
+      <a class="button" click.delegate="editor.toggleActive()">
+        <i if.bind="!edit" class="fal fa-edit"></i>
+        <i if.bind="edit" class="fal fa-save"></i>
+      </a>
+    </div>
+
+    <main class="container">
+      <h1 class="title uk-light">${post.headline}</h1>
+
+      <section id="post-cover">
+        <div class="segment pad-medium-up">
+          <div class="spread attached">
+            <main class="cover-main uk-box-shadow-medium">
+              <div class="aspect-phi-landscape">
+                <img src.bind="post.image" class="blend-bottom object-fit-cover" />
+              </div>
+              <div class="content cover-content">
+                <player playlist.bind="post"></player>
+              </div>
+              <div class="content">
+                <div class="info">
+                  <a href.bind="post.audio.contentUrl">
+                    <i class="fal fa-download"></i> Download
+                  </a>
+                </div>
+              </div>
+            </main>
+            <aside>
+              <tracklist slot="side" playlist.bind="post"></tracklist>
+            </aside>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section slot="cover-side">
-      <tracklist slot="side" playlist.bind="post"></tracklist>
-    </section>
-
-    <section slot="content-main">
-      <div class="excerpt">
-        <p>${post.description}</p>
-      </div>
-      <article innerhtml.bind="post.text"></article>
-    </section>
-            
-    <section slot="content-side">
-      <disqus identifier.bind="post._id" url.bind="url" title.bind="post.headline"></disqus>
-    </section>
-  </blog-post>
+      <section id="post-body">
+        <div class="segment pad-medium-up">
+          <div class="spread">
+            <main class="content-main">
+              <div class="excerpt">
+                <p>${post.description}</p>
+              </div>
+              <article innerhtml.bind="post.text"></article>
+            </main>
+            <aside>
+              <disqus identifier.bind="post._id" url.bind="url" title.bind="post.headline"></disqus>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </template>
