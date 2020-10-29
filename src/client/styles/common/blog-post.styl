@@ -1,45 +1,5 @@
 @import '../settings';
 
-@keyframes SlideInRight {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes SlideOutRight {
-  0% {
-    transform: translateX(0%);
-  }
-
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes SlideInBottom {
-  0% {
-    transform: translateY(100%);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes SlideOutBottom {
-  0% {
-    transform: translateY(0%);
-  }
-
-  100% {
-    transform: translateY(100%);
-  }
-}
-
 .post
   top: 0;
   bottom: 0;
@@ -53,26 +13,6 @@
     left: 500px;
     right: 0;
     box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.25);
-
-.panel-bottom
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 250px;
-  z-index: 20;
-  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.5);
-
-  &.aurelia-hide-remove
-    -webkit-animation: SlideInBottom 0.3s;
-    animation: SlideInBottom 0.3s;
-    transition-timing-function: ease;
-  
-  &.aurelia-hide-add
-    -webkit-animation: SlideOutBottom 0.3s;
-    animation: SlideOutBottom 0.3s;
-    transition-timing-function: ease;
-
 
 // Background image
 //-----------------------------------------------------------------------------
