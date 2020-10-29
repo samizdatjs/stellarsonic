@@ -1,19 +1,15 @@
 <template>
   <require from="components/common/common"></require>
   <require from="components/editor/cover-edit"></require>
-  <require from="components/editor/editor"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/track-editor"></require>
   <require from="components/editor/playlist-timeline"></require>
-  <require from="components/editor/tag-list"></require>
   <require from="components/player/player"></require>
   <require from="components/tracklist"></require>
   <require from="components/disqus"></require>
   <require from="styles/common/article.styl"></require>
-  <require from="styles/editor/tag-edit.styl"></require>
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
-  <require from="styles/volume.styl"></require>
 
   <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'settings'">
      <cover-edit></cover-edit>
@@ -26,14 +22,14 @@
   <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'content'">
     <ul uk-accordion>
       <li>
-          <a class="uk-accordion-title" href="#">Images</a>
-          <div class="uk-accordion-content">
-            <image-upload></image-upload>
-          </div>
+        <a class="uk-accordion-title" href="#">Images</a>
+        <div class="uk-accordion-content">
+          <image-upload></image-upload>
+        </div>
       </li>
       <li>
-          <a class="uk-accordion-title" href="#">Audio</a>
-          <div class="uk-accordion-content"></div>
+        <a class="uk-accordion-title" href="#">Audio</a>
+        <div class="uk-accordion-content"></div>
       </li>
     </ul>
   </div>
