@@ -3,6 +3,7 @@
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/track-editor"></require>
   <require from="components/editor/playlist-timeline"></require>
+  <require from="styles/editor/editor.styl"></require>
 
   <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'settings'">
     <div class="uk-margin">
@@ -26,6 +27,22 @@
     <div class="uk-margin">
       <label for="post-audio">Audio</label>
       <input class="uk-input" id="post-audio" type="text" value.bind="editor.post.audio.contentUrl">
+    </div>
+    <div class="uk-margin">
+      <fieldset class="uk-fieldset">
+        <legend>Genres</legend>
+        <ul class="tags">
+          <li repeat.for="genre of editor.post.genres" class="uk-box-shadow-small">${genre} <i class="fal fa-times"></i></li>
+        </ul>
+      </fieldset>
+    </div>
+    <div class="uk-margin">
+      <fieldset class="uk-fieldset">
+        <legend>Keywords</legend>
+        <ul class="tags">
+          <li repeat.for="keyword of editor.post.keywords" class="uk-box-shadow-small">${keyword} <i class="fal fa-times"></i></li>
+        </ul>
+      </fieldset>
     </div>
   </div>
 
