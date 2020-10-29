@@ -1,21 +1,24 @@
 <template>
   <require from="components/editor/color-picker"></require>
-  <require from="styles/editor/cover-edit.styl"></require>
 
   <div class="cover-edit">
     <div class="uk-margin">
-      <input class="uk-input" type="text" value.bind="editor.post.headline">
+      <label for="post-headline">Headline</label>
+      <input class="uk-input" id="post-headline" type="text" value.bind="editor.post.headline">
     </div>
     <div class="uk-margin">
+      <label for="post-image">Image</label>
       <select class="uk-select" value.bind="editor.post.image">
         <option value="images/${editor.post._id}/${image}" repeat.for="image of editor.images">${image}</option>
       </select>
     </div>
-    <div class="uk-margin">
-      <color-picker name="Background" color.bind="state.post.palette.primary"></color-picker>
-    </div>
-    <div class="uk-margin">
-      <color-picker name="Cover" color.bind="state.post.palette.dark"></color-picker>
+    <div class="uk-margin uk-grid-small" uk-grid>
+      <div class="uk-width-1-2@s">
+        <color-picker name="Background" color.bind="state.post.palette.primary"></color-picker>
+      </div>
+      <div class="uk-width-1-2@s">
+        <color-picker name="Cover" color.bind="state.post.palette.dark"></color-picker>
+      </div>
     </div>
   </div>
 </template>
