@@ -1,9 +1,6 @@
 <template>
   <require from="value-converters"></require>
-  <require from="components/editor/cover-edit"></require>
-  <require from="components/editor/image-upload"></require>
-  <require from="components/editor/track-editor"></require>
-  <require from="components/editor/playlist-timeline"></require>
+  <require from="components/editor/editor"></require>
   <require from="components/player/player"></require>
   <require from="components/tracklist"></require>
   <require from="components/disqus"></require>
@@ -11,45 +8,7 @@
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
 
-  <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'settings'">
-     <cover-edit></cover-edit>
-  </div>
-
-  <div class="edit-panel" if.bind="editor.active && editor.mode === 'text'">
-    <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
-  </div>
-
-  <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'content'">
-    <ul uk-accordion>
-      <li>
-        <a class="uk-accordion-title" href="#">Images</a>
-        <div class="uk-accordion-content">
-          <image-upload></image-upload>
-        </div>
-      </li>
-      <li>
-        <a class="uk-accordion-title" href="#">Audio</a>
-        <div class="uk-accordion-content"></div>
-      </li>
-    </ul>
-  </div>
-
-  <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'tracks'">
-    <track-editor></track-editor>
-  </div>
-
-  <div class="timeline-edit-panel au-animate animate-slide-in-top" if.bind="editor.active">
-    <a class="post-edit-tab ${editor.mode === 'settings' ? 'selected' : ''}" click.delegate="editor.setMode('settings')">
-      <i class="fal fa-cog"></i>
-    </a>
-    <a class="post-edit-tab ${editor.mode === 'text' ? 'selected' : ''}" click.delegate="editor.setMode('text')">
-      <i class="fal fa-text"></i>
-    </a>
-    <a class="post-edit-tab ${editor.mode === 'content' ? 'selected' : ''}" click.delegate="editor.setMode('content')">
-      <i class="fal fa-paperclip"></i>
-    </a>
-    <playlist-timeline playlist.bind="post" selected.bind="editor.selectedTrackNumber" select.call="editor.selectTrack(index)"></playlist-timeline>
-  </div>
+  <post-editor></post-editor>
 
   <div class="post au-animate ${editor.active ? 'edit' : ''}" css="background: ${post.palette.primary}">
     <div class="background-image" css="background: url(${bgImage}) 50% 50% / cover no-repeat;"></div>
