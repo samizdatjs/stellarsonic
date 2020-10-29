@@ -6,6 +6,24 @@
   <require from="components/common/grid"></require>
   <require from="components/common/card.html"></require>
 
+  <div class="uk-container uk-container-large uk-padding-large uk-padding-remove-horizontal">
+    <div class="uk-child-width-expand@s" uk-grid>
+      <div repeat.for="post of posts.data">
+        <div>
+          <a href="#posts/${post._id}" class="uk-transition-toggle square uk-box-shadow-medium" tabindex.bind="$index" style="overflow: hidden; display: block">
+            <img class="uk-transition-scale-up uk-transition-opaque" src.bind="post.image">
+          </a>
+          <div class="uk-padding-small uk-padding-remove-bottom uk-dark" style="color: rgba(0,0,0,.65)">
+            <h1>
+              ${post.headline}
+            </h1>
+            <i class="fa fa-tags"></i>
+            <span style="margin-left: 10px" class="font-secondary" repeat.for="genre of post.genres">${genre}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
   <main class="au-animate home">
     <div class="segment pad-xsmall-up">
 
@@ -34,4 +52,5 @@
       </section>
     </div>
   </main>
+-->
 </template>

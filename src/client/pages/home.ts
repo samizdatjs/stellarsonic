@@ -12,6 +12,7 @@ export class Home {
   ) {}
 
   async activate() {
+    this.posts.refresh();
     this.genres.refresh();
   }
 
