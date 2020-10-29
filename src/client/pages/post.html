@@ -25,8 +25,19 @@
     <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
   </div>
 
-  <div class="edit-panel" if.bind="editor.active && editor.mode === 'content'">
-    <image-upload></image-upload>
+  <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'content'">
+    <ul uk-accordion>
+      <li>
+          <a class="uk-accordion-title" href="#">Images</a>
+          <div class="uk-accordion-content">
+            <image-upload></image-upload>
+          </div>
+      </li>
+      <li>
+          <a class="uk-accordion-title" href="#">Audio</a>
+          <div class="uk-accordion-content"></div>
+      </li>
+    </ul>
   </div>
 
   <div class="edit-panel uk-padding" if.bind="editor.active && editor.mode === 'tracks'">
