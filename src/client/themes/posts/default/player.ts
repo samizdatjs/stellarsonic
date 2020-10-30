@@ -1,7 +1,7 @@
 import {autoinject, bindable} from 'aurelia-framework';
-import {Player} from '../../../domain/player';
-import {MusicPlaylist} from '../../../domain/models/music-playlist';
-import {Track} from '../../../domain/models/track';
+import {Player} from '../../../../domain/player';
+import {MusicPlaylist} from '../../../../domain/models/music-playlist';
+import {Track} from '../../../../domain/models/track';
 
 @autoinject
 export class PlayerCustomElement {
@@ -29,5 +29,11 @@ export class PlayerCustomElement {
     if (this.loaded && Math.abs(t - this.player.currentTrackTime) > 2) {
       this.player.currentTrackTime = t;
     }
+  }
+
+  get icon(): string {
+    return !this.player.isLoaded(this.playlist) || this.player.audio.paused
+      ? 'fal fa-play-circle'
+      : 'fal fa-pause-circle';
   }
 }

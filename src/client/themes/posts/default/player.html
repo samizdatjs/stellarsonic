@@ -1,7 +1,5 @@
 <template>
   <require from="value-converters"></require>
-  <require from="components/player/play-button"></require>
-  <require from="styles/player.styl"></require>
 
   <section class="track-details content uk-light">
     <h1>${currentTrack.name}</h1>
@@ -12,7 +10,9 @@
     <a click.delegate="player.skipBackward()" class="skip-backward button">
       <i class="fal fa-step-backward"></i>
     </a>
-    <play-button playlist.bind="playlist"></play-button>
+    <a click.delegate="player.togglePlay(playlist)" class="play button">
+      <i class="${icon}"></i>
+    </a>
     <a click.delegate="player.skipForward()" class="skip-forward button">
       <i class="fal fa-step-forward"></i>
     </a>

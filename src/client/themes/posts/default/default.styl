@@ -1,5 +1,5 @@
-@import '../../styles/animations.styl';
-@import '../../styles/settings.styl';
+@import '../../../styles/animations.styl';
+@import '../../../styles/settings.styl';
 
 // Animation
 //-----------------------------------------------------------------------------
@@ -253,6 +253,65 @@
 
 // Player
 //-----------------------------------------------------------------------------
+.cover-content
+  margin-top: -100px;
+  
+  @media screen and (min-width: bp-medium)
+    margin-top: -150px;
+
+player
+  display: block;
+  width: 100%;
+
+  &.active
+    transition: margin-top 1s;
+
+  &.inactive
+    margin-top: 300px;
+
+  .track-details
+    margin: 0 30px;
+    padding: 20px 0;
+    align-self: end;
+    text-align: center;
+    
+    h1
+      margin: 10px 0;
+      font-size: 1.5em;
+
+    h2
+      font-size: 1rem;
+      color: color-primary;
+      font-family: font-secondary;
+      font-weight: 300;
+      margin: 0;
+  
+  .track-controls
+    margin: 10px 0;
+    text-align: center;
+
+    .timestamp
+      margin: 10px 0;
+      color: color-primary-lighten;
+      font-family: font-primary;
+      opacity: 0.6;
+
+    .time
+      float: left;
+    
+    .duration
+      float: right;
+
+    .play
+      font-size: 35px;
+
+    a
+      margin: 20px;
+      color: color-primary-lighten;
+      
+      &:hover
+        color: #fff;
+
 .track-timeline
   .slider
     width: 100%;
