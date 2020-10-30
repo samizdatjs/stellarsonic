@@ -10,7 +10,6 @@ import {
 import siteConfig from '../config';
 import 'aurelia-animator-css';
 import { MusicPlaylist } from '../domain/models/music-playlist';
-import * as UIKit from 'uikit';
 
 @view({collection: 'articles'})
 export class PostView extends Item<MusicPlaylist> {

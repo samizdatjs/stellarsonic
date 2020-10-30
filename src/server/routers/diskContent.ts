@@ -1,6 +1,6 @@
 import * as express from 'express';
 import {Logger} from '@ziqquratu/ziqquratu';
-import {post, get, router, ControllerFactory} from '@ziqquratu/tashmetu';
+import {post, get, router, ControllerFactory, del} from '@ziqquratu/tashmetu';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as multer from 'multer';
@@ -35,7 +35,7 @@ class DiskContentRouter {
 
   @get('/:id/:file')
   public downloadFile(req: express.Request, res: express.Response) {
-    res.sendfile(path.join(this.config.destination(req.params.id), req.params.file));
+    res.sendfile(this.filePath(req.params.id, req.params.file));
   }
 
   @post('/:id')
@@ -44,6 +44,20 @@ class DiskContentRouter {
       console.log(err);
       res.send(err);
     })
+  }
+
+  @del('/:id/:file')
+  public deleteFile(req: express.Request, res: express.Response) {
+    try {
+      fs.unlinkSync(this.filePath(req.params.id, req.params.file));
+      res.status(200).json({});
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  private filePath(postId: string, fileName: string): string {
+    return path.join(this.config.destination(postId), fileName);
   }
 
   readDir(postId: string) {

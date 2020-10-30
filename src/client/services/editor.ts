@@ -62,6 +62,13 @@ export class Editor {
     return this.refreshImages();
   }
 
+  public async removeImage(image: string) {
+    const resp = await fetch(`/images/${this.post._id}/${image}`, {
+      method: 'DELETE',
+    });
+    return this.refreshImages();
+  }
+
   public async refreshImages(): Promise<void> {
     const imagesResp = await fetch(`/images/${this.post._id}`)
     this.images = await imagesResp.json();

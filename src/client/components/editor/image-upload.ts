@@ -4,6 +4,8 @@ import UIkit from 'uikit';
 
 @autoinject
 export class ImageUploadCustomElement {
+  image: string | undefined;
+
   constructor(private element: Element, private editor: Editor) {}
 
   bind() {
@@ -15,5 +17,15 @@ export class ImageUploadCustomElement {
         this.editor.uploadImage(files[0]);
       },
     } as any);
+  }
+
+  remove() {
+    if (this.image) {
+      this.editor.removeImage(this.image);
+    }
+  }
+
+  selectImage(image: string) {
+    this.image = image;
   }
 }
