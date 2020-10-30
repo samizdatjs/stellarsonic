@@ -1,5 +1,5 @@
 import {autoinject} from 'aurelia-framework';
-import {Editor} from '../../services/editor';
+import {Editor} from '../../../services/editor';
 
 @autoinject
 export class PostEditorCustomElement {

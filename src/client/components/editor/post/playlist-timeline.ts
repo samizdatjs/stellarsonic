@@ -1,7 +1,7 @@
 import {autoinject, bindable, observable, BindingEngine, Disposable} from 'aurelia-framework';
-import {Player} from '../../../domain/player';
-import {MusicPlaylist} from '../../../domain/models/music-playlist';
-import {Track} from '../../../domain/models/track';
+import {Player} from '../../../../domain/player';
+import {MusicPlaylist} from '../../../../domain/models/music-playlist';
+import {Track} from '../../../../domain/models/track';
 
 @autoinject
 export class PlaylistTimelineCustomElement {

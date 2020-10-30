@@ -1,6 +1,6 @@
 import {autoinject} from 'aurelia-framework';
-import {Editor} from '../../services/editor';
-import {Track} from '../../../domain/models/track';
+import {Editor} from '../../../services/editor';
+import {Track} from '../../../../domain/models/track';
 
 @autoinject
 export class TrackEditorCustomElement {

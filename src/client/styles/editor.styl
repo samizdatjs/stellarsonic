@@ -1,0 +1,128 @@
+.tags
+  li
+    padding: 12px 24px;
+    margin-right: 10px;
+    background: rgba(255,255,255,.2);
+    height: 50px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    flex: 1;
+
+    a
+      width: 20px;
+      padding: 3px;
+      margin-right: -10px;
+      color: rgba(0,0,0,.3);
+
+      &:hover
+        color: rgba(0,0,0,.62);
+
+.edit-panel
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  color: rgba(0,0,0,.62);
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 200;
+  box-sizing: border-box;
+
+.timeline-edit-panel
+  position: absolute;
+  top: 0;
+  height: 60px;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 100px 100px 100px 1fr;
+
+.post-edit-tab
+  display: block;
+  border-right: 1px solid rgba(0,0,0,.3);
+  background:#646360;
+  text-align: center;
+  color: #fff;
+  padding: 15px 0;
+  font-size: 1.3em;
+  height: 60px;
+  box-sizing: border-box;
+
+  &.selected
+    background: #e8e5df
+    color: rgba(0,0,0,.62);
+    cursor: unset;
+
+
+// Playlist timeline
+//-----------------------------------------------------------------------------
+.timeline
+  box-shadow: inset 0px 2px 3px 0px rgba(0,0,0,0.3)
+
+.timestamps
+  position: relative;
+  cursor: pointer;
+
+  .progress
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(46,170,183,.22);
+    transition: width 0.2s;
+    transition-timing-function: ease-in-out;
+
+  ul
+    display: flex
+
+    li
+      height: 40px
+      display: block
+      background: rgba(0,0,0,.06)
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      box-sizing: border-box;
+
+      &:not(:last-child)
+        border-right: 1px solid rgba(0,0,0,.4)
+
+.track-handles
+  display: flex
+
+  li
+    height: 20px
+    display: block
+    background: rgba(0,0,0,.075)
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    cursor: pointer;
+    box-sizing: border-box;
+
+    &:not(:last-child)
+      border-right: 1px solid rgba(0,0,0,.4)
+
+    &:hover
+      background: rgba(0,0,0,.03)
+
+    &.selected
+      background: color-editor-background;
+      border-bottom: none;
+
+// Color picker
+//-----------------------------------------------------------------------------
+.color-picker
+  position: relative;
+  text-align: left;
+
+  .color-sample
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 5px;
+    top: 5px;
+    color: #fff;
+    text-align: center;
+
+  .color-name
+    margin-left: 30px;
+
+.color-picker-input
+  display: none;
