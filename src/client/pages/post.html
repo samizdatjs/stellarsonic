@@ -11,7 +11,7 @@
   <post-editor></post-editor>
 
   <div class="post au-animate ${editor.active ? 'edit' : ''}" css="background: ${post.palette.primary}">
-    <div class="background-image" css="background: url(${bgImage}) 50% 50% / cover no-repeat;"></div>
+    <div class="background-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
 
     <div class="nav-button left">
       <a class="button" route-href="route: home;">
@@ -31,7 +31,7 @@
       <section id="post-cover">
         <div class="segment pad-medium-up">
           <div class="spread attached">
-            <main class="cover-main uk-box-shadow-medium">
+            <main class="cover-main uk-box-shadow-medium" css="background: ${post.palette.dark}">
               <div class="aspect-phi-landscape">
                 <img src.bind="post.image" class="blend-bottom object-fit-cover" />
               </div>

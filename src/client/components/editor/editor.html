@@ -18,10 +18,10 @@
     </div>
     <div class="uk-margin uk-grid-small" uk-grid>
       <div class="uk-width-1-2@s">
-        <color-picker name="Background" color.bind="state.post.palette.primary"></color-picker>
+        <color-picker name="Background" color.bind="editor.post.palette.primary"></color-picker>
       </div>
       <div class="uk-width-1-2@s">
-        <color-picker name="Cover" color.bind="state.post.palette.dark"></color-picker>
+        <color-picker name="Cover" color.bind="editor.post.palette.dark"></color-picker>
       </div>
     </div>
     <div class="uk-margin">
@@ -32,7 +32,10 @@
       <fieldset class="uk-fieldset">
         <legend>Genres</legend>
         <ul class="tags">
-          <li repeat.for="genre of editor.post.genres" class="uk-box-shadow-small">${genre} <i class="fal fa-times"></i></li>
+          <li repeat.for="genre of editor.post.genres" class="uk-box-shadow-small">
+            <span>${genre}</span>
+            <span class="uk-margin-small-left" uk-icon="close"></span>
+          </li>
         </ul>
       </fieldset>
     </div>
@@ -40,7 +43,10 @@
       <fieldset class="uk-fieldset">
         <legend>Keywords</legend>
         <ul class="tags">
-          <li repeat.for="keyword of editor.post.keywords" class="uk-box-shadow-small">${keyword} <i class="fal fa-times"></i></li>
+          <li repeat.for="keyword of editor.post.keywords" class="uk-box-shadow-small">
+            <span>${keyword}</span>
+            <span class="uk-margin-small-left" uk-icon="close"></span>
+          </li>
         </ul>
       </fieldset>
     </div>
@@ -71,13 +77,13 @@
 
   <div class="timeline-edit-panel au-animate animate-slide-in-top" if.bind="editor.active">
     <a class="post-edit-tab ${editor.mode === 'settings' ? 'selected' : ''}" click.delegate="editor.setMode('settings')">
-      <i class="fal fa-cog"></i>
+      <span uk-icon="cog"></span>
     </a>
     <a class="post-edit-tab ${editor.mode === 'text' ? 'selected' : ''}" click.delegate="editor.setMode('text')">
-      <i class="fal fa-text"></i>
+      <span uk-icon="file-edit"></span>
     </a>
     <a class="post-edit-tab ${editor.mode === 'content' ? 'selected' : ''}" click.delegate="editor.setMode('content')">
-      <i class="fal fa-paperclip"></i>
+      <span uk-icon="cloud-upload"></span>
     </a>
     <playlist-timeline playlist.bind="editor.post" selected.bind="editor.selectedTrackNumber" select.call="editor.selectTrack(index)"></playlist-timeline>
   </div>
