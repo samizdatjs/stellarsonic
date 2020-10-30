@@ -1,6 +1,7 @@
 <template>
   <require from="components/editor/color-picker"></require>
   <require from="components/editor/image-upload"></require>
+  <require from="components/editor/tag-list"></require>
   <require from="components/editor/track-editor"></require>
   <require from="components/editor/playlist-timeline"></require>
   <require from="styles/editor/editor.styl"></require>
@@ -31,23 +32,13 @@
     <div class="uk-margin">
       <fieldset class="uk-fieldset">
         <legend>Genres</legend>
-        <ul class="tags">
-          <li repeat.for="genre of editor.post.genres" class="uk-box-shadow-small">
-            <span>${genre}</span>
-            <span class="uk-margin-small-left" uk-icon="close"></span>
-          </li>
-        </ul>
+        <tag-list tags.bind="editor.post.genres"></tag-list>
       </fieldset>
     </div>
     <div class="uk-margin">
       <fieldset class="uk-fieldset">
         <legend>Keywords</legend>
-        <ul class="tags">
-          <li repeat.for="keyword of editor.post.keywords" class="uk-box-shadow-small">
-            <span>${keyword}</span>
-            <span class="uk-margin-small-left" uk-icon="close"></span>
-          </li>
-        </ul>
+        <tag-list tags.bind="editor.post.keywords"></tag-list>
       </fieldset>
     </div>
   </div>

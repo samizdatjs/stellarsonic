@@ -1,0 +1,20 @@
+<template>
+  <require from="styles/editor/editor.styl"></require>
+
+  <ul class="tags plain uk-flex uk-flex-wrap uk-flex-wrap-stretch">
+    <div class="uk-margin-small-right">
+      <button class="uk-button uk-box-shadow-small" type="button" click.delegate="showAdd()">
+        <span if.bind="tag !== undefined" uk-icon="chevron-down"></span>
+        <span if.bind="tag === undefined" uk-icon="plus"></span>
+      </button>
+      <div uk-dropdown="mode: click" hide.delegate="hide()">
+        <input class="uk-input uk-inline tag-input" type="text" value.bind="tag">
+        <button class="uk-button" click.delegate="add()">Add</button>
+      </div>
+    </div>
+    <li repeat.for="tag of tags" class="uk-box-shadow-small uk-margin-small-bottom uk-flex uk-flex-between">
+      <span>${tag}</span>
+      <a class="uk-margin-small-left uk-text-center" uk-icon="minus-circle" click.delegate="tags.splice($index, 1)"></a>
+    </li>
+  </ul>
+</template>
