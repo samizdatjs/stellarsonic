@@ -17,7 +17,9 @@ class DiskContentRouter {
   public constructor(private config: DiskContentRouterConfig) {
     const storage = multer.diskStorage({
       destination: (req, file, cb) => {
-        cb(null, config.destination(req.params.id));
+        const path = config.destination(req.params.id);
+        fs.mkdirSync(path, { recursive: true })
+        cb(null, path);
       },
       filename: (req, file, cb) => {
         cb(null, file.originalname);

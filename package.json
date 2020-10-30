@@ -57,6 +57,7 @@
     "showdown-youtube": "^1.2.1",
     "simplemde": "^1.11.2",
     "slugify": "^1.4.5",
+    "uikit": "^3.5.9",
     "vibrant": "0.0.1",
     "yargs": "^11.0.0"
   },
@@ -73,6 +74,7 @@
     "@types/showdown": "^1.7.2",
     "@types/simplemde": "^1.11.7",
     "@types/socket.io": "^2.1.4",
+    "@types/uikit": "^3.3.1",
     "@types/webpack": "4.4.0",
     "@types/webpack-env": "1.13.0",
     "@types/yargs": "^11.0.0",
