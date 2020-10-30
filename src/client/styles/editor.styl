@@ -1,3 +1,46 @@
+@import 'settings';
+
+// General
+//-----------------------------------------------------------------------------
+.editor-toolbar
+  position: absolute;
+  top: 0;
+  height: 60px;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 100px 100px 100px 1fr;
+
+  .editor-tab
+    display: block;
+    border-right: 1px solid rgba(0,0,0,.3);
+    background:#646360;
+    text-align: center;
+    color: #fff;
+    padding: 15px 0;
+    font-size: 1.3em;
+    height: 60px;
+    box-sizing: border-box;
+
+    &.selected
+      background: #e8e5df
+      color: rgba(0,0,0,.62);
+      cursor: unset;
+
+.editor-panel
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  width: 500px;
+  color: rgba(0,0,0,.62);
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 200;
+  box-sizing: border-box;
+
+
+// Tag list
+//-----------------------------------------------------------------------------
 .tags
   li
     padding: 12px 24px;
@@ -16,42 +59,6 @@
 
       &:hover
         color: rgba(0,0,0,.62);
-
-.edit-panel
-  position: absolute;
-  top: 60px;
-  bottom: 0;
-  left: 0;
-  width: 500px;
-  color: rgba(0,0,0,.62);
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-weight: 200;
-  box-sizing: border-box;
-
-.timeline-edit-panel
-  position: absolute;
-  top: 0;
-  height: 60px;
-  left: 0;
-  right: 0;
-  display: grid;
-  grid-template-columns: 100px 100px 100px 1fr;
-
-.post-edit-tab
-  display: block;
-  border-right: 1px solid rgba(0,0,0,.3);
-  background:#646360;
-  text-align: center;
-  color: #fff;
-  padding: 15px 0;
-  font-size: 1.3em;
-  height: 60px;
-  box-sizing: border-box;
-
-  &.selected
-    background: #e8e5df
-    color: rgba(0,0,0,.62);
-    cursor: unset;
 
 
 // Playlist timeline
