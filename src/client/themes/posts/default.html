@@ -1,11 +1,11 @@
 <template>
   <require from="value-converters"></require>
   <require from="components/player/player"></require>
-  <require from="components/tracklist"></require>
   <require from="components/disqus"></require>
   <require from="styles/common/article.styl"></require>
   <require from="styles/app.styl"></require>
   <require from="styles/post.styl"></require>
+  <require from="styles/tracklist.styl"></require>
 
   <div class="post au-animate" css="background: ${post.palette.primary}">
     <div class="background-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
@@ -38,7 +38,15 @@
               </div>
             </main>
             <aside>
-              <tracklist playlist.bind="post"></tracklist>
+              <div class="tracklist">
+                <ul class="plain">
+                  <li repeat.for="track of post.tracks" click.delegate="player.togglePlay(post, $index)" 
+                    class.one-time="$index < post.tracks.length / 2 ? 'first-half' : ''">
+                    <h1 class="track-title">${track.name}</h1>
+                    <span class="track-info">${track.byArtist} · ${track.copyrightYear}</span>
+                  </li>
+                </ul>
+              </div>
             </aside>
           </div>
         </div>
