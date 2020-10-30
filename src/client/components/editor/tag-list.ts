@@ -3,21 +3,23 @@ import {autoinject, bindable} from 'aurelia-framework';
 @autoinject
 export class TagListCustomElement {
   @bindable tags!: string[];
-  tag: string | undefined;
+  tag: string = '';
+  editing: boolean = false;
 
   add() {
-    if (this.tag !== undefined && this.tag !== '') {
+    if (this.tag !== '') {
       this.tags.push(this.tag);
-      this.tag = undefined;
+      this.tag = '';
     }
   }
 
   showAdd() {
-    this.tag = '';
+    this.editing = true;
   }
 
   hide() {
-    this.tag = undefined;
+    this.tag = '';
+    this.editing = false;
     return true;
   }
 
