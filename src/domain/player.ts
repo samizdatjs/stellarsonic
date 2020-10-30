@@ -84,11 +84,19 @@ export abstract class Player {
 
   public togglePlay(playlist: MusicPlaylist, track?: number) {
     if (!this.isLoaded(playlist)) {
-      this.play(playlist);
-    } else if (this.audio.paused) {
+      this.play(playlist, track || 0);
+    } else if (track === this.currentTrackNumber || track === undefined) {
+      this.togglePlayAudio();
+    } else if (track !== undefined){
+      this.play(playlist, track);
+    }
+  }
+
+  private togglePlayAudio() {
+    if (this.audio.paused) {
       this.audio.play()
     } else {
-      this.audio.pause();
+      this.audio.pause()
     }
   }
 

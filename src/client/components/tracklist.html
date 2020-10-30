@@ -2,7 +2,7 @@
   <require from="styles/tracklist.styl"></require>
 
   <ul class="plain">
-    <li repeat.for="track of playlist.tracks" click.delegate="togglePlay($index)" 
+    <li repeat.for="track of playlist.tracks" click.delegate="player.togglePlay(playlist, $index)" 
       class.one-time="$index < playlist.tracks.length / 2 ? 'first-half' : ''">
       <h1 class="track-title">${track.name}</h1>
       <span class="track-info">${track.byArtist} · ${track.copyrightYear}</span>
