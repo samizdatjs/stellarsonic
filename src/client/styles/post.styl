@@ -83,17 +83,19 @@
 
 .post
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
 
-  &.edit
-    top: 100px;
-    bottom: 0;
-    left: 500px;
-    right: 0;
-    box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.25);
+.page
+  .edit
+    .post
+      top: 100px;
+      left: 500px;
+      width: calc(100vw - 500px);
+      height: calc(100vh - 100px);
+      box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.25);
 
 // Background image
 //-----------------------------------------------------------------------------

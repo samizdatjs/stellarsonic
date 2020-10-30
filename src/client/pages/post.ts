@@ -6,8 +6,6 @@ import {Editor} from '../services/editor';
 
 @autoinject
 export class Post {
-  public selectedTrack: number | undefined;
-
   public constructor(
     private state: State,
     public player: Player,
@@ -24,5 +22,13 @@ export class Post {
 
   get post() {
     return this.state.post;
+  }
+
+  get model() {
+    return {
+      post: this.state.post,
+      url: this.url,
+      player: this.player,
+    }
   }
 }

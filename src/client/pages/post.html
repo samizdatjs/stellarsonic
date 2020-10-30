@@ -1,23 +1,10 @@
 <template>
-  <require from="value-converters"></require>
   <require from="components/editor/editor"></require>
-  <require from="components/player/player"></require>
-  <require from="components/tracklist"></require>
-  <require from="components/disqus"></require>
-  <require from="styles/common/article.styl"></require>
   <require from="styles/app.styl"></require>
-  <require from="styles/post.styl"></require>
 
-  <post-editor></post-editor>
+  <div class="page">
+    <post-editor></post-editor>
 
-  <div class="post au-animate ${editor.active ? 'edit' : ''}" css="background: ${post.palette.primary}">
-    <div class="background-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
-
-    <div class="nav-button left">
-      <a class="button" route-href="route: home;">
-        <i class="fas fa-th"></i>
-      </a>
-    </div>
     <div class="nav-button right">
       <a class="button" click.delegate="editor.toggleActive()">
         <i if.bind="!edit" class="fal fa-edit"></i>
@@ -25,49 +12,6 @@
       </a>
     </div>
 
-    <main class="container">
-      <h1 class="title uk-light">${post.headline}</h1>
-
-      <section id="post-cover">
-        <div class="segment pad-medium-up">
-          <div class="spread attached">
-            <main class="cover-main uk-box-shadow-medium" css="background: ${post.palette.dark}">
-              <div class="aspect-phi-landscape">
-                <img src.bind="post.image" class="blend-bottom object-fit-cover" />
-              </div>
-              <div class="content cover-content">
-                <player playlist.bind="post"></player>
-              </div>
-              <div class="content">
-                <div class="info">
-                  <a href.bind="post.audio.contentUrl">
-                    <i class="fal fa-download"></i> Download
-                  </a>
-                </div>
-              </div>
-            </main>
-            <aside>
-              <tracklist playlist.bind="post"></tracklist>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section id="post-body">
-        <div class="segment pad-medium-up">
-          <div class="spread">
-            <main class="content-main">
-              <div class="excerpt">
-                <p>${post.description}</p>
-              </div>
-              <article innerhtml.bind="post.text"></article>
-            </main>
-            <aside>
-              <disqus identifier.bind="post._id" url.bind="url" title.bind="post.headline"></disqus>
-            </aside>
-          </div>
-        </div>
-      </section>
-    </main>
+    <compose view="themes/posts/default.html" model.bind="model" class="${editor.active ? 'edit' : ''}"></compose>
   </div>
 </template>
