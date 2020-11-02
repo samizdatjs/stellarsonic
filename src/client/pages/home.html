@@ -1,10 +1,9 @@
 <template>
-  <require from="components/editor/post/editor"></require>
+  <require from="components/editor/home/editor"></require>
   <require from="styles/app.styl"></require>
 
   <div class="page-container">
-    <!--
-    <post-editor></post-editor>
+    <home-editor></home-editor>
 
     <div class="nav-button right">
       <a class="button" click.delegate="editor.toggleActive()">
@@ -12,7 +11,6 @@
         <i if.bind="edit" class="fal fa-save"></i>
       </a>
     </div>
-  -->
 
     <compose view="themes/home/default/default.html" class="${editor.active ? 'edit' : ''}"></compose>
   </div>
