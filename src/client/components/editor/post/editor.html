@@ -7,14 +7,17 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <div class="editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
+  <div class="editor-toolbar post-editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
     <a class="editor-tab ${editor.mode === 'settings' ? 'selected' : ''}" click.delegate="editor.setMode('settings')">
-      <span uk-icon="cog"></span>
-    </a>
-    <a class="editor-tab ${editor.mode === 'text' ? 'selected' : ''}" click.delegate="editor.setMode('text')">
-      <span uk-icon="file-edit"></span>
+      <span uk-icon="settings"></span>
     </a>
     <a class="editor-tab ${editor.mode === 'content' ? 'selected' : ''}" click.delegate="editor.setMode('content')">
+      <span uk-icon="file-edit"></span>
+    </a>
+    <a class="editor-tab ${editor.mode === 'text' ? 'selected' : ''}" click.delegate="editor.setMode('text')">
+      <span uk-icon="file-text"></span>
+    </a>
+    <a class="editor-tab ${editor.mode === 'attachments' ? 'selected' : ''}" click.delegate="editor.setMode('attachments')">
       <span uk-icon="cloud-upload"></span>
     </a>
     <playlist-timeline playlist.bind="editor.post" selected.bind="editor.selectedTrackNumber" select.call="editor.selectTrack(index)"></playlist-timeline>
@@ -22,6 +25,14 @@
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.mode !== 'tracks'">
     <div class="uk-padding" if.bind="editor.mode === 'settings'">
+      <div class="uk-margin">
+        <label for="post-image">Theme</label>
+        <select class="uk-select" value.bind="editor.theme">
+          <option value="default">Default</option>
+        </select>
+      </div>
+    </div> 
+    <div class="uk-padding" if.bind="editor.mode === 'content'">
       <div class="uk-margin">
         <label for="post-headline">Headline</label>
         <input class="uk-input" id="post-headline" type="text" value.bind="editor.post.headline">
@@ -62,7 +73,7 @@
       <textarea class="uk-textarea" value.bind="editor.post.text" spellcheck="false" style="height: 100%"></textarea>
     </div>
 
-    <div class="uk-padding" if.bind="editor.mode === 'content'">
+    <div class="uk-padding" if.bind="editor.mode === 'attachments'">
       <ul uk-accordion>
         <li>
           <a class="uk-accordion-title" href="#">Images</a>
