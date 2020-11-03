@@ -86,9 +86,11 @@ bootstrap(Application, {
       '/images':      diskContent({
         destination: (postId) => `./public/uploads/${postId}/images`,
         fieldName: 'image'
+      }),
+      '/audio':      diskContent({
+        destination: (postId) => `./public/uploads/${postId}/audio`,
+        fieldName: 'audio'
       })
-      // '/images':      router(ProxyImageRouter),
-      // '/content':     router(PostContentRouter),
     }
   }));
 }).then(app => app.run(parseInt(process.env.PORT || '8080')));
