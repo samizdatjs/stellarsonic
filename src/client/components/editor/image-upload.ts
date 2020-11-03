@@ -1,27 +1,30 @@
-import {autoinject} from 'aurelia-framework';
-import {Editor} from '../../services/editor';
+import {autoinject, bindable} from 'aurelia-framework';
 import UIkit from 'uikit';
+import {ContentService} from '../../services/content';
 
 @autoinject
 export class ImageUploadCustomElement {
   image: string | undefined;
+  files: string[] = [];
+  @bindable content!: ContentService;
 
-  constructor(private element: Element, private editor: Editor) {}
+  constructor(private element: Element) {}
 
-  bind() {
+  async bind() {
     const elem = this.element.getElementsByClassName('js-upload')[0];
     UIkit.upload(elem, {
       url: '',
       multiple: false,
-      beforeAll: (event: any, files: any) => {
-        this.editor.uploadImage(files[0]);
+      beforeAll: async (event: any, files: any) => {
+        await this.content.uploadFile(files[0]);
       },
     } as any);
+    console.log(await this.content.listFiles());
   }
 
-  remove() {
+  async remove() {
     if (this.image) {
-      this.editor.removeImage(this.image);
+      this.content.deleteFile(this.image);
     }
   }
 

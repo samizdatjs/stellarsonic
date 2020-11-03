@@ -41,7 +41,7 @@
       <div class="uk-margin">
         <label for="post-image">Image</label>
         <select class="uk-select" value.bind="editor.post.image">
-          <option value="images/${editor.post._id}/${image}" repeat.for="image of editor.images">${image}</option>
+          <option value.bind="image" repeat.for="image of editor.images.files">${image}</option>
         </select>
       </div>
       <div class="uk-margin uk-grid-small" uk-grid>
@@ -79,13 +79,13 @@
         <li>
           <a class="uk-accordion-title" href="#">Images</a>
           <div class="uk-accordion-content">
-            <image-upload></image-upload>
+            <image-upload content.bind="editor.images"></image-upload>
           </div>
         </li>
         <li>
           <a class="uk-accordion-title" href="#">Audio</a>
           <div class="uk-accordion-content">
-            <audio-upload></audio-upload>
+            <audio-upload content.bind="editor.audio"></audio-upload>
           </div>
         </li>
       </ul>
