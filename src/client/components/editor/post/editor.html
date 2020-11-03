@@ -1,6 +1,7 @@
 <template>
   <require from="components/editor/color-picker"></require>
   <require from="components/editor/image-upload"></require>
+  <require from="components/editor/audio-upload"></require>
   <require from="components/editor/tag-list"></require>
   <require from="components/editor/post/track-editor"></require>
   <require from="components/editor/post/playlist-timeline"></require>
@@ -83,7 +84,9 @@
         </li>
         <li>
           <a class="uk-accordion-title" href="#">Audio</a>
-          <div class="uk-accordion-content"></div>
+          <div class="uk-accordion-content">
+            <audio-upload></audio-upload>
+          </div>
         </li>
       </ul>
     </div>

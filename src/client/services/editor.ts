@@ -8,6 +8,7 @@ import {PostView} from '../main';
 @inject(PostView, 'ziqquratu.Database')
 export class Editor {
   public images: string[] = [];
+  public audio: string[] = [];
   public selectedTrackNumber: number | undefined;
   public active: boolean = false;
   public mode: string = 'settings';
@@ -52,13 +53,8 @@ export class Editor {
     this.active = !this.active;
   }
 
-  public async uploadImage(image: File): Promise<void> {
-    const formData = new FormData();
-    formData.append('image', image);
-    const resp = await fetch(`/images/${this.post._id}`, {
-      method: 'POST',
-      body: formData,
-    });
+  public async uploadImage(file: File): Promise<void> {
+    await this.uploadContent(file, 'image',`/images/${this.post._id}`);
     return this.refreshImages();
   }
 
@@ -72,6 +68,22 @@ export class Editor {
   public async refreshImages(): Promise<void> {
     const imagesResp = await fetch(`/images/${this.post._id}`)
     this.images = await imagesResp.json();
+  }
+
+  public async uploadAudio(file: File) {
+    return this.uploadContent(file, 'audio',`/audio/${this.post._id}`)
+  }
+
+  public async removeAudio(file: string) {
+    const resp = await fetch(`/audio/${this.post._id}/${file}`, {
+      method: 'DELETE',
+    });
+    return this.refreshImages();
+  }
+
+  public async refreshAudio(): Promise<void> {
+    const resp = await fetch(`/audio/${this.post._id}`)
+    this.audio = await resp.json();
   }
 
   public async savePost(): Promise<MusicPlaylist | null> {
@@ -92,5 +104,14 @@ export class Editor {
     if (this.selectedTrackNumber >= this.post.tracks.length) {
       this.selectedTrackNumber = this.post.tracks.length - 1;
     }
+  }
+
+  private async uploadContent(file: File, field: string, endpoint: string) {
+    const formData = new FormData();
+    formData.append(field, file);
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      body: formData,
+    });
   }
 }
