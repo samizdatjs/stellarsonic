@@ -5,12 +5,10 @@
   <div class="page-container">
     <home-editor></home-editor>
 
-    <div class="nav-button right">
-      <a class="button" click.delegate="editor.toggleActive()">
-        <i if.bind="!edit" class="fal fa-edit"></i>
-        <i if.bind="edit" class="fal fa-save"></i>
-      </a>
-    </div>
+    <a class="editor-toggle ${editor.active ? 'active' : ''}" click.delegate="editor.toggleActive()" class="uk-inline">
+      <span if.bind="editor.active" class="uk-position-center" uk-icon="chevron-left"></span>
+      <span if.bind="!editor.active" class="uk-position-center" uk-icon="chevron-right"></span>
+    </a>
 
     <compose view="themes/home/default/default.html" class="${editor.active ? 'edit' : ''}"></compose>
   </div>
