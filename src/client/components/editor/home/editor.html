@@ -2,24 +2,21 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <div class="editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
-    <!--
+  <div class="editor-toolbar home-editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
     <a class="editor-tab ${editor.mode === 'settings' ? 'selected' : ''}" click.delegate="editor.setMode('settings')">
-      <span uk-icon="cog"></span>
-    </a>
-    <a class="editor-tab ${editor.mode === 'text' ? 'selected' : ''}" click.delegate="editor.setMode('text')">
-      <span uk-icon="file-edit"></span>
+      <span uk-icon="settings"></span>
     </a>
     <a class="editor-tab ${editor.mode === 'content' ? 'selected' : ''}" click.delegate="editor.setMode('content')">
-      <span uk-icon="cloud-upload"></span>
+      <span uk-icon="file-edit"></span>
     </a>
-    <playlist-timeline playlist.bind="editor.post" selected.bind="editor.selectedTrackNumber" select.call="editor.selectTrack(index)"></playlist-timeline>
-  -->
   </div>
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active">
-    <div class="uk-padding">
-      Home editor
+    <div class="uk-padding" if.bind="editor.mode === 'settings'">
+      Settings
+    </div>
+    <div class="uk-padding" if.bind="editor.mode === 'content'">
+      Create post
     </div>
   </div>
 </template>
