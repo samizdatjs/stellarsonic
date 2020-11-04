@@ -1,12 +1,12 @@
-import {autoinject} from 'aurelia-framework';
+import {inject} from 'aurelia-framework';
 import {Editor} from '../../../services/editor';
 import {Track} from '../../../../domain/models/track';
 import {ContentService} from '../../../services/content';
-import { PostView } from '../../../main';
-import { Database } from '@ziqquratu/ziqquratu';
-import { Duration } from '../../../../domain/models/duration';
+import {PostView} from '../../../main';
+import {Database} from '@ziqquratu/ziqquratu';
+import {Duration} from '../../../../domain/models/duration';
 
-@autoinject
+@inject(Editor, 'ziqquratu.Database')
 export class PostEditorCustomElement {
   public selectedTrackNumber: number | undefined;
   public active: boolean = false;

@@ -6,14 +6,14 @@ export class MusicPlaylist {
   public constructor(
     public _id: string,
     public headline: string,
-    public image: string,
-    public audio: AudioObject,
-    public tracks: Track[],
-    public genres: string[],
-    public keywords: string[],
-    public author: Person,
-    public palette: Record<string, string>,
-    public text: string,
+    public image: string = '',
+    public audio: AudioObject = { contentUrl: '' },
+    public tracks: Track[] = [],
+    public genres: string[] = [],
+    public keywords: string[] = [],
+    public author: Person = { givenName: '', familyName: '', email: '' },
+    public palette: Record<string, string> = {},
+    public text: string = '',
   ) {}
 
   public static fromJSONLD(data: any) {
