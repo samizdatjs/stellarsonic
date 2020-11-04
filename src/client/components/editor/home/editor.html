@@ -3,19 +3,19 @@
   <require from="styles/animations.styl"></require>
 
   <div class="editor-toolbar home-editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
-    <a class="editor-tab ${editor.mode === 'settings' ? 'selected' : ''}" click.delegate="editor.setMode('settings')">
+    <a class="editor-tab ${mode === 'settings' ? 'selected' : ''}" click.delegate="mode = 'settings'">
       <span uk-icon="settings"></span>
     </a>
-    <a class="editor-tab ${editor.mode === 'content' ? 'selected' : ''}" click.delegate="editor.setMode('content')">
+    <a class="editor-tab ${mode === 'content' ? 'selected' : ''}" click.delegate="mode = 'content'">
       <span uk-icon="file-edit"></span>
     </a>
   </div>
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active">
-    <div class="uk-padding" if.bind="editor.mode === 'settings'">
+    <div class="uk-padding" if.bind="mode === 'settings'">
       Settings
     </div>
-    <div class="uk-padding" if.bind="editor.mode === 'content'">
+    <div class="uk-padding" if.bind="mode === 'content'">
       Create post
     </div>
   </div>

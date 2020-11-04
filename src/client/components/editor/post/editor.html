@@ -1,31 +1,31 @@
 <template>
+  <require from="value-converters"></require>
   <require from="components/editor/color-picker"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/audio-upload"></require>
   <require from="components/editor/tag-list"></require>
-  <require from="components/editor/post/track-editor"></require>
   <require from="components/editor/post/playlist-timeline"></require>
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
   <div class="editor-toolbar post-editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
-    <a class="editor-tab ${editor.mode === 'settings' ? 'selected' : ''}" click.delegate="editor.setMode('settings')">
+    <a class="editor-tab ${mode === 'settings' ? 'selected' : ''}" click.delegate="setMode('settings')">
       <span uk-icon="settings"></span>
     </a>
-    <a class="editor-tab ${editor.mode === 'content' ? 'selected' : ''}" click.delegate="editor.setMode('content')">
+    <a class="editor-tab ${mode === 'content' ? 'selected' : ''}" click.delegate="setMode('content')">
       <span uk-icon="file-edit"></span>
     </a>
-    <a class="editor-tab ${editor.mode === 'text' ? 'selected' : ''}" click.delegate="editor.setMode('text')">
+    <a class="editor-tab ${mode === 'text' ? 'selected' : ''}" click.delegate="setMode('text')">
       <span uk-icon="file-text"></span>
     </a>
-    <a class="editor-tab ${editor.mode === 'attachments' ? 'selected' : ''}" click.delegate="editor.setMode('attachments')">
+    <a class="editor-tab ${mode === 'attachments' ? 'selected' : ''}" click.delegate="setMode('attachments')">
       <span uk-icon="cloud-upload"></span>
     </a>
-    <playlist-timeline playlist.bind="editor.post" selected.bind="editor.selectedTrackNumber" select.call="editor.selectTrack(index)"></playlist-timeline>
+    <playlist-timeline playlist.bind="post" selected.bind="selectedTrackNumber" select.call="selectTrack(index)"></playlist-timeline>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.mode !== 'tracks'">
-    <div class="uk-padding" if.bind="editor.mode === 'settings'">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && mode !== 'tracks'">
+    <div class="uk-padding" if.bind="mode === 'settings'">
       <div class="uk-margin">
         <label for="post-image">Theme</label>
         <select class="uk-select" value.bind="editor.theme">
@@ -33,66 +33,93 @@
         </select>
       </div>
     </div> 
-    <div class="uk-padding" if.bind="editor.mode === 'content'">
+    <div class="uk-padding" if.bind="mode === 'content'">
       <div class="uk-margin">
         <label for="post-headline">Headline</label>
-        <input class="uk-input" id="post-headline" type="text" value.bind="editor.post.headline">
+        <input class="uk-input" id="post-headline" type="text" value.bind="post.headline">
       </div>
       <div class="uk-margin">
         <label for="post-image">Image</label>
-        <select class="uk-select" value.bind="editor.post.image">
-          <option value.bind="image" repeat.for="image of editor.images.files">${image}</option>
+        <select class="uk-select" value.bind="post.image">
+          <option value.bind="image" repeat.for="image of images.files">${image}</option>
         </select>
       </div>
       <div class="uk-margin uk-grid-small" uk-grid>
         <div class="uk-width-1-2@s">
-          <color-picker name="Background" color.bind="editor.post.palette.primary"></color-picker>
+          <color-picker name="Background" color.bind="post.palette.primary"></color-picker>
         </div>
         <div class="uk-width-1-2@s">
-          <color-picker name="Cover" color.bind="editor.post.palette.dark"></color-picker>
+          <color-picker name="Cover" color.bind="post.palette.dark"></color-picker>
         </div>
       </div>
       <div class="uk-margin">
         <label for="post-audio">Audio</label>
-        <input class="uk-input" id="post-audio" type="text" value.bind="editor.post.audio.contentUrl">
+        <input class="uk-input" id="post-audio" type="text" value.bind="post.audio.contentUrl">
       </div>
       <div class="uk-margin">
         <fieldset class="uk-fieldset">
           <legend>Genres</legend>
-          <tag-list tags.bind="editor.post.genres"></tag-list>
+          <tag-list tags.bind="post.genres"></tag-list>
         </fieldset>
       </div>
       <div class="uk-margin">
         <fieldset class="uk-fieldset">
           <legend>Keywords</legend>
-          <tag-list tags.bind="editor.post.keywords"></tag-list>
+          <tag-list tags.bind="post.keywords"></tag-list>
         </fieldset>
       </div>
     </div>
 
-    <div class="text-editor uk-padding" if.bind="editor.mode === 'text'">
-      <textarea class="uk-textarea" value.bind="editor.post.text" spellcheck="false" style="height: 100%"></textarea>
+    <div class="text-editor uk-padding" if.bind="mode === 'text'">
+      <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
     </div>
 
-    <div class="uk-padding" if.bind="editor.mode === 'attachments'">
+    <div class="uk-padding" if.bind="mode === 'attachments'">
       <ul uk-accordion>
         <li>
           <a class="uk-accordion-title" href="#">Images</a>
           <div class="uk-accordion-content">
-            <image-upload content.bind="editor.images"></image-upload>
+            <image-upload content.bind="images"></image-upload>
           </div>
         </li>
         <li>
           <a class="uk-accordion-title" href="#">Audio</a>
           <div class="uk-accordion-content">
-            <audio-upload content.bind="editor.audio"></audio-upload>
+            <audio-upload content.bind="audio"></audio-upload>
           </div>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.mode === 'tracks'">
-    <track-editor></track-editor>
+  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && mode === 'tracks'">
+    <div class="uk-margin">
+      <label for="track-name">Name</label>
+      <input class="uk-input" id="track-name" type="text" value.bind="track.name">
+    </div>
+    <div class="uk-margin">
+      <label for="track-artist">Artist</label>
+      <input class="uk-input" id="track-artist" type="text" value.bind="track.byArtist">
+    </div>
+    <div class="uk-margin">
+      <label for="track-year">Year</label>
+      <input class="uk-input" id="track-year" type="number" value.bind="track.copyrightYear | integerFromInput">
+    </div>
+    <div class="uk-child-width-1-2@s uk-margin" uk-grid>
+      <div>
+        <label for="track-minutes">Minutes</label>
+        <input class="uk-input" id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
+      </div>
+      <div>
+        <label for="track-seconds">Seconds</label>
+        <input class="uk-input" id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
+      </div>
+    </div>
+    <div class="uk-padding uk-padding-remove-horizontal">
+      <button class="uk-button uk-box-shadow-small" click.delegate="removeTrack()">
+        <span class="uk-margin-small-right" uk-icon="trash"></span>
+        Remove
+      </button>
+    </div>
   </div>
 </template>
