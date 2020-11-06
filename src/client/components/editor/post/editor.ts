@@ -6,7 +6,7 @@ import {PostView} from '../../../main';
 import {Database} from '@ziqquratu/ziqquratu';
 import {Duration} from '../../../../domain/models/duration';
 
-@inject(Editor, 'ziqquratu.Database')
+@inject(PostView, 'ziqquratu.Database', Editor)
 export class PostEditorCustomElement {
   public selectedTrackNumber: number | undefined;
   public active: boolean = false;
