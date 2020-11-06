@@ -1,25 +1,38 @@
 <template>
+  <require from="components/editor/navbar.html"></require>
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <div class="editor-toolbar home-editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
-    <a class="editor-tab ${mode === 'settings' ? 'selected' : ''}" click.delegate="mode = 'settings'">
-      <span uk-icon="settings"></span>
-    </a>
-    <a class="editor-tab ${mode === 'content' ? 'selected' : ''}" click.delegate="mode = 'content'">
-      <span uk-icon="file-edit"></span>
-    </a>
-  </div>
+  <navbar items.bind="menu" selected.bind="selected" select.call="select(id)"></navbar>
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active">
-    <div class="uk-padding" if.bind="mode === 'settings'">
+    <div class="uk-padding" if.bind="selected === 'settings'">
       Settings
     </div>
-    <div class="uk-padding" if.bind="mode === 'content'">
+    <div class="uk-padding" if.bind="selected === 'posts'">
       <button class="uk-button uk-box-shadow-small" uk-toggle="target: #modal-create-post">
         <span class="uk-margin-small-right" uk-icon="plus"></span>
         Create Post
       </button>
+
+      <table class="uk-table">
+        <thead>
+          <tr>
+            <th>Headline</th>
+            <th>Pubishing Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr repeat.for="post of posts">
+            <td>${post.headline}</td>
+            <td>${post.datePublished}</td>
+            <td>
+              <a href="" uk-icon="trash" class="uk-icon-link"></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

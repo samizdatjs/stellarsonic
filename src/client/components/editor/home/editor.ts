@@ -7,9 +7,32 @@ import {Editor} from '../../../services/editor';
 export class HomeEditorCustomElement {
   public mode: string = 'settings';
   public headline: string = '';
+  public posts: any[] = [];
+  public selected: string = 'settings';
 
-  constructor(public editor: Editor, private database: Database) {
-    console.log(database);
+  public menu = [
+    {
+      id: 'settings',
+      title: 'Settings',
+      icon: 'settings'
+    },
+    {
+      id: 'posts',
+      title: 'Posts',
+      icon: 'file-edit',
+    },
+    {
+      id: 'authors',
+      title: 'Authors',
+      icon: 'users'
+    },
+  ]
+
+  constructor(public editor: Editor, private database: Database) {}
+
+  async bind() {
+    const collection = await this.database.collection('articles');
+    this.posts = await collection.find().toArray();
   }
 
   public setMode(mode: string) {
@@ -19,5 +42,9 @@ export class HomeEditorCustomElement {
   public async createPost() {
     const collection = await this.database.collection('articles');
     const post = await collection.insertOne(new MusicPlaylist('test', this.headline));
+  }
+
+  public select(id: string) {
+    this.selected = id;
   }
 }
