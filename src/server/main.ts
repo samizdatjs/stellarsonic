@@ -80,7 +80,7 @@ bootstrap(Application, {
     middleware: {
       '/':            [...rootMiddleware, requestLogger()],
       '/api/posts':   resource({collection: 'articles', readOnly: false}),
-      '/api/authors': resource({collection: 'authors', readOnly: true}),
+      '/api/authors': resource({collection: 'authors', readOnly: false}),
       '/api/tags':    resource({collection: 'tags', readOnly: true}),
       '/api/genres':  resource({collection: 'genres', readOnly: true}),
       '/images':      diskContent({

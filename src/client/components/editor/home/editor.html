@@ -1,5 +1,6 @@
 <template>
   <require from="components/editor/navbar.html"></require>
+  <require from="components/editor/home/authors-editor"></require>
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
@@ -34,6 +35,9 @@
         </tbody>
       </table>
     </div>
+    <div class="uk-padding" if.bind="selected === 'authors'">
+      <authors-editor></authors-editor>
+    </div>
   </div>
 
   <div id="modal-create-post" uk-modal>
@@ -46,6 +50,17 @@
         <p class="uk-text-right">
           <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
           <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="createPost()">Create</button>
+        </p>
+    </div>
+  </div>
+
+  <div id="remove-author-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title">Remove author</h2>
+        <p>Are you sure you want to remove this author?</p>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="removeAuthor()">Remove</button>
         </p>
     </div>
   </div>

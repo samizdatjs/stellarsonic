@@ -8,6 +8,7 @@ export class HomeEditorCustomElement {
   public mode: string = 'settings';
   public headline: string = '';
   public posts: any[] = [];
+  public authors: any[] = [];
   public selected: string = 'settings';
 
   public menu = [
@@ -31,8 +32,10 @@ export class HomeEditorCustomElement {
   constructor(public editor: Editor, private database: Database) {}
 
   async bind() {
-    const collection = await this.database.collection('articles');
-    this.posts = await collection.find().toArray();
+    const postCollection = await this.database.collection('articles');
+    this.posts = await postCollection.find().toArray();
+    const authorCollection = await this.database.collection('authors');
+    this.authors = await authorCollection.find().toArray();
   }
 
   public setMode(mode: string) {
