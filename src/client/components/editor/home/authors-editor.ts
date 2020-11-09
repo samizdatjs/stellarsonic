@@ -1,21 +1,19 @@
 import {Database} from '@ziqquratu/ziqquratu';
 import {inject} from 'aurelia-framework';
+import {AuthorListView} from '../../../main';
 
-@inject('ziqquratu.Database')
+@inject('ziqquratu.Database', AuthorListView)
 export class AuthorsEditorCustomElement {
-  public authors: any[] = [];
   public selected: any = null;
 
-  constructor(private database: Database) {}
+  constructor(private database: Database, private authors: AuthorListView) {}
 
   async bind() {
-    const authorCollection = await this.database.collection('authors');
-    this.authors = await authorCollection.find().toArray();
+    this.authors.refresh();
   }
 
   async removeSelectedAuthor() {
     const authorCollection = await this.database.collection('authors');
     await authorCollection.deleteOne({_id: this.selected._id});
-    this.authors = await authorCollection.find().toArray();
   }
 }

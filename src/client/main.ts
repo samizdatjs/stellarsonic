@@ -34,6 +34,9 @@ export class PostFeed extends Feed<MusicPlaylist> {
   genre = 'all';
 }
 
+@view({collection: 'authors'})
+export class AuthorListView extends ItemSet<any> {}
+
 class PostTransformer implements IOGate {
   public async input(post: MusicPlaylist): Promise<any> {
     return post.toJSONLD();
@@ -49,6 +52,7 @@ class PostTransformer implements IOGate {
     PostView,
     PostFeed,
     PostGenres,
+    AuthorListView,
     Provider.ofInstance<DatabaseConfig>('ziqquratu.DatabaseConfig', {
       collections: {
         'articles': {
