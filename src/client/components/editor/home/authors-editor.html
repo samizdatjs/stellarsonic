@@ -1,5 +1,5 @@
 <template>
-  <button class="uk-button uk-box-shadow-small" uk-toggle="target: #create-author-modal" click.delegate="selected = {}">
+  <button class="uk-button uk-box-shadow-small" uk-toggle="target: #edit-author-modal" click.delegate="selected = {}">
     <span class="uk-margin-small-right" uk-icon="plus"></span>
     Add Author
   </button>
@@ -17,13 +17,14 @@
         <td>${author.givenName} ${author.familyName}</td>
         <td>${author.email}</td>
         <td>
+          <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right" uk-toggle="target: #edit-author-modal" click.delegate="selected = author"></a>
           <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-author-modal" click.delegate="selected = author"></a>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <div id="create-author-modal" uk-modal>
+  <div id="edit-author-modal" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
       <h2 class="uk-modal-title">Create Author</h2>
         <div class="uk-margin">
@@ -35,12 +36,12 @@
           <input class="uk-input" id="author-family-name" type="text" value.bind="selected.familyName">
         </div>
         <div class="uk-margin">
-          <label for="author-family-name">Email</label>
-          <input class="uk-input" id="author-family-name" type="text" value.bind="selected.email">
+          <label for="author-email">Email</label>
+          <input class="uk-input" id="author-email" type="text" value.bind="selected.email">
         </div>
         <p class="uk-text-right">
           <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="createAuthor()">Create</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="saveAuthor()">Save</button>
         </p>
     </div>
   </div>

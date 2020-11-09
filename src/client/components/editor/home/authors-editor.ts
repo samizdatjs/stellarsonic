@@ -17,8 +17,12 @@ export class AuthorsEditorCustomElement {
     await authorCollection.deleteOne({_id: this.selected._id});
   }
 
-  async createAuthor() {
-    const authorCollection = await this.database.collection('authors');
-    await authorCollection.insertOne(this.selected);
+  async saveAuthor() {
+    const collection = await this.database.collection('authors');
+    if (this.selected._id) {
+      await collection.replaceOne({_id: this.selected._id}, this.selected);
+    } else {
+      await collection.insertOne(this.selected);
+    }
   }
 }
