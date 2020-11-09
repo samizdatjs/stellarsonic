@@ -1,5 +1,5 @@
 <template>
-  <button class="uk-button uk-box-shadow-small" uk-toggle="target: #modal-create-post">
+  <button class="uk-button uk-box-shadow-small" uk-toggle="target: #create-author-modal" click.delegate="selected = {}">
     <span class="uk-margin-small-right" uk-icon="plus"></span>
     Add Author
   </button>
@@ -22,6 +22,28 @@
       </tr>
     </tbody>
   </table>
+
+  <div id="create-author-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title">Create Author</h2>
+        <div class="uk-margin">
+          <label for="author-given-name">Given name</label>
+          <input class="uk-input" id="author-given-name" type="text" value.bind="selected.givenName">
+        </div>
+        <div class="uk-margin">
+          <label for="author-family-name">Family name</label>
+          <input class="uk-input" id="author-family-name" type="text" value.bind="selected.familyName">
+        </div>
+        <div class="uk-margin">
+          <label for="author-family-name">Email</label>
+          <input class="uk-input" id="author-family-name" type="text" value.bind="selected.email">
+        </div>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="createAuthor()">Create</button>
+        </p>
+    </div>
+  </div>
 
   <div id="remove-author-modal" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
