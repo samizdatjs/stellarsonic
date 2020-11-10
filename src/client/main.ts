@@ -52,6 +52,9 @@ export class WritableItemSet<T extends Identifiable> extends ItemSet<T> {
   }
 }
 
+@view({collection: 'articles'})
+export class PostListView extends WritableItemSet<MusicPlaylist> {}
+
 @view({collection: 'authors'})
 export class AuthorListView extends WritableItemSet<Person> {}
 
@@ -71,6 +74,7 @@ class PostTransformer implements IOGate {
     PostFeed,
     PostGenres,
     AuthorListView,
+    PostListView,
     Provider.ofInstance<DatabaseConfig>('ziqquratu.DatabaseConfig', {
       collections: {
         'articles': {

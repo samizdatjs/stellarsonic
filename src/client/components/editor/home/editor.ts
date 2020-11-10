@@ -1,15 +1,9 @@
-import {Database} from '@ziqquratu/ziqquratu';
 import {inject} from 'aurelia-framework';
-import {MusicPlaylist} from '../../../../domain/models/music-playlist';
 import {Editor} from '../../../services/editor';
 
-@inject(Editor, 'ziqquratu.Database')
+@inject(Editor)
 export class HomeEditorCustomElement {
   public mode: string = 'settings';
-  public headline: string = '';
-  public posts: any[] = [];
-  public authors: any[] = [];
-  public selected: string = 'settings';
 
   public menu = [
     {
@@ -29,25 +23,9 @@ export class HomeEditorCustomElement {
     },
   ]
 
-  constructor(public editor: Editor, private database: Database) {}
-
-  async bind() {
-    const postCollection = await this.database.collection('articles');
-    this.posts = await postCollection.find().toArray();
-    const authorCollection = await this.database.collection('authors');
-    this.authors = await authorCollection.find().toArray();
-  }
+  constructor(public editor: Editor) {}
 
   public setMode(mode: string) {
     this.mode = mode;
-  }
-
-  public async createPost() {
-    const collection = await this.database.collection('articles');
-    const post = await collection.insertOne(new MusicPlaylist('test', this.headline));
-  }
-
-  public select(id: string) {
-    this.selected = id;
   }
 }

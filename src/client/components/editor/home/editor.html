@@ -1,67 +1,21 @@
 <template>
   <require from="components/editor/navbar.html"></require>
   <require from="components/editor/home/authors-editor"></require>
+  <require from="components/editor/home/posts-editor"></require>
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <navbar items.bind="menu" selected.bind="selected" select.call="select(id)"></navbar>
+  <navbar items.bind="menu" selected.bind="mode" select.call="mode = id"></navbar>
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active">
-    <div class="uk-padding" if.bind="selected === 'settings'">
+    <div class="uk-padding" if.bind="mode === 'settings'">
       Settings
     </div>
-    <div class="uk-padding" if.bind="selected === 'posts'">
-      <button class="uk-button uk-box-shadow-small" uk-toggle="target: #modal-create-post">
-        <span class="uk-margin-small-right" uk-icon="plus"></span>
-        Create Post
-      </button>
-
-      <table class="uk-table">
-        <thead>
-          <tr>
-            <th>Headline</th>
-            <th>Pubishing Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr repeat.for="post of posts">
-            <td>${post.headline}</td>
-            <td>${post.datePublished}</td>
-            <td>
-              <a href="" uk-icon="trash" class="uk-icon-link"></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="uk-padding" if.bind="mode === 'posts'">
+      <posts-editor></posts-editor>
     </div>
-    <div class="uk-padding" if.bind="selected === 'authors'">
+    <div class="uk-padding" if.bind="mode === 'authors'">
       <authors-editor></authors-editor>
-    </div>
-  </div>
-
-  <div id="modal-create-post" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-      <h2 class="uk-modal-title">Create Post</h2>
-        <div class="uk-margin">
-          <label for="post-audio">Headline</label>
-          <input class="uk-input" id="post-headline" type="text" value.bind="headline">
-        </div>
-        <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="createPost()">Create</button>
-        </p>
-    </div>
-  </div>
-
-  <div id="remove-author-modal" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-      <h2 class="uk-modal-title">Remove author</h2>
-        <p>Are you sure you want to remove this author?</p>
-        <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="removeAuthor()">Remove</button>
-        </p>
     </div>
   </div>
 </template>

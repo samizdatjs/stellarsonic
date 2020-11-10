@@ -4,8 +4,8 @@ import { AudioObject, Person } from '../interfaces';
 
 export class MusicPlaylist {
   public constructor(
-    public _id: string,
-    public headline: string,
+    public _id?: string,
+    public headline: string = '',
     public image: string = '',
     public audio: AudioObject = { contentUrl: '' },
     public tracks: Track[] = [],
