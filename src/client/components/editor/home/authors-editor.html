@@ -17,7 +17,8 @@
         <td>${author.givenName} ${author.familyName}</td>
         <td>${author.email}</td>
         <td>
-          <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right" uk-toggle="target: #edit-author-modal" click.delegate="selected = author"></a>
+          <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
+            uk-toggle="target: #edit-author-modal" click.delegate="edit(author)"></a>
           <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-author-modal" click.delegate="selected = author"></a>
         </td>
       </tr>
@@ -41,7 +42,7 @@
         </div>
         <p class="uk-text-right">
           <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="saveAuthor()">Save</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="authors.save(selected)">Save</button>
         </p>
     </div>
   </div>
@@ -52,7 +53,7 @@
         <p>Are you sure you want to remove this author?</p>
         <p class="uk-text-right">
           <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="removeSelectedAuthor()">Remove</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="authors.delete(selected)">Remove</button>
         </p>
     </div>
   </div>
