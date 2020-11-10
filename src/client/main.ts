@@ -10,7 +10,7 @@ import {
 import siteConfig from '../config';
 import 'aurelia-animator-css';
 import { MusicPlaylist } from '../domain/models/music-playlist';
-import { Person } from '../domain/interfaces';
+import { Identifiable, Person } from '../domain/interfaces';
 
 @view({collection: 'articles'})
 export class PostView extends Item<MusicPlaylist> {
@@ -35,22 +35,25 @@ export class PostFeed extends Feed<MusicPlaylist> {
   genre = 'all';
 }
 
-@view({collection: 'authors'})
-export class AuthorListView extends ItemSet<Person> {
-  public async save(author: Person) {
+
+export class WritableItemSet<T extends Identifiable> extends ItemSet<T> {
+  public async save(item: T) {
     const collection = await this.collection;
-    if (author._id) {
-      return await collection.replaceOne({_id: author._id}, author);
+    if (item._id) {
+      return await collection.replaceOne({_id: item._id}, item);
     } else {
-      return await collection.insertOne(author);
+      return await collection.insertOne(item);
     }
   }
 
-  public async delete(author: Person) {
+  public async delete(item: T) {
     const collection = await this.collection;
-    return collection.deleteOne({_id: author._id});
+    return collection.deleteOne({_id: item._id});
   }
 }
+
+@view({collection: 'authors'})
+export class AuthorListView extends WritableItemSet<Person> {}
 
 class PostTransformer implements IOGate {
   public async input(post: MusicPlaylist): Promise<any> {
