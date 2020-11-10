@@ -17,6 +17,11 @@ export class PostView extends Item<MusicPlaylist> {
   @filter() _id: string = '';
 }
 
+@view({collection: 'settings'})
+export class SettingsView extends Item<any> {
+  @filter() _id: string = '';
+}
+
 @view({collection: 'genres'})
 export class PostGenres extends ItemSet {}
 
@@ -75,6 +80,7 @@ class PostTransformer implements IOGate {
     PostGenres,
     AuthorListView,
     PostListView,
+    SettingsView,
     Provider.ofInstance<DatabaseConfig>('ziqquratu.DatabaseConfig', {
       collections: {
         'articles': {
@@ -84,6 +90,7 @@ class PostTransformer implements IOGate {
           ],
         },
         'authors': http({path: '/api/authors'}),
+        'settings': http({path: '/api/settings'}),
         'genres': http({path: '/api/genres'}),
         'tags': http({path: '/api/tags'}),
       },
