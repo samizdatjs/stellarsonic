@@ -53,6 +53,10 @@ export const databaseConfig = {
       extension: 'yaml',
       serializer: yaml()
     }),
+    'settings': file({
+      path: 'content/settings.yaml',
+      serializer: yaml()
+    }),
     'genres': aggregation({
       from: 'articles',
       pipeline: [
