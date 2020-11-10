@@ -28,6 +28,10 @@ class DiskContentRouter {
     this.upload = multer({ storage: storage }).single('image');
   }
 
+  public toString() {
+    return `disk content at '${this.config.destination(':postId')}' using field '${this.config.fieldName}'`;
+  }
+
   @get('/:id')
   public async listFiles(req: express.Request, res: express.Response): Promise<any> {
     return this.readDir(req.params.id);
