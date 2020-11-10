@@ -1,20 +1,12 @@
 import * as express from 'express';
 import {bootstrap, component, LogLevel, Provider} from '@ziqquratu/ziqquratu';
-import {resource, requestLogger, ServerConfig, middleware, post} from '@ziqquratu/tashmetu';
+import {resource, requestLogger, ServerConfig} from '@ziqquratu/tashmetu';
 import {FileSystemConfig} from '@ziqquratu/nabu';
 import {terminal} from '@ziqquratu/terminal';
 import {Server, get} from '@ziqquratu/tashmetu';
 import * as yargs from 'yargs';
 import { databaseConfig } from './databaseConfig';
-import * as request from 'request';
 import {diskContent, DiskContentRouterFactory} from './routers/diskContent';
-
-class ProxyImageRouter {
-  @get('/:path')
-  public async image(req: express.Request, res: express.Response): Promise<any> {
-    request.get(req.params.path).pipe(res);
-  }
-}
 
 @component({
   dependencies: [
@@ -24,7 +16,6 @@ class ProxyImageRouter {
   ],
   providers: [
     Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig),
-    ProxyImageRouter,
   ],
   factories: [
     DiskContentRouterFactory
