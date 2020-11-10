@@ -111,6 +111,8 @@ export async function configure(aurelia: Aurelia): Promise<void> {
     container: container(aurelia.container)
   });
 
+  PLATFORM.moduleName('themes/posts/default/default.html')
+
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('components/app'));
 }

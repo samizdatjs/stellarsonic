@@ -9,6 +9,7 @@ import {SettingsView} from '../main';
 @autoinject
 export class Post {
   public theme: any;
+  public themeName = 'default';
 
   public constructor(
     private state: State,
