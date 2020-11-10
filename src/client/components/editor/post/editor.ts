@@ -1,4 +1,4 @@
-import {inject} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 import {Editor} from '../../../services/editor';
 import {Track} from '../../../../domain/models/track';
 import {ContentService} from '../../../services/content';
@@ -8,11 +8,14 @@ import {Duration} from '../../../../domain/models/duration';
 
 @inject(PostView, 'ziqquratu.Database', Editor)
 export class PostEditorCustomElement {
+  @bindable settings: any;
   public selectedTrackNumber: number | undefined;
   public active: boolean = false;
   public mode: string = 'settings';
   public images: ContentService;
   public audio: ContentService;
+  public theme: string = 'default';
+  public themeSettings: any;
 
   public constructor(
     private postView: PostView,
@@ -29,6 +32,10 @@ export class PostEditorCustomElement {
     postView.on('item-updated', () => {
       this.updateContent();
     })
+  }
+
+  async bind() {
+    this.themeSettings = (await import(`../../../themes/posts/${this.theme}/${this.theme}.json`));
   }
 
   public get selectedTrack(): Track | undefined {

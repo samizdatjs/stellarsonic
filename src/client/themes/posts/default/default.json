@@ -1,0 +1,16 @@
+{
+  "settings": [
+    {
+      "key": "backgroundColor",
+      "name": "Background",
+      "type": "color",
+      "value": "rgb(0,0,0)"
+    },
+    {
+      "key": "coverColor",
+      "name": "Cover",
+      "type": "color",
+      "value": "rgb(0,0,0)"
+    }
+  ]
+}

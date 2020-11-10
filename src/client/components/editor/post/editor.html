@@ -28,9 +28,12 @@
     <div class="uk-padding" if.bind="mode === 'settings'">
       <div class="uk-margin">
         <label for="post-image">Theme</label>
-        <select class="uk-select" value.bind="editor.theme">
+        <select class="uk-select" value.bind="theme">
           <option value="default">Default</option>
         </select>
+        <div class="uk-margin" repeat.for="setting of themeSettings.settings">
+          <color-picker if.bind="setting.type === 'color'" name.bind="setting.name" color.bind="settings[setting.key]"></color-picker>
+        </div>
       </div>
     </div> 
     <div class="uk-padding" if.bind="mode === 'content'">
@@ -43,14 +46,6 @@
         <select class="uk-select" value.bind="post.image">
           <option value.bind="image" repeat.for="image of images.files">${image}</option>
         </select>
-      </div>
-      <div class="uk-margin uk-grid-small" uk-grid>
-        <div class="uk-width-1-2@s">
-          <color-picker name="Background" color.bind="post.palette.primary"></color-picker>
-        </div>
-        <div class="uk-width-1-2@s">
-          <color-picker name="Cover" color.bind="post.palette.dark"></color-picker>
-        </div>
       </div>
       <div class="uk-margin">
         <label for="post-audio">Audio</label>
