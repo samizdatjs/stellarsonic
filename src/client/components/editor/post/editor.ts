@@ -2,7 +2,7 @@ import {bindable, inject} from 'aurelia-framework';
 import {Editor} from '../../../services/editor';
 import {Track} from '../../../../domain/models/track';
 import {ContentService} from '../../../services/content';
-import {PostView} from '../../../main';
+import {PostView} from '../../../views';
 import {Database} from '@ziqquratu/ziqquratu';
 import {Duration} from '../../../../domain/models/duration';
 

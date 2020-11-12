@@ -1,77 +1,14 @@
 import {Aurelia, PLATFORM} from 'aurelia-framework';
 import {container} from '@ziqquratu/ioc-aurelia';
 import {caching} from '@ziqquratu/caching';
-import {io, IOGate} from '@ziqquratu/pipe';
-import {view, Item, ItemSet, Feed, filter, sortBy} from '@ziqquratu/view';
+import {io} from '@ziqquratu/pipe';
 import {
-  bootstrap, component, http, DatabaseConfig, Provider, SortingDirection
+  bootstrap, component, http, DatabaseConfig, Provider
 } from '@ziqquratu/ziqquratu';
-
 import siteConfig from '../config';
 import 'aurelia-animator-css';
-import { MusicPlaylist } from '../domain/models/music-playlist';
-import { Identifiable, Person } from '../domain/interfaces';
-
-@view({collection: 'articles'})
-export class PostView extends Item<MusicPlaylist> {
-  @filter() _id: string = '';
-}
-
-@view({collection: 'settings'})
-export class SettingsView extends Item<any> {
-  @filter() _id: string = '';
-}
-
-@view({collection: 'genres'})
-export class PostGenres extends ItemSet {}
-
-@view({collection: 'articles'})
-export class PostFeed extends Feed<MusicPlaylist> {
-  limit = 3;
-  increment = 3;
-
-  @sortBy('datePublished')
-  dateSort = SortingDirection.Descending;
-
-  @filter({
-    compile: value => ({genres: {$contains: value}}),
-    disableOn: 'all'
-  })
-  genre = 'all';
-}
-
-
-export class WritableItemSet<T extends Identifiable> extends ItemSet<T> {
-  public async save(item: T) {
-    const collection = await this.collection;
-    if (item._id) {
-      return await collection.replaceOne({_id: item._id}, item);
-    } else {
-      return await collection.insertOne(item);
-    }
-  }
-
-  public async delete(item: T) {
-    const collection = await this.collection;
-    return collection.deleteOne({_id: item._id});
-  }
-}
-
-@view({collection: 'articles'})
-export class PostListView extends WritableItemSet<MusicPlaylist> {}
-
-@view({collection: 'authors'})
-export class AuthorListView extends WritableItemSet<Person> {}
-
-class PostTransformer implements IOGate {
-  public async input(post: MusicPlaylist): Promise<any> {
-    return post.toJSONLD();
-  }
-
-  public async output(data: any): Promise<any> {
-    return MusicPlaylist.fromJSONLD(data);
-  }
-}
+import {AuthorListView, PostFeed, PostGenres, PostListView, PostView, SettingsView} from './views';
+import {PostTransformer} from './lib';
 
 @component({
   providers: [

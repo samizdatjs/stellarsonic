@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import {PostView} from '../main';
+import {PostView} from '../views';
 import {MusicPlaylist} from '../../domain/models/music-playlist';
 
 @inject(PostView)

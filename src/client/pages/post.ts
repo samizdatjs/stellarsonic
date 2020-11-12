@@ -4,7 +4,7 @@ import siteConfig from '../../config';
 import {autoinject} from 'aurelia-framework';
 import {Editor} from '../services/editor';
 import {RouteConfig} from 'aurelia-router';
-import {SettingsView} from '../main';
+import {SettingsView} from '../views';
 
 @autoinject
 export class Post {

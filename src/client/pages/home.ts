@@ -1,4 +1,4 @@
-import {PostFeed, PostGenres} from '../main';
+import {PostFeed, PostGenres} from '../views';
 import {Editor} from '../services/editor';
 import {autoinject} from 'aurelia-framework';
 

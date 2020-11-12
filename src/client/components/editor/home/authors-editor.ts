@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {Person} from '../../../../domain/interfaces';
-import {AuthorListView} from '../../../main';
+import {AuthorListView} from '../../../views';
 
 @inject(AuthorListView)
 export class AuthorsEditorCustomElement {
