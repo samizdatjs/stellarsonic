@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
-import {PostView} from '../views';
-import {MusicPlaylist} from '../../domain/models/music-playlist';
+import {PostView} from '@client/views';
+import {MusicPlaylist} from '@domain/models/music-playlist';
 
 @inject(PostView)
 export class State {

@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import {Editor} from '../../../services/editor';
+import {Editor} from '@client/services/editor';
 
 @inject(Editor)
 export class HomeEditorCustomElement {

@@ -1,6 +1,6 @@
-import {PostFeed, PostGenres} from '../views';
-import {Editor} from '../services/editor';
 import {autoinject} from 'aurelia-framework';
+import {PostFeed, PostGenres} from '@client/views';
+import {Editor} from '@client/services/editor';
 
 @autoinject
 export class Home {

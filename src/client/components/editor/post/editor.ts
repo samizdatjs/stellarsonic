@@ -1,10 +1,10 @@
 import {bindable, inject} from 'aurelia-framework';
-import {Editor} from '../../../services/editor';
-import {Track} from '../../../../domain/models/track';
-import {ContentService} from '../../../services/content';
-import {PostView} from '../../../views';
 import {Database} from '@ziqquratu/ziqquratu';
-import {Duration} from '../../../../domain/models/duration';
+import {Track} from '@domain/models/track';
+import {Duration} from '@domain/models/duration';
+import {Editor} from '@client/services/editor';
+import {ContentService} from '@client/services/content';
+import {PostView} from '@client/views';
 
 @inject(PostView, 'ziqquratu.Database', Editor)
 export class PostEditorCustomElement {

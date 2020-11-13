@@ -1,7 +1,7 @@
 import {IOGate} from '@ziqquratu/pipe';
 import {ItemSet} from '@ziqquratu/view';
-import {MusicPlaylist} from '../domain/models/music-playlist';
-import {Identifiable} from '../domain/interfaces';
+import {MusicPlaylist} from '@domain/models/music-playlist';
+import {Identifiable} from '@domain/interfaces';
 
 export class WritableItemSet<T extends Identifiable> extends ItemSet<T> {
   public async save(item: T) {

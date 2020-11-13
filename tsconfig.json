@@ -10,7 +10,12 @@
       "dom"
     ],
     "module": "esnext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@client/*": ["src/client/*"],
+      "@domain/*": ["src/domain/*"]
+    }
   },
   "exclude": [
     "node_modules",

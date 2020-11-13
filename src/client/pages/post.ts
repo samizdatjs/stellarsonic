@@ -1,10 +1,10 @@
-import {State} from '../services/state';
-import {Player} from '../../domain/player';
-import siteConfig from '../../config';
 import {autoinject} from 'aurelia-framework';
-import {Editor} from '../services/editor';
 import {RouteConfig} from 'aurelia-router';
-import {SettingsView} from '../views';
+import {SettingsView} from '@client/views';
+import {Editor} from '@client/services/editor';
+import {State} from '@client/services/state';
+import {Player} from '@domain/player';
+import siteConfig from '../../config';
 
 @autoinject
 export class Post {

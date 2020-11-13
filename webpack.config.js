@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
 const CompressionPlugin = require('compression-webpack-plugin');
 
+function srcPath(subdir) {
+    return path.join(__dirname, "src", subdir);
+}
+
 module.exports = (env) => {
   let config = {
     context: __dirname + '/src/client',
@@ -20,6 +24,13 @@ module.exports = (env) => {
     },
     
     resolve: {
+      plugins: [
+        new TsConfigPathsPlugin(),
+      ],
+      alias: {
+        '@client/': srcPath('client'),
+        '@domain/': srcPath('domain'),
+      },
       extensions: [
         '.webpack.js',
         '.web.js',
@@ -68,7 +79,6 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         template: 'index.html'
       }),
-      new TsConfigPathsPlugin(),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ],
 

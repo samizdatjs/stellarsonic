@@ -1,7 +1,7 @@
 import {view, Item, ItemSet, Feed, filter, sortBy} from '@ziqquratu/view';
 import {SortingDirection} from '@ziqquratu/ziqquratu';
-import {MusicPlaylist} from '../domain/models/music-playlist';
-import {Person} from '../domain/interfaces';
+import {MusicPlaylist} from '@domain/models/music-playlist';
+import {Person} from '@domain/interfaces';
 import {WritableItemSet} from './lib';
 
 @view({collection: 'articles'})

@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
-import {MusicPlaylist} from '../../../../domain/models/music-playlist';
-import {PostListView} from '../../../views';
+import {MusicPlaylist} from '@domain/models/music-playlist';
+import {PostListView} from '@client/views';
 
 @inject(PostListView)
 export class PostsEditorCustomElement {

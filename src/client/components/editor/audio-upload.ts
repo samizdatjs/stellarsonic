@@ -1,6 +1,6 @@
 import {autoinject, bindable} from 'aurelia-framework';
 import UIkit from 'uikit';
-import {ContentService} from '../../services/content';
+import {ContentService} from '@client/services/content';
 
 @autoinject
 export class AudioUploadCustomElement {
