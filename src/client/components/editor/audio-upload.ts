@@ -4,19 +4,20 @@ import {ContentService} from '@client/services/content';
 
 @autoinject
 export class AudioUploadCustomElement {
-  audio: string | undefined;
   @bindable content!: ContentService;
+  audio: string | undefined;
 
   constructor(private element: Element) {}
 
   bind() {
     const elem = this.element.getElementsByClassName('js-upload')[0];
     UIkit.upload(elem, {
-      url: '',
+      url: this.content.url,
+      name: this.content.field,
       multiple: false,
-      beforeAll: (event: any, files: any) => {
-        this.content.uploadFile(files[0]);
-      },
+      complete: () => {
+        this.content.listFiles()
+      }
     } as any);
     this.content.listFiles()
   }

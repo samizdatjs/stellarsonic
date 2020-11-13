@@ -2,8 +2,8 @@ export class ContentService {
   public files: string[] = [];
 
   public constructor(
-    private field: string,
-    private url: string
+    public field: string,
+    public url: string
   ) {
     if (url !== '') {
       this.listFiles();
@@ -13,10 +13,11 @@ export class ContentService {
   public async uploadFile(file: File) {
     const formData = new FormData();
     formData.append(this.field, file);
-    await fetch(this.url, {
+    const resp = await fetch(this.url, {
       method: 'POST',
       body: formData,
     });
+    console.log(resp);
     this.files = await this.listFiles();
   }
 

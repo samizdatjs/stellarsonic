@@ -7,4 +7,32 @@
       <span class="uk-link">selecting one</span>
     </div>
   </div>
+
+  <table class="uk-table">
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="file of content.files">
+        <td>${file}</td>
+        <td>
+          <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-audio-modal" click.delegate="selectAudio(file)"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="remove-audio-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title">Remove</h2>
+        <p>Are you sure you want to remove this file?</p>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="remove()">Remove</button>
+        </p>
+    </div>
+  </div>
 </template>

@@ -25,7 +25,7 @@ class DiskContentRouter {
         cb(null, file.originalname);
       }
     });
-    this.upload = multer({ storage: storage }).single('image');
+    this.upload = multer({ storage: storage }).single(config.fieldName);
   }
 
   public toString() {

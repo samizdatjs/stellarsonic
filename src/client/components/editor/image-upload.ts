@@ -4,22 +4,21 @@ import {ContentService} from '@client/services/content';
 
 @autoinject
 export class ImageUploadCustomElement {
-  image: string | undefined;
-  files: string[] = [];
   @bindable content!: ContentService;
+  image: string | undefined;
 
   constructor(private element: Element) {}
 
   async bind() {
     const elem = this.element.getElementsByClassName('js-upload')[0];
     UIkit.upload(elem, {
-      url: '',
+      url: this.content.url,
+      name: this.content.field,
       multiple: false,
-      beforeAll: async (event: any, files: any) => {
-        await this.content.uploadFile(files[0]);
-      },
+      complete: () => {
+        this.content.listFiles()
+      }
     } as any);
-    console.log(await this.content.listFiles());
   }
 
   async remove() {
