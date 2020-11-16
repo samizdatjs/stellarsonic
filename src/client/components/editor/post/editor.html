@@ -59,7 +59,7 @@
             </ul>
           </li>
           <li class="${nav.mode === 'tracks' ? 'uk-active' : ''}">
-            <a click.delegate="navigate({mode: 'tracks', tab: 0})">Playlist</a>
+            <a click.delegate="navigate({mode: 'tracks'})">Playlist</a>
             <ul class="uk-nav-sub">
               <li repeat.for="track of post.tracks">
                 <a click.delegate="navigate({mode: 'tracks', tab: $index})">
