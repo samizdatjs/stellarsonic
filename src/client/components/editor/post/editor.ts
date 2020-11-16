@@ -1,4 +1,4 @@
-import {bindable, inject} from 'aurelia-framework';
+import {bindable, inject, observable} from 'aurelia-framework';
 import {Database} from '@ziqquratu/ziqquratu';
 import {Track} from '@domain/models/track';
 import {Duration} from '@domain/models/duration';
@@ -11,11 +11,40 @@ export class PostEditorCustomElement {
   @bindable settings: any;
   public selectedTrackNumber: number | undefined;
   public active: boolean = false;
-  public mode: string = 'settings';
+  @observable public mode: string = 'post';
+  public tab: string | number = 'menu';
   public images: ContentService;
   public audio: ContentService;
   public theme: string = 'default';
   public themeSettings: any;
+
+  public menu = [
+    {
+      id: 'menu',
+      title: 'Menu',
+      icon: 'menu',
+    },
+    {
+      id: 'settings',
+      title: 'Settings',
+      icon: 'settings'
+    },
+    {
+      id: 'content',
+      title: 'Content',
+      icon: 'file-edit'
+    },
+    {
+      id: 'text',
+      title: 'Text',
+      icon: 'file-text'
+    },
+    {
+      id: 'assets',
+      title: 'Assets',
+      icon: 'cloud-upload'
+    },
+  ]
 
   public constructor(
     private postView: PostView,
@@ -38,9 +67,17 @@ export class PostEditorCustomElement {
     this.themeSettings = (await import(`../../../themes/posts/${this.theme}/${this.theme}.json`));
   }
 
-  public get selectedTrack(): Track | undefined {
-    return this.selectedTrackNumber !== undefined
-      ? this.post.tracks[this.selectedTrackNumber]
+  modeChanged(mode: string) {
+    if (mode === 'post') {
+      this.tab = 'settings';
+    } else {
+      this.tab = 0;
+    }
+  }
+
+  public get track(): Track | undefined {
+    return Number.isInteger(this.tab as any)
+      ? this.post.tracks[this.tab as number]
       : undefined;
   }
 
@@ -65,38 +102,22 @@ export class PostEditorCustomElement {
     return col.replaceOne({_id: this.post._id}, this.post);
   }
 
-  public setMode(mode: string) {
-    this.mode = mode;
-    this.selectedTrackNumber = undefined;
-  }
-
-  public selectTrack(index: number | undefined) {
-    this.selectedTrackNumber = index;
-    this.mode = 'tracks';
-  }
-
   public addTrack() {
     this.post.addTrack('New track', '', 2020, new Duration(3, 0));
-    this.selectedTrackNumber = this.post.tracks.length - 1;
+    this.tab = this.post.tracks.length - 1;
   }
 
   public removeSelectedTrack() {
-    if (this.selectedTrackNumber === undefined) {
+    if (this.track === undefined) {
       throw Error('No track selected');
     }
-    this.post.removeTrack(this.selectedTrackNumber);
-    if (this.selectedTrackNumber >= this.post.tracks.length) {
-      this.selectedTrackNumber = this.post.tracks.length - 1;
+    this.post.removeTrack(this.tab);
+    if (this.tab >= this.post.tracks.length) {
+      this.tab = this.post.tracks.length - 1;
     }
   }
 
-  get track(): Track | undefined {
-    return this.selectedTrackNumber !== undefined
-      ? this.post.tracks[this.selectedTrackNumber]
-      : undefined;
-  }
-
-  set track(value: Track | undefined) {
+  public set track(value: Track | undefined) {
     // console.log(value);
   }
 }

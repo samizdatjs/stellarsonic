@@ -5,7 +5,11 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <navbar items.bind="menu" selected.bind="mode" select.call="mode = id"></navbar>
+  <nav class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <div class="uk-navbar-left">
+      <navbar items.bind="menu" selected.bind="mode" select.call="mode = id"></navbar>
+    </div>
+  </nav>
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active">
     <div class="uk-padding" if.bind="mode === 'settings'">

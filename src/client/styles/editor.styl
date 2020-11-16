@@ -22,6 +22,17 @@
   width: 100%;
   background: rgba(0,0,0,.8)!important;
 
+  .uk-navbar-nav
+    li.uk-active
+      background: #e8e5df;
+
+      a
+        color: rgba(0,0,0,.62);
+
+  .uk-navbar-item, .uk-navbar-nav>li>a, .uk-navbar-toggle
+    min-height: 60px;
+    font-size: .675rem;
+
 .editor-toolbar
   position: absolute;
   top: 0;
@@ -93,8 +104,12 @@
 
 // Playlist timeline
 //-----------------------------------------------------------------------------
+playlist-timeline
+  width: 100%;
+
 .timeline
   box-shadow: inset 0px 2px 3px 0px rgba(0,0,0,0.3)
+  background: #e8e5df;
 
 .timestamps
   position: relative;

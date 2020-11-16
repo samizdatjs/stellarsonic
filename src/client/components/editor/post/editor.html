@@ -1,5 +1,6 @@
 <template>
   <require from="value-converters"></require>
+  <require from="components/editor/navbar.html"></require>
   <require from="components/editor/color-picker"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/audio-upload"></require>
@@ -8,24 +9,39 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <div class="editor-toolbar post-editor-toolbar au-animate animate-slide-in-top" if.bind="editor.active">
-    <a class="editor-tab ${mode === 'settings' ? 'selected' : ''}" click.delegate="setMode('settings')">
-      <span uk-icon="settings"></span>
-    </a>
-    <a class="editor-tab ${mode === 'content' ? 'selected' : ''}" click.delegate="setMode('content')">
-      <span uk-icon="file-edit"></span>
-    </a>
-    <a class="editor-tab ${mode === 'text' ? 'selected' : ''}" click.delegate="setMode('text')">
-      <span uk-icon="file-text"></span>
-    </a>
-    <a class="editor-tab ${mode === 'attachments' ? 'selected' : ''}" click.delegate="setMode('attachments')">
-      <span uk-icon="cloud-upload"></span>
-    </a>
-    <playlist-timeline playlist.bind="post" selected.bind="selectedTrackNumber" select.call="selectTrack(index)"></playlist-timeline>
-  </div>
+  <nav class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <ul if.bind="mode === 'tracks'" class="uk-navbar-nav" style="width: 100%">
+      <li class="${tab === 'menu' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="tab = 'menu'">
+          <span class="uk-margin-small-right" uk-icon="menu"></span>
+          Menu
+        </a>
+      </li>
+      <li>
+        <a href="#" click.delegate="addTrack()">
+          <span class="uk-margin-small-right" uk-icon="plus"></span>
+          Add Track
+        </a>
+      </li>
+      <div class="uk-navbar-right" style="flex: 1">
+        <playlist-timeline playlist.bind="post" selected.bind="tab" select.call="tab = index"></playlist-timeline>
+      </div>
+    </ul>
+    <navbar if.bind="mode === 'post'" items.bind="menu" selected.bind="tab" select.call="tab = id"></navbar>
+  </nav>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && mode !== 'tracks'">
-    <div class="uk-padding" if.bind="mode === 'settings'">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && !track">
+    <div class="uk-padding" if.bind="tab === 'menu'">
+      <div class="uk-width-1-1@s">
+        <ul class="uk-nav uk-nav-default">
+          <li><a route-href="route: home;">Home</a></li>
+          <li class="uk-nav-divider"></li>
+          <li class="${mode === 'post' ? 'uk-active' : ''}"><a click.delegate="mode = 'post'">Post</a></li>
+          <li class="${mode === 'tracks' ? 'uk-active' : ''}"><a click.delegate="mode = 'tracks'">Playlist</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="uk-padding" if.bind="tab === 'settings'">
       <div class="uk-margin">
         <label for="post-image">Theme</label>
         <select class="uk-select" value.bind="theme">
@@ -36,7 +52,7 @@
         </div>
       </div>
     </div> 
-    <div class="uk-padding" if.bind="mode === 'content'">
+    <div class="uk-padding" if.bind="tab === 'content'">
       <div class="uk-margin">
         <label for="post-headline">Headline</label>
         <input class="uk-input" id="post-headline" type="text" value.bind="post.headline">
@@ -65,11 +81,11 @@
       </div>
     </div>
 
-    <div class="text-editor uk-padding" if.bind="mode === 'text'">
+    <div class="text-editor uk-padding" if.bind="tab === 'text'">
       <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
     </div>
 
-    <div class="uk-padding" if.bind="mode === 'attachments'">
+    <div class="uk-padding" if.bind="tab === 'assets'">
       <ul uk-accordion>
         <li>
           <a class="uk-accordion-title" href="#">Images</a>
@@ -87,7 +103,7 @@
     </div>
   </div>
 
-  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && mode === 'tracks'">
+  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && track">
     <div class="uk-margin">
       <label for="track-name">Name</label>
       <input class="uk-input" id="track-name" type="text" value.bind="track.name">
@@ -111,7 +127,7 @@
       </div>
     </div>
     <div class="uk-padding uk-padding-remove-horizontal">
-      <button class="uk-button uk-box-shadow-small" click.delegate="removeTrack()">
+      <button class="uk-button uk-box-shadow-small" click.delegate="removeSelectedTrack()">
         <span class="uk-margin-small-right" uk-icon="trash"></span>
         Remove
       </button>
