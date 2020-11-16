@@ -9,10 +9,10 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <nav class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
-    <ul if.bind="mode === 'tracks'" class="uk-navbar-nav" style="width: 100%">
-      <li class="${tab === 'menu' ? 'uk-active' : ''}">
-        <a href="#" click.delegate="tab = 'menu'">
+  <nav if.bind="nav.mode === 'tracks'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <ul class="uk-navbar-nav" style="width: 100%">
+      <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({tab: 'menu'})">
           <span class="uk-margin-small-right" uk-icon="menu"></span>
           Menu
         </a>
@@ -24,37 +24,58 @@
         </a>
       </li>
       <div class="uk-navbar-right" style="flex: 1">
-        <playlist-timeline playlist.bind="post" selected.bind="tab" select.call="tab = index"></playlist-timeline>
+        <playlist-timeline playlist.bind="post" selected.bind="nav.tab" select.call="navigate({mode: 'tracks', tab: index})"></playlist-timeline>
       </div>
     </ul>
-    <navbar if.bind="mode === 'post'" items.bind="menu" selected.bind="tab" select.call="tab = id"></navbar>
   </nav>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && tab === 'menu'">
+  <nav if.bind="nav.mode === 'post'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <ul class="uk-navbar-nav">
+      <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({tab: 'menu'})">
+          <span class="uk-margin-small-right" uk-icon="menu"></span>
+          Menu
+        </a>
+      </li>
+    </ul>
+    <navbar items.bind="menu" selected.bind="nav.tab" select.call="navigate({mode: 'post', tab: id})"></navbar>
+  </nav>
+
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.tab === 'menu'">
     <div class="uk-padding">
       <div class="uk-width-1-1@s">
         <ul class="uk-nav uk-nav-default">
           <li><a route-href="route: home;">Home</a></li>
           <li class="uk-nav-divider"></li>
-          <li class="${mode === 'post' ? 'uk-active' : ''}"><a click.delegate="mode = 'post'">Post</a></li>
-          <li class="${mode === 'tracks' ? 'uk-active' : ''}"><a click.delegate="mode = 'tracks'">Playlist</a></li>
+          <li class="uk-parent ${mode === 'post' ? 'uk-active' : ''}">
+            <a click.delegate="nav.mode = 'post'">Post</a>
+            <ul class="uk-nav-sub">
+              <li repeat.for="item of menu">
+                <a click.delegate="navigate({mode: 'post', tab: item.id})">
+                  <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
+                  ${item.title}
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="${nav.mode === 'tracks' ? 'uk-active' : ''}">
+            <a click.delegate="navigate({mode: 'tracks', tab: 0})">Playlist</a>
+            <ul class="uk-nav-sub">
+              <li repeat.for="track of post.tracks">
+                <a click.delegate="navigate({mode: 'tracks', tab: $index})">
+                  <span class="uk-margin-small-right" uk-icon="play"></span>
+                  ${track.name}
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && tab !== 'menu' && !track">
-    <div class="uk-padding" if.bind="tab === 'menu'">
-      <div class="uk-width-1-1@s">
-        <ul class="uk-nav uk-nav-default">
-          <li><a route-href="route: home;">Home</a></li>
-          <li class="uk-nav-divider"></li>
-          <li class="${mode === 'post' ? 'uk-active' : ''}"><a click.delegate="mode = 'post'">Post</a></li>
-          <li class="${mode === 'tracks' ? 'uk-active' : ''}"><a click.delegate="mode = 'tracks'">Playlist</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="uk-padding" if.bind="tab === 'settings'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'post' && nav.tab !== 'menu'">
+    <div class="uk-padding" if.bind="nav.tab === 'settings'">
       <div class="uk-margin">
         <label for="post-image">Theme</label>
         <select class="uk-select" value.bind="theme">
@@ -65,7 +86,7 @@
         </div>
       </div>
     </div> 
-    <div class="uk-padding" if.bind="tab === 'content'">
+    <div class="uk-padding" if.bind="nav.tab === 'content'">
       <div class="uk-margin">
         <label for="post-headline">Headline</label>
         <input class="uk-input" id="post-headline" type="text" value.bind="post.headline">
@@ -94,11 +115,11 @@
       </div>
     </div>
 
-    <div class="text-editor uk-padding" if.bind="tab === 'text'">
+    <div class="text-editor uk-padding" if.bind="nav.tab === 'text'">
       <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
     </div>
 
-    <div class="uk-padding" if.bind="tab === 'assets'">
+    <div class="uk-padding" if.bind="nav.tab === 'assets'">
       <ul uk-accordion>
         <li>
           <a class="uk-accordion-title" href="#">Images</a>
@@ -116,7 +137,7 @@
     </div>
   </div>
 
-  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && track">
+  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'tracks' && nav.tab !== 'menu'">
     <div class="uk-margin">
       <label for="track-name">Name</label>
       <input class="uk-input" id="track-name" type="text" value.bind="track.name">

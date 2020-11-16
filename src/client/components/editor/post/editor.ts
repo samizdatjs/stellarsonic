@@ -6,24 +6,24 @@ import {Editor} from '@client/services/editor';
 import {ContentService} from '@client/services/content';
 import {PostView} from '@client/views';
 
+interface EditorNav {
+  mode: string;
+  tab: string | number;
+}
+
 @inject(PostView, 'ziqquratu.Database', Editor)
 export class PostEditorCustomElement {
   @bindable settings: any;
   public selectedTrackNumber: number | undefined;
   public active: boolean = false;
-  @observable public mode: string = 'post';
-  public tab: string | number = 'menu';
   public images: ContentService;
   public audio: ContentService;
   public theme: string = 'default';
   public themeSettings: any;
 
+  public nav: EditorNav = { mode: 'post', tab: 'menu' };
+
   public menu = [
-    {
-      id: 'menu',
-      title: 'Menu',
-      icon: 'menu',
-    },
     {
       id: 'settings',
       title: 'Settings',
@@ -67,17 +67,9 @@ export class PostEditorCustomElement {
     this.themeSettings = (await import(`../../../themes/posts/${this.theme}/${this.theme}.json`));
   }
 
-  modeChanged(mode: string) {
-    if (mode === 'post') {
-      this.tab = 'settings';
-    } else {
-      this.tab = 0;
-    }
-  }
-
   public get track(): Track | undefined {
-    return Number.isInteger(this.tab as any)
-      ? this.post.tracks[this.tab as number]
+    return Number.isInteger(this.nav.tab as any)
+      ? this.post.tracks[this.nav.tab as number]
       : undefined;
   }
 
@@ -104,16 +96,20 @@ export class PostEditorCustomElement {
 
   public addTrack() {
     this.post.addTrack('New track', '', 2020, new Duration(3, 0));
-    this.tab = this.post.tracks.length - 1;
+    this.nav.tab = this.post.tracks.length - 1;
+  }
+
+  public navigate(to: Partial<EditorNav>) {
+    this.nav = Object.assign(this.nav, to);
   }
 
   public removeSelectedTrack() {
     if (this.track === undefined) {
       throw Error('No track selected');
     }
-    this.post.removeTrack(this.tab);
-    if (this.tab >= this.post.tracks.length) {
-      this.tab = this.post.tracks.length - 1;
+    this.post.removeTrack(this.nav.tab);
+    if (this.nav.tab >= this.post.tracks.length) {
+      this.nav.tab = this.post.tracks.length - 1;
     }
   }
 
