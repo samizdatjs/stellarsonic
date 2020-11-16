@@ -1,20 +1,26 @@
-<template bindable="items, select, selected">
-  <ul class="uk-navbar-nav">
-    <li repeat.for="item of items" class="${selected === item.id ? 'uk-active' : ''}">
-      <a href="#" click.delegate="select(item)">
-        <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
-        ${item.title}
-      </a>
-      <div if.bind="item.children" class="uk-navbar-dropdown">
-        <ul class="uk-nav uk-navbar-dropdown-nav">
-          <li repeat.for="child of item.children" class="${selected === child.id ? 'uk-active' ? ''">
-            <a href="#" click.delegate="select(child)">
-              <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="child.icon"></span>
-              ${child.title}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </li>
-  </ul>
+<template>
+  <nav class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <ul class="uk-navbar-nav">
+      <li class="${nav.tab === undefined ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({tab: undefined})">
+          ${section.title}
+          <span class="uk-margin-small-left" uk-icon="chevron-right"></span>
+        </a>
+      </li>
+    </ul>
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav">
+        <li repeat.for="item of section.children" class="${nav.tab === item.id ? 'uk-active' : ''}">
+          <a if.bind="!item.toggle" href="#" click.delegate="navigate({tab: item.id})">
+            <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
+            ${item.title}
+          </a>
+          <a if.bind="item.toggle" href="#" data-uk-toggle.bind="item.toggle">
+            <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
+            ${item.title}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>

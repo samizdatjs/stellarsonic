@@ -1,4 +1,4 @@
-import {bindable, inject, observable} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 import {Database} from '@ziqquratu/ziqquratu';
 import {Track} from '@domain/models/track';
 import {Duration} from '@domain/models/duration';
@@ -17,29 +17,24 @@ export class PostEditorCustomElement {
   public theme: string = 'default';
   public themeSettings: any;
 
-  public nav: EditorNav = { mode: 'post', tab: 'menu' };
+  public nav: EditorNav = { mode: 'post', tab: undefined };
 
   public menu = [
     {
-      id: 'settings',
-      title: 'Settings',
-      icon: 'settings'
+      id: 'post',
+      title: 'Post',
+      children: [
+        { id: 'settings', title: 'Settings', icon: 'settings' },
+        { id: 'content', title: 'Content', icon: 'file-edit' },
+        { id: 'text', title: 'Text', icon: 'file-text' },
+        { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
+      ]
     },
     {
-      id: 'content',
-      title: 'Content',
-      icon: 'file-edit'
-    },
-    {
-      id: 'text',
-      title: 'Text',
-      icon: 'file-text'
-    },
-    {
-      id: 'assets',
-      title: 'Assets',
-      icon: 'cloud-upload'
-    },
+      id: 'tracks',
+      title: 'Playlist',
+      navbar: 'playlist-timeline',
+    }
   ]
 
   public constructor(
@@ -104,7 +99,7 @@ export class PostEditorCustomElement {
       throw Error('No track selected');
     }
     this.post.removeTrack(this.nav.tab);
-    if (this.nav.tab >= this.post.tracks.length) {
+    if (this.nav.tab && this.nav.tab >= this.post.tracks.length) {
       this.nav.tab = this.post.tracks.length - 1;
     }
   }

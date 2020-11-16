@@ -1,6 +1,6 @@
 <template>
   <require from="value-converters"></require>
-  <require from="components/editor/navbar.html"></require>
+  <require from="components/editor/navbar"></require>
   <require from="components/editor/color-picker"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/audio-upload"></require>
@@ -9,10 +9,12 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
+  <navbar if.bind="nav.mode !== 'tracks'" menu.bind="menu" nav.bind="nav" navigate.bind="navigate"></navbar>
+
   <nav if.bind="nav.mode === 'tracks'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
     <ul class="uk-navbar-nav" style="width: 100%">
-      <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
-        <a href="#" click.delegate="navigate({tab: 'menu'})">
+      <li class="${!nav.tab ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({tab: undefined})">
           <span class="uk-margin-small-right" uk-icon="menu"></span>
           Playlist
         </a>
@@ -29,19 +31,7 @@
     </ul>
   </nav>
 
-  <nav if.bind="nav.mode === 'post'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
-    <ul class="uk-navbar-nav">
-      <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
-        <a href="#" click.delegate="navigate({tab: 'menu'})">
-          <span class="uk-margin-small-right" uk-icon="menu"></span>
-          Post
-        </a>
-      </li>
-    </ul>
-    <navbar items.bind="menu" selected.bind="nav.tab" select.call="navigate({mode: 'post', tab: id})"></navbar>
-  </nav>
-
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.tab === 'menu'">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && !nav.tab">
     <div class="uk-padding">
       <div class="uk-width-1-1@s">
         <ul class="uk-nav uk-nav-default">
@@ -50,7 +40,7 @@
           <li class="uk-parent ${nav.mode === 'post' ? 'uk-active' : ''}">
             <a click.delegate="navigate({mode: 'post'})">Post</a>
             <ul class="uk-nav-sub">
-              <li repeat.for="item of menu">
+              <li repeat.for="item of menu[0].children">
                 <a click.delegate="navigate({mode: 'post', tab: item.id})">
                   <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
                   ${item.title}
@@ -74,7 +64,7 @@
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'post' && nav.tab !== 'menu'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'post' && nav.tab">
     <div class="uk-padding" if.bind="nav.tab === 'settings'">
       <div class="uk-margin">
         <label for="post-image">Theme</label>
@@ -137,7 +127,7 @@
     </div>
   </div>
 
-  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'tracks' && nav.tab !== 'menu'">
+  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'tracks' && nav.tab">
     <div class="uk-margin">
       <label for="track-name">Name</label>
       <input class="uk-input" id="track-name" type="text" value.bind="track.name">

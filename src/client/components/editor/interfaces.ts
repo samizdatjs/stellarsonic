@@ -1,4 +1,4 @@
 export interface EditorNav {
   mode: string;
-  tab: string | number;
+  tab?: string | number;
 }

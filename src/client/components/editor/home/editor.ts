@@ -5,34 +5,40 @@ import { Person } from '@domain/interfaces';
 
 @inject(Editor)
 export class HomeEditorCustomElement {
-  // public mode: string = 'settings';
-  public nav: EditorNav = { mode: 'posts', tab: 'menu' };
+  public nav: EditorNav = { mode: 'home' };
   public author: Person | undefined;
 
   public menu = [
     {
-      id: 'settings',
-      title: 'Settings',
-      icon: 'settings'
+      id: 'home',
+      title: 'Home',
+      icon: 'home',
+      children: [
+        { id: 'settings', title: 'Settings', icon: 'settings' }
+      ]
     },
     {
       id: 'posts',
       title: 'Posts',
       icon: 'file-edit',
+      children: [
+        { id: 'list', title: 'List', icon: 'list' },
+        { id: 'create', title: 'Create', icon: 'plus', toggle: 'target: #post-create-modal' },
+      ]
     },
     {
       id: 'authors',
       title: 'Authors',
-      icon: 'users'
+      icon: 'users',
+      children: [
+        { id: 'list', title: 'List', icon: 'list' },
+        { id: 'add', title: 'Add', icon: 'plus', toggle: 'target: #author-edit-modal' },
+      ]
     },
-  ]
+  ];
 
   constructor(public editor: Editor) {}
-/*
-  public setMode(mode: string) {
-    this.mode = mode;
-  }
-  */
+
   public navigate(to: Partial<EditorNav>) {
     this.nav = Object.assign(this.nav, to);
   }
