@@ -1,25 +1,109 @@
 <template>
   <require from="components/editor/navbar.html"></require>
-  <require from="components/editor/home/authors-editor"></require>
-  <require from="components/editor/home/posts-editor"></require>
+  <require from="components/editor/home/author-edit"></require>
+  <require from="components/editor/home/author-list"></require>
+  <require from="components/editor/home/post-create"></require>
+  <require from="components/editor/home/post-list"></require>
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <nav class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+  <nav if.bind="nav.mode === 'home'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <ul class="uk-navbar-nav">
+      <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({tab: 'menu'})">
+          <span class="uk-margin-small-right" uk-icon="menu"></span>
+          Home
+        </a>
+      </li>
+    </ul>
     <div class="uk-navbar-left">
       <navbar items.bind="menu" selected.bind="mode" select.call="mode = id"></navbar>
     </div>
   </nav>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active">
-    <div class="uk-padding" if.bind="mode === 'settings'">
-      Settings
-    </div>
-    <div class="uk-padding" if.bind="mode === 'posts'">
-      <posts-editor></posts-editor>
-    </div>
-    <div class="uk-padding" if.bind="mode === 'authors'">
-      <authors-editor></authors-editor>
+  <nav if.bind="nav.mode === 'posts'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <ul class="uk-navbar-nav">
+      <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({tab: 'menu'})">
+          Posts
+          <span class="uk-margin-small-left" uk-icon="chevron-right"></span>
+        </a>
+      </li>
+      <li class="${nav.tab === 'list' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({mode: 'posts', tab: 'list'})">
+          <span class="uk-margin-small-right" uk-icon="list"></span>
+          List
+        </a>
+      </li>
+      <li>
+        <a href="#" uk-toggle="target: #post-create-modal">
+          <span class="uk-margin-small-right" uk-icon="plus"></span>
+          Create
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <nav if.bind="nav.mode === 'authors'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+    <ul class="uk-navbar-nav">
+      <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({tab: 'menu'})">
+          Authors
+          <span class="uk-margin-small-left" uk-icon="chevron-right"></span>
+        </a>
+      </li>
+      <li class="${nav.tab === 'list' ? 'uk-active' : ''}">
+        <a href="#" click.delegate="navigate({mode: 'authors', tab: 'list'})">
+          <span class="uk-margin-small-right" uk-icon="list"></span>
+          List
+        </a>
+      </li>
+      <li>
+        <a href="#" uk-toggle="target: #author-edit-modal">
+          <span class="uk-margin-small-right" uk-icon="plus"></span>
+          Add
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.tab === 'menu'">
+    <div class="uk-padding">
+      <div class="uk-width-1-1@s">
+        <ul class="uk-nav uk-nav-default">
+          <li class="uk-parent ${nav.mode === 'posts' ? 'uk-active' : ''}">
+            <a click.delegate="navigate({mode: 'posts', tab: 'list'})">Posts</a>
+            <!--
+            <ul class="uk-nav-sub">
+              <li repeat.for="item of menu">
+                <a click.delegate="navigate({mode: 'post', tab: item.id})">
+                  <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
+                  ${item.title}
+                </a>
+              </li>
+            </ul>
+            -->
+          </li>
+          <li class="${nav.mode === 'authors' ? 'uk-active' : ''}">
+            <a click.delegate="navigate({mode: 'authors', tab: 'list'})">Authors</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
+
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.tab !== 'menu'">
+    <div class="uk-padding" if.bind="nav.mode === 'settings'">
+      Settings
+    </div>
+    <div class="uk-padding" if.bind="nav.mode === 'posts' && nav.tab === 'list'">
+      <post-list></post-list>
+    </div>
+    <div class="uk-padding" if.bind="nav.mode === 'authors' && nav.tab === 'list'">
+      <author-list edit.call="editAuthor(author)"></author-list>
+    </div>
+  </div>
+
+  <post-create></post-create>  
+  <author-edit author.bind="author"></author-edit>
 </template>

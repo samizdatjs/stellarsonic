@@ -1,0 +1,23 @@
+<template>
+  <div id="author-edit-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title">Author</h2>
+        <div class="uk-margin">
+          <label for="author-given-name">Given name</label>
+          <input class="uk-input" id="author-given-name" type="text" value.bind="author.givenName">
+        </div>
+        <div class="uk-margin">
+          <label for="author-family-name">Family name</label>
+          <input class="uk-input" id="author-family-name" type="text" value.bind="author.familyName">
+        </div>
+        <div class="uk-margin">
+          <label for="author-email">Email</label>
+          <input class="uk-input" id="author-email" type="text" value.bind="author.email">
+        </div>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="authors.save(author)">Save</button>
+        </p>
+    </div>
+  </div>
+</template>

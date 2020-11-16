@@ -5,11 +5,7 @@ import {Duration} from '@domain/models/duration';
 import {Editor} from '@client/services/editor';
 import {ContentService} from '@client/services/content';
 import {PostView} from '@client/views';
-
-interface EditorNav {
-  mode: string;
-  tab: string | number;
-}
+import {EditorNav} from '../interfaces';
 
 @inject(PostView, 'ziqquratu.Database', Editor)
 export class PostEditorCustomElement {

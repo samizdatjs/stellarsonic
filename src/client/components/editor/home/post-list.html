@@ -1,0 +1,20 @@
+<template>
+  <table class="uk-table uk-table-justify">
+    <thead>
+      <tr>
+        <th>Headline</th>
+        <th>Pubishing Date</th>
+        <th class="uk-table-shrink">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="post of posts.data">
+        <td>${post.headline}</td>
+        <td>${post.datePublished}</td>
+        <td>
+          <a href="" uk-icon="trash" class="uk-icon-link"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>

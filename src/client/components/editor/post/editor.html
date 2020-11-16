@@ -14,7 +14,7 @@
       <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
         <a href="#" click.delegate="navigate({tab: 'menu'})">
           <span class="uk-margin-small-right" uk-icon="menu"></span>
-          Menu
+          Playlist
         </a>
       </li>
       <li>
@@ -34,7 +34,7 @@
       <li class="${nav.tab === 'menu' ? 'uk-active' : ''}">
         <a href="#" click.delegate="navigate({tab: 'menu'})">
           <span class="uk-margin-small-right" uk-icon="menu"></span>
-          Menu
+          Post
         </a>
       </li>
     </ul>
@@ -47,8 +47,8 @@
         <ul class="uk-nav uk-nav-default">
           <li><a route-href="route: home;">Home</a></li>
           <li class="uk-nav-divider"></li>
-          <li class="uk-parent ${mode === 'post' ? 'uk-active' : ''}">
-            <a click.delegate="nav.mode = 'post'">Post</a>
+          <li class="uk-parent ${nav.mode === 'post' ? 'uk-active' : ''}">
+            <a click.delegate="navigate({mode: 'post'})">Post</a>
             <ul class="uk-nav-sub">
               <li repeat.for="item of menu">
                 <a click.delegate="navigate({mode: 'post', tab: item.id})">

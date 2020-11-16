@@ -1,9 +1,10 @@
-import {inject} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 import {Person} from '@domain/interfaces';
 import {AuthorListView} from '@client/views';
 
 @inject(AuthorListView)
-export class AuthorsEditorCustomElement {
+export class AuthorListCustomElement {
+  @bindable edit!: Function;
   public selected: Person | undefined;
 
   constructor(private authors: AuthorListView) {}
@@ -12,7 +13,7 @@ export class AuthorsEditorCustomElement {
     this.authors.refresh();
   }
 
-  edit(author: Person) {
-    this.selected = Object.assign({}, author);
+  public select(author: any) {
+    this.selected = author;
   }
 }

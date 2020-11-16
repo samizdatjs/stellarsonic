@@ -1,0 +1,33 @@
+<template>
+  <table class="uk-table uk-table-justify">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th style="text-align: right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="author of authors.data">
+        <td>${author.givenName} ${author.familyName}</td>
+        <td>${author.email}</td>
+        <td>
+          <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
+            uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
+          <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-author-modal" click.delegate="select(author)"></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div id="remove-author-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title">Remove author</h2>
+        <p>Are you sure you want to remove this author?</p>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="authors.delete(selected)">Remove</button>
+        </p>
+    </div>
+  </div>
+</template>
