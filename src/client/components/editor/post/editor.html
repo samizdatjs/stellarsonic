@@ -30,7 +30,20 @@
     <navbar if.bind="mode === 'post'" items.bind="menu" selected.bind="tab" select.call="tab = id"></navbar>
   </nav>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && !track">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && tab === 'menu'">
+    <div class="uk-padding">
+      <div class="uk-width-1-1@s">
+        <ul class="uk-nav uk-nav-default">
+          <li><a route-href="route: home;">Home</a></li>
+          <li class="uk-nav-divider"></li>
+          <li class="${mode === 'post' ? 'uk-active' : ''}"><a click.delegate="mode = 'post'">Post</a></li>
+          <li class="${mode === 'tracks' ? 'uk-active' : ''}"><a click.delegate="mode = 'tracks'">Playlist</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && tab !== 'menu' && !track">
     <div class="uk-padding" if.bind="tab === 'menu'">
       <div class="uk-width-1-1@s">
         <ul class="uk-nav uk-nav-default">
