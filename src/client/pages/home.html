@@ -10,6 +10,6 @@
       <span if.bind="!editor.active" class="uk-position-center" uk-icon="chevron-right"></span>
     </a>
 
-    <compose view="themes/home-standard/home-standard.html" class="${editor.active ? 'edit' : ''}"></compose>
+    <compose view.bind="view" class="${editor.active ? 'edit' : ''}"></compose>
   </div>
 </template>

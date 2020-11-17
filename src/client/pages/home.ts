@@ -24,4 +24,12 @@ export class Home {
   get posts() {
     return this.postFeed.data;
   }
+
+  get theme(): string {
+    return this.settings.themeConfig[this.settings.theme];
+  }
+
+  get view(): string {
+    return `themes/${this.settings.theme}/${this.settings.theme}.html`;
+  }
 }
