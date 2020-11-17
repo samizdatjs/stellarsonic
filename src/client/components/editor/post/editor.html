@@ -13,7 +13,7 @@
 
   <nav if.bind="nav.mode === 'tracks'" class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
     <ul class="uk-navbar-nav" style="width: 100%">
-      <li class="${!nav.tab ? 'uk-active' : ''}">
+      <li class="${nav.tab === undefined ? 'uk-active' : ''}">
         <a href="#" click.delegate="navigate({tab: undefined})">
           <span class="uk-margin-small-right" uk-icon="menu"></span>
           Playlist
@@ -31,7 +31,7 @@
     </ul>
   </nav>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && !nav.tab">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.tab === undefined">
     <div class="uk-padding">
       <div class="uk-width-1-1@s">
         <ul class="uk-nav uk-nav-default">
@@ -127,7 +127,7 @@
     </div>
   </div>
 
-  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'tracks' && nav.tab">
+  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'tracks' && nav.tab !== undefined">
     <div class="uk-margin">
       <label for="track-name">Name</label>
       <input class="uk-input" id="track-name" type="text" value.bind="track.name">
