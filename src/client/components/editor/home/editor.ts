@@ -7,6 +7,7 @@ import { Person } from '@domain/interfaces';
 export class HomeEditorCustomElement {
   public nav: EditorNav = { mode: 'home' };
   public author: Person | undefined;
+  public theme: string = 'default';
 
   public menu = [
     {

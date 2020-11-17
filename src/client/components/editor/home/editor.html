@@ -17,8 +17,13 @@
   </div>
 
   <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.tab !== undefined">
-    <div class="uk-padding" if.bind="nav.mode === 'settings'">
-      Settings
+    <div class="uk-padding" if.bind="nav.mode === 'home' && nav.tab === 'settings'">
+      <div class="uk-margin">
+        <label for="post-image">Theme</label>
+        <select class="uk-select" value.bind="theme">
+          <option value="default">Default</option>
+        </select>
+      </div>
     </div>
     <div class="uk-padding" if.bind="nav.mode === 'posts' && nav.tab === 'musicplaylists'">
       <post-list></post-list>
