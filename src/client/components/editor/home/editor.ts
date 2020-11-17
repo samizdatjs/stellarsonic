@@ -22,7 +22,7 @@ export class HomeEditorCustomElement {
       title: 'Posts',
       icon: 'file-edit',
       children: [
-        { id: 'list', title: 'List', icon: 'list' },
+        { id: 'musicplaylists', title: 'Music Playlists', icon: 'list' },
         { id: 'create', title: 'Create', icon: 'plus', toggle: 'target: #post-create-modal' },
       ]
     },
