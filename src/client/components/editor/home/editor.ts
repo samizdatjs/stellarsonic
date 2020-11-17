@@ -1,10 +1,11 @@
-import {inject} from 'aurelia-framework';
+import {bindable, inject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
 import {EditorNav} from '../interfaces';
 import { Person } from '@domain/interfaces';
 
 @inject(Editor)
 export class HomeEditorCustomElement {
+  @bindable settings: any;
   public nav: EditorNav = { mode: 'home' };
   public author: Person | undefined;
   public theme: string = 'default';

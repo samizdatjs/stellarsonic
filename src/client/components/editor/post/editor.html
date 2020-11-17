@@ -1,10 +1,10 @@
 <template>
   <require from="value-converters"></require>
   <require from="components/editor/navbar"></require>
-  <require from="components/editor/color-picker"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/audio-upload"></require>
   <require from="components/editor/tag-list"></require>
+  <require from="components/editor/theme"></require>
   <require from="components/editor/post/playlist-timeline"></require>
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
@@ -66,15 +66,7 @@
 
   <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'post' && nav.tab">
     <div class="uk-padding" if.bind="nav.tab === 'settings'">
-      <div class="uk-margin">
-        <label for="post-image">Theme</label>
-        <select class="uk-select" value.bind="theme">
-          <option value="default">Default</option>
-        </select>
-        <div class="uk-margin" repeat.for="setting of themeSettings.settings">
-          <color-picker if.bind="setting.type === 'color'" name.bind="setting.name" color.bind="settings[setting.key]"></color-picker>
-        </div>
-      </div>
+      <theme settings.bind="settings"></theme>
     </div> 
     <div class="uk-padding" if.bind="nav.tab === 'content'">
       <div class="uk-margin">

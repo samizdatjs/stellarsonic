@@ -40,7 +40,7 @@ export class PostEditorCustomElement {
   public constructor(
     private postView: PostView,
     private database: Database,
-    public editor: Editor
+    public editor: Editor,
   ) {
     this.images = new ContentService('image', '')
     this.audio = new ContentService('audio', '')
@@ -52,10 +52,6 @@ export class PostEditorCustomElement {
     postView.on('item-updated', () => {
       this.updateContent();
     })
-  }
-
-  async bind() {
-    this.themeSettings = (await import(`../../../themes/posts/${this.theme}/${this.theme}.json`));
   }
 
   public get track(): Track | undefined {

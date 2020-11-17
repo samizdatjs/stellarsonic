@@ -1,0 +1,11 @@
+<template>
+  <require from="components/editor/color-picker"></require>
+
+  <label for="post-image">Theme</label>
+  <select class="uk-select" value.bind="setings.theme">
+    <option repeat.for="t of theming.themes(theme.type)" value.bind="t.id">${t.name}</option>
+  </select>
+  <div class="uk-margin" repeat.for="setting of theme.settings">
+    <color-picker if.bind="setting.type === 'color'" name.bind="setting.name" color.bind="selectedThemeConfig[setting.key]"></color-picker>
+  </div>
+</template>

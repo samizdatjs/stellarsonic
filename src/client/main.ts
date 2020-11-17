@@ -48,7 +48,8 @@ export async function configure(aurelia: Aurelia): Promise<void> {
     container: container(aurelia.container)
   });
 
-  PLATFORM.moduleName('themes/posts/default/default.html')
+  PLATFORM.moduleName('themes/home-standard/home-standard.html');
+  PLATFORM.moduleName('themes/musicplaylist-standard/musicplaylist-standard.html');
 
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('components/app'));

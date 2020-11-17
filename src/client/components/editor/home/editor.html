@@ -1,6 +1,7 @@
 <template>
   <require from="components/editor/navbar"></require>
   <require from="components/editor/navmenu"></require>
+  <require from="components/editor/theme"></require>
   <require from="components/editor/home/author-edit"></require>
   <require from="components/editor/home/author-list"></require>
   <require from="components/editor/home/post-create"></require>
@@ -18,12 +19,7 @@
 
   <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.tab !== undefined">
     <div class="uk-padding" if.bind="nav.mode === 'home' && nav.tab === 'settings'">
-      <div class="uk-margin">
-        <label for="post-image">Theme</label>
-        <select class="uk-select" value.bind="theme">
-          <option value="default">Default</option>
-        </select>
-      </div>
+      <theme settings.bind="settings"></theme>
     </div>
     <div class="uk-padding" if.bind="nav.mode === 'posts' && nav.tab === 'musicplaylists'">
       <post-list></post-list>
