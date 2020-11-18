@@ -4,14 +4,15 @@ import {Track} from '@domain/models/track';
 import {Duration} from '@domain/models/duration';
 import {Editor} from '@client/services/editor';
 import {ContentService} from '@client/services/content';
-import {PostView} from '@client/views';
 import {EditorNav} from '../interfaces';
+import {MusicPlaylist} from '@domain/models/music-playlist';
 
-@inject(PostView, 'ziqquratu.Database', Editor)
+@inject('ziqquratu.Database', Editor)
 export class PostEditorCustomElement {
   @bindable settings: any;
+  @bindable post!: MusicPlaylist;
+
   public selectedTrackNumber: number = 0;
-  public active: boolean = false;
   public images: ContentService;
   public audio: ContentService;
   public theme: string = 'default';
@@ -32,40 +33,20 @@ export class PostEditorCustomElement {
   }
 
   public constructor(
-    private postView: PostView,
     private database: Database,
     public editor: Editor,
   ) {
     this.images = new ContentService('image', '')
     this.audio = new ContentService('audio', '')
-
-    if (this.postView.data) {
-      this.updateContent();
-    }
-
-    postView.on('item-updated', () => {
-      this.updateContent();
-    })
   }
 
   public get track(): Track | undefined {
     return this.post.tracks[this.selectedTrackNumber]
   }
 
-  private async updateContent() {
+  bind() {
     this.images = new ContentService('image', `/images/${this.post._id}`);
     this.audio = new ContentService('audio', `/audio/${this.post._id}`);
-  }
-
-  public get post(): any {
-    if (this.postView.data) {
-      return this.postView.data;
-    }
-    throw Error('No post loaded');
-  }
-
-  public toggleActive() {
-    this.active = !this.active;
   }
 
   public async savePost(): Promise<any | null> {
@@ -75,7 +56,7 @@ export class PostEditorCustomElement {
 
   public addTrack() {
     this.post.addTrack('New track', '', 2020, new Duration(3, 0));
-    this.nav.tab = this.post.tracks.length - 1;
+    this.selectedTrackNumber = this.post.tracks.length - 1;
   }
 
   public navigate(to: Partial<EditorNav>) {
@@ -87,9 +68,9 @@ export class PostEditorCustomElement {
     if (this.track === undefined) {
       throw Error('No track selected');
     }
-    this.post.removeTrack(this.nav.tab);
-    if (this.nav.tab && this.nav.tab >= this.post.tracks.length) {
-      this.nav.tab = this.post.tracks.length - 1;
+    this.post.removeTrack(this.selectedTrackNumber);
+    if (this.selectedTrackNumber && this.selectedTrackNumber >= this.post.tracks.length) {
+      this.selectedTrackNumber = this.post.tracks.length - 1;
     }
   }
 
