@@ -35,6 +35,7 @@ export class PostEditorCustomElement {
         { id: 'tracks', title: 'Playlist', icon: 'play', toolbar: true }
       ]
     }
+    editor.navigate();
   }
 
   public get track(): Track | undefined {
