@@ -16,7 +16,7 @@
       <li class="${nav.tab === undefined ? 'uk-active' : ''}">
         <a href="#" click.delegate="navigate({tab: undefined})">
           <span class="uk-margin-small-right" uk-icon="menu"></span>
-          Playlist
+          Menu
         </a>
       </li>
       <li>
@@ -35,32 +35,58 @@
     <div class="uk-padding">
       <div class="uk-width-1-1@s">
         <ul class="uk-nav uk-nav-default">
-          <li><a route-href="route: home;">Home</a></li>
-          <li class="uk-nav-divider"></li>
-          <li class="uk-parent ${nav.mode === 'post' ? 'uk-active' : ''}">
-            <a click.delegate="navigate({mode: 'post'})">Post</a>
-            <ul class="uk-nav-sub">
-              <li repeat.for="item of menu[0].children">
-                <a click.delegate="navigate({mode: 'post', tab: item.id})">
-                  <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
-                  ${item.title}
-                </a>
-              </li>
-            </ul>
+          <li>
+            <a route-href="route: home;">
+              <span class="uk-margin-small-right" uk-icon="home"></span>
+              Home
+            </a>
           </li>
-          <li class="${nav.mode === 'tracks' ? 'uk-active' : ''}">
-            <a click.delegate="navigate({mode: 'tracks'})">Playlist</a>
-            <ul class="uk-nav-sub">
-              <li repeat.for="track of post.tracks">
-                <a click.delegate="navigate({mode: 'tracks', tab: $index})">
-                  <span class="uk-margin-small-right" uk-icon="play"></span>
-                  ${track.name}
-                </a>
-              </li>
-            </ul>
+          <li class="uk-nav-header">Page</li>
+          <li class="uk-nav-divider"></li>
+          <li repeat.for="item of menu[0].children">
+            <a click.delegate="navigate({mode: 'page', tab: item.id})">
+              <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
+              ${item.title}
+            </a>
+          </li>
+          <li class="uk-nav-header">Post</li>
+          <li class="uk-nav-divider"></li>
+          <li repeat.for="item of menu[1].children">
+            <a click.delegate="navigate({mode: 'post', tab: item.id})">
+              <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
+              ${item.title}
+            </a>
+          </li>
+          <li>
+            <a click.delegate="navigate({mode: 'tracks', tab: 0})">
+              <span class="uk-margin-small-right" uk-icon="play"></span>
+              Playlist
+            </a>
           </li>
         </ul>
       </div>
+    </div>
+  </div>
+
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'page' && nav.tab">
+    <div class="uk-padding" if.bind="nav.tab === 'settings'">
+      <theme settings.bind="settings"></theme>
+    </div> 
+    <div class="uk-padding" if.bind="nav.tab === 'assets'">
+      <ul uk-accordion>
+        <li>
+          <a class="uk-accordion-title" href="#">Images</a>
+          <div class="uk-accordion-content">
+            <image-upload content.bind="images"></image-upload>
+          </div>
+        </li>
+        <li>
+          <a class="uk-accordion-title" href="#">Audio</a>
+          <div class="uk-accordion-content">
+            <audio-upload content.bind="audio"></audio-upload>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -99,23 +125,6 @@
 
     <div class="text-editor uk-padding" if.bind="nav.tab === 'text'">
       <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
-    </div>
-
-    <div class="uk-padding" if.bind="nav.tab === 'assets'">
-      <ul uk-accordion>
-        <li>
-          <a class="uk-accordion-title" href="#">Images</a>
-          <div class="uk-accordion-content">
-            <image-upload content.bind="images"></image-upload>
-          </div>
-        </li>
-        <li>
-          <a class="uk-accordion-title" href="#">Audio</a>
-          <div class="uk-accordion-content">
-            <audio-upload content.bind="audio"></audio-upload>
-          </div>
-        </li>
-      </ul>
     </div>
   </div>
 

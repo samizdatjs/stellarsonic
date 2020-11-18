@@ -12,11 +12,11 @@ export class HomeEditorCustomElement {
 
   public menu = [
     {
-      id: 'home',
-      title: 'Home',
-      icon: 'home',
+      id: 'page',
+      title: 'Page',
       children: [
-        { id: 'settings', title: 'Settings', icon: 'settings' }
+        { id: 'settings', title: 'Settings', icon: 'settings' },
+        { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
       ]
     },
     {
@@ -33,7 +33,7 @@ export class HomeEditorCustomElement {
       title: 'Authors',
       icon: 'users',
       children: [
-        { id: 'list', title: 'List', icon: 'list' },
+        { id: 'list', title: 'Authors', icon: 'list' },
         { id: 'add', title: 'Add', icon: 'plus', toggle: 'target: #author-edit-modal' },
       ]
     },

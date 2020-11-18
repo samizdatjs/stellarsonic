@@ -21,13 +21,20 @@ export class PostEditorCustomElement {
 
   public menu = [
     {
+      id: 'page',
+      title: 'Page',
+      type: 'header',
+      children: [
+        { id: 'settings', title: 'Settings', icon: 'settings' },
+        { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
+      ]
+    },
+    {
       id: 'post',
       title: 'Post',
       children: [
-        { id: 'settings', title: 'Settings', icon: 'settings' },
         { id: 'content', title: 'Content', icon: 'file-edit' },
         { id: 'text', title: 'Text', icon: 'file-text' },
-        { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
       ]
     },
     {
