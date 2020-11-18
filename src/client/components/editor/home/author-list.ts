@@ -4,7 +4,7 @@ import {AuthorListView} from '@client/views';
 
 @inject(AuthorListView)
 export class AuthorListCustomElement {
-  @bindable edit!: Function;
+  @bindable edit!: (author: Person) => void;
   public selected: Person | undefined;
 
   constructor(private authors: AuthorListView) {}

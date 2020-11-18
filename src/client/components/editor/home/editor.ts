@@ -2,12 +2,13 @@ import {bindable, inject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
 import {EditorNav} from '../interfaces';
 import {Person} from '@domain/interfaces';
+import UIkit from 'uikit';
 
 @inject(Editor)
 export class HomeEditorCustomElement {
   @bindable settings: any;
   public nav: EditorNav = { mode: 'menu' };
-  public author: Person | undefined;
+  public author: Partial<Person> = {}
   public theme: string = 'default';
 
   constructor(public editor: Editor) {
@@ -35,14 +36,15 @@ export class HomeEditorCustomElement {
           title: 'Authors',
           icon: 'users',
           actions: [
-            { title: 'Add', icon: 'plus', toggle: 'target: #author-edit-modal' },
+            { title: 'Add', icon: 'plus', call: () => this.editAuthor() },
           ]
         },
       ]
     }
   }
 
-  public editAuthor(author: Person) {
+  public editAuthor(author: Partial<Person> = {}) {
     this.author = Object.assign({}, author);
+    UIkit.modal('#author-edit-modal').show();
   }
 }
