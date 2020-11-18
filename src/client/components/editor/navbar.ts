@@ -1,16 +1,16 @@
-import { Editor } from '@client/services/editor';
+import {Editor} from '@client/services/editor';
 import {autoinject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {MenuItem, MenuAction} from './interfaces';
 
 @autoinject
 export class NavbarCustomElement {
-  public constructor(public router: Router, public editor: Editor) {}
+  public actions: MenuAction[] = [];
 
-  get actions() {
-    return !this.editor.nav
-      ? this.editor.menu.actions
-      : this.sectionActions;
+  public constructor(public router: Router, public editor: Editor) {
+    editor.on('navigate', (to: string | undefined) => {
+      this.actions = to ? this.sectionActions : this.editor.menu.actions || [];
+    });
   }
 
   get sectionActions() {

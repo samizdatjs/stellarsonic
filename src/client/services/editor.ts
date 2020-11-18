@@ -1,6 +1,7 @@
 import {Menu} from "@client/components/editor/interfaces";
+import {EventEmitter} from 'eventemitter3';
 
-export class Editor {
+export class Editor extends EventEmitter {
   public active: boolean = false;
   public toolbar: boolean = false;
   public nav: string | undefined;
@@ -13,5 +14,6 @@ export class Editor {
   navigate(to?: string) {
     this.nav = to;
     this.toolbar = this.menu.items.find(o => o.id === to && o.toolbar) !== undefined;
+    this.emit('navigate', to);
   }
 }
