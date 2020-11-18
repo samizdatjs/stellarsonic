@@ -1,10 +1,10 @@
-<template bindable="menu, nav, navigate">
+<template>
   <require from="components/editor/navitem.html"></require>
 
   <div class="uk-width-1-1@s">
     <ul class="uk-nav uk-nav-default">
-      <li repeat.for="item of menu.items">
-        <a click.delegate="navigate({mode: item.id})">
+      <li repeat.for="item of editor.menu.items">
+        <a click.delegate="editor.navigate(item.id)">
           <navitem item.bind="item"></navitem>
         </a>
       </li>

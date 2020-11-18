@@ -17,6 +17,7 @@ export interface MenuItem {
   title: string;
   icon?: string;
   actions?: MenuAction[];
+  toolbar?: boolean;
 }
 
 export interface Menu {

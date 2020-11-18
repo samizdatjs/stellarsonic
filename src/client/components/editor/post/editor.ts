@@ -4,7 +4,6 @@ import {Track} from '@domain/models/track';
 import {Duration} from '@domain/models/duration';
 import {Editor} from '@client/services/editor';
 import {ContentService} from '@client/services/content';
-import {EditorNav} from '../interfaces';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 
 @inject('ziqquratu.Database', Editor)
@@ -18,26 +17,24 @@ export class PostEditorCustomElement {
   public theme: string = 'default';
   public themeSettings: any;
 
-  public nav: EditorNav = { mode: 'menu', tab: undefined };
-  public menu = {
-    actions: [
-      { title: 'Home', icon: 'chevron-left', route: 'home' }
-    ],
-    items: [
-      { id: 'settings', title: 'Settings', icon: 'settings' },
-      { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
-      { id: 'content', title: 'Content', icon: 'file-edit' },
-      { id: 'text', title: 'Text', icon: 'file-text' },
-      { id: 'tracks', title: 'Playlist', icon: 'play' }
-    ]
-  }
-
   public constructor(
     private database: Database,
     public editor: Editor,
   ) {
     this.images = new ContentService('image', '')
     this.audio = new ContentService('audio', '')
+    editor.menu = {
+      actions: [
+        { title: 'Home', icon: 'chevron-left', route: 'home' }
+      ],
+      items: [
+        { id: 'settings', title: 'Settings', icon: 'settings' },
+        { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
+        { id: 'content', title: 'Content', icon: 'file-edit' },
+        { id: 'text', title: 'Text', icon: 'file-text' },
+        { id: 'tracks', title: 'Playlist', icon: 'play', toolbar: true }
+      ]
+    }
   }
 
   public get track(): Track | undefined {
@@ -57,11 +54,6 @@ export class PostEditorCustomElement {
   public addTrack() {
     this.post.addTrack('New track', '', 2020, new Duration(3, 0));
     this.selectedTrackNumber = this.post.tracks.length - 1;
-  }
-
-  public navigate(to: Partial<EditorNav>) {
-    this.nav = Object.assign(this.nav, to);
-    this.editor.toolbar = to.mode === 'tracks';
   }
 
   public removeSelectedTrack() {

@@ -1,7 +1,7 @@
 <template>
   <require from="value-converters"></require>
   <require from="components/editor/navbar"></require>
-  <require from="components/editor/navmenu.html"></require>
+  <require from="components/editor/navmenu"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/audio-upload"></require>
   <require from="components/editor/tag-list"></require>
@@ -10,12 +10,12 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <navbar if.bind="nav.mode !== 'tracks'" menu.bind="menu" nav.bind="nav" navigate.call="navigate({mode})"></navbar>
+  <navbar if.bind="editor.nav !== 'tracks'"></navbar>
 
-  <nav if.bind="nav.mode === 'tracks'" class="uk-navbar-container editor-navbar uk-animation-slide-top-small" uk-navbar="mode: click">
+  <nav if.bind="editor.nav === 'tracks'" class="uk-navbar-container editor-navbar uk-animation-slide-top-small" uk-navbar="mode: click">
     <ul class="uk-navbar-nav" style="width: 100%">
       <li>
-        <a href="#" click.delegate="navigate({mode: 'menu'})">
+        <a href="#" click.delegate="editor.navigate()">
           <span class="uk-margin-small-right" uk-icon="chevron-left"></span>
           Playlist
         </a>
@@ -32,19 +32,19 @@
     </ul>
   </nav>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.mode === 'menu'">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && !editor.nav">
     <div class="uk-padding">
-      <navmenu menu.bind="menu" nav.bind="nav" navigate.call="navigate({mode, tab})"></navmenu>
+      <navmenu></navmenu>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'settings'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'settings'">
     <div class="uk-padding">
       <theme settings.bind="settings"></theme>
     </div> 
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'assets'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'assets'">
     <div class="uk-padding">
       <ul uk-accordion>
         <li>
@@ -63,7 +63,7 @@
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'content'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'content'">
     <div class="uk-padding">
       <div class="uk-margin">
         <label for="post-headline">Headline</label>
@@ -94,13 +94,13 @@
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'text'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'text'">
     <div class="text-editor uk-padding">
       <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
     </div>
   </div>
 
-  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'tracks'">
+  <div class="editor-panel uk-padding au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'tracks'">
     <div class="uk-margin">
       <label for="track-name">Name</label>
       <input class="uk-input" id="track-name" type="text" value.bind="track.name">

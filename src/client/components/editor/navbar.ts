@@ -1,18 +1,15 @@
-import {autoinject, bindable} from 'aurelia-framework';
+import { Editor } from '@client/services/editor';
+import {autoinject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import {Menu, MenuItem, MenuAction} from './interfaces';
+import {MenuItem, MenuAction} from './interfaces';
 
 @autoinject
 export class NavbarCustomElement {
-  @bindable menu!: Menu;
-  @bindable nav!: any;
-  @bindable navigate!: any;
-
-  public constructor(public router: Router) {}
+  public constructor(public router: Router, public editor: Editor) {}
 
   get actions() {
-    return this.nav.mode === 'menu'
-      ? this.menu.actions
+    return !this.editor.nav
+      ? this.editor.menu.actions
       : this.sectionActions;
   }
 
@@ -20,13 +17,13 @@ export class NavbarCustomElement {
     const back: MenuAction = {
       title: 'Menu',
       icon: 'chevron-left',
-      call: () => this.navigate({mode: 'menu'})
+      call: () => this.editor.navigate()
     };
     return [back].concat(this.section ? this.section.actions || [] : [])
   }
 
   get section(): MenuItem | undefined {
-    return this.menu.items.find(item => item.id === this.nav.mode);
+    return this.editor.menu.items.find(item => item.id === this.editor.nav);
   }
 
   call(action: any) {

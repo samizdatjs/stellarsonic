@@ -1,6 +1,6 @@
 <template>
   <require from="components/editor/navbar"></require>
-  <require from="components/editor/navmenu.html"></require>
+  <require from="components/editor/navmenu"></require>
   <require from="components/editor/theme"></require>
   <require from="components/editor/home/author-edit"></require>
   <require from="components/editor/home/author-list"></require>
@@ -9,21 +9,21 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <navbar menu.bind="menu" nav.bind="nav" navigate.bind="navigate"></navbar>
+  <navbar></navbar>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.mode === 'menu'">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && !editor.nav">
     <div class="uk-padding">
-      <navmenu menu.bind="menu" nav.bind="nav" navigate.bind="navigate"></navmenu>
+      <navmenu></navmenu>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'settings'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'settings'">
     <div class="uk-padding">
       <theme settings.bind="settings"></theme>
     </div> 
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'assets'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'assets'">
     <div class="uk-padding">
       <ul uk-accordion>
         <li>
@@ -42,13 +42,13 @@
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'posts'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'posts'">
     <div class="uk-padding">
       <post-list></post-list>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'authors'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === 'authors'">
     <div class="uk-padding">
       <author-list edit.call="editAuthor(author)"></author-list>
     </div>
