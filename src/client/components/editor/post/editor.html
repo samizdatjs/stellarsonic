@@ -1,6 +1,7 @@
 <template>
   <require from="value-converters"></require>
   <require from="components/editor/navbar"></require>
+  <require from="components/editor/navmenu"></require>
   <require from="components/editor/image-upload"></require>
   <require from="components/editor/audio-upload"></require>
   <require from="components/editor/tag-list"></require>
@@ -31,48 +32,20 @@
     </ul>
   </nav>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.tab === undefined">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.mode === 'menu'">
     <div class="uk-padding">
-      <div class="uk-width-1-1@s">
-        <ul class="uk-nav uk-nav-default">
-          <li>
-            <a route-href="route: home;">
-              <span class="uk-margin-small-right" uk-icon="home"></span>
-              Home
-            </a>
-          </li>
-          <li class="uk-nav-header">Page</li>
-          <li class="uk-nav-divider"></li>
-          <li repeat.for="item of menu[0].children">
-            <a click.delegate="navigate({mode: 'page', tab: item.id})">
-              <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
-              ${item.title}
-            </a>
-          </li>
-          <li class="uk-nav-header">Post</li>
-          <li class="uk-nav-divider"></li>
-          <li repeat.for="item of menu[1].children">
-            <a click.delegate="navigate({mode: 'post', tab: item.id})">
-              <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
-              ${item.title}
-            </a>
-          </li>
-          <li>
-            <a click.delegate="navigate({mode: 'tracks', tab: 0})">
-              <span class="uk-margin-small-right" uk-icon="play"></span>
-              Playlist
-            </a>
-          </li>
-        </ul>
-      </div>
+      <navmenu menu.bind="menu" nav.bind="nav" navigate.bind="navigate"></navmenu>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'page' && nav.tab">
-    <div class="uk-padding" if.bind="nav.tab === 'settings'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'settings'">
+    <div class="uk-padding">
       <theme settings.bind="settings"></theme>
     </div> 
-    <div class="uk-padding" if.bind="nav.tab === 'assets'">
+  </div>
+
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'assets'">
+    <div class="uk-padding">
       <ul uk-accordion>
         <li>
           <a class="uk-accordion-title" href="#">Images</a>
@@ -90,11 +63,8 @@
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'post' && nav.tab">
-    <div class="uk-padding" if.bind="nav.tab === 'settings'">
-      <theme settings.bind="settings"></theme>
-    </div> 
-    <div class="uk-padding" if.bind="nav.tab === 'content'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'content'">
+    <div class="uk-padding">
       <div class="uk-margin">
         <label for="post-headline">Headline</label>
         <input class="uk-input" id="post-headline" type="text" value.bind="post.headline">
@@ -122,8 +92,10 @@
         </fieldset>
       </div>
     </div>
+  </div>
 
-    <div class="text-editor uk-padding" if.bind="nav.tab === 'text'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'text'">
+    <div class="text-editor uk-padding">
       <textarea class="uk-textarea" value.bind="post.text" spellcheck="false" style="height: 100%"></textarea>
     </div>
   </div>

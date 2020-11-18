@@ -17,31 +17,14 @@ export class PostEditorCustomElement {
   public theme: string = 'default';
   public themeSettings: any;
 
-  public nav: EditorNav = { mode: 'post', tab: undefined };
+  public nav: EditorNav = { mode: 'menu', tab: undefined };
 
   public menu = [
-    {
-      id: 'page',
-      title: 'Page',
-      type: 'header',
-      children: [
-        { id: 'settings', title: 'Settings', icon: 'settings' },
-        { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
-      ]
-    },
-    {
-      id: 'post',
-      title: 'Post',
-      children: [
-        { id: 'content', title: 'Content', icon: 'file-edit' },
-        { id: 'text', title: 'Text', icon: 'file-text' },
-      ]
-    },
-    {
-      id: 'tracks',
-      title: 'Playlist',
-      navbar: 'playlist-timeline',
-    }
+    { id: 'settings', title: 'Settings', icon: 'settings' },
+    { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
+    { id: 'content', title: 'Content', icon: 'file-edit' },
+    { id: 'text', title: 'Text', icon: 'file-text' },
+    { id: 'tracks', title: 'Playlist', navbar: 'playlist-timeline' }
   ]
 
   public constructor(

@@ -1,19 +1,11 @@
 <template>
   <div class="uk-width-1-1@s">
     <ul class="uk-nav uk-nav-default">
-      <li repeat.for="section of menu" class="uk-nav-parent ${nav.mode === section.id ? 'uk-active' : ''}">
-        <a click.delegate="navigate({mode: section.id, tab: section.children[0].id})">
+      <li repeat.for="section of menu">
+        <a click.delegate="navigate({mode: section.id})">
           <span if.bind="section.icon" class="uk-margin-small-right" data-uk-icon.bind="section.icon"></span>
           ${section.title}
         </a>
-        <ul class="uk-nav-sub" if.bind="items(section)">
-          <li repeat.for="item of items(section)">
-            <a href="#" click.delegate="navigate({mode: section.id, tab: item.id})">
-              <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
-              ${item.title}
-            </a>
-          </li>
-        </ul>
       </li>
     </ul>
   </div>

@@ -1,21 +1,23 @@
 <template>
-  <nav class="uk-navbar-container uk-light editor-navbar" uk-navbar="mode: click">
+  <nav class="uk-navbar-container uk-padding uk-padding-remove-vertical editor-navbar" uk-navbar="mode: click">
     <ul class="uk-navbar-nav">
-      <li class="${nav.tab === undefined ? 'uk-active' : ''}">
-        <a href="#" click.delegate="navigate({tab: undefined})">
-          <span class="uk-margin-small-right" uk-icon="menu"></span>
-          Menu
+      <li>
+        <a href="#" click.delegate="navigate({mode: 'menu'})">
+          <span class="uk-margin-small-right" uk-icon="chevron-left"></span>
+          ${section.title}
         </a>
       </li>
     </ul>
     <div class="uk-navbar-left">
       <ul class="uk-navbar-nav">
-        <li repeat.for="item of section.children" class="${nav.tab === item.id ? 'uk-active' : ''}">
+        <li repeat.for="item of section.actions">
+          <!--
           <a if.bind="!item.toggle" href="#" click.delegate="navigate({tab: item.id})">
             <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
             ${item.title}
           </a>
-          <a if.bind="item.toggle" href="#" data-uk-toggle.bind="item.toggle">
+        -->
+          <a href="#" data-uk-toggle.bind="item.toggle">
             <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
             ${item.title}
           </a>

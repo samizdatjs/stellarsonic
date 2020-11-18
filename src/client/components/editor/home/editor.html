@@ -11,41 +11,20 @@
 
   <navbar menu.bind="menu" nav.bind="nav" navigate.bind="navigate"></navbar>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && !nav.tab">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && nav.mode === 'menu'">
     <div class="uk-padding">
-      <div class="uk-width-1-1@s">
-        <ul class="uk-nav uk-nav-default">
-          <li class="uk-nav-header">Page</li>
-          <li class="uk-nav-divider"></li>
-          <li repeat.for="item of menu[0].children">
-            <a click.delegate="navigate({mode: 'page', tab: item.id})">
-              <span if.bind="item.icon" class="uk-margin-small-right" data-uk-icon.bind="item.icon"></span>
-              ${item.title}
-            </a>
-          </li>
-          <li class="uk-nav-header">Site</li>
-          <li class="uk-nav-divider"></li>
-          <li>
-            <a href="#" click.delegate="navigate({mode: 'posts', tab: 'musicplaylists'})">
-              <span class="uk-margin-small-right" uk-icon="file-edit"></span>
-              Posts
-            </a>
-          </li>
-          <li>
-            <a href="#" click.delegate="navigate({mode: 'authors', tab: 'list'})">
-              <span class="uk-margin-small-right" uk-icon="users"></span>
-              Authors
-            </a>
-        </ul>
-      </div>
+      <navmenu menu.bind="menu" nav.bind="nav" navigate.bind="navigate"></navmenu>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'page' && nav.tab">
-    <div class="uk-padding" if.bind="nav.tab === 'settings'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'settings'">
+    <div class="uk-padding">
       <theme settings.bind="settings"></theme>
     </div> 
-    <div class="uk-padding" if.bind="nav.tab === 'assets'">
+  </div>
+
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'assets'">
+    <div class="uk-padding">
       <ul uk-accordion>
         <li>
           <a class="uk-accordion-title" href="#">Images</a>
@@ -63,14 +42,14 @@
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'posts' && nav.tab">
-    <div class="uk-padding" if.bind="nav.tab === 'musicplaylists'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'posts'">
+    <div class="uk-padding">
       <post-list></post-list>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'authors' && nav.tab">
-    <div class="uk-padding" if.bind="nav.mode === 'authors' && nav.tab === 'list'">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && nav.mode === 'authors'">
+    <div class="uk-padding">
       <author-list edit.call="editAuthor(author)"></author-list>
     </div>
   </div>

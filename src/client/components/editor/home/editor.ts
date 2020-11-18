@@ -6,35 +6,34 @@ import { Person } from '@domain/interfaces';
 @inject(Editor)
 export class HomeEditorCustomElement {
   @bindable settings: any;
-  public nav: EditorNav = { mode: 'home' };
+  public nav: EditorNav = { mode: 'menu' };
   public author: Person | undefined;
   public theme: string = 'default';
 
   public menu = [
     {
-      id: 'page',
-      title: 'Page',
-      children: [
-        { id: 'settings', title: 'Settings', icon: 'settings' },
-        { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
-      ]
+       id: 'settings',
+       title: 'Settings',
+       icon: 'settings',
+       actions: [
+         { title: 'Save' },
+       ]
     },
+    { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
     {
       id: 'posts',
       title: 'Posts',
       icon: 'file-edit',
-      children: [
-        { id: 'musicplaylists', title: 'Music Playlists', icon: 'list' },
-        { id: 'create', title: 'Create', icon: 'plus', toggle: 'target: #post-create-modal' },
+      actions: [
+        { title: 'Create', icon: 'plus', toggle: 'target: #post-create-modal' },
       ]
     },
     {
       id: 'authors',
       title: 'Authors',
       icon: 'users',
-      children: [
-        { id: 'list', title: 'Authors', icon: 'list' },
-        { id: 'add', title: 'Add', icon: 'plus', toggle: 'target: #author-edit-modal' },
+      actions: [
+        { title: 'Add', icon: 'plus', toggle: 'target: #author-edit-modal' },
       ]
     },
   ];

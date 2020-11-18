@@ -20,17 +20,17 @@
 .editor-navbar
   position: absolute;
   width: 100%;
-  background: rgba(0,0,0,.8)!important;
+  background: rgba(0,0,0,.02)!important;
 
   .uk-navbar-nav
     li.uk-active
-      background: #e8e5df;
-
+      // background: #e8e5df;
+/*
       a
         color: rgba(0,0,0,.62);
-
+*/
   .uk-navbar-item, .uk-navbar-nav>li>a, .uk-navbar-toggle
-    min-height: 60px;
+    // min-height: 60px;
     font-size: .675rem;
 
 .editor-toolbar
@@ -59,7 +59,7 @@
 
 .editor-panel
   position: absolute;
-  top: 60px;
+  top: 80px;
   bottom: 0;
   left: 0;
   width: 500px;
@@ -76,6 +76,11 @@
 
   .uk-card-title
     font-size: 1.2em;
+
+  .uk-nav-default > li > a
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 200;
+    font-size: 1.8em;
 
 .post-editor-toolbar
   grid-template-columns: 100px 100px 100px 100px 1fr;
