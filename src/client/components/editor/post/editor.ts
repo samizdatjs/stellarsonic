@@ -18,14 +18,18 @@ export class PostEditorCustomElement {
   public themeSettings: any;
 
   public nav: EditorNav = { mode: 'menu', tab: undefined };
-
-  public menu = [
-    { id: 'settings', title: 'Settings', icon: 'settings' },
-    { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
-    { id: 'content', title: 'Content', icon: 'file-edit' },
-    { id: 'text', title: 'Text', icon: 'file-text' },
-    { id: 'tracks', title: 'Playlist', icon: 'play' }
-  ]
+  public menu = {
+    actions: [
+      { title: 'Home', icon: 'chevron-left', route: 'home' }
+    ],
+    items: [
+      { id: 'settings', title: 'Settings', icon: 'settings' },
+      { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
+      { id: 'content', title: 'Content', icon: 'file-edit' },
+      { id: 'text', title: 'Text', icon: 'file-text' },
+      { id: 'tracks', title: 'Playlist', icon: 'play' }
+    ]
+  }
 
   public constructor(
     private postView: PostView,

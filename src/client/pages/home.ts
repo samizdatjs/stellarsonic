@@ -16,6 +16,7 @@ export class Home {
   ) {}
 
   async activate(params: any, routeConfig: RouteConfig) {
+    console.log(params);
     await this.postFeed.refresh();
     await this.genres.refresh();
     this.settings = await this.theming.settings(routeConfig, params);
