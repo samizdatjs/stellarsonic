@@ -10,7 +10,7 @@ import {EditorNav} from '../interfaces';
 @inject(PostView, 'ziqquratu.Database', Editor)
 export class PostEditorCustomElement {
   @bindable settings: any;
-  public selectedTrackNumber: number | undefined;
+  public selectedTrackNumber: number = 0;
   public active: boolean = false;
   public images: ContentService;
   public audio: ContentService;
@@ -24,7 +24,7 @@ export class PostEditorCustomElement {
     { id: 'assets', title: 'Assets', icon: 'cloud-upload' },
     { id: 'content', title: 'Content', icon: 'file-edit' },
     { id: 'text', title: 'Text', icon: 'file-text' },
-    { id: 'tracks', title: 'Playlist', navbar: 'playlist-timeline' }
+    { id: 'tracks', title: 'Playlist', icon: 'play' }
   ]
 
   public constructor(
@@ -45,9 +45,7 @@ export class PostEditorCustomElement {
   }
 
   public get track(): Track | undefined {
-    return Number.isInteger(this.nav.tab as any)
-      ? this.post.tracks[this.nav.tab as number]
-      : undefined;
+    return this.post.tracks[this.selectedTrackNumber]
   }
 
   private async updateContent() {
@@ -78,6 +76,7 @@ export class PostEditorCustomElement {
 
   public navigate(to: Partial<EditorNav>) {
     this.nav = Object.assign(this.nav, to);
+    this.editor.toolbar = to.mode === 'tracks';
   }
 
   public removeSelectedTrack() {

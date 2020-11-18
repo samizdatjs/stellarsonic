@@ -228,12 +228,14 @@ ul.plain
   height: 100vw;
   overflow: hidden;
 
+
   .page
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     position: absolute;
+    transition: transform 0.4s ease-out;
 
   .edit
     .page
@@ -242,3 +244,7 @@ ul.plain
       width: calc(100vw - 500px);
       height: calc(100vh - 20px);
       box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.25);
+
+  .edit.editor-toolbar-full
+    .page
+      transform: translateY(100px);
