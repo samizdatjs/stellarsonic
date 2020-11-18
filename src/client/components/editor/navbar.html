@@ -4,7 +4,7 @@
   <nav
     class="uk-navbar-container uk-padding uk-padding-remove-vertical editor-navbar uk-animation-slide-top-small"
     uk-navbar="mode: click"
-    if.bind="actions"
+    if.bind="actions.length > 0"
   >
     <ul class="uk-navbar-nav">
       <li repeat.for="action of actions">
