@@ -1,6 +1,11 @@
 import {EditorPanel, Menu, MenuAction} from "@client/components/editor/interfaces";
+import { EventAggregator } from "aurelia-event-aggregator";
+import { autoinject } from "aurelia-framework";
+import {NavigationInstruction, PipelineResult, Router, RouterEvent} from "aurelia-router";
 import {EventEmitter} from 'eventemitter3';
+import {editorConfig} from '../editorConfig';
 
+@autoinject
 export class Editor extends EventEmitter {
   public active: boolean = false;
   public toolbar: boolean = false;
@@ -9,6 +14,16 @@ export class Editor extends EventEmitter {
   public actions: MenuAction[] = [];
   public settings: any;
   public post: any;
+
+  constructor(ea: EventAggregator) {
+    super();
+    ea.subscribe(RouterEvent.Complete, (event: { instruction: NavigationInstruction; result: PipelineResult }) => {
+      const route = event.instruction.config.name;
+      if (route) {
+        this.menu = (editorConfig as any)[route];
+      }
+    });
+  }
 
   public toggleActive() {
     this.active = !this.active;

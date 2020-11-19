@@ -3,7 +3,6 @@ import {PostFeed, PostGenres} from '@client/views';
 import {Editor} from '@client/services/editor';
 import {Theming} from '@client/services/theming';
 import {RouteConfig} from 'aurelia-router';
-import {editorConfig} from '../editorConfig';
 
 @autoinject
 export class Home {
@@ -20,7 +19,6 @@ export class Home {
     await this.postFeed.refresh();
     await this.genres.refresh();
     this.settings = this.editor.settings = await this.theming.settings(routeConfig, params);
-    this.editor.menu = editorConfig.home;
   }
 
   get posts() {

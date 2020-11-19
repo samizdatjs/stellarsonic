@@ -5,11 +5,12 @@ import {State} from '@client/services/state';
 import {Theming} from '@client/services/theming';
 import {Player} from '@domain/player';
 import siteConfig from '../../config';
-import {editorConfig} from '../editorConfig';
+import {Page} from '@client/interfaces';
 
 @autoinject
-export class Post {
+export class Post implements Page {
   public settings: any;
+  public route: string = 'post';
 
   public constructor(
     private state: State,
@@ -21,7 +22,6 @@ export class Post {
   async activate(params: any, routeConfig: RouteConfig) {
     this.editor.post = await this.state.changePost(params.id);
     this.settings = this.editor.settings = await this.theming.settings(routeConfig, params);
-    this.editor.menu = editorConfig.post;
   }
 
   get url() {
@@ -30,6 +30,10 @@ export class Post {
 
   get post() {
     return this.state.post;
+  }
+
+  get content() {
+    return this.post;
   }
 
   get theme(): string {
