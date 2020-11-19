@@ -4,7 +4,7 @@
   <div class="uk-width-1-1@s">
     <ul class="uk-nav uk-nav-default">
       <li repeat.for="item of editor.menu.items">
-        <a click.delegate="editor.navigate(item.id)">
+        <a click.delegate="editor.navigate($index)">
           <navitem item.bind="item"></navitem>
         </a>
       </li>

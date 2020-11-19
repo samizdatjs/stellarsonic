@@ -1,0 +1,19 @@
+<template>
+  <require from="components/editor/image-upload"></require>
+  <require from="components/editor/audio-upload"></require>
+
+  <ul uk-accordion>
+    <li>
+      <a class="uk-accordion-title" href="#">Images</a>
+      <div class="uk-accordion-content">
+        <image-upload content.bind="images"></image-upload>
+      </div>
+    </li>
+    <li>
+      <a class="uk-accordion-title" href="#">Audio</a>
+      <div class="uk-accordion-content">
+        <audio-upload content.bind="audio"></audio-upload>
+      </div>
+    </li>
+  </ul>
+</template>

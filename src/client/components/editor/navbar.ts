@@ -8,8 +8,8 @@ export class NavbarCustomElement {
   public actions: MenuAction[] = [];
 
   public constructor(public router: Router, public editor: Editor) {
-    editor.on('navigate', (to: string | undefined) => {
-      this.actions = to ? this.sectionActions : this.editor.menu.actions || [];
+    editor.on('navigate', (to: number | undefined) => {
+      this.actions = to !== undefined ? this.sectionActions : this.editor.menu.actions || [];
     });
   }
 
@@ -19,11 +19,11 @@ export class NavbarCustomElement {
       icon: 'chevron-left',
       call: () => this.editor.navigate()
     };
-    return [back].concat(this.section ? this.section.actions || [] : [])
+    return [back].concat(this.editor.actions)
   }
 
   get section(): MenuItem | undefined {
-    return this.editor.menu.items.find(item => item.id === this.editor.nav);
+    return this.editor.nav !== undefined ? this.editor.menu.items[this.editor.nav] : undefined;
   }
 
   call(action: any) {

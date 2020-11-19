@@ -2,10 +2,11 @@ import {autoinject, bindable, observable, BindingEngine, Disposable} from 'aurel
 import {Player} from '@domain/player';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {Track} from '@domain/models/track';
+import { Editor } from '@client/services/editor';
 
 @autoinject
 export class PlaylistTimelineCustomElement {
-  @bindable @observable playlist!: MusicPlaylist;
+  @observable playlist!: MusicPlaylist;
   @bindable select!: Function;
   @bindable selected!: number;
   subscription: Disposable | undefined;
@@ -16,7 +17,10 @@ export class PlaylistTimelineCustomElement {
     private player: Player,
     private element: Element,
     private bindingEngine: BindingEngine,
-  ) {}
+    private editor: Editor,
+  ) {
+    this.playlist = this.editor.post;
+  }
 
   updateTrackWidths() {
     this.trackWidths = this.playlist.tracks.map(t => this.trackWidth(t));

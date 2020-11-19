@@ -1,0 +1,23 @@
+<template>
+  <require from="components/editor/navbar"></require>
+  <require from="components/editor/navmenu"></require>
+  <require from="styles/editor.styl"></require>
+  <require from="styles/animations.styl"></require>
+
+  <navbar if.bind="!section || !section.toolbar"></navbar>
+  <compose if.bind="section && section.toolbar" view-model.bind="section.toolbar"></compose>
+
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.nav === undefined">
+    <div class="uk-padding">
+      <navmenu></navmenu>
+    </div>
+  </div>
+
+  <div repeat.for="item of editor.menu.items">
+    <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === $index">
+      <div class="uk-padding" if.bind="item.component">
+        <compose view-model.bind="item.component"></compose>
+      </div>
+    </div>
+  </div>
+</template>

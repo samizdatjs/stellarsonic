@@ -13,14 +13,18 @@ export interface MenuAction {
 }
 
 export interface MenuItem {
-  id: string;
   title: string;
   icon?: string;
   actions?: MenuAction[];
-  toolbar?: boolean;
+  component?: string;
+  toolbar?: string;
 }
 
 export interface Menu {
   actions?: MenuAction[];
   items: MenuItem[];
+}
+
+export interface EditorPanel {
+  actions: MenuAction[];
 }

@@ -1,0 +1,32 @@
+<template>
+  <require from="value-converters"></require>
+
+  <div class="uk-margin">
+    <label for="track-name">Name</label>
+    <input class="uk-input" id="track-name" type="text" value.bind="track.name">
+  </div>
+  <div class="uk-margin">
+    <label for="track-artist">Artist</label>
+    <input class="uk-input" id="track-artist" type="text" value.bind="track.byArtist">
+  </div>
+  <div class="uk-margin">
+    <label for="track-year">Year</label>
+    <input class="uk-input" id="track-year" type="number" value.bind="track.copyrightYear | integerFromInput">
+  </div>
+  <div class="uk-child-width-1-2@s uk-margin" uk-grid>
+    <div>
+      <label for="track-minutes">Minutes</label>
+      <input class="uk-input" id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
+    </div>
+    <div>
+      <label for="track-seconds">Seconds</label>
+      <input class="uk-input" id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
+    </div>
+  </div>
+  <div class="uk-padding uk-padding-remove-horizontal">
+    <button class="uk-button uk-box-shadow-small" click.delegate="removeSelectedTrack()">
+      <span class="uk-margin-small-right" uk-icon="trash"></span>
+      Remove
+    </button>
+  </div>
+</template>
