@@ -1,39 +1,37 @@
-import {autoinject} from 'aurelia-framework';
+import {autoinject, inject} from 'aurelia-framework';
 import {RouteConfig} from 'aurelia-router';
 import {Editor} from '@client/services/editor';
-import {State} from '@client/services/state';
+import {SEO} from '@client/services/seo';
 import {Theming} from '@client/services/theming';
 import {Player} from '@domain/player';
 import siteConfig from '../../config';
 import {Page} from '@client/interfaces';
+import { Database } from '@ziqquratu/ziqquratu';
 
-@autoinject
+@inject(SEO, Player, Editor, Theming, 'ziqquratu.Database')
 export class Post implements Page {
   public settings: any;
   public route: string = 'post';
+  public content: any;
 
   public constructor(
-    private state: State,
+    private seo: SEO,
     public player: Player,
     public editor: Editor,
     private theming: Theming,
+    private database: Database
   ) {}
 
   async activate(params: any, routeConfig: RouteConfig) {
-    this.editor.post = await this.state.changePost(params.id);
+    const collection = await this.database.collection('articles');
+    this.content = await collection.findOne({_id: params.id});
+    this.seo.update(this.content);
+    this.editor.post = this.content;
     this.settings = this.editor.settings = await this.theming.settings(routeConfig, params);
   }
 
   get url() {
-    return this.post ? `${siteConfig.url}/#posts/${(<any>this.post)._id}` : undefined;
-  }
-
-  get post() {
-    return this.state.post;
-  }
-
-  get content() {
-    return this.post;
+    return this.content ? `${siteConfig.url}/#posts/${(<any>this.content)._id}` : undefined;
   }
 
   get theme(): string {

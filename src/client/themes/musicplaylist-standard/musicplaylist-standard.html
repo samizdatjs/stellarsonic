@@ -6,7 +6,7 @@
   <require from="./player"></require>
 
   <div class="page au-animate" css="background: ${theme.backgroundColor}">
-    <div class="background-image" css="background: url(${post.image}) 50% 50% / cover no-repeat;"></div>
+    <div class="background-image" css="background: url(${content.image}) 50% 50% / cover no-repeat;"></div>
 
     <div class="nav-button left">
       <a class="button" route-href="route: home;">
@@ -15,21 +15,21 @@
     </div>
 
     <main class="container">
-      <h1 class="title uk-light">${post.headline}</h1>
+      <h1 class="title uk-light">${content.headline}</h1>
 
       <section id="post-cover">
         <div class="segment pad-medium-up">
           <div class="spread attached">
             <main class="cover-main uk-box-shadow-medium" css="background: ${theme.coverColor}">
               <div class="aspect-phi-landscape">
-                <img src.bind="post.image" class="blend-bottom object-fit-cover" />
+                <img src.bind="content.image" class="blend-bottom object-fit-cover" />
               </div>
               <div class="content cover-content">
-                <player playlist.bind="post"></player>
+                <player playlist.bind="content"></player>
               </div>
               <div class="content">
                 <div class="info">
-                  <a href.bind="post.audio.contentUrl">
+                  <a href.bind="content.audio.contentUrl">
                     <i class="fal fa-download"></i> Download
                   </a>
                 </div>
@@ -38,8 +38,8 @@
             <aside>
               <div class="tracklist">
                 <ul class="plain">
-                  <li repeat.for="track of post.tracks" click.delegate="player.togglePlay(post, $index)" 
-                    class.one-time="$index < post.tracks.length / 2 ? 'first-half' : ''">
+                  <li repeat.for="track of content.tracks" click.delegate="player.togglePlay(post, $index)" 
+                    class.one-time="$index < content.tracks.length / 2 ? 'first-half' : ''">
                     <h1 class="track-title">${track.name}</h1>
                     <span class="track-info">${track.byArtist} · ${track.copyrightYear}</span>
                   </li>
@@ -55,12 +55,12 @@
           <div class="spread">
             <main class="content-main">
               <div class="excerpt">
-                <p>${post.description}</p>
+                <p>${content.description}</p>
               </div>
-              <article innerhtml.bind="post.text"></article>
+              <article innerhtml.bind="content.text"></article>
             </main>
             <aside>
-              <disqus identifier.bind="post._id" url.bind="url" title.bind="post.headline"></disqus>
+              <disqus identifier.bind="content._id" url.bind="url" title.bind="content.headline"></disqus>
             </aside>
           </div>
         </div>
