@@ -7,12 +7,16 @@ import {EditorPanel} from '../interfaces';
 @autoinject
 export class MusicPlaylistTracksCustomElement implements EditorPanel {
   public actions = [];
-  public selectedTrackNumber: number = 0;
+  public model: any;
 
   public constructor(public editor: Editor) {}
 
   bind() {
     this.editor.setPanel(this);
+  }
+
+  activate(model: any) {
+    this.model = model;
   }
 
   get post() {
@@ -21,16 +25,16 @@ export class MusicPlaylistTracksCustomElement implements EditorPanel {
 
   public addTrack() {
     this.post.addTrack('New track', '', 2020, new Duration(3, 0));
-    this.selectedTrackNumber = this.post.tracks.length - 1;
+    this.model.trackIndex = this.post.tracks.length - 1;
   }
 
   public removeSelectedTrack() {
     if (this.track === undefined) {
       throw Error('No track selected');
     }
-    this.post.removeTrack(this.selectedTrackNumber);
-    if (this.selectedTrackNumber && this.selectedTrackNumber >= this.post.tracks.length) {
-      this.selectedTrackNumber = this.post.tracks.length - 1;
+    this.post.removeTrack(this.model.trackIndex);
+    if (this.model.trackIndex && this.model.trackIndex >= this.post.tracks.length) {
+      this.model.trackIndex = this.post.tracks.length - 1;
     }
   }
 
@@ -39,6 +43,6 @@ export class MusicPlaylistTracksCustomElement implements EditorPanel {
   }
 
   public get track(): Track | undefined {
-    return this.post.tracks[this.selectedTrackNumber]
+    return this.post.tracks[this.model.trackIndex]
   }
 }

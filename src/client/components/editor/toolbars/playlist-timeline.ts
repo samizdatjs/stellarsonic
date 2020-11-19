@@ -1,16 +1,15 @@
-import {autoinject, bindable, observable, BindingEngine, Disposable} from 'aurelia-framework';
+import {autoinject, observable, BindingEngine, Disposable} from 'aurelia-framework';
 import {Player} from '@domain/player';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {Track} from '@domain/models/track';
-import { Editor } from '@client/services/editor';
+import {Editor} from '@client/services/editor';
 
 @autoinject
 export class PlaylistTimelineCustomElement {
   @observable playlist!: MusicPlaylist;
-  @bindable select!: Function;
-  @bindable selected!: number;
   subscription: Disposable | undefined;
 
+  public model: any;
   public trackWidths: string[] = [];
   
   public constructor(
@@ -34,6 +33,10 @@ export class PlaylistTimelineCustomElement {
       .subscribe(() => { 
         this.updateTrackWidths()
       });
+  }
+
+  activate(model: any) {
+    this.model = model;
   }
 
   detached() {

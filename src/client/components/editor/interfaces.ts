@@ -18,6 +18,7 @@ export interface MenuItem {
   actions?: MenuAction[];
   component?: string;
   toolbar?: string;
+  model?: any;
 }
 
 export interface Menu {

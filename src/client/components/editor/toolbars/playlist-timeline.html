@@ -11,8 +11,8 @@
     <ul class="track-handles plain">
       <li repeat.for="track of playlist.tracks"
         css="width: ${trackWidths[$index]}"
-        class="${$index === selected ? 'selected' : ''}"
-        click.delegate="select({index: $index})">
+        class="${$index === model.trackIndex ? 'selected' : ''}"
+        click.delegate="model.trackIndex = $index">
       </li>
     </ul>
   </div>
