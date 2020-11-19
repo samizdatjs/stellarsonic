@@ -20,7 +20,7 @@ export class MusicPlaylistTracksCustomElement implements EditorPanel {
   }
 
   get post() {
-    return this.editor.post;
+    return this.editor.page.content;
   }
 
   public addTrack() {

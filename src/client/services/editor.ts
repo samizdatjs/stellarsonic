@@ -1,4 +1,5 @@
 import {EditorPanel, Menu, MenuAction} from "@client/components/editor/interfaces";
+import { Page } from "@client/interfaces";
 import { EventAggregator } from "aurelia-event-aggregator";
 import { autoinject } from "aurelia-framework";
 import {NavigationInstruction, PipelineResult, Router, RouterEvent} from "aurelia-router";
@@ -12,8 +13,7 @@ export class Editor extends EventEmitter {
   public nav: number | undefined;
   public menu: Menu = { items: [] };
   public actions: MenuAction[] = [];
-  public settings: any;
-  public post: any;
+  public page: Page = { settings: {}, theme: {}};
 
   constructor(ea: EventAggregator) {
     super();
@@ -32,6 +32,10 @@ export class Editor extends EventEmitter {
   public setPanel(panel: EditorPanel) {
     this.actions = panel.actions;
     this.emit('navigate', this.nav);
+  }
+
+  public setPage(page: Page) {
+    this.page = page;
   }
 
   navigate(to?: number) {

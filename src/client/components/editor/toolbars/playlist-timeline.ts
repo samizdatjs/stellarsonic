@@ -18,7 +18,7 @@ export class PlaylistTimelineCustomElement {
     private bindingEngine: BindingEngine,
     private editor: Editor,
   ) {
-    this.playlist = this.editor.post;
+    this.playlist = this.editor.page.content;
   }
 
   updateTrackWidths() {

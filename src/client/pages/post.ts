@@ -25,9 +25,15 @@ export class Post implements Page {
   async activate(params: any, routeConfig: RouteConfig) {
     const collection = await this.database.collection('articles');
     this.content = await collection.findOne({_id: params.id});
+    this.settings = await this.theming.settings(routeConfig, params);
     this.seo.update(this.content);
-    this.editor.post = this.content;
-    this.settings = this.editor.settings = await this.theming.settings(routeConfig, params);
+    this.editor.setPage({
+      route: routeConfig.name,
+      content: this.content,
+      settings: this.settings,
+      theme: this.theme,
+    });
+    // this.editor.post = this.content;
   }
 
   get url() {

@@ -18,7 +18,12 @@ export class Home {
   async activate(params: any, routeConfig: RouteConfig) {
     await this.postFeed.refresh();
     await this.genres.refresh();
-    this.settings = this.editor.settings = await this.theming.settings(routeConfig, params);
+    this.settings = await this.theming.settings(routeConfig, params);
+    this.editor.setPage({
+      route: routeConfig.name,
+      settings: this.settings,
+      theme: this.theme,
+    });
   }
 
   get posts() {

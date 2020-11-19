@@ -1,6 +1,6 @@
 export interface Page {
-  route: string;
+  route?: string;
   settings: any;
-  content: any;
+  content?: any;
   theme: any;
 }

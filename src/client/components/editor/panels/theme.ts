@@ -16,11 +16,11 @@ export class ThemeCustomElement implements EditorPanel {
   }
 
   public get theme() {
-    return this.theming.theme(this.editor.settings.theme);
+    return this.theming.theme(this.editor.page.settings.theme);
   }
 
   public get selectedThemeConfig() {
-    return this.editor.settings.themeConfig[this.editor.settings.theme];
+    return this.editor.page.theme;
   }
 
   private save() {
