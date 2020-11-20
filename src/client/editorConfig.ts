@@ -1,4 +1,5 @@
 import {PLATFORM} from "aurelia-framework";
+import { Page } from "./interfaces";
 
 export const panels = {
   theme: PLATFORM.moduleName('components/editor/panels/theme'),
@@ -31,7 +32,14 @@ export const editorConfig = {
       { title: 'Settings', icon: 'settings', component: panels.theme },
       { title: 'Assets', icon: 'cloud-upload', component: panels.assets },
       { title: 'Content', icon: 'file-edit', component: panels.musicPlaylistContent },
-      { title: 'Text', icon: 'file-text', component: panels.text },
+      {
+        title: 'Text',
+        icon: 'file-text',
+        component: panels.text,
+        model: (page: Page) => {
+          return { data: page.content, key: 'text' }
+        }
+      },
       { 
         title: 'Playlist',
         icon: 'play',
