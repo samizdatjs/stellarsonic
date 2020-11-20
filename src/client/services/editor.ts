@@ -1,4 +1,4 @@
-import {EditorPanel, Menu, MenuAction} from "@client/components/editor/interfaces";
+import {EditorPanelComponent, Menu, MenuAction} from "@client/components/editor/interfaces";
 import { Page } from "@client/interfaces";
 import { EventAggregator } from "aurelia-event-aggregator";
 import { autoinject } from "aurelia-framework";
@@ -29,7 +29,7 @@ export class Editor extends EventEmitter {
     this.active = !this.active;
   }
 
-  public setPanel(panel: EditorPanel) {
+  public setPanel(panel: EditorPanelComponent) {
     this.actions = panel.actions;
     this.emit('navigate', this.nav);
   }
@@ -40,7 +40,7 @@ export class Editor extends EventEmitter {
 
   navigate(to?: number) {
     this.nav = to;
-    this.toolbar = to !== undefined && this.menu.items[to].toolbar !== undefined;
+    this.toolbar = to !== undefined && this.menu.items[to].panel.toolbar !== undefined;
     this.emit('navigate', to);
   }
 }

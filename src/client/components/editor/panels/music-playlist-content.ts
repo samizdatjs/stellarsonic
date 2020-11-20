@@ -1,9 +1,9 @@
 import {autoinject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
-import {EditorPanel} from '../interfaces';
+import {EditorPanelComponent} from '../interfaces';
 
 @autoinject
-export class MusicPlaylistContentCustomElement implements EditorPanel {
+export class MusicPlaylistContentCustomElement implements EditorPanelComponent {
   public actions = [];
 
   public constructor(public editor: Editor) {}

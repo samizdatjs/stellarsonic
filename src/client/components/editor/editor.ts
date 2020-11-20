@@ -11,10 +11,10 @@ export class EditorCustomElement {
   }
 
   model(item: MenuItem) {
-    if (typeof item.model === 'function') {
-      return item.model(this.editor.page);
+    if (typeof item.panel.model === 'function') {
+      return item.panel.model(this.editor.page);
     } else {
-      return item.model;
+      return item.panel.model;
     }
   }
 }

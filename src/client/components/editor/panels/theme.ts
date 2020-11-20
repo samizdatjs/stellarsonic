@@ -1,10 +1,10 @@
 import {autoinject} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
 import {Editor} from '@client/services/editor';
-import {EditorPanel} from '../interfaces';
+import {EditorPanelComponent} from '../interfaces';
 
 @autoinject
-export class ThemeCustomElement implements EditorPanel {
+export class ThemeCustomElement implements EditorPanelComponent {
   public actions = [
     { title: 'Save', call: () => this.save() }
   ]

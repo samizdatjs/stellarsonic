@@ -1,3 +1,5 @@
+import { EditorPanel } from '../../interfaces';
+
 export interface EditorNav {
   mode: string;
   tab?: string | number;
@@ -15,10 +17,7 @@ export interface MenuAction {
 export interface MenuItem {
   title: string;
   icon?: string;
-  actions?: MenuAction[];
-  component?: string;
-  toolbar?: string;
-  model?: any;
+  panel: EditorPanel;
 }
 
 export interface Menu {
@@ -26,6 +25,6 @@ export interface Menu {
   items: MenuItem[];
 }
 
-export interface EditorPanel {
+export interface EditorPanelComponent {
   actions: MenuAction[];
 }

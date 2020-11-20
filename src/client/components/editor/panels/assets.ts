@@ -1,10 +1,10 @@
 import {autoinject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
 import {ContentService} from '@client/services/content';
-import {EditorPanel} from '../interfaces';
+import {EditorPanelComponent} from '../interfaces';
 
 @autoinject
-export class AssetsCustomElement implements EditorPanel {
+export class AssetsCustomElement implements EditorPanelComponent {
   public images: ContentService;
   public audio: ContentService;
   public actions = [];
