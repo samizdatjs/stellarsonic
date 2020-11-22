@@ -1,12 +1,13 @@
 <template>
   <require from="components/editor/navitem.html"></require>
 
-  <nav
-    class="uk-navbar-container uk-padding uk-padding-remove-vertical editor-navbar uk-animation-slide-top-small"
-    uk-navbar="mode: click"
-    if.bind="actions.length > 0"
-  >
+  <div class="uk-navbar-left uk-animation-slide-top-small"">
     <ul class="uk-navbar-nav">
+      <li>
+        <a click.delegate="editor.navigate()">
+          <navitem item.bind="{ title: 'Menu', icon: 'chevron-left'}"></navitem>
+        </a>
+      </li>
       <li repeat.for="action of actions">
         <a if.bind="action.call" click.delegate="call(action)">
           <navitem item.bind="action"></navitem>
@@ -22,5 +23,4 @@
         </a>
       </li>
     </ul>
-  </nav>
 </template>

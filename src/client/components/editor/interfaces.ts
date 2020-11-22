@@ -24,7 +24,3 @@ export interface Menu {
   actions?: MenuAction[];
   items: MenuItem[];
 }
-
-export interface EditorPanelComponent {
-  actions: MenuAction[];
-}

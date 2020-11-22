@@ -1,8 +1,8 @@
-import {EditorPanelComponent, Menu, MenuAction} from "@client/components/editor/interfaces";
+import {Menu, MenuAction, MenuItem} from "@client/components/editor/interfaces";
 import { Page } from "@client/interfaces";
-import { EventAggregator } from "aurelia-event-aggregator";
+import {EventAggregator} from "aurelia-event-aggregator";
 import { autoinject } from "aurelia-framework";
-import {NavigationInstruction, PipelineResult, Router, RouterEvent} from "aurelia-router";
+import {NavigationInstruction, PipelineResult, RouterEvent} from "aurelia-router";
 import {EventEmitter} from 'eventemitter3';
 import {editorConfig} from '../editorConfig';
 
@@ -14,6 +14,7 @@ export class Editor extends EventEmitter {
   public menu: Menu = { items: [] };
   public actions: MenuAction[] = [];
   public page: Page = { settings: {}, theme: {}};
+  public activeMenuItem: MenuItem | undefined;
 
   constructor(ea: EventAggregator) {
     super();
@@ -29,11 +30,6 @@ export class Editor extends EventEmitter {
     this.active = !this.active;
   }
 
-  public setPanel(panel: EditorPanelComponent) {
-    this.actions = panel.actions;
-    this.emit('navigate', this.nav);
-  }
-
   public setPage(page: Page) {
     this.page = page;
   }
@@ -41,6 +37,7 @@ export class Editor extends EventEmitter {
   navigate(to?: number) {
     this.nav = to;
     this.toolbar = to !== undefined && this.menu.items[to].panel.toolbar !== undefined;
+    this.activeMenuItem = this.nav !== undefined ? this.menu.items[this.nav] : undefined;
     this.emit('navigate', to);
   }
 }

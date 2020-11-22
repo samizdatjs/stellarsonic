@@ -3,20 +3,18 @@ import {Person} from '@domain/interfaces';
 import {AuthorListView} from '@client/views';
 import {Editor} from '@client/services/editor';
 import UIkit from 'uikit';
-import {EditorPanelComponent} from '../interfaces';
 
 @inject(AuthorListView, Editor)
-export class AuthorListCustomElement implements EditorPanelComponent {
+export class AuthorListCustomElement {
   public selected: Person | undefined;
   public actions = [
-    { title: 'Create', icon: 'plus', call: () => this.edit({ givenName: '', familyName: '', email: '' }) }
+    { title: 'Add', icon: 'plus', call: () => this.edit({ givenName: '', familyName: '', email: '' }) }
   ]
 
-  constructor(private authors: AuthorListView, private editor: Editor) {}
+  constructor(private authors: AuthorListView) {}
 
   async bind() {
     this.authors.refresh();
-    this.editor.setPanel(this);
   }
 
   public select(author: Person) {

@@ -2,10 +2,9 @@ import {inject} from 'aurelia-framework';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {PostListView} from '@client/views';
 import {Editor} from '@client/services/editor';
-import {EditorPanelComponent} from '../interfaces';
 
 @inject(PostListView, Editor)
-export class PostListCustomElement implements EditorPanelComponent {
+export class PostListCustomElement {
   public selected: MusicPlaylist | undefined;
   public actions = [
     { title: 'Create', icon: 'plus', call: () => this.createPost() }
@@ -15,7 +14,6 @@ export class PostListCustomElement implements EditorPanelComponent {
 
   async bind() {
     this.posts.refresh();
-    this.editor.setPanel(this);
   }
 
   createPost() {

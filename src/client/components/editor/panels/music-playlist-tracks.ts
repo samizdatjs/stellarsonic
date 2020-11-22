@@ -2,18 +2,13 @@ import {autoinject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
 import {Track} from '@domain/models/track';
 import {Duration} from '@domain/models/duration';
-import {EditorPanelComponent} from '../interfaces';
 
 @autoinject
-export class MusicPlaylistTracksCustomElement implements EditorPanelComponent {
+export class MusicPlaylistTracksCustomElement {
   public actions = [];
   public model: any;
 
   public constructor(public editor: Editor) {}
-
-  bind() {
-    this.editor.setPanel(this);
-  }
 
   activate(model: any) {
     this.model = model;

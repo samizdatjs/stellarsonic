@@ -1,9 +1,8 @@
 import {autoinject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
-import {EditorPanelComponent} from '../interfaces';
 
 @autoinject
-export class TextCustomElement implements EditorPanelComponent {
+export class TextCustomElement {
   public actions = [];
   public model: any;
 
@@ -11,9 +10,5 @@ export class TextCustomElement implements EditorPanelComponent {
 
   activate(model: any) {
     this.model = model;
-  }
-
-  bind() {
-    this.editor.setPanel(this);
   }
 }

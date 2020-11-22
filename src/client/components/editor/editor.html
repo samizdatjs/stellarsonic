@@ -4,8 +4,9 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <navbar if.bind="!section || !section.panel.toolbar"></navbar>
-  <compose if.bind="section && section.panel.toolbar" view-model.bind="section.panel.toolbar" model.bind="model(section)"></compose>
+  <div if.bind="section && section.panel.toolbar">
+    <compose view-model.bind="section.panel.toolbar" model.bind="model(section)"></compose>
+  </div>
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.nav === undefined">
     <div class="uk-padding">

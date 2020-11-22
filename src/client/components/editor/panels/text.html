@@ -1,4 +1,8 @@
 <template>
+  <require from="components/editor/navbar"></require>
+
+  <navbar></navbar>
+
   <div class="text-editor">
     <textarea class="uk-textarea" value.bind="model.data[model.key]" spellcheck="false" style="height: 100%"></textarea>
   </div>
