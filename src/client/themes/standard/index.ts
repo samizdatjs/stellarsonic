@@ -14,14 +14,18 @@ export class StandardHomeTheme {}
   id: 'standard',
   type: 'playlist',
   moduleId: PLATFORM.moduleName('themes/standard/playlist'),
+  groups: {
+    'Cover': ['coverColor'],
+    'Background': ['backgroundColor', 'backgroundOpacity']
+  }
 })
 export class StandardPlaylistTheme {
-  @color('Cover color')
+  @color('Color')
   coverColor = 'rgb(0,0,0)';
 
-  @color('Background color')
+  @color('Color')
   backgroundColor = 'rgb(0,0,0)';
 
-  @range('Background opacity', 0, 1, 0.01)
+  @range('Opacity', 0, 1, 0.01)
   backgroundOpacity = 0.03;
 }

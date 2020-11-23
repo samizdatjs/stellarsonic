@@ -1,6 +1,6 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
-import {EditorPanel, Page, SettingAnnotation} from '@client/interfaces';
+import {EditorPanel, Page, SettingAnnotation, ThemeAnnotation} from '@client/interfaces';
 
 export class ThemePanel extends EditorPanel<Page> {
   component = {
@@ -22,6 +22,7 @@ export class ThemeCustomElement {
   settings: any;
   data: any;
   contentId: string | undefined;
+  themeMeta!: ThemeAnnotation;
 
   public constructor(private theming: Theming) {}
 
@@ -29,6 +30,16 @@ export class ThemeCustomElement {
     this.contentId = page.content ? page.content._id : null;
     this.data = page.theme;
     this.settings = SettingAnnotation.onClass(this.data.constructor);
+    this.themeMeta = ThemeAnnotation.onClass(this.data.constructor)[0];
+  }
+
+  get groupNames(): string[] {
+    return this.themeMeta.groups ? Object.keys(this.themeMeta.groups) : []
+  }
+
+  groupSettings(name: string): string[] {
+    const keys = this.themeMeta.groups ? this.themeMeta.groups[name] : [];
+    return this.settings.filter((s: any) => keys.includes(s.key));
   }
 
   private save() {

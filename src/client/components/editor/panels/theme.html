@@ -9,7 +9,20 @@
     <option repeat.for="t of theming.themes(theme.type)" value.bind="t.id">${t.name}</option>
   </select>
 -->
-  <div class="uk-margin" repeat.for="setting of settings">
-    <setting data.bind="data" key.bind="setting.key"></setting>
+  <ul uk-accordion if.bind="themeMeta.groups">
+    <li repeat.for="name of groupNames">
+      <a class="uk-accordion-title" href="#">${name}</a>
+      <div class="uk-accordion-content">
+        <div class="uk-margin" repeat.for="setting of groupSettings(name)">
+          <setting data.bind="data" key.bind="setting.key"></setting>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div if.bind="!themeMeta.groups">
+    <div class="uk-margin" repeat.for="setting of settings">
+      <setting data.bind="data" key.bind="setting.key"></setting>
+    </div>
   </div>
 </template>

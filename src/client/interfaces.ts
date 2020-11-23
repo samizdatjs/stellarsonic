@@ -40,15 +40,16 @@ export class SettingAnnotation extends Annotation {
 }
 
 export interface ThemeConfig {
-  id: string,
-  type: string,
-  moduleId: string,
+  id: string;
+  type: string;
+  moduleId: string;
+  groups?: Record<string, string[]>;
 }
 
 export class ThemeAnnotation extends Annotation implements ThemeConfig {
-  public constructor(public id: string, public type: string, public moduleId: string) {
+  public constructor(public id: string, public type: string, public moduleId: string, public groups: Record<string, string[]> | undefined) {
     super();
   }
 }
 
-export const theme = ({id, type, moduleId}: ThemeConfig) => classDecorator(() => new ThemeAnnotation(id, type, moduleId));
+export const theme = ({id, type, moduleId, groups}: ThemeConfig) => classDecorator(() => new ThemeAnnotation(id, type, moduleId, groups));
