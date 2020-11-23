@@ -2,10 +2,11 @@ import {autoinject} from 'aurelia-framework';
 import {RouteConfig} from 'aurelia-router';
 import {Player} from '@domain/player';
 import {MusicPlaylist} from '@domain/models/music-playlist';
+import {StandardPlaylistSettings} from '.';
 
 @autoinject
 export class Playlist {
-  public theme: any;
+  public theme!: StandardPlaylistSettings;
   public content!: MusicPlaylist;
 
   public constructor(

@@ -1,6 +1,6 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
-import {EditorPanel, Page} from '@client/interfaces';
+import {EditorPanel, Page, ThemeSettingAnnotation} from '@client/interfaces';
 
 export class ThemePanel extends EditorPanel<Page> {
   component = {
@@ -19,14 +19,14 @@ export class ThemeCustomElement {
     { title: 'Save', call: () => this.save() }
   ]
 
-  theme: any;
-  selectedThemeConfig: any;
+  settings: any;
+  data: any;
 
   public constructor(private theming: Theming) {}
 
   activate(page: Page) {
-    this.theme = this.theming.theme(page.settings.theme);
-    this.selectedThemeConfig = page.theme;
+    this.data = page.theme;
+    this.settings = ThemeSettingAnnotation.onClass(this.data.constructor);
   }
 
   private save() {

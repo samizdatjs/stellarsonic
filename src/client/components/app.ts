@@ -28,18 +28,20 @@ export class App {
         this.seo.update(content);
       }
 
-      const pageSettings = await this.theming.settings(instruction);
-      const themeSettings = pageSettings.themeConfig[pageSettings.theme];
+      const theme = await this.theming.settings(instruction);
+
+      // const pageSettings = await this.theming.settings(instruction);
+      // const themeSettings = pageSettings.themeConfig[pageSettings.theme];
       const page: Page = {
         route: instruction.config.name,
-        settings: pageSettings,
-        theme: themeSettings,
+        settings: {}, // pageSettings,
+        theme: theme.settings,
         content: content,
       }
 
       this.editor.setPage(page);
 
-      instruction.config.moduleId = PLATFORM.moduleName(`themes/${pageSettings.theme}/${instruction.config.name}`);
+      instruction.config.moduleId = PLATFORM.moduleName(`themes/${theme.name}/${instruction.config.name}`);
       instruction.config.settings = page;
       instruction.config.href = instruction.fragment
 
