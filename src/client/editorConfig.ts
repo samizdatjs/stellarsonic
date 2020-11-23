@@ -1,51 +1,10 @@
-import {PLATFORM} from "aurelia-framework";
-import {EditorPanel, Page} from "./interfaces";
-
-export interface DataBindingModel {
-  data: any;
-  key: string;
-}
-
-export class TextEditorPanel extends EditorPanel<DataBindingModel> {
-  component = PLATFORM.moduleName('components/editor/panels/text');
-}
-
-export class ThemePanel extends EditorPanel {
-  component = PLATFORM.moduleName('components/editor/panels/theme');
-}
-
-export class AssetsPanel extends EditorPanel {
-  component = PLATFORM.moduleName('components/editor/panels/assets');
-}
-
-export class AuthorsPanel extends EditorPanel {
-  component = PLATFORM.moduleName('components/editor/panels/author-list');
-}
-
-export class PostsPanel extends EditorPanel {
-  component = PLATFORM.moduleName('components/editor/panels/post-list');
-}
-
-export class MusicPlaylistContentPanel extends EditorPanel {
-  component = PLATFORM.moduleName('components/editor/panels/music-playlist-content');
-
-  public constructor() {
-    super((page: Page) => page.content)
-  }
-}
-
-export interface MusicPlaylistTracksModel {
-  trackIndex: number;
-}
-
-export class MusicPlaylistTracksPanel extends EditorPanel<MusicPlaylistTracksModel> {
-  component = PLATFORM.moduleName('components/editor/panels/music-playlist-tracks');
-  toolbar = PLATFORM.moduleName('components/editor/toolbars/playlist-timeline');
-
-  public constructor() {
-    super({ trackIndex: 0 });
-  }
-}
+import {TextEditorPanel} from './components/editor/panels/text';
+import {ThemePanel} from './components/editor/panels/theme';
+import {AssetsPanel} from './components/editor/panels/assets';
+import {PostsPanel} from './components/editor/panels/post-list';
+import {AuthorsPanel} from './components/editor/panels/author-list';
+import {MusicPlaylistContentPanel} from './components/editor/panels/music-playlist-content';
+import {MusicPlaylistTracksPanel} from './components/editor/panels/music-playlist-tracks';
 
 export const editorConfig = {
   home: {

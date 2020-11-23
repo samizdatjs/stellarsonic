@@ -7,9 +7,14 @@ export interface Page {
 
 type Model<T> = T | ((page: Page) => T);
 
+export interface Component {
+  view: any;
+  viewModel: any;
+}
+
 export abstract class EditorPanel<T = any> {
-  public abstract component: string;
-  public toolbar: string | undefined;
+  public abstract component: Component;
+  public toolbar: Component | undefined;
 
   public constructor(public model?: Model<T>) {}
 }

@@ -1,21 +1,40 @@
-import {autoinject} from 'aurelia-framework';
-import {Editor} from '@client/services/editor';
+import {PLATFORM, autoinject, observable, BindingEngine, Disposable} from 'aurelia-framework';
+import {Player} from '@domain/player';
 import {Track} from '@domain/models/track';
 import {Duration} from '@domain/models/duration';
+import {EditorPanel, Page} from '@client/interfaces';
+import {MusicPlaylist} from '@domain/models/music-playlist';
 
-@autoinject
+export interface MusicPlaylistTracksModel {
+  content: MusicPlaylist;
+  trackIndex: number;
+}
+
+export class MusicPlaylistTracksPanel extends EditorPanel<MusicPlaylistTracksModel> {
+  component = {
+    viewModel: MusicPlaylistTracksCustomElement,
+    view: PLATFORM.moduleName('components/editor/panels/music-playlist-tracks.html'),
+  }
+  toolbar = {
+    viewModel: MusicPlaylistTimelineCustomElement,
+    view: PLATFORM.moduleName('components/editor/panels/music-playlist-timeline.html'),
+  }
+
+  public constructor() {
+    super((page: Page) => ({ content: page.content, trackIndex: 0 }));
+  }
+}
+
 export class MusicPlaylistTracksCustomElement {
   public actions = [];
-  public model: any;
+  public model!: MusicPlaylistTracksModel;
 
-  public constructor(public editor: Editor) {}
-
-  activate(model: any) {
+  activate(model: MusicPlaylistTracksModel) {
     this.model = model;
   }
 
   get post() {
-    return this.editor.page.content;
+    return this.model.content;
   }
 
   public addTrack() {
@@ -39,5 +58,61 @@ export class MusicPlaylistTracksCustomElement {
 
   public get track(): Track | undefined {
     return this.post.tracks[this.model.trackIndex]
+  }
+}
+
+
+@autoinject
+export class MusicPlaylistTimelineCustomElement {
+  @observable playlist!: MusicPlaylist;
+  subscription: Disposable | undefined;
+
+  public model: any;
+  public trackWidths: string[] = [];
+  
+  public constructor(
+    private player: Player,
+    private element: Element,
+    private bindingEngine: BindingEngine,
+  ) {}
+
+  updateTrackWidths() {
+    this.trackWidths = this.playlist.tracks.map(t => this.trackWidth(t));
+  }
+
+  bind() {
+    this.updateTrackWidths()
+
+    this.subscription = this.bindingEngine
+      .propertyObserver(this.playlist, 'durationInSeconds')
+      .subscribe(() => { 
+        this.updateTrackWidths()
+      });
+  }
+
+  activate(model: any) {
+    this.model = model;
+    this.playlist = model.content;
+  }
+
+  detached() {
+    if (this.subscription) {
+      this.subscription.dispose();
+    }
+  }
+
+  trackWidth(track: Track): string {
+    return ((track.duration.inSeconds / this.playlist.durationInSeconds) * 100) + '%';
+  }
+
+  get progressWidth(): string {
+    return ((this.player.audio.currentTime / this.playlist.durationInSeconds) * 100) + '%';
+  }
+
+  seek(event: MouseEvent) {
+    const width = this.element.getBoundingClientRect().width;
+    const amount = (event as any).layerX / width;
+    const time = this.playlist.durationInSeconds * amount;
+    this.player.audio.currentTime = time;
   }
 }

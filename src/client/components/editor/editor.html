@@ -5,7 +5,7 @@
   <require from="styles/animations.styl"></require>
 
   <div if.bind="section && section.panel.toolbar">
-    <compose view-model.bind="section.panel.toolbar" model.bind="model(section)"></compose>
+    <compose view.bind="section.panel.toolbar.view" view-model.bind="viewModel(section.panel.toolbar)" model.bind="model(section)"></compose>
   </div>
 
   <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.nav === undefined">
@@ -17,7 +17,7 @@
   <div repeat.for="item of editor.menu.items">
     <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === $index">
       <div class="uk-padding" if.bind="item.panel.component">
-        <compose view-model.bind="item.panel.component" model.bind="model(item)"></compose>
+        <compose view-model.bind="viewModel(item.panel.component)" model.bind="model(item)" view.bind="item.panel.component.view"></compose>
       </div>
     </div>
   </div>

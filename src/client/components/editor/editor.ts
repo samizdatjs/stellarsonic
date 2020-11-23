@@ -1,10 +1,11 @@
-import {inject} from 'aurelia-framework';
+import {Container, autoinject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
 import {MenuItem} from './interfaces';
+import { Component } from '@client/interfaces';
 
-@inject(Editor)
+@autoinject
 export class EditorCustomElement {
-  constructor(public editor: Editor) {}
+  constructor(public editor: Editor, private container: Container) {}
 
   get section(): MenuItem | undefined {
     return this.editor.activeMenuItem;
@@ -14,9 +15,18 @@ export class EditorCustomElement {
     if (item === undefined) {
       return null;
     } else if (typeof item.panel.model === 'function') {
-      return item.panel.model(this.editor.page);
+      item.panel.model = item.panel.model(this.editor.page);
+    } 
+    return item.panel.model;
+  }
+
+  viewModel(component: Component | undefined) {
+    if (component === undefined) {
+      return null;
+    } else if (typeof component.viewModel === 'function') {
+      return this.container.get(component.viewModel);
     } else {
-      return item.panel.model;
+      return component.viewModel;
     }
   }
 }

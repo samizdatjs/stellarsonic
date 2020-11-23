@@ -1,14 +1,26 @@
-import {autoinject} from 'aurelia-framework';
-import {Editor} from '@client/services/editor';
+import { PLATFORM } from "aurelia-framework";
+import { EditorPanel } from "@client/interfaces";
 
-@autoinject
+export interface DataBindingModel {
+  data: any;
+  key: string;
+}
+
+export class TextEditorPanel extends EditorPanel<DataBindingModel> {
+  component = {
+    viewModel: TextCustomElement,
+    view: PLATFORM.moduleName('components/editor/panels/text.html')
+  }
+
+  // component = TextCustomElement;
+  // view = PLATFORM.moduleName('components/editor/panels/text.html');
+}
+
 export class TextCustomElement {
   public actions = [];
-  public model: any;
+  public model: DataBindingModel | undefined;
 
-  public constructor(public editor: Editor) {}
-
-  activate(model: any) {
+  activate(model: DataBindingModel) {
     this.model = model;
   }
 }

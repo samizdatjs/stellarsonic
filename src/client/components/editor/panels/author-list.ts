@@ -1,10 +1,17 @@
-import {inject} from 'aurelia-framework';
+import {inject, PLATFORM} from 'aurelia-framework';
 import {Person} from '@domain/interfaces';
 import {AuthorListView} from '@client/views';
-import {Editor} from '@client/services/editor';
+import {EditorPanel} from '@client/interfaces';
 import UIkit from 'uikit';
 
-@inject(AuthorListView, Editor)
+export class AuthorsPanel extends EditorPanel {
+  component = {
+    viewModel: AuthorListCustomElement,
+    view: PLATFORM.moduleName('components/editor/panels/author-list.html'),
+  }
+}
+
+@inject(AuthorListView)
 export class AuthorListCustomElement {
   public selected: Person | undefined;
   public actions = [
