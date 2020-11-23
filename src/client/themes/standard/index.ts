@@ -1,5 +1,6 @@
 import {theme} from '@client/interfaces'
 import {color} from '@client/components/editor/settings/color';
+import {range} from '@client/components/editor/settings/range';
 import {PLATFORM} from 'aurelia-framework';
 
 @theme({
@@ -20,4 +21,7 @@ export class StandardPlaylistTheme {
 
   @color('Background color')
   backgroundColor = 'rgb(0,0,0)';
+
+  @range('Background opacity', 0, 1, 0.01)
+  backgroundOpacity = 0.03;
 }
