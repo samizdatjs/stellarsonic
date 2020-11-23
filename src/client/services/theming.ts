@@ -1,6 +1,6 @@
-import { Database } from "@ziqquratu/ziqquratu";
-import { inject } from "aurelia-framework";
-import { RouteConfig } from "aurelia-router";
+import {Database} from "@ziqquratu/ziqquratu";
+import {inject} from "aurelia-framework";
+import {NavigationInstruction} from "aurelia-router";
 
 export const themes = [
   'home-standard',
@@ -15,12 +15,15 @@ export class Theming {
     this.themeSettings = themes.map(t => require(`../themes/${t}/${t}.json`));
   }
 
-  public async settings(routeConfig: RouteConfig, params: any) {
+  public async settings(instruction: NavigationInstruction) {
     const collection = await this.database.collection('settings');
-    const themes = this.themes(routeConfig.name);
+    const themes = this.themes(instruction.config.name);
+    const settingId = instruction.config.name === 'home'
+      ? instruction.config.name
+      : `${instruction.config.name}.${instruction.params.id}`;
 
     const defaultSettings = {
-      _id: this.settingId(routeConfig, params),
+      _id: settingId,
       theme: themes[0].id,
       themeConfig: {} as any,
     };
@@ -28,7 +31,7 @@ export class Theming {
       defaultSettings.themeConfig[t.id] = this.defaultConfig(t);
     }
 
-    const settings = await collection.findOne({_id: this.settingId(routeConfig, params)});
+    const settings = await collection.findOne({_id: settingId});
 
     return Object.assign({}, defaultSettings, settings);
   }
@@ -47,12 +50,5 @@ export class Theming {
       config[setting.key] = setting.value;
     }
     return config;
-  }
-
-  private settingId(routeConfig: RouteConfig, params: any) {
-    switch(routeConfig.name) {
-      case 'post': return `post.${params.id}`;
-      default: return routeConfig.name;
-    }
   }
 }

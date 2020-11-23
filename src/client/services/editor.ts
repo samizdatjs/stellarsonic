@@ -21,6 +21,7 @@ export class Editor extends EventEmitter {
       const route = event.instruction.config.name;
       if (route) {
         this.menu = (configuration as any)[route];
+        this.navigate(undefined);
       }
     });
   }

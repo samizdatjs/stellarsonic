@@ -51,8 +51,8 @@ export async function configure(aurelia: Aurelia): Promise<void> {
     container.register(Provider.ofInstance('stellarsonic.EditorConfiguration', editorConfig));
   });
 
-  PLATFORM.moduleName('themes/home-standard/home-standard.html');
-  PLATFORM.moduleName('themes/musicplaylist-standard/musicplaylist-standard.html');
+  PLATFORM.moduleName('themes/home-standard/home');
+  PLATFORM.moduleName('themes/musicplaylist-standard/post');
 
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('components/app'));

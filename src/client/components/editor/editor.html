@@ -4,21 +4,19 @@
   <require from="styles/editor.styl"></require>
   <require from="styles/animations.styl"></require>
 
-  <div if.bind="section && section.panel.toolbar">
-    <compose view.bind="section.panel.toolbar.view" view-model.bind="viewModel(section.panel.toolbar)" model.bind="model(section)"></compose>
+  <div if.bind="editor.nav !== undefined && section.panel.toolbar">
+    <compose view.bind="section.panel.toolbar.view" view-model.bind="viewModel(section.panel.toolbar)" model.bind="model"></compose>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.nav === undefined">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.nav === undefined">
     <div class="uk-padding">
       <navmenu></navmenu>
     </div>
   </div>
 
-  <div repeat.for="item of editor.menu.items">
-    <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.active && editor.nav === $index">
-      <div class="uk-padding" if.bind="item.panel.component">
-        <compose view-model.bind="viewModel(item.panel.component)" model.bind="model(item)" view.bind="item.panel.component.view"></compose>
-      </div>
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right" if.bind="editor.nav !== undefined">
+    <div class="uk-padding">
+      <compose view-model.bind="viewModel(section.panel.component)" model.bind="model" view.bind="section.panel.component.view"></compose>
     </div>
   </div>
 </template>

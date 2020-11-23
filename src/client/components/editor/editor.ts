@@ -1,23 +1,21 @@
 import {Container, autoinject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
-import {MenuItem} from './interfaces';
-import { Component } from '@client/interfaces';
+import {Component} from '@client/interfaces';
 
 @autoinject
 export class EditorCustomElement {
-  constructor(public editor: Editor, private container: Container) {}
+  model: any;
+  section: any;
 
-  get section(): MenuItem | undefined {
-    return this.editor.activeMenuItem;
-  }
-
-  model(item: MenuItem | undefined) {
-    if (item === undefined) {
-      return null;
-    } else if (typeof item.panel.model === 'function') {
-      item.panel.model = item.panel.model(this.editor.page);
-    } 
-    return item.panel.model;
+  constructor(public editor: Editor, private container: Container) {
+    editor.on('navigate', (to: string) => {
+      if (to !== undefined) {
+        this.section = this.editor.activeMenuItem;
+        this.model = typeof this.section.panel.model === 'function'
+          ? this.section.panel.model(this.editor.page)
+          : this.section.panel.model;
+      }
+    });
   }
 
   viewModel(component: Component | undefined) {
