@@ -1,4 +1,5 @@
-import {setting, theme} from '@client/interfaces'
+import {theme} from '@client/interfaces'
+import {color} from '@client/components/editor/settings/color';
 import {PLATFORM} from 'aurelia-framework';
 
 @theme({
@@ -14,9 +15,9 @@ export class StandardHomeTheme {}
   moduleId: PLATFORM.moduleName('themes/standard/playlist'),
 })
 export class StandardPlaylistTheme {
-  @setting('color', 'Cover color')
+  @color('Cover color')
   coverColor = 'rgb(0,0,0)';
 
-  @setting('color', 'Background color')
+  @color('Background color')
   backgroundColor = 'rgb(0,0,0)';
 }

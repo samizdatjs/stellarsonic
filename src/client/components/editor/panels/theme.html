@@ -1,5 +1,5 @@
 <template>
-  <require from="components/editor/color-picker"></require>
+  <require from="components/editor/setting"></require>
   <require from="components/editor/navbar"></require>
 
   <navbar actions.bind="actions"></navbar>
@@ -10,6 +10,6 @@
   </select>
 -->
   <div class="uk-margin" repeat.for="setting of settings">
-    <color-picker if.bind="setting.type === 'color'" name.bind="setting.name" color.bind="data[setting.key]"></color-picker>
+    <setting data.bind="data" key.bind="setting.key"></setting>
   </div>
 </template>

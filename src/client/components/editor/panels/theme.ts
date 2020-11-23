@@ -1,6 +1,6 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
-import {EditorPanel, Page, ThemeSettingAnnotation} from '@client/interfaces';
+import {EditorPanel, Page, SettingAnnotation} from '@client/interfaces';
 
 export class ThemePanel extends EditorPanel<Page> {
   component = {
@@ -28,7 +28,7 @@ export class ThemeCustomElement {
   activate(page: Page) {
     this.contentId = page.content ? page.content._id : null;
     this.data = page.theme;
-    this.settings = ThemeSettingAnnotation.onClass(this.data.constructor);
+    this.settings = SettingAnnotation.onClass(this.data.constructor);
   }
 
   private save() {

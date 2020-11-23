@@ -1,0 +1,11 @@
+<template>
+  <require from="styles/editor.styl"></require>
+
+  <button class="uk-button uk-width-1-1 uk-box-shadow-small color-picker" click.delegate="inputElement.click()">
+    <div class="color-sample" css="background: ${setting.data[setting.key]}">
+      <span class="" uk-icon="paint-bucket"></span>
+    </div>
+    <span class="color-name">${setting.name}</span>
+  </button>
+  <input ref="inputElement" type="color" value.bind="setting.data[setting.key]" class="color-picker-input"/>
+</template>
