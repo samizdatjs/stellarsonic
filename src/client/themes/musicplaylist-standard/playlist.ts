@@ -1,10 +1,10 @@
 import {autoinject} from 'aurelia-framework';
 import {RouteConfig} from 'aurelia-router';
 import {Player} from '@domain/player';
-import { MusicPlaylist } from '@domain/models/music-playlist';
+import {MusicPlaylist} from '@domain/models/music-playlist';
 
 @autoinject
-export class Post {
+export class Playlist {
   public theme: any;
   public content!: MusicPlaylist;
 

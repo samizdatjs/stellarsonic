@@ -1,5 +1,5 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
-import {ContentService} from '@client/services/content';
+import {Assets} from '@client/services/assets';
 import {EditorPanel, Page} from '@client/interfaces';
 
 export class AssetsPanel extends EditorPanel<Page> {
@@ -15,19 +15,19 @@ export class AssetsPanel extends EditorPanel<Page> {
 
 @autoinject
 export class AssetsCustomElement {
-  public images: ContentService;
-  public audio: ContentService;
+  public images: Assets;
+  public audio: Assets;
   public actions = [];
 
   public constructor() {
-    this.images = new ContentService('image', '')
-    this.audio = new ContentService('audio', '')
+    this.images = new Assets('image', '')
+    this.audio = new Assets('audio', '')
   }
 
   activate(page: Page) {
     if (page.content) {
-      this.images = new ContentService('image', `/images/${page.content._id}`);
-      this.audio = new ContentService('audio', `/audio/${page.content._id}`);
+      this.images = new Assets('image', `/images/${page.content._id}`);
+      this.audio = new Assets('audio', `/audio/${page.content._id}`);
     }
   }
 }

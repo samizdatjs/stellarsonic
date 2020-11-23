@@ -52,7 +52,7 @@ export async function configure(aurelia: Aurelia): Promise<void> {
   });
 
   PLATFORM.moduleName('themes/home-standard/home');
-  PLATFORM.moduleName('themes/musicplaylist-standard/post');
+  PLATFORM.moduleName('themes/musicplaylist-standard/playlist');
 
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('components/app'));

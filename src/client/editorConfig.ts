@@ -15,7 +15,7 @@ export const editorConfig = {
       { title: 'Authors', icon: 'users', panel: new AuthorsPanel() },
     ]
   },
-  post: {
+  playlist: {
     actions: [
       { title: 'Home', icon: 'chevron-left', route: 'home' }
     ],

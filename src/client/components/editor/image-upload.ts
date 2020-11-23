@@ -1,10 +1,10 @@
 import {autoinject, bindable} from 'aurelia-framework';
 import UIkit from 'uikit';
-import {ContentService} from '@client/services/content';
+import {Assets} from '@client/services/assets';
 
 @autoinject
 export class ImageUploadCustomElement {
-  @bindable content!: ContentService;
+  @bindable content!: Assets;
   image: string | undefined;
 
   constructor(private element: Element) {}

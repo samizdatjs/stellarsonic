@@ -1,7 +1,7 @@
 {
   "id": "musicplaylist-standard",
   "name": "Music Playlist Standard",
-  "type": "post",
+  "type": "playlist",
   "settings": [
     {
       "key": "backgroundColor",

@@ -4,18 +4,18 @@ import {PLATFORM} from 'aurelia-pal';
 import {Editor} from '@client/services/editor';
 import {Theming} from '@client/services/theming';
 import {Page} from '@client/interfaces';
-import {Database} from '@ziqquratu/ziqquratu';
 import {SEO} from '@client/services/seo';
+import {Content} from '@client/services/content';
 
-@inject(Editor, Theming, SEO, 'ziqquratu.Database')
+@inject(Editor, Theming, Content, SEO)
 export class App {
   router!: Router;
 
   constructor(
     public editor: Editor,
     private theming: Theming,
+    private contentProvider: Content,
     private seo: SEO,
-    private database: Database,
   ) {}
 
   configureRouter(config: RouterConfiguration, router: Router): void {
@@ -23,11 +23,8 @@ export class App {
     config.title = 'Stellarsonic';
 
     const navStrat = async (instruction: NavigationInstruction) => {
-      let content: any = undefined;
-
-      if (instruction.config.name === 'post') {
-        const collection = await this.database.collection('articles');
-        content = await collection.findOne({_id: instruction.params.id});
+      const content = await this.contentProvider.content(instruction);
+      if (content) {
         this.seo.update(content);
       }
 
@@ -49,7 +46,7 @@ export class App {
     };
     config.map([
       { route: '', name: 'home', navigationStrategy: navStrat },
-      { route: 'posts/:id', name: 'post', navigationStrategy: navStrat },
+      { route: 'playlists/:id', name: 'playlist', navigationStrategy: navStrat },
     ]);
   }
 }
