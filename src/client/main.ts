@@ -9,6 +9,7 @@ import siteConfig from '../config';
 import 'aurelia-animator-css';
 import {AuthorListView, PostFeed, PostGenres, PostListView, PostView, SettingsView} from './views';
 import {PostTransformer} from './lib';
+import {editorConfig} from './editorConfig';
 
 @component({
   providers: [
@@ -46,6 +47,8 @@ export async function configure(aurelia: Aurelia): Promise<void> {
 
   await bootstrap(Application, {
     container: container(aurelia.container)
+  }, async container => {
+    container.register(Provider.ofInstance('stellarsonic.EditorConfiguration', editorConfig));
   });
 
   PLATFORM.moduleName('themes/home-standard/home-standard.html');

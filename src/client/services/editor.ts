@@ -1,12 +1,11 @@
 import {Menu, MenuAction, MenuItem} from "@client/components/editor/interfaces";
-import { Page } from "@client/interfaces";
+import {Page} from "@client/interfaces";
 import {EventAggregator} from "aurelia-event-aggregator";
-import { autoinject } from "aurelia-framework";
+import {inject} from "aurelia-framework";
 import {NavigationInstruction, PipelineResult, RouterEvent} from "aurelia-router";
 import {EventEmitter} from 'eventemitter3';
-import {editorConfig} from '../editorConfig';
 
-@autoinject
+@inject(EventAggregator, 'stellarsonic.EditorConfiguration')
 export class Editor extends EventEmitter {
   public active: boolean = false;
   public toolbar: boolean = false;
@@ -16,12 +15,12 @@ export class Editor extends EventEmitter {
   public page: Page = { settings: {}, theme: {}};
   public activeMenuItem: MenuItem | undefined;
 
-  constructor(ea: EventAggregator) {
+  constructor(ea: EventAggregator, configuration: any) {
     super();
     ea.subscribe(RouterEvent.Complete, (event: { instruction: NavigationInstruction; result: PipelineResult }) => {
       const route = event.instruction.config.name;
       if (route) {
-        this.menu = (editorConfig as any)[route];
+        this.menu = (configuration as any)[route];
       }
     });
   }
