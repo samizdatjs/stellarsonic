@@ -1,8 +1,9 @@
-import {Database} from "@ziqquratu/ziqquratu";
+import {Database, Newable} from "@ziqquratu/ziqquratu";
 import {inject} from "aurelia-framework";
 import {NavigationInstruction} from "aurelia-router";
+import {ThemeAnnotation, ThemeConfig} from "@client/interfaces";
 
-import theme from '../themes/standard';
+import * as theme from '../themes/standard';
 
 export const themes = [
   'standard',
@@ -10,51 +11,59 @@ export const themes = [
 
 @inject('ziqquratu.Database')
 export class Theming {
-  private themeName: string = 'standard';
-  private themeSettings: any[] = [];
-
-  public constructor(private database: Database) {
-    // this.themeSettings = themes.map(t => require(`../themes/${t}/${t}.json`));
-    // console.log(standardTheme);
-  }
+  public constructor(private database: Database) {}
 
   public async settings(instruction: NavigationInstruction) {
     const type = instruction.config.name as string;
 
-    return { name: 'standard', settings: new theme.settings[type] };
+    const theme = this.getTheme(type);
+    const settings = new theme();
 
-    /*
+    try {
+      const data = await this.load(instruction);
+      for (const key of Object.keys(settings)) {
+        (settings as any)[key] = data.settings[key];
+      }
+    } catch (err) {
+      // No settings stored, proceed with defaults
+    }
+
+    return { name: 'standard', settings };
+  }
+
+  private getTheme(type: string) {
+    for (const t of Object.values(theme)) {
+      const config = this.getThemeMeta(t);
+      if (config.type === type) {
+        return t;
+      }
+    }
+    throw Error('No theme defined for type: ' + type);
+  }
+
+  private getThemeMeta(ctr: Newable<any>): ThemeConfig {
+    return ThemeAnnotation.onClass(ctr)[0];
+  }
+
+  public async save(config: any, contentId?: string) {
+    const meta = this.getThemeMeta(config.constructor);
     const collection = await this.database.collection('settings');
-    // const themes = this.themes(instruction.config.name);
-    const settingId = instruction.config.name === 'home'
-      ? instruction.config.name
-      : `${instruction.config.name}.${instruction.params.id}`;
-
-    const defaultSettings = {
-      _id: settingId,
-      theme: this.themeName,
-      themeConfig: {} as any,
-    };
-    for (const t of themes) {
-      for (const type of Object.keys(this.themeSettings.settings) )
-      defaultSettings.themeConfig[t] = this.defaultConfig(t);
-    }
-
-    const settings = await collection.findOne({_id: settingId});
-
-    return Object.assign({}, defaultSettings, settings);
-    */
+    collection.replaceOne({
+      themeId: meta.id,
+      contentId: contentId,
+      type: meta.type
+    }, {
+      themeId: meta.id,
+      contentId: contentId,
+      type: meta.type,
+      settings: config
+    }, {
+      upsert: true
+    });
   }
 
-  public theme(id: string) {
-    return this.themeSettings.find(t => t.id === id);
-  }
-
-  public defaultConfig(theme: any, type: string) {
-    let config = {} as any;
-    for (let setting of theme.settings[type]) {
-      config[setting.key] = setting.value;
-    }
-    return config;
+  public async load(instruction: NavigationInstruction) {
+    const collection = await this.database.collection('settings');
+    return collection.findOne({themeId: 'standard', contentId: instruction.params.id, type: instruction.config.name});
   }
 }

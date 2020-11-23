@@ -21,15 +21,17 @@ export class ThemeCustomElement {
 
   settings: any;
   data: any;
+  contentId: string | undefined;
 
   public constructor(private theming: Theming) {}
 
   activate(page: Page) {
+    this.contentId = page.content ? page.content._id : null;
     this.data = page.theme;
     this.settings = ThemeSettingAnnotation.onClass(this.data.constructor);
   }
 
   private save() {
-    console.log('save settings');
+    this.theming.save(this.data, this.contentId);
   }
 }

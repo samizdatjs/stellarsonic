@@ -1,4 +1,4 @@
-import {propertyDecorator, Annotation} from '@ziqquratu/core';
+import {propertyDecorator, Annotation, classDecorator} from '@ziqquratu/core';
 
 export interface Page {
   route?: string;
@@ -27,8 +27,17 @@ export class ThemeSettingAnnotation extends Annotation {
   }
 }
 
-export const setting = (type: string, name: string) => propertyDecorator((target, key) => new ThemeSettingAnnotation(type, name, key));
-
-export class Theme {
-  public constructor(public name: string, public settings: Record<string, any>) {}
+export interface ThemeConfig {
+  id: string,
+  type: string,
+  moduleId: string,
 }
+
+export class ThemeAnnotation extends Annotation implements ThemeConfig {
+  public constructor(public id: string, public type: string, public moduleId: string) {
+    super();
+  }
+}
+
+export const setting = (type: string, name: string) => propertyDecorator((target, key) => new ThemeSettingAnnotation(type, name, key));
+export const theme = ({id, type, moduleId}: ThemeConfig) => classDecorator(() => new ThemeAnnotation(id, type, moduleId));
