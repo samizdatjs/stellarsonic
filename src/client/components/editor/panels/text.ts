@@ -1,5 +1,5 @@
-import { PLATFORM } from "aurelia-framework";
-import { EditorPanel } from "@client/interfaces";
+import {PLATFORM} from "aurelia-framework";
+import {EditorPanel} from "@client/interfaces";
 
 export interface DataBindingModel {
   data: any;
@@ -11,13 +11,9 @@ export class TextEditorPanel extends EditorPanel<DataBindingModel> {
     viewModel: TextCustomElement,
     view: PLATFORM.moduleName('components/editor/panels/text.html')
   }
-
-  // component = TextCustomElement;
-  // view = PLATFORM.moduleName('components/editor/panels/text.html');
 }
 
 export class TextCustomElement {
-  public actions = [];
   public model: DataBindingModel | undefined;
 
   activate(model: DataBindingModel) {

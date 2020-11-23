@@ -2,14 +2,14 @@ import {autoinject, PLATFORM} from 'aurelia-framework';
 import {ContentService} from '@client/services/content';
 import {EditorPanel, Page} from '@client/interfaces';
 
-export class AssetsPanel extends EditorPanel {
+export class AssetsPanel extends EditorPanel<Page> {
   component = {
     viewModel: AssetsCustomElement,
     view: PLATFORM.moduleName('components/editor/panels/assets.html'),
   }
 
   constructor() {
-    super((page: Page) => page);
+    super(page => page);
   }
 }
 

@@ -2,14 +2,14 @@ import {autoinject, PLATFORM} from 'aurelia-framework';
 import {EditorPanel, Page} from '@client/interfaces';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 
-export class MusicPlaylistContentPanel extends EditorPanel {
+export class MusicPlaylistContentPanel extends EditorPanel<Page> {
   component = {
     viewModel: MusicPlaylistContentCustomElement,
     view: PLATFORM.moduleName('components/editor/panels/music-playlist-content.html'),
   }
 
   public constructor() {
-    super((page: Page) => page.content)
+    super(page => page.content)
   }
 }
 
