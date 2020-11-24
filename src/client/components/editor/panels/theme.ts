@@ -44,10 +44,10 @@ export class ThemeCustomElement {
   }
 
   private save() {
-    this.theming.save(this.data, this.contentId);
+    this.theming.saveConfig(this.data, this.contentId);
   }
 
   private async revert() {
-    await this.theming.revert(this.data, this.contentId)
+    await this.theming.revertConfig(this.data, this.contentId)
   }
 }

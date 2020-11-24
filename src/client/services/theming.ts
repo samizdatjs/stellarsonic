@@ -19,10 +19,7 @@ export class Theming {
     const settings = new theme();
 
     try {
-      const data = await this.load(instruction);
-      for (const key of Object.keys(settings)) {
-        (settings as any)[key] = data.settings[key];
-      }
+      await this.loadConfig(settings, this.themeName, type, instruction.params.id);
     } catch (err) {
       // No settings stored, proceed with defaults
     }
@@ -44,7 +41,11 @@ export class Theming {
     return ThemeAnnotation.onClass(ctr)[0];
   }
 
-  public async save(config: any, contentId?: string) {
+  public get themeName(): string {
+    return this.siteConfig.theme;
+  }
+
+  public async saveConfig(config: any, contentId?: string) {
     const meta = this.getThemeMeta(config.constructor);
     const collection = await this.database.collection('settings');
     collection.replaceOne({
@@ -61,17 +62,16 @@ export class Theming {
     });
   }
 
-  public async load(instruction: NavigationInstruction) {
+  private async loadConfig(target: any, themeId: string, type: string, contentId?: string) {
     const collection = await this.database.collection('settings');
-    return collection.findOne({themeId: 'standard', contentId: instruction.params.id, type: instruction.config.name});
+    const data = await collection.findOne({themeId, type, contentId});
+    for (const key of Object.keys(target)) {
+      target[key] = data.settings[key];
+    }
   }
 
-  public async revert(config: any, contentId?: string) {
+  public async revertConfig(config: any, contentId?: string) {
     const meta = this.getThemeMeta(config.constructor);
-    const collection = await this.database.collection('settings');
-    const data = await collection.findOne({themeId: meta.id, contentId: contentId, type: meta.type});
-    for (const key of Object.keys(config)) {
-      config[key] = data.settings[key];
-    }
+    await this.loadConfig(config, meta.id, meta.type, contentId);
   }
 }
