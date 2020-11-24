@@ -15,8 +15,8 @@
   </div>
 
   <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right ${editor.toolbar ? 'toolbar' : ''}" if.bind="editor.nav !== undefined">
-    <div class="uk-padding">
-      <compose view-model.bind="viewModel(section.panel.component)" model.bind="model" view.bind="section.panel.component.view"></compose>
+    <div class="uk-padding" style="height: 100%; box-sizing: border-box;">
+      <compose containerless view-model.bind="viewModel(section.panel.component)" model.bind="model" view.bind="section.panel.component.view"></compose>
     </div>
   </div>
 </template>
