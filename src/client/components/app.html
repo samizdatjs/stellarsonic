@@ -2,7 +2,7 @@
   <require from="components/editor/editor"></require>
   <require from="styles/app.styl"></require>
 
-  <div class="page-container">
+  <div class="app-container">
     <editor if.bind="env === 'development'"></editor>
 
     <a if.bind="env === 'development'" class="editor-toggle ${editor.active ? 'active' : ''}" click.delegate="editor.toggleActive()" class="uk-inline">
@@ -10,6 +10,8 @@
       <span if.bind="!editor.active" class="uk-position-center" uk-icon="chevron-right"></span>
     </a>
 
-    <router-view class="${editor.active ? 'edit' : ''} ${editor.toolbar ? 'editor-toolbar-full' : ''}"></router-view>
+    <div class="page-container ${editor.active ? 'edit' : ''} ${editor.toolbar ? 'editor-toolbar-full' : ''}">
+      <router-view swap-order="with"></router-view>
+    </div>
   </div>
 </template>

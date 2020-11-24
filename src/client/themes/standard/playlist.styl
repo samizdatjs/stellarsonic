@@ -4,12 +4,12 @@
 // Animation
 //-----------------------------------------------------------------------------
 @keyframes postEnter
-  0% {opacity: 1;}
-  100% {opacity: 1;}
+  0% {transform: translateY(100%);}
+  100% {transform: translateY(0);}
 
 @keyframes postLeave
-  0% {opacity: 1;}
-  100% {opacity: 1;}
+  0% {transform: translateY(0);}
+  100% {transform: translateY(100%);}
 
 @keyframes coverFrameLeave
   0%
@@ -56,7 +56,7 @@
     opacity: 0;
 
 .post.au-enter-active
-  animation: postEnter 0.5s;
+  animation: postEnter 0.5s ease-in-out;
 
   cover
     img
@@ -67,7 +67,7 @@
     animation: playerEnter 0.5s;
 
 .post.au-leave-active
-  animation: postLeave 0.5s;
+  animation: postLeave 1.5s ease-in-out;
 
   cover
     img
