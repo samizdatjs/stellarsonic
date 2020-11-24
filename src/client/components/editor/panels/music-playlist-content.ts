@@ -1,26 +1,44 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {EditorPanel, Page} from '@client/interfaces';
 import {MusicPlaylist} from '@domain/models/music-playlist';
+import {Editor} from '@client/services/editor';
 
-export class MusicPlaylistContentPanel extends EditorPanel<Page> {
+export class MusicPlaylistContentModel {
+  constructor(
+    public playlist: MusicPlaylist,
+    private editor: Editor,
+  ) {}
+
+  async save() {
+    this.playlist = await this.editor.saveContent()
+  }
+}
+
+export class MusicPlaylistContentPanel extends EditorPanel {
   component = {
     viewModel: MusicPlaylistContentCustomElement,
     view: PLATFORM.moduleName('components/editor/panels/music-playlist-content.html'),
   }
 
   public constructor() {
-    super(page => page.content)
+    super((page: Page, editor: Editor) => new MusicPlaylistContentModel(page.content, editor));
   }
 }
 
 @autoinject
 export class MusicPlaylistContentCustomElement {
-  public actions = [];
-  public post: MusicPlaylist | undefined;
+  public actions = [
+    { title: 'save', icon: 'cloud-upload', call: () => this.model.save()}
+  ];
+  public model!: MusicPlaylistContentModel
 
   public constructor() {}
 
-  activate(post: MusicPlaylist) {
-    this.post = post;
+  activate(model: MusicPlaylistContentModel) {
+    this.model = model;
+  }
+
+  get post() {
+    return this.model.playlist;
   }
 }
