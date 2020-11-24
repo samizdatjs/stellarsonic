@@ -1,4 +1,5 @@
 import {Annotation, classDecorator} from '@ziqquratu/core';
+import {Editor} from './services/editor';
 
 export interface Page {
   route?: string;
@@ -6,7 +7,7 @@ export interface Page {
   theme: any;
 }
 
-type Model<T> = T | ((page: Page) => T);
+type Model<T> = T | ((page: Page, editor: Editor) => T);
 
 export interface Component {
   view: any;

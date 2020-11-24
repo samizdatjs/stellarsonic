@@ -4,8 +4,9 @@ import {EventAggregator} from "aurelia-event-aggregator";
 import {inject} from "aurelia-framework";
 import {NavigationInstruction, PipelineResult, RouterEvent} from "aurelia-router";
 import {EventEmitter} from 'eventemitter3';
+import {Content} from "./content";
 
-@inject(EventAggregator, 'stellarsonic.EditorConfiguration')
+@inject(EventAggregator, Content, 'stellarsonic.EditorConfiguration')
 export class Editor extends EventEmitter {
   public active: boolean = false;
   public toolbar: boolean = false;
@@ -15,7 +16,7 @@ export class Editor extends EventEmitter {
   public page: Page = { theme: {}};
   public activeMenuItem: MenuItem | undefined;
 
-  constructor(ea: EventAggregator, configuration: EditorConfig) {
+  constructor(ea: EventAggregator, private contentProvider: Content, configuration: EditorConfig) {
     super();
     ea.subscribe(RouterEvent.Complete, (event: { instruction: NavigationInstruction; result: PipelineResult }) => {
       const route = event.instruction.config.name;
@@ -32,6 +33,12 @@ export class Editor extends EventEmitter {
 
   public setPage(page: Page) {
     this.page = page;
+  }
+
+  public async saveContent() {
+    if (this.page.content) {
+      this.page.content = await this.contentProvider.save(this.page.content, this.page.route || '');
+    }
   }
 
   navigate(to?: number) {

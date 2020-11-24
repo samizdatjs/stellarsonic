@@ -12,7 +12,7 @@ export class EditorCustomElement {
       if (to !== undefined) {
         this.section = this.editor.activeMenuItem;
         this.model = typeof this.section.panel.model === 'function'
-          ? this.section.panel.model(this.editor.page)
+          ? this.section.panel.model(this.editor.page, this.editor)
           : this.section.panel.model;
       }
     });

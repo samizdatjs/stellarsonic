@@ -6,13 +6,13 @@ export class MusicPlaylist {
   public constructor(
     public _id?: string,
     public headline: string = '',
+    public datePublished: string = '',
     public image: string = '',
-    public audio: AudioObject = { contentUrl: '' },
+    public audio: AudioObject = { contentUrl: '', duration: '' },
     public tracks: Track[] = [],
     public genres: string[] = [],
     public keywords: string[] = [],
     public author: Person = { givenName: '', familyName: '', email: '' },
-    public palette: Record<string, string> = {},
     public text: string = '',
   ) {}
 
@@ -20,13 +20,13 @@ export class MusicPlaylist {
     return new MusicPlaylist(
       data._id,
       data.headline,
+      data.datePublished,
       data.image,
       data.audio,
       data.track.map((t: any) => Track.fromJSONLD(t)),
       data.genre,
       data.keywords.split(', '),
       data.author,
-      data.palette,
       data.text,
     );
   }
@@ -62,15 +62,18 @@ export class MusicPlaylist {
       '@context': 'https://schema.org',
       '@type': 'MusicPlaylist',
       _id: this._id,
-      name: this.headline,
-      genre: this.genres,
-      keywords: this.keywords.join(', '),
+      headline: this.headline,
+      datePublished: this.datePublished,
+      image: this.image,
       audio: {
         '@type': 'AudioObject',
         contentUrl: this.audio.contentUrl,
+        duration: this.audio.duration,
       },
       numTracks: this.tracks.length,
       track: this.tracks.map(t => t.toJSONLD()),
+      genre: this.genres,
+      keywords: this.keywords.join(', '),
       author: this.author,
       text: this.text,
     }

@@ -27,7 +27,9 @@ export const editorConfig: EditorConfig = {
       {
         title: 'Text',
         icon: 'file-text',
-        panel: new TextEditorPanel(page => ({data: page.content, key: 'text'}))
+        panel: new TextEditorPanel((page, editor) => {
+          return { data: page.content, key: 'text', save: () => editor.saveContent() }
+        })
       },
       { 
         title: 'Playlist',

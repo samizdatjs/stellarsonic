@@ -10,4 +10,5 @@ export interface Person extends Identifiable {
 
 export interface AudioObject {
   contentUrl: string;
+  duration: string;
 }

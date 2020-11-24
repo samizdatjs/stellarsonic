@@ -1,4 +1,4 @@
-import {Database} from "@ziqquratu/ziqquratu";
+import {Collection, Database} from "@ziqquratu/ziqquratu";
 import {inject} from "aurelia-framework";
 import {NavigationInstruction} from "aurelia-router";
 
@@ -11,11 +11,20 @@ export class Content {
   public constructor(private database: Database) {}
 
   public async content(instruction: NavigationInstruction) {
-    const collectionName = instruction.config.name ? collections[instruction.config.name] : undefined;
-    if (collectionName) {
-      const collection = await this.database.collection(collectionName);
-      return collection.findOne({_id: instruction.params.id});
+    const collection = await this.resolveCollection(instruction.config.name || '');
+    return collection.findOne({_id: instruction.params.id});
+  }
+
+  public async save(doc: any, type: string) {
+    const collection = await this.resolveCollection(type);
+    return collection.replaceOne({_id: doc._id}, doc);
+  }
+
+  private async resolveCollection(type: string): Promise<Collection<any>> {
+    const collectionName = collections[type];
+    if (!collectionName) {
+      throw Error('No collection associated with type: ' + type);
     }
-    return null;
+    return this.database.collection(collectionName);
   }
 }
