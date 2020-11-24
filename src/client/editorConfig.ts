@@ -1,4 +1,4 @@
-import {TextEditorPanel} from './components/editor/panels/text';
+import {TextEditorPanel, TextEditorContent} from './components/editor/panels/text';
 import {ThemePanel} from './components/editor/panels/theme';
 import {AssetsPanel} from './components/editor/panels/assets';
 import {PostsPanel} from './components/editor/panels/post-list';
@@ -27,11 +27,9 @@ export const editorConfig: EditorConfig = {
       {
         title: 'Text',
         icon: 'file-text',
-        panel: new TextEditorPanel((page, editor) => {
-          return { data: page.content, key: 'text', save: () => editor.saveContent() }
-        })
+        panel: TextEditorPanel.forContentKey('text'),
       },
-      { 
+      {
         title: 'Playlist',
         icon: 'play',
         panel: new MusicPlaylistTracksPanel(),

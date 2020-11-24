@@ -37,7 +37,7 @@ export class Editor extends EventEmitter {
 
   public async saveContent() {
     if (this.page.content) {
-      this.page.content = await this.contentProvider.save(this.page.content, this.page.route || '');
+      return this.page.content = await this.contentProvider.save(this.page.content, this.page.route || '');
     }
   }
 
