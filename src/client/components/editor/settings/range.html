@@ -1,7 +1,7 @@
 <template>
   <require from="styles/editor.styl"></require>
 
-  <div class="uk-card uk-card-body uk-box-shadow-small">
+  <div class="uk-card uk-card-body uk-box-shadow-small uk-padding-small range-setting">
     <h3 class="uk-card-title">${setting.name}</h3>
     <input style="width: 100%;" type="range" min.bind="setting.min" max.bind="setting.max" step.bind="setting.step" value.bind="setting.data[setting.key]"/>
   </div>
