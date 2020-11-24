@@ -53,3 +53,30 @@ export class ThemeAnnotation extends Annotation implements ThemeConfig {
 }
 
 export const theme = ({id, type, moduleId, groups}: ThemeConfig) => classDecorator(() => new ThemeAnnotation(id, type, moduleId, groups));
+
+export interface EditorNav {
+  mode: string;
+  tab?: string | number;
+}
+
+export interface MenuAction {
+  title: string;
+  icon?: string;
+  route?: string;
+  toggle?: string;
+  call?: () => any;
+  href?: string;
+}
+
+export interface MenuItem {
+  title: string;
+  icon?: string;
+  panel: EditorPanel;
+}
+
+export interface Menu {
+  actions?: MenuAction[];
+  items: MenuItem[];
+}
+
+export type EditorConfig = Record<string, Menu>;

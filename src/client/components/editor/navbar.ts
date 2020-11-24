@@ -1,7 +1,7 @@
 import {Editor} from '@client/services/editor';
 import {autoinject, bindable} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
-import {MenuAction} from './interfaces';
+import {MenuAction} from '@client/interfaces';
 
 @autoinject
 export class NavbarCustomElement {

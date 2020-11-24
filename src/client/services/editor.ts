@@ -1,4 +1,4 @@
-import {Menu, MenuAction, MenuItem} from "@client/components/editor/interfaces";
+import {Menu, MenuAction, MenuItem, EditorConfig} from "@client/interfaces";
 import {Page} from "@client/interfaces";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {inject} from "aurelia-framework";
@@ -15,7 +15,7 @@ export class Editor extends EventEmitter {
   public page: Page = { settings: {}, theme: {}};
   public activeMenuItem: MenuItem | undefined;
 
-  constructor(ea: EventAggregator, configuration: any) {
+  constructor(ea: EventAggregator, configuration: EditorConfig) {
     super();
     ea.subscribe(RouterEvent.Complete, (event: { instruction: NavigationInstruction; result: PipelineResult }) => {
       const route = event.instruction.config.name;
