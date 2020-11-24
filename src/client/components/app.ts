@@ -30,11 +30,8 @@ export class App {
 
       const theme = await this.theming.settings(instruction);
 
-      // const pageSettings = await this.theming.settings(instruction);
-      // const themeSettings = pageSettings.themeConfig[pageSettings.theme];
       const page: Page = {
         route: instruction.config.name,
-        settings: {}, // pageSettings,
         theme: theme.settings,
         content: content,
       }

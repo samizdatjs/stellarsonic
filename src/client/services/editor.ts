@@ -12,7 +12,7 @@ export class Editor extends EventEmitter {
   public nav: number | undefined;
   public menu: Menu = { items: [] };
   public actions: MenuAction[] = [];
-  public page: Page = { settings: {}, theme: {}};
+  public page: Page = { theme: {}};
   public activeMenuItem: MenuItem | undefined;
 
   constructor(ea: EventAggregator, configuration: EditorConfig) {
