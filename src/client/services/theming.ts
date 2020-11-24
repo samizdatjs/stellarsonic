@@ -2,14 +2,19 @@ import {Database, Newable} from "@ziqquratu/ziqquratu";
 import {inject} from "aurelia-framework";
 import {NavigationInstruction} from "aurelia-router";
 import {ThemeAnnotation, ThemeConfig} from "@client/interfaces";
+import {NotificationService} from "./notification";
 
 export const themes = [
   'standard',
 ];
 
-@inject('ziqquratu.Database', 'stellarsonic.SiteConfig')
+@inject('ziqquratu.Database', 'stellarsonic.SiteConfig', NotificationService)
 export class Theming {
-  public constructor(private database: Database, private siteConfig: any) {}
+  public constructor(
+    private database: Database,
+    private siteConfig: any,
+    private notification: NotificationService
+  ) {}
 
   public async settings(instruction: NavigationInstruction) {
     const themeModule = await import(`@client/themes/${this.siteConfig.theme}`);
@@ -46,20 +51,25 @@ export class Theming {
   }
 
   public async saveConfig(config: any, contentId?: string) {
-    const meta = this.getThemeMeta(config.constructor);
-    const collection = await this.database.collection('settings');
-    collection.replaceOne({
-      themeId: meta.id,
-      contentId: contentId,
-      type: meta.type
-    }, {
-      themeId: meta.id,
-      contentId: contentId,
-      type: meta.type,
-      settings: config
-    }, {
-      upsert: true
-    });
+    try {
+      const meta = this.getThemeMeta(config.constructor);
+      const collection = await this.database.collection('settings');
+      collection.replaceOne({
+        themeId: meta.id,
+        contentId: contentId,
+        type: meta.type
+      }, {
+        themeId: meta.id,
+        contentId: contentId,
+        type: meta.type,
+        settings: config
+      }, {
+        upsert: true
+      });
+      this.notification.success('Theme settings saved');
+    } catch (err) {
+      this.notification.error(err.message);
+    }
   }
 
   private async loadConfig(target: any, themeId: string, type: string, contentId?: string) {
@@ -71,7 +81,12 @@ export class Theming {
   }
 
   public async revertConfig(config: any, contentId?: string) {
-    const meta = this.getThemeMeta(config.constructor);
-    await this.loadConfig(config, meta.id, meta.type, contentId);
+    try {
+      const meta = this.getThemeMeta(config.constructor);
+      await this.loadConfig(config, meta.id, meta.type, contentId);
+      this.notification.success('Theme settings reverted');
+    } catch (err) {
+      this.notification.error(err.message);
+    }
   }
 }

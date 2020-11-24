@@ -45,20 +45,10 @@ export class ThemeCustomElement {
   }
 
   private async save() {
-    await this.theming.saveConfig(this.data, this.contentId);
-    UIkit.notification({
-      message: '<span uk-icon="icon: check" class="uk-margin-right"></span> Theme settings saved',
-      pos: 'bottom-left',
-      timeout: 3000,
-    });
+    this.theming.saveConfig(this.data, this.contentId);
   }
 
   private async revert() {
-    await this.theming.revertConfig(this.data, this.contentId)
-    UIkit.notification({
-      message: '<span uk-icon="icon: check" class="uk-margin-right"></span> Theme settings reverted',
-      pos: 'bottom-left',
-      timeout: 3000,
-    });
+    this.theming.revertConfig(this.data, this.contentId)
   }
 }

@@ -1,14 +1,15 @@
 import {Collection, Database} from "@ziqquratu/ziqquratu";
 import {inject} from "aurelia-framework";
 import {NavigationInstruction} from "aurelia-router";
+import {NotificationService} from './notification';
 
 const collections: Record<string, string> = {
   playlist: 'articles',
 }
 
-@inject('ziqquratu.Database')
+@inject('ziqquratu.Database', NotificationService)
 export class Content {
-  public constructor(private database: Database) {}
+  public constructor(private database: Database, private notification: NotificationService) {}
 
   public async content(instruction: NavigationInstruction) {
     const collection = await this.resolveCollection(instruction.config.name || '');
@@ -16,8 +17,14 @@ export class Content {
   }
 
   public async save(doc: any, type: string) {
-    const collection = await this.resolveCollection(type);
-    return collection.replaceOne({_id: doc._id}, doc);
+    try {
+      const collection = await this.resolveCollection(type);
+      const result = await collection.replaceOne({_id: doc._id}, doc);
+      this.notification.success('Content saved');
+      return result;
+    } catch (err) {
+      this.notification.error(err.message);
+    }
   }
 
   private async resolveCollection(type: string): Promise<Collection<any>> {
