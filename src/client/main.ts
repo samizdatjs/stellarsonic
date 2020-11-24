@@ -35,6 +35,7 @@ import {editorConfig} from './editorConfig';
       use: [caching()]
     }),
     Provider.ofInstance('disqus.Shortname', siteConfig.disqus),
+    Provider.ofInstance('stellarsonic.SiteConfig', siteConfig),
   ],
 })
 export class Application {}
