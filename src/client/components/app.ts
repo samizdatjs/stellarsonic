@@ -7,7 +7,7 @@ import {Page} from '@client/interfaces';
 import {SEO} from '@client/services/seo';
 import {Content} from '@client/services/content';
 
-@inject(Editor, Theming, Content, SEO)
+@inject(Editor, Theming, Content, SEO, 'stellarsonic.Environment')
 export class App {
   router!: Router;
 
@@ -16,6 +16,7 @@ export class App {
     private theming: Theming,
     private contentProvider: Content,
     private seo: SEO,
+    public env: string,
   ) {}
 
   configureRouter(config: RouterConfiguration, router: Router): void {
