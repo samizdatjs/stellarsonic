@@ -1,6 +1,7 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
 import {EditorPanel, Page, SettingAnnotation, ThemeAnnotation} from '@client/interfaces';
+import UIkit from 'uikit';
 
 export class ThemePanel extends EditorPanel<Page> {
   component = {
@@ -43,11 +44,21 @@ export class ThemeCustomElement {
     return this.settings.filter((s: any) => keys.includes(s.key));
   }
 
-  private save() {
-    this.theming.saveConfig(this.data, this.contentId);
+  private async save() {
+    await this.theming.saveConfig(this.data, this.contentId);
+    UIkit.notification({
+      message: '<span uk-icon="icon: check" class="uk-margin-right"></span> Theme settings saved',
+      pos: 'bottom-left',
+      timeout: 3000,
+    });
   }
 
   private async revert() {
     await this.theming.revertConfig(this.data, this.contentId)
+    UIkit.notification({
+      message: '<span uk-icon="icon: check" class="uk-margin-right"></span> Theme settings reverted',
+      pos: 'bottom-left',
+      timeout: 3000,
+    });
   }
 }
