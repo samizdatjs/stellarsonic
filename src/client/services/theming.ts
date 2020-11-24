@@ -66,4 +66,13 @@ export class Theming {
     const collection = await this.database.collection('settings');
     return collection.findOne({themeId: 'standard', contentId: instruction.params.id, type: instruction.config.name});
   }
+
+  public async revert(config: any, contentId?: string) {
+    const meta = this.getThemeMeta(config.constructor);
+    const collection = await this.database.collection('settings');
+    const data = await collection.findOne({themeId: meta.id, contentId: contentId, type: meta.type});
+    for (const key of Object.keys(config)) {
+      config[key] = data.settings[key];
+    }
+  }
 }

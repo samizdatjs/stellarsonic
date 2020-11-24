@@ -16,7 +16,8 @@ export class ThemePanel extends EditorPanel<Page> {
 @autoinject
 export class ThemeCustomElement {
   public actions = [
-    { title: 'Save', call: () => this.save() }
+    { title: 'Save', icon: 'cloud-upload', call: () => this.save() },
+    { title: 'Revert', icon: 'reply', call: () => this.revert() },
   ]
 
   settings: any;
@@ -44,5 +45,9 @@ export class ThemeCustomElement {
 
   private save() {
     this.theming.save(this.data, this.contentId);
+  }
+
+  private async revert() {
+    await this.theming.revert(this.data, this.contentId)
   }
 }
