@@ -1,4 +1,4 @@
-import {Annotation, classDecorator} from '@ziqquratu/core';
+import {Annotation, classDecorator, methodDecorator} from '@ziqquratu/core';
 import {Editor} from './services/editor';
 
 export interface Page {
@@ -80,3 +80,47 @@ export interface Menu {
 }
 
 export type EditorConfig = Record<string, Menu>;
+
+
+export interface ActionConfig {
+  title: string;
+  icon?: string;
+}
+
+export class ActionAnnotation extends Annotation implements ActionConfig {
+  public constructor(
+    public title: string,
+    public icon: string | undefined,
+    public key: string,
+  ) { super() }
+}
+
+export const action = ({title, icon}: ActionConfig) => 
+  methodDecorator((target, key) => new ActionAnnotation(title, icon, key));
+
+export abstract class EditorComponent {
+  public actions: MenuAction[];
+
+  public constructor() {
+    this.actions = this.getActions();
+  }
+
+  private getActions(): MenuAction[] {
+    return ActionAnnotation.onClass(this.constructor, true).map(({title, icon, key}) => {
+      return { title, icon, call: () => (this as any)[key]() };
+    })
+  }
+}
+
+export abstract class ContentEditorComponent extends EditorComponent {
+  public constructor(protected editor: Editor) { super() }
+
+  get content() {
+    return this.editor.page.content;
+  }
+
+  @action({title: 'save', icon: 'cloud-upload'})
+  saveContent() {
+    this.editor.saveContent();
+  }
+}
