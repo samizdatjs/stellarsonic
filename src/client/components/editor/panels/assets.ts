@@ -1,8 +1,9 @@
-import {autoinject, PLATFORM} from 'aurelia-framework';
+import {autoinject, PLATFORM, transient} from 'aurelia-framework';
 import {Assets} from '@client/services/assets';
 import {EditorComponentConfig} from '@client/interfaces';
 import {Editor} from '@client/services/editor';
 
+@transient()
 @autoinject
 export class AssetsCustomElement {
   public images: Assets;
@@ -10,6 +11,7 @@ export class AssetsCustomElement {
   public actions = [];
 
   public constructor(editor: Editor) {
+    console.log('assets');
     const urlImages = editor.page.content ? `/images/${editor.page.content._id}` : '/images';
     const urlAudio = editor.page.content ? `/audio/${editor.page.content._id}` : '/audio';
 

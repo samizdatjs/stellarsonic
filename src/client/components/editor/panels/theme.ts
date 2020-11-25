@@ -1,8 +1,9 @@
-import {autoinject, PLATFORM} from 'aurelia-framework';
+import {autoinject, PLATFORM, transient} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
 import {action, EditorComponent, EditorComponentConfig, SettingAnnotation, ThemeAnnotation} from '@client/interfaces';
 import {Editor} from '@client/services/editor';
 
+@transient()
 @autoinject
 export class ThemeCustomElement extends EditorComponent {
   settings: any;
