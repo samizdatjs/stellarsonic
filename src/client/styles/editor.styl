@@ -8,16 +8,22 @@
   width: 100%;
   background: rgba(0,0,0,.02)!important;
 
-  .uk-navbar-nav
-    li.uk-active
-      // background: #e8e5df;
-/*
-      a
-        color: rgba(0,0,0,.62);
-*/
   .uk-navbar-item, .uk-navbar-nav>li>a, .uk-navbar-toggle
-    // min-height: 60px;
     font-size: .675rem;
+
+.setting-title
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.9em;
+  color: rgba(0,0,0,0.62);
+  text-transform: uppercase;
+
+.setting-value
+  display: inline;
+  float: right;
+  margin: 0;
+  font-size: 1.4em;
+  color: rgba(0,0,0,.62);
+  font-family: 'Raleway', sans-serif;
 
 .editor-toolbar
   position: absolute;
@@ -206,9 +212,9 @@ playlist-timeline
   }
   input[type=range]::-webkit-slider-runnable-track {
     background: rgba(0, 0, 0, 0.05);
-    border-radius: 6px;
+    border-radius: 3px;
     width: 100%;
-    height: 6px;
+    height: 3px;
     cursor: pointer;
   }
   input[type=range]::-webkit-slider-thumb {
@@ -227,9 +233,9 @@ playlist-timeline
   input[type=range]::-moz-range-track {
     background: rgba(0, 0, 0, 0.1);
     border: 0.1px solid rgba(1, 1, 1, 0.2);
-    border-radius: 6px;
+    border-radius: 3px;
     width: 100%;
-    height: 6px;
+    height: 3px;
     cursor: pointer;
   }
   input[type=range]::-moz-range-thumb {
@@ -246,7 +252,7 @@ playlist-timeline
     border-width: 5.5px 0;
     color: transparent;
     width: 100%;
-    height: 6px;
+    height: 3px;
     cursor: pointer;
   }
   input[type=range]::-ms-fill-lower {

@@ -6,23 +6,39 @@ export class RangeSettingAnnotation extends SettingAnnotation {
   view = PLATFORM.moduleName('components/editor/settings/range.html')
   viewModel = RangeCustomElement;
 
-  constructor(name: string, key: string, public min: number, public max: number, public step: number) {
+  constructor(name: string, key: string, private config: RangeConfig) {
     super(name, key);
   }
 
   model(data: any) {
-    return {data, name: this.name, key: this.key, min: this.min, max: this.max, step: this.step};
+    return Object.assign({}, {data, name: this.name, key: this.key}, this.config);
   }
 }
 
-export const range = (name: string, min: number, max: number, step: number) => propertyDecorator((target, key) => new RangeSettingAnnotation(name, key, min, max, step));
+interface RangeConfig {
+  min: number;
+  max: number;
+  step: number;
+  percentage?: boolean
+}
+
+export const range = (name: string, config: RangeConfig) =>
+  propertyDecorator((target, key) => new RangeSettingAnnotation(name, key, config));
+
+export const rangePercent = (name: string) => range(name, { min: 0, max: 1, step: 0.01, percentage: true})
+
 
 @autoinject
 @transient()
 export class RangeCustomElement {
-  setting!: SettingData;
+  setting!: SettingData & RangeConfig
 
-  activate(setting: SettingData) {
+  activate(setting: SettingData & RangeConfig) {
     this.setting = setting;
+  }
+
+  get value(): string {
+    const val = this.setting.data[this.setting.key];
+    return this.setting.percentage ? `${Math.round(val * 100)} %` : val;
   }
 }
