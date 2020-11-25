@@ -1,16 +1,13 @@
 import {inject, PLATFORM} from "aurelia-framework";
-import {ContentEditorComponent, EditorPanel} from "@client/interfaces";
+import {ContentEditorComponent, EditorComponentConfig, EditorPanel} from "@client/interfaces";
 import {Editor} from "@client/services/editor";
 
-export class TextEditorPanel extends EditorPanel<string> {
-  component = {
+export const textEditor = (key: string) => {
+  return {
     viewModel: TextCustomElement,
-    view: PLATFORM.moduleName('components/editor/panels/text.html')
-  }
-
-  public static forContentKey(key: string) {
-    return new TextEditorPanel(key);
-  }
+    panel:PLATFORM.moduleName('components/editor/panels/text.html'),
+    model: key,
+  } as EditorComponentConfig;
 }
 
 @inject(Editor)

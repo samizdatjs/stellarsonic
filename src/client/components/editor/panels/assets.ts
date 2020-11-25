@@ -1,14 +1,7 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {Assets} from '@client/services/assets';
-import {EditorPanel, Page} from '@client/interfaces';
+import {EditorComponentConfig} from '@client/interfaces';
 import {Editor} from '@client/services/editor';
-
-export class AssetsPanel extends EditorPanel<Page> {
-  component = {
-    viewModel: AssetsCustomElement,
-    view: PLATFORM.moduleName('components/editor/panels/assets.html'),
-  }
-}
 
 @autoinject
 export class AssetsCustomElement {
@@ -23,4 +16,9 @@ export class AssetsCustomElement {
     this.images = new Assets('image', urlImages);
     this.audio = new Assets('audio', urlAudio);
   }
+}
+
+export const assets: EditorComponentConfig = {
+  viewModel: AssetsCustomElement,
+  panel: PLATFORM.moduleName('components/editor/panels/assets.html'),
 }

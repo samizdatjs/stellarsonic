@@ -1,15 +1,8 @@
 import {inject, PLATFORM} from 'aurelia-framework';
 import {Person} from '@domain/interfaces';
 import {AuthorListView} from '@client/views';
-import {action, EditorComponent, EditorPanel} from '@client/interfaces';
+import {action, EditorComponent, EditorComponentConfig} from '@client/interfaces';
 import UIkit from 'uikit';
-
-export class AuthorsPanel extends EditorPanel {
-  component = {
-    viewModel: AuthorListCustomElement,
-    view: PLATFORM.moduleName('components/editor/panels/author-list.html'),
-  }
-}
 
 @inject(AuthorListView)
 export class AuthorListCustomElement extends EditorComponent {
@@ -34,4 +27,9 @@ export class AuthorListCustomElement extends EditorComponent {
   public add() {
     this.edit({ givenName: '', familyName: '', email: '' })
   }
+}
+
+export const authorList: EditorComponentConfig = {
+  viewModel: AuthorListCustomElement,
+  panel: PLATFORM.moduleName('components/editor/panels/author-list.html'),
 }

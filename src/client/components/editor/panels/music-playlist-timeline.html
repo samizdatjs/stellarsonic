@@ -4,15 +4,15 @@
   <div class="timeline">
     <div class="timestamps" click.trigger="seek($event)">
       <ul id="timestamp-list" class="plain">
-        <li repeat.for="track of playlist.tracks" css="width: ${trackWidths[$index]}"></li>
+        <li repeat.for="track of content.tracks" css="width: ${trackWidths[$index]}"></li>
       </ul>
       <div class="progress" css="width: ${progressWidth}"></div>
     </div>
     <ul class="track-handles plain">
-      <li repeat.for="track of playlist.tracks"
+      <li repeat.for="track of content.tracks"
         css="width: ${trackWidths[$index]}"
-        class="${$index === model.trackIndex ? 'selected' : ''}"
-        click.delegate="model.trackIndex = $index">
+        class="${$index === trackIndex ? 'selected' : ''}"
+        click.delegate="trackIndex = $index">
       </li>
     </ul>
   </div>

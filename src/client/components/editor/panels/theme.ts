@@ -1,14 +1,7 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
-import {action, EditorComponent, EditorPanel, Page, SettingAnnotation, ThemeAnnotation} from '@client/interfaces';
+import {action, EditorComponent, EditorComponentConfig, SettingAnnotation, ThemeAnnotation} from '@client/interfaces';
 import {Editor} from '@client/services/editor';
-
-export class ThemePanel extends EditorPanel<Page> {
-  component = {
-    viewModel: ThemeCustomElement,
-    view: PLATFORM.moduleName('components/editor/panels/theme.html'),
-  }
-}
 
 @autoinject
 export class ThemeCustomElement extends EditorComponent {
@@ -43,4 +36,9 @@ export class ThemeCustomElement extends EditorComponent {
   public async revert() {
     this.theming.revertConfig(this.data, this.contentId)
   }
+}
+
+export const theme: EditorComponentConfig = {
+  viewModel: ThemeCustomElement,
+  panel: PLATFORM.moduleName('components/editor/panels/theme.html'),
 }

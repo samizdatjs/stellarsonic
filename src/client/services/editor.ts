@@ -43,7 +43,7 @@ export class Editor extends EventEmitter {
 
   navigate(to?: number) {
     this.nav = to;
-    this.toolbar = to !== undefined && this.menu.items[to].panel.toolbar !== undefined;
+    this.toolbar = to !== undefined && this.menu.items[to].component.toolbar !== undefined;
     this.activeMenuItem = this.nav !== undefined ? this.menu.items[this.nav] : undefined;
     this.emit('navigate', to);
   }

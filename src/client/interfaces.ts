@@ -1,4 +1,4 @@
-import {Annotation, classDecorator, methodDecorator} from '@ziqquratu/core';
+import {Annotation, classDecorator, methodDecorator, Newable} from '@ziqquratu/core';
 import {Editor} from './services/editor';
 
 export interface Page {
@@ -71,7 +71,7 @@ export interface MenuAction {
 export interface MenuItem {
   title: string;
   icon?: string;
-  panel: EditorPanel;
+  component: EditorComponentConfig;
 }
 
 export interface Menu {
@@ -112,10 +112,10 @@ export abstract class EditorComponent {
   }
 }
 
-export abstract class ContentEditorComponent extends EditorComponent {
+export abstract class ContentEditorComponent<T = any> extends EditorComponent {
   public constructor(protected editor: Editor) { super() }
 
-  get content() {
+  get content(): T {
     return this.editor.page.content;
   }
 
@@ -123,4 +123,11 @@ export abstract class ContentEditorComponent extends EditorComponent {
   saveContent() {
     this.editor.saveContent();
   }
+}
+
+export interface EditorComponentConfig {
+  viewModel: Newable<any>;
+  panel: string;
+  toolbar?: string;
+  model?: any;
 }
