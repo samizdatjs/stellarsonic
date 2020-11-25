@@ -1,6 +1,7 @@
 <template>
   <require from="value-converters"></require>
   <require from="components/disqus"></require>
+  <require from="components/markdown"></require>
   <require from="styles/common/article.styl"></require>
   <require from="./playlist.styl"></require>
   <require from="./player"></require>
@@ -57,7 +58,9 @@
               <div class="excerpt">
                 <p>${content.description}</p>
               </div>
-              <article innerhtml.bind="content.text"></article>
+              <article>
+                <markdown text.bind="content.text"></markdown>
+              </article>
             </main>
             <aside>
               <disqus identifier.bind="content._id" url.bind="url" title.bind="content.headline"></disqus>
