@@ -8,13 +8,13 @@
     <compose view.bind="section.component.toolbar" view-model.bind="viewModel" model.bind="model"></compose>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.nav === undefined">
+  <div class="editor-panel au-animate animate-slide-in-left animate-slide-out-left" if.bind="editor.active && editor.nav === undefined">
     <div class="uk-padding-large">
       <navmenu></navmenu>
     </div>
   </div>
 
-  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right ${editor.toolbar ? 'toolbar' : ''}" if.bind="editor.nav !== undefined">
+  <div class="editor-panel au-animate animate-slide-in-right animate-slide-out-right ${editor.toolbar ? 'toolbar' : ''}" if.bind="editor.active && editor.nav !== undefined">
     <div style="height: 100%; box-sizing: border-box;">
       <compose containerless view-model.bind="viewModel" model.bind="model" view.bind="section.component.panel"></compose>
     </div>

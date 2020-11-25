@@ -5,12 +5,12 @@
   <div class="app-container">
     <editor if.bind="env === 'development'"></editor>
 
-    <a if.bind="env === 'development'" class="editor-toggle ${editor.active ? 'active' : ''}" click.delegate="editor.toggleActive()" class="uk-inline">
-      <span if.bind="editor.active" class="uk-position-center" uk-icon="chevron-left"></span>
-      <span if.bind="!editor.active" class="uk-position-center" uk-icon="chevron-right"></span>
-    </a>
-
     <div class="page-container ${editor.active ? 'edit' : ''} ${editor.toolbar ? 'editor-toolbar-full' : ''}">
+      <a if.bind="env === 'development'" class="editor-toggle ${editor.active ? 'active' : ''}" click.delegate="editor.toggleActive()" class="uk-inline">
+        <span if.bind="editor.active" class="uk-position-center" uk-icon="chevron-left"></span>
+        <span if.bind="!editor.active" class="uk-position-center" uk-icon="chevron-right"></span>
+      </a>
+
       <router-view swap-order="with"></router-view>
     </div>
   </div>

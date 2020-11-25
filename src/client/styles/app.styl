@@ -233,6 +233,9 @@ ul.plain
   background: rgba(255,255,255,.2);
   margin: 0;
 
+.uk-tab>.uk-active>a
+  border-color: #c6c6c6;
+
 .uk-nav-header
   border-bottom: 1px solid rgba(0,0,0,.1);
 
@@ -244,22 +247,32 @@ ul.plain
   height: 100vh;
   overflow: hidden;
 
-
   .page-container
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     position: absolute;
-    transition: transform 0.4s ease-out;
+    transition: all 0.2s ease-out;
     overflow: hidden;
+
+    .editor-toggle
+      position: absolute;
+      top: calc(50vh - 40px);
+      left: 0;
+      background: #fff;
+      width: 30px;
+      height: 80px;
+      border-radius: 0 5px 5px 0;
+      z-index: 10;
+      border: 1px solid rgba(0,0,0,.15)
 
     &.edit
       top: 20px;
       left: 500px;
-      width: calc(100vw - 500px);
-      height: calc(100vh - 20px);
-      box-shadow: 0px 0px 12px 3px rgba(0,0,0,0.25);
+      width: calc(100vw - 520px);
+      height: calc(100vh - 40px);
+      box-shadow: 0px 5px 25px rgba(0,0,0,0.12);
 
     &.edit.editor-toolbar-full
       transform: translateY(80px);
