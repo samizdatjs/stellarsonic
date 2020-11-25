@@ -1,0 +1,37 @@
+<template>
+  <require from="components/editor/navbar"></require>
+
+  <navbar actions.bind="actions"></navbar>
+
+  <div class="uk-padding">
+    <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="tag of content[key]">
+      <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+          <div class="uk-width-auto">
+            <span uk-icon="tag" class="uk-margin-small-right"></span>
+          </div>
+          <div class="uk-width-expand">
+            <h4 class="uk-card-title uk-margin-remove-bottom">${tag}</h4>
+          </div>
+          <div class="uk-width-auto">
+            <a href="" uk-icon="trash" class="uk-icon-link" click.delegate="removeTag(tag)"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tag-edit-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title">Tag</h2>
+        <div class="uk-margin">
+          <label for="post-audio">Value</label>
+          <input class="uk-input" id="post-headline" type="text" value.bind="selected">
+        </div>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="saveTag()">Add</button>
+        </p>
+    </div>
+  </div>
+</template>
