@@ -4,30 +4,32 @@
 
   <navbar actions.bind="actions"></navbar>
 
-  <div class="uk-margin">
-    <label for="post-headline">Headline</label>
-    <input class="uk-input" id="post-headline" type="text" value.bind="content.headline">
-  </div>
-  <div class="uk-margin">
-    <label for="post-image">Image</label>
-    <select class="uk-select" value.bind="content.image">
-      <option value.bind="image" repeat.for="image of content.images.files">${image}</option>
-    </select>
-  </div>
-  <div class="uk-margin">
-    <label for="post-audio">Audio</label>
-    <input class="uk-input" id="post-audio" type="text" value.bind="content.audio.contentUrl">
-  </div>
-  <div class="uk-margin">
-    <fieldset class="uk-fieldset">
-      <legend>Genres</legend>
-      <tag-list tags.bind="content.genres"></tag-list>
-    </fieldset>
-  </div>
-  <div class="uk-margin">
-    <fieldset class="uk-fieldset">
-      <legend>Keywords</legend>
-      <tag-list tags.bind="content.keywords"></tag-list>
-    </fieldset>
+  <div class="uk-padding">
+    <div class="uk-margin">
+      <label for="post-headline">Headline</label>
+      <input class="uk-input" id="post-headline" type="text" value.bind="content.headline">
+    </div>
+    <div class="uk-margin">
+      <label for="post-image">Image</label>
+      <select class="uk-select" value.bind="content.image">
+        <option value.bind="image" repeat.for="image of content.images.files">${image}</option>
+      </select>
+    </div>
+    <div class="uk-margin">
+      <label for="post-audio">Audio</label>
+      <input class="uk-input" id="post-audio" type="text" value.bind="content.audio.contentUrl">
+    </div>
+    <div class="uk-margin">
+      <fieldset class="uk-fieldset">
+        <legend>Genres</legend>
+        <tag-list tags.bind="content.genres"></tag-list>
+      </fieldset>
+    </div>
+    <div class="uk-margin">
+      <fieldset class="uk-fieldset">
+        <legend>Keywords</legend>
+        <tag-list tags.bind="content.keywords"></tag-list>
+      </fieldset>
+    </div>
   </div>
 </template>

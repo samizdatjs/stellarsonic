@@ -3,20 +3,22 @@
 
   <navbar actions.bind="actions"></navbar>
 
-  <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="post of posts.data">
-    <div class="uk-card-header">
-      <div class="uk-grid-small uk-flex-middle" uk-grid>
-        <div class="uk-width-auto">
-          <span uk-icon="file-edit" class="uk-margin-small-right"></span>
-        </div>
-        <div class="uk-width-expand">
-          <h4 class="uk-card-title uk-margin-remove-bottom">${post.headline}</h4>
-          <p class="uk-text-meta uk-margin-remove-top">${post.datePublished}</p>
-        </div>
-        <div class="uk-width-auto">
-          <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
-            uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
-          <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-author-modal" click.delegate="select(author)"></a>
+  <div class="uk-padding">
+    <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="post of posts.data">
+      <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+          <div class="uk-width-auto">
+            <span uk-icon="file-edit" class="uk-margin-small-right"></span>
+          </div>
+          <div class="uk-width-expand">
+            <h4 class="uk-card-title uk-margin-remove-bottom">${post.headline}</h4>
+            <p class="uk-text-meta uk-margin-remove-top">${post.datePublished}</p>
+          </div>
+          <div class="uk-width-auto">
+            <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
+              uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
+            <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-author-modal" click.delegate="select(author)"></a>
+          </div>
         </div>
       </div>
     </div>

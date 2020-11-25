@@ -6,6 +6,7 @@ export const textEditor = (key: string) => {
   return {
     viewModel: TextCustomElement,
     panel:PLATFORM.moduleName('components/editor/panels/text.html'),
+    // toolbar:PLATFORM.moduleName('components/editor/panels/text-toolbar.html'),
     model: key,
   } as EditorComponentConfig;
 }
