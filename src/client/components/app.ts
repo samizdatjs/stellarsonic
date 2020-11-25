@@ -6,6 +6,7 @@ import {Theming} from '@client/services/theming';
 import {Page} from '@client/interfaces';
 import {SEO} from '@client/services/seo';
 import {Content} from '@client/services/content';
+import { Assets } from '@client/services/assets';
 
 @inject(Editor, Theming, Content, SEO, 'stellarsonic.Environment')
 export class App {
@@ -31,10 +32,15 @@ export class App {
 
       const theme = await this.theming.settings(instruction);
 
+      const urlImages = content ? `/images/${content._id}` : '/images';
+      const urlAudio = content ? `/audio/${content._id}` : '/audio';
+
       const page: Page = {
         route: instruction.config.name,
         theme: theme.settings,
         content: content,
+        images: new Assets('image', urlImages),
+        audio: new Assets('audio', urlAudio),
       }
 
       this.editor.setPage(page);

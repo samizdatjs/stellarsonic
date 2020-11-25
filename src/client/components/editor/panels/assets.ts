@@ -11,11 +11,8 @@ export class AssetsCustomElement {
   public actions = [];
 
   public constructor(editor: Editor) {
-    const urlImages = editor.page.content ? `/images/${editor.page.content._id}` : '/images';
-    const urlAudio = editor.page.content ? `/audio/${editor.page.content._id}` : '/audio';
-
-    this.images = new Assets('image', urlImages);
-    this.audio = new Assets('audio', urlAudio);
+    this.images = editor.page.images;
+    this.audio = editor.page.audio;
   }
 }
 

@@ -5,6 +5,7 @@ import {inject} from "aurelia-framework";
 import {NavigationInstruction, PipelineResult, RouterEvent} from "aurelia-router";
 import {EventEmitter} from 'eventemitter3';
 import {Content} from "./content";
+import {Assets} from "./assets";
 
 @inject(EventAggregator, Content, 'stellarsonic.EditorConfiguration')
 export class Editor extends EventEmitter {
@@ -13,7 +14,7 @@ export class Editor extends EventEmitter {
   public nav: number | undefined;
   public menu: Menu = { items: [] };
   public actions: MenuAction[] = [];
-  public page: Page = { theme: {}};
+  public page: Page = { theme: {}, images: new Assets('image', ''), audio: new Assets('audio', '')};
   public activeMenuItem: MenuItem | undefined;
 
   constructor(ea: EventAggregator, private contentProvider: Content, configuration: EditorConfig) {

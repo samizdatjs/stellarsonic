@@ -1,11 +1,14 @@
 import {Annotation, classDecorator, methodDecorator, Newable} from '@ziqquratu/core';
 import { RouteConfig } from 'aurelia-router';
 import {Editor} from './services/editor';
+import { Assets } from './services/assets';
 
 export interface Page {
   route?: string;
   content?: any;
   theme: any;
+  images: Assets;
+  audio: Assets;
 }
 
 type Model<T> = T | ((page: Page, editor: Editor) => T);
