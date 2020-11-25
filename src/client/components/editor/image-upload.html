@@ -1,26 +1,28 @@
 <template>
   <div class="js-upload uk-placeholder uk-text-center">
-    <span uk-icon="icon: cloud-upload"></span>
-    <span class="uk-text-middle">Attach images by dropping them here or</span>
+    <span uk-icon="icon: cloud-upload" class="uk-margin-small-right"></span>
+    <span class="uk-text-middle">Attach files by dropping them here or</span>
     <div uk-form-custom>
       <input type="file">
       <span class="uk-link">selecting one</span>
     </div>
   </div>
-  <div class="uk-padding">
-  <div class="uk-child-width-1-2 uk-grid-match uk-grid-small" uk-grid>
-    <div class="uk-text-center" repeat.for="img of content.files">
-      <div class="uk-inline-clip uk-transition-toggle aspect-square uk-box-shadow-medium" tabindex.bind="$index">
-        <img src.bind="img" alt="" class="object-fit-cover"/>
-        <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-bottom">
-          <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-remove" click.delegate="selectImage(img)">
-            Remove
-          </button>
+
+  <div class="uk-padding uk-padding-remove-vertical">
+    <div class="uk-child-width-1-2 uk-grid-match uk-grid-small" uk-grid>
+      <div class="uk-text-center uk-animation-slide-top-small" repeat.for="img of content.files">
+        <div class="uk-inline-clip uk-transition-toggle aspect-square uk-box-shadow-medium" tabindex.bind="$index">
+          <img src.bind="img" alt="" class="object-fit-cover"/>
+          <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-primary uk-flex uk-flex-center uk-flex-bottom">
+            <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-remove" click.delegate="selectImage(img)">
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
+
   <div id="modal-remove" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
       <h2 class="uk-modal-title">Remove</h2>

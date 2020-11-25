@@ -9,22 +9,22 @@
     <option repeat.for="t of theming.themes(theme.type)" value.bind="t.id">${t.name}</option>
   </select>
 -->
-  <div class="uk-padding">
-    <ul uk-accordion if.bind="themeMeta.groups">
-      <li repeat.for="name of groupNames">
-        <a class="uk-accordion-title" href="#">${name}</a>
-        <div class="uk-accordion-content">
-          <div class="uk-margin" repeat.for="setting of groupSettings(name)">
-            <setting data.bind="data" key.bind="setting.key"></setting>
-          </div>
+  <div if.bind="themeMeta.groups">
+    <ul uk-tab="animation: uk-animation-fade" class="uk-padding uk-box-shadow-small">
+      <li repeat.for="name of groupNames"><a href="#">${name}</a></li>
+    </ul>
+    <ul class="uk-switcher">
+      <li repeat.for="name of groupNames" class="uk-padding">
+        <div class="uk-margin" repeat.for="setting of groupSettings(name)">
+          <setting data.bind="data" key.bind="setting.key"></setting>
         </div>
       </li>
     </ul>
+  </div>
 
-    <div if.bind="!themeMeta.groups">
-      <div class="uk-margin" repeat.for="setting of settings">
-        <setting data.bind="data" key.bind="setting.key"></setting>
-      </div>
+  <div if.bind="!themeMeta.groups" class="uk-padding">
+    <div class="uk-margin" repeat.for="setting of settings">
+      <setting data.bind="data" key.bind="setting.key"></setting>
     </div>
   </div>
 </template>

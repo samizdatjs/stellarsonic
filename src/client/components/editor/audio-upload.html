@@ -1,29 +1,31 @@
 <template>
   <div class="js-upload uk-placeholder uk-text-center">
-    <span uk-icon="icon: cloud-upload"></span>
-    <span class="uk-text-middle">Attach audio files by dropping them here or</span>
+    <span uk-icon="icon: cloud-upload" class="uk-margin-small-right"></span>
+    <span class="uk-text-middle">Attach files by dropping them here or</span>
     <div uk-form-custom>
       <input type="file">
       <span class="uk-link">selecting one</span>
     </div>
   </div>
 
-  <table class="uk-table">
-    <thead>
-      <tr>
-        <th>File</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr repeat.for="file of content.files">
-        <td>${file}</td>
-        <td>
-          <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-audio-modal" click.delegate="selectAudio(file)"></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="uk-padding uk-padding-remove-vertical">
+    <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-top-small" repeat.for="file of content.files">
+      <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+          <div class="uk-width-auto">
+            <a href="" uk-icon="play-circle" class="uk-icon-link uk-margin-small-right"></a>
+          </div>
+          <div class="uk-width-expand">
+            <h4 class="uk-card-title uk-margin-remove-bottom">${file}</h4>
+            <p class="uk-text-meta uk-margin-remove-top">Duration</p>
+          </div>
+          <div class="uk-width-auto">
+            <a href="" uk-icon="trash" class="uk-icon-link"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="remove-audio-modal" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
