@@ -1,4 +1,5 @@
 import {Annotation, classDecorator, methodDecorator, Newable} from '@ziqquratu/core';
+import { RouteConfig } from 'aurelia-router';
 import {Editor} from './services/editor';
 
 export interface Page {
@@ -130,4 +131,20 @@ export interface EditorComponentConfig {
   panel: string;
   toolbar?: string;
   model?: any;
+}
+
+export class PageView<Content, Theme> {
+  public page!: Page;
+
+  async activate(params: any, routeConfig: RouteConfig) {
+    this.page = routeConfig.settings;
+  }
+
+  get content(): Content {
+    return this.page.content;
+  }
+
+  get theme(): Theme {
+    return this.page.theme;
+  }
 }
