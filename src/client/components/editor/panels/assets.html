@@ -5,20 +5,16 @@
 
   <navbar></navbar>
 
-  <div class="uk-padding">
-    <ul uk-accordion>
-      <li>
-        <a class="uk-accordion-title" href="#">Images</a>
-        <div class="uk-accordion-content">
-          <image-upload content.bind="images"></image-upload>
-        </div>
-      </li>
-      <li>
-        <a class="uk-accordion-title" href="#">Audio</a>
-        <div class="uk-accordion-content">
-          <audio-upload content.bind="audio"></audio-upload>
-        </div>
-      </li>
-    </ul>
-  </div>
+  <ul uk-tab="animation: uk-animation-fade" class="uk-padding uk-box-shadow-small">
+    <li><a href="#">Images</a></li>
+    <li><a href="#">Audio</a></li>
+  </ul>
+  <ul class="uk-switcher">
+    <li>
+      <image-upload content.bind="images"></image-upload>
+    </li>
+    <li>
+      <audio-upload content.bind="audio"></audio-upload>
+    </li>
+  </ul>
 </template>
