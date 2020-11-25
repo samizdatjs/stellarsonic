@@ -12,6 +12,15 @@
     </ul>
   </div>
 
+  <div if.bind="editor.page.route === 'home'" class="uk-margin-large-bottom">
+    <h1>
+      Stellarsonic
+    </h1>
+    <ul class="uk-breadcrumb">
+      <li class="uk-disabled"><span>Home</span></li>
+    </ul>
+  </div>
+
   <div class="uk-width-1-1@s">
     <ul class="uk-nav uk-nav-default">
       <li repeat.for="item of editor.menu.items" class="${!item.component ? 'uk-nav-header' : ''}">
