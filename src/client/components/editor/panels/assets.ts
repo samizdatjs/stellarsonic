@@ -11,7 +11,6 @@ export class AssetsCustomElement {
   public actions = [];
 
   public constructor(editor: Editor) {
-    console.log('assets');
     const urlImages = editor.page.content ? `/images/${editor.page.content._id}` : '/images';
     const urlAudio = editor.page.content ? `/audio/${editor.page.content._id}` : '/audio';
 

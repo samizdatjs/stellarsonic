@@ -20,7 +20,6 @@ export class MusicPlaylistTracksCustomElement extends ContentEditorComponent<Mus
     editor: Editor,
   ) {
     super(editor);
-    console.log('MusicPLaylistTracks');
   }
 
   activate() {

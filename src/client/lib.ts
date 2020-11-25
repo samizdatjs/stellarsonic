@@ -21,14 +21,10 @@ export class WritableItemSet<T extends Identifiable> extends ItemSet<T> {
 
 export class PostTransformer implements IOGate {
   public async input(post: MusicPlaylist): Promise<any> {
-    console.log('input');
-    console.log(post);
     return post.toJSONLD();
   }
 
   public async output(data: any): Promise<any> {
-    console.log('output');
-    console.log(data);
     return MusicPlaylist.fromJSONLD(data);
   }
 }
