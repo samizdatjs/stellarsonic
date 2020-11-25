@@ -3,10 +3,11 @@
 
   <div class="uk-width-1-1@s">
     <ul class="uk-nav uk-nav-default">
-      <li repeat.for="item of editor.menu.items">
-        <a click.delegate="editor.navigate($index)">
+      <li repeat.for="item of editor.menu.items" class="${!item.component ? 'uk-nav-header' : ''}">
+        <a if.bind="item.component" click.delegate="editor.navigate($index)">
           <navitem item.bind="item"></navitem>
         </a>
+        <span if.bind="!item.component">${item.title}</span>
       </li>
     </ul>
   </div>

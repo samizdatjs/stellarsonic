@@ -72,7 +72,7 @@ export interface MenuAction {
 export interface MenuItem {
   title: string;
   icon?: string;
-  component: EditorComponentConfig;
+  component?: EditorComponentConfig;
 }
 
 export interface Menu {

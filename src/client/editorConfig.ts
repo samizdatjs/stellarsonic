@@ -11,8 +11,10 @@ import {EditorConfig} from './interfaces';
 export const editorConfig: EditorConfig = {
   home: {
     items: [
+      { title: 'Page' },
       { title: 'Settings', icon: 'settings', component: theme },
       { title: 'Assets', icon: 'cloud-upload', component: assets },
+      { title: 'Site' },
       { title: 'Posts', icon: 'file-edit', component: postList },
       { title: 'Authors', icon: 'users', component: authorList },
     ]
@@ -22,9 +24,11 @@ export const editorConfig: EditorConfig = {
       { title: 'Home', icon: 'chevron-left', route: 'home' }
     ],
     items: [
+      { title: 'Page' },
       { title: 'Settings', icon: 'settings', component: theme },
       { title: 'Assets', icon: 'cloud-upload', component: assets },
-      { title: 'Content', icon: 'file-edit', component: playlistContent },
+      { title: 'Content' },
+      { title: 'Cover', icon: 'file-edit', component: playlistContent },
       { title: 'Tags', icon: 'tag', component: tagList('keywords') },
       { title: 'Genres', icon: 'tag', component: tagList('genres') },
       { title: 'Text', icon: 'file-text', component: textEditor('text') },
