@@ -1,36 +1,26 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {Theming} from '@client/services/theming';
-import {EditorPanel, Page, SettingAnnotation, ThemeAnnotation} from '@client/interfaces';
-import UIkit from 'uikit';
+import {action, EditorComponent, EditorPanel, Page, SettingAnnotation, ThemeAnnotation} from '@client/interfaces';
+import {Editor} from '@client/services/editor';
 
 export class ThemePanel extends EditorPanel<Page> {
   component = {
     viewModel: ThemeCustomElement,
     view: PLATFORM.moduleName('components/editor/panels/theme.html'),
   }
-
-  public constructor() {
-    super(page => page);
-  }
 }
 
 @autoinject
-export class ThemeCustomElement {
-  public actions = [
-    { title: 'Save', icon: 'cloud-upload', call: () => this.save() },
-    { title: 'Revert', icon: 'reply', call: () => this.revert() },
-  ]
-
+export class ThemeCustomElement extends EditorComponent {
   settings: any;
   data: any;
   contentId: string | undefined;
   themeMeta!: ThemeAnnotation;
 
-  public constructor(private theming: Theming) {}
-
-  activate(page: Page) {
-    this.contentId = page.content ? page.content._id : null;
-    this.data = page.theme;
+  public constructor(private theming: Theming, editor: Editor) {
+    super();
+    this.contentId = editor.page.content ? editor.page.content._id : null;
+    this.data = editor.page.theme;
     this.settings = SettingAnnotation.onClass(this.data.constructor);
     this.themeMeta = ThemeAnnotation.onClass(this.data.constructor)[0];
   }
@@ -44,11 +34,13 @@ export class ThemeCustomElement {
     return this.settings.filter((s: any) => keys.includes(s.key));
   }
 
-  private async save() {
+  @action({title: 'save', icon: 'cloud-upload'})
+  public async save() {
     this.theming.saveConfig(this.data, this.contentId);
   }
 
-  private async revert() {
+  @action({title: 'revert', icon: 'reply'})
+  public async revert() {
     this.theming.revertConfig(this.data, this.contentId)
   }
 }

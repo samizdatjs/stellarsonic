@@ -1,4 +1,4 @@
-import {TextEditorPanel, TextEditorContent} from './components/editor/panels/text';
+import {TextEditorPanel} from './components/editor/panels/text';
 import {ThemePanel} from './components/editor/panels/theme';
 import {AssetsPanel} from './components/editor/panels/assets';
 import {PostsPanel} from './components/editor/panels/post-list';

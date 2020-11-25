@@ -1,7 +1,7 @@
 import {inject, PLATFORM} from 'aurelia-framework';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {PostListView} from '@client/views';
-import {EditorPanel} from '@client/interfaces';
+import {action, EditorComponent, EditorPanel} from '@client/interfaces';
 
 export class PostsPanel extends EditorPanel {
   component = {
@@ -11,18 +11,16 @@ export class PostsPanel extends EditorPanel {
 }
 
 @inject(PostListView)
-export class PostListCustomElement {
+export class PostListCustomElement extends EditorComponent {
   public selected: MusicPlaylist | undefined;
-  public actions = [
-    { title: 'Create', icon: 'plus', call: () => this.createPost() }
-  ]
 
-  constructor(public posts: PostListView) {}
+  constructor(public posts: PostListView) { super(); }
 
   async bind() {
     this.posts.refresh();
   }
 
+  @action({title: 'create', icon: 'plus'})
   createPost() {
     this.selected = new MusicPlaylist();
   }

@@ -1,7 +1,7 @@
 import {inject, PLATFORM} from 'aurelia-framework';
 import {Person} from '@domain/interfaces';
 import {AuthorListView} from '@client/views';
-import {EditorPanel} from '@client/interfaces';
+import {action, EditorComponent, EditorPanel} from '@client/interfaces';
 import UIkit from 'uikit';
 
 export class AuthorsPanel extends EditorPanel {
@@ -12,13 +12,10 @@ export class AuthorsPanel extends EditorPanel {
 }
 
 @inject(AuthorListView)
-export class AuthorListCustomElement {
+export class AuthorListCustomElement extends EditorComponent {
   public selected: Person | undefined;
-  public actions = [
-    { title: 'Add', icon: 'plus', call: () => this.edit({ givenName: '', familyName: '', email: '' }) }
-  ]
 
-  constructor(private authors: AuthorListView) {}
+  constructor(private authors: AuthorListView) { super(); }
 
   async bind() {
     this.authors.refresh();
@@ -31,5 +28,10 @@ export class AuthorListCustomElement {
   public edit(author: Person) {
     this.select(author);
     UIkit.modal('#author-edit-modal').show();
+  }
+
+  @action({ title: 'create', icon: 'plus' })
+  public add() {
+    this.edit({ givenName: '', familyName: '', email: '' })
   }
 }

@@ -1,43 +1,23 @@
-import {PLATFORM} from "aurelia-framework";
-import {EditorPanel, Page} from "@client/interfaces";
+import {inject, PLATFORM} from "aurelia-framework";
+import {ContentEditorComponent, EditorPanel} from "@client/interfaces";
 import {Editor} from "@client/services/editor";
 
-export interface TextEditorModel {
-  data: any;
-  key: string;
-  save(): any;
-}
-
-export class TextEditorContent implements TextEditorModel {
-  public constructor(
-    public data: any,
-    public key: string,
-    public editor: Editor
-  ) {}
-
-  async save() {
-    this.data = await this.editor.saveContent();
-  }
-}
-
-export class TextEditorPanel extends EditorPanel<TextEditorModel> {
+export class TextEditorPanel extends EditorPanel<string> {
   component = {
     viewModel: TextCustomElement,
     view: PLATFORM.moduleName('components/editor/panels/text.html')
   }
 
   public static forContentKey(key: string) {
-    return new TextEditorPanel((page: Page, editor: Editor) => new TextEditorContent(page.content, key, editor));
+    return new TextEditorPanel(key);
   }
 }
 
-export class TextCustomElement {
-  model: TextEditorModel | undefined;
-  actions = [
-    { title: 'Save', icon: 'cloud-upload', call: () => this.model ? this.model.save() : null }
-  ] 
+@inject(Editor)
+export class TextCustomElement extends ContentEditorComponent {
+  key!: string;
 
-  activate(model: TextEditorModel) {
-    this.model = model;
+  activate(key: string) {
+    this.key = key;
   }
 }

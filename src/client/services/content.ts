@@ -12,8 +12,12 @@ export class Content {
   public constructor(private database: Database, private notification: NotificationService) {}
 
   public async content(instruction: NavigationInstruction) {
-    const collection = await this.resolveCollection(instruction.config.name || '');
-    return collection.findOne({_id: instruction.params.id});
+    try {
+      const collection = await this.resolveCollection(instruction.config.name || '');
+      return collection.findOne({_id: instruction.params.id});
+    } catch (err) {
+      return null;
+    }
   }
 
   public async save(doc: any, type: string) {
