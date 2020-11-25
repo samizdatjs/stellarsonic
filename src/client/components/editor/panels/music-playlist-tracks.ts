@@ -1,4 +1,4 @@
-import {PLATFORM, autoinject, observable, BindingEngine, Disposable} from 'aurelia-framework';
+import {PLATFORM, autoinject, observable, BindingEngine, Disposable, transient} from 'aurelia-framework';
 import {Player} from '@domain/player';
 import {Track} from '@domain/models/track';
 import {Duration} from '@domain/models/duration';
@@ -6,6 +6,7 @@ import {action, ContentEditorComponent, EditorComponentConfig} from '@client/int
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {Editor} from '@client/services/editor';
 
+@transient()
 @autoinject
 export class MusicPlaylistTracksCustomElement extends ContentEditorComponent<MusicPlaylist> {
   trackIndex: number = 0;
@@ -19,6 +20,7 @@ export class MusicPlaylistTracksCustomElement extends ContentEditorComponent<Mus
     editor: Editor,
   ) {
     super(editor);
+    console.log('MusicPLaylistTracks');
   }
 
   activate() {
@@ -58,9 +60,8 @@ export class MusicPlaylistTracksCustomElement extends ContentEditorComponent<Mus
   }
 
   public get track(): Track | undefined {
-    return this.content.tracks[this.trackIndex]
+    return this.content ? this.content.tracks[this.trackIndex] : undefined;
   }
-
 
   updateTrackWidths() {
     this.trackWidths = this.content.tracks.map(t => this.trackWidth(t));
@@ -71,14 +72,22 @@ export class MusicPlaylistTracksCustomElement extends ContentEditorComponent<Mus
   }
 
   get progressWidth(): string {
-    return ((this.player.audio.currentTime / this.content.durationInSeconds) * 100) + '%';
+    return this.isLoaded
+      ? ((this.player.audio.currentTime / this.content.durationInSeconds) * 100) + '%'
+      : '0%';
+  }
+
+  get isLoaded(): boolean {
+    return this.content && this.player.isLoaded(this.content);
   }
 
   seek(event: MouseEvent) {
-    const width = this.element.getBoundingClientRect().width;
-    const amount = (event as any).layerX / width;
-    const time = this.content.durationInSeconds * amount;
-    this.player.audio.currentTime = time;
+    if (this.isLoaded) {
+      const width = this.element.getBoundingClientRect().width;
+      const amount = (event as any).layerX / width;
+      const time = this.content.durationInSeconds * amount;
+      this.player.audio.currentTime = time;
+    }
   }
 }
 
