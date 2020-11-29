@@ -9,17 +9,16 @@
       <input class="uk-input" id="post-headline" type="text" value.bind="content.headline">
     </div>
     <div class="uk-margin">
+      <label>Cover image</label>
       <div class="uk-card uk-card-default">
         <div class="uk-card-media-top">
           <div class="aspect-phi-landscape">
             <img src.bind="content.image" alt="" class="object-fit-cover">
           </div>
         </div>
-        <div class="uk-card-body">
-          <h3 class="uk-card-title">Cover image</h3>
-          <select class="uk-select" value.bind="content.image">
-            <option model.bind="image" repeat.for="image of editor.page.images.files">${image}</option>
-          </select>
+        <div class="uk-card-footer">
+          <a href="#" class="uk-button uk-button-text uk-margin-right">Change</a>
+          <a href="#" class="uk-button uk-button-text">Upload</a>
         </div>
       </div>
     </div>

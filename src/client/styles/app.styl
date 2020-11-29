@@ -198,14 +198,14 @@ ul.plain
 .uk-box-shadow-medium
   box-shadow: 0 5px 15px rgba(0,0,0,.4);
 
-.uk-input, .uk-select, .uk-button
+.uk-input, .uk-select, .uk-button:not(.uk-button-text)
   height: 50px!important;
 
 .uk-input, .uk-select, .uk-textarea
-  border: 1px solid rgba(0,0,0,.1);
   background: rgba(0,0,0,.03)!important;
 
-.uk-button:not(.uk-button-primary)
+.uk-button:not(.uk-button-text)
+  height: 50px!important;
   background: rgba(255,255,255,.2);
 
   &:hover
@@ -238,6 +238,10 @@ ul.plain
 
 .uk-nav-header
   border-bottom: 1px solid rgba(0,0,0,.1);
+
+.uk-card-default .uk-card-footer
+  border-top: 1px solid rgba(0,0,0,.1);
+
 
 // Page
 //-----------------------------------------------------------------------------
