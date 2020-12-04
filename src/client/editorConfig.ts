@@ -6,6 +6,7 @@ import {authorList} from './components/editor/panels/author-list';
 import {playlistContent} from './components/editor/panels/music-playlist-content';
 import {playlistTracks} from './components/editor/panels/music-playlist-tracks';
 import {tagList} from './components/editor/panels/tag-list';
+import {image} from './components/editor/panels/image';
 import {EditorConfig} from './interfaces';
 
 export const editorConfig: EditorConfig = {
@@ -28,7 +29,8 @@ export const editorConfig: EditorConfig = {
       { title: 'Settings', icon: 'settings', component: theme },
       { title: 'Assets', icon: 'cloud-upload', component: assets },
       { title: 'Content' },
-      { title: 'Cover', icon: 'file-edit', component: playlistContent },
+      { title: 'General', icon: 'file-edit', component: playlistContent },
+      { title: 'Cover', icon: 'image', component: image('image') },
       { title: 'Tags', icon: 'tag', component: tagList('keywords') },
       { title: 'Genres', icon: 'tag', component: tagList('genres') },
       { title: 'Text', icon: 'file-text', component: textEditor('text') },

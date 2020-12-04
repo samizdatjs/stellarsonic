@@ -1,0 +1,18 @@
+<template>
+  <require from="components/editor/navbar"></require>
+  <require from="components/editor/upload"></require>
+
+  <navbar actions.bind="actions"></navbar>
+
+  <upload assets.bind="images"></upload>
+
+  <div class="uk-padding uk-padding-remove-vertical">
+    <div class="uk-child-width-1-2 uk-grid-match uk-grid-small" uk-grid>
+      <a class="uk-text-center uk-animation-slide-top-small" repeat.for="img of images.files" click.delegate="select(img)">
+        <div class="uk-inline-clip uk-transition-toggle aspect-square uk-box-shadow-medium" tabindex.bind="$index">
+          <img src.bind="img" alt="" class="object-fit-cover ${img === content[key] ? 'image-selected' : ''}"/>
+        </div>
+      </a>
+    </div>
+  </div>
+</template>

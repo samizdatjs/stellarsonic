@@ -1,12 +1,7 @@
 <template>
-  <div class="js-upload uk-placeholder uk-text-center">
-    <span uk-icon="icon: cloud-upload" class="uk-margin-small-right"></span>
-    <span class="uk-text-middle">Attach files by dropping them here or</span>
-    <div uk-form-custom>
-      <input type="file">
-      <span class="uk-link">selecting one</span>
-    </div>
-  </div>
+  <require from="components/editor/upload"></require>
+
+  <upload assets.bind="content"></upload>
 
   <div class="uk-padding uk-padding-remove-vertical">
     <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-top-small" repeat.for="file of content.files">
