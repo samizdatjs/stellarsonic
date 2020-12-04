@@ -11,6 +11,7 @@ export class Home {
   ) {}
 
   async activate(params: any, routeConfig: RouteConfig) {
+    this.postFeed.limit = 6;
     await this.postFeed.refresh();
   }
 
