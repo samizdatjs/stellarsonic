@@ -1,0 +1,22 @@
+<template>
+  <require from="components/editor/navbar"></require>
+
+  <navbar actions.bind="actions"></navbar>
+
+  <div class="uk-padding">
+    <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="theme of themes">
+      <div class="uk-card-header">
+        <div class="uk-grid-small uk-flex-middle" uk-grid>
+          <div class="uk-width-auto">
+            <span uk-icon="check" class="uk-margin-small-right"></span>
+          </div>
+          <div class="uk-width-expand">
+            <h4 class="uk-card-title uk-margin-remove-bottom">${theme}</h4>
+          </div>
+          <div class="uk-width-auto">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

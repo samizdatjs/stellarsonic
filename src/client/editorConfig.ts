@@ -3,6 +3,7 @@ import {theme} from './components/editor/panels/theme';
 import {assets} from './components/editor/panels/assets';
 import {postList} from './components/editor/panels/post-list';
 import {authorList} from './components/editor/panels/author-list';
+import {themeList} from './components/editor/panels/theme-list';
 import {playlistContent} from './components/editor/panels/music-playlist-content';
 import {playlistTracks} from './components/editor/panels/music-playlist-tracks';
 import {tagList} from './components/editor/panels/tag-list';
@@ -18,6 +19,7 @@ export const editorConfig: EditorConfig = {
       { title: 'Site' },
       { title: 'Posts', icon: 'file-edit', component: postList },
       { title: 'Authors', icon: 'users', component: authorList },
+      { title: 'Themes', icon: 'users', component: themeList },
     ]
   },
   playlist: {

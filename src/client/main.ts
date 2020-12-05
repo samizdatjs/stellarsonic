@@ -36,6 +36,7 @@ import { Player } from '@domain/player';
     }),
     Provider.ofInstance('disqus.Shortname', siteConfig.disqus),
     Provider.ofInstance('stellarsonic.SiteConfig', siteConfig),
+    Provider.ofInstance('stellarsonic.Themes', ['standard'])
   ],
 })
 export class Application {}
