@@ -15,6 +15,10 @@ export class PostListCustomElement extends EditorComponent {
     this.posts.refresh();
   }
 
+  select(post: MusicPlaylist) {
+    this.selected = post;
+  }
+
   @action({title: 'create', icon: 'plus'})
   async createPost() {
     await this.authors.refresh();

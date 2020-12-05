@@ -17,10 +17,21 @@
           <div class="uk-width-auto">
             <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
               uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
-            <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #remove-author-modal" click.delegate="select(author)"></a>
+            <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #post-remove-modal" click.delegate="select(post)"></a>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="post-remove-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title">Remove post</h2>
+        <p>Are you sure you want to remove this post?</p>
+        <p class="uk-text-right">
+          <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="posts.delete(selected)">Remove</button>
+        </p>
     </div>
   </div>
 
