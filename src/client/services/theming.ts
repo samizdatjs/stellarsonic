@@ -53,7 +53,7 @@ export class Theming {
   public async saveConfig(config: any, contentId?: string) {
     try {
       const meta = this.getThemeMeta(config.constructor);
-      const collection = await this.database.collection('settings');
+      const collection = await this.database.collection('theme-settings');
       collection.replaceOne({
         themeId: meta.id,
         contentId: contentId,
@@ -73,7 +73,7 @@ export class Theming {
   }
 
   private async loadConfig(target: any, themeId: string, type: string, contentId?: string) {
-    const collection = await this.database.collection('settings');
+    const collection = await this.database.collection('theme-settings');
     const data = await collection.findOne({themeId, type, contentId});
     for (const key of Object.keys(target)) {
       target[key] = data.settings[key];

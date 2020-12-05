@@ -28,7 +28,7 @@ import { Player } from '@domain/player';
           ],
         },
         'authors': http({path: '/api/authors'}),
-        'settings': http({path: '/api/settings'}),
+        'theme-settings': http({path: '/api/theme-settings'}),
         'genres': http({path: '/api/genres'}),
         'tags': http({path: '/api/tags'}),
       },

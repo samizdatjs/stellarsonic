@@ -3,7 +3,7 @@ import {bootstrap, component, LogLevel, Provider} from '@ziqquratu/ziqquratu';
 import {resource, requestLogger, ServerConfig} from '@ziqquratu/tashmetu';
 import {FileSystemConfig} from '@ziqquratu/nabu';
 import {terminal} from '@ziqquratu/terminal';
-import {Server, get} from '@ziqquratu/tashmetu';
+import {Server} from '@ziqquratu/tashmetu';
 import * as yargs from 'yargs';
 import {databaseConfig} from './databaseConfig';
 import {diskContent, DiskContentRouterFactory} from './routers/diskContent';
@@ -69,17 +69,18 @@ bootstrap(Application, {
   }));
   c.register(Provider.ofInstance<ServerConfig>('tashmetu.ServerConfig', {
     middleware: {
-      '/':             [...rootMiddleware, requestLogger()],
-      '/api/posts':    resource({collection: 'articles', readOnly: false}),
-      '/api/authors':  resource({collection: 'authors', readOnly: false}),
-      '/api/settings': resource({collection: 'settings', readOnly: false}),
-      '/api/tags':     resource({collection: 'tags', readOnly: true}),
-      '/api/genres':   resource({collection: 'genres', readOnly: true}),
-      '/images':       diskContent({
+      '/':                   [...rootMiddleware, requestLogger()],
+      '/api/posts':          resource({collection: 'articles', readOnly: false}),
+      '/api/authors':        resource({collection: 'authors', readOnly: false}),
+      '/api/theme-settings': resource({collection: 'theme-settings', readOnly: false}),
+      '/api/tags':           resource({collection: 'tags', readOnly: true}),
+      '/api/genres':         resource({collection: 'genres', readOnly: true}),
+
+      '/images': diskContent({
         destination: (postId) => `./public/uploads/${postId}/images`,
         fieldName: 'image'
       }),
-      '/audio':       diskContent({
+      '/audio': diskContent({
         destination: (postId) => `./public/uploads/${postId}/audio`,
         fieldName: 'audio'
       })
