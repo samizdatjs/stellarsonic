@@ -6,6 +6,7 @@ export class MusicPlaylist {
   public constructor(
     public _id?: string,
     public headline: string = '',
+    public alternativeHeadline: string = '',
     public datePublished: string = '',
     public image: string = '',
     public audio: AudioObject = { contentUrl: '', duration: '' },
@@ -20,6 +21,7 @@ export class MusicPlaylist {
     return new MusicPlaylist(
       data._id,
       data.headline,
+      data.alternativeHeadline,
       data.datePublished,
       data.image,
       data.audio,
@@ -63,6 +65,7 @@ export class MusicPlaylist {
       '@type': 'MusicPlaylist',
       _id: this._id,
       headline: this.headline,
+      alternativeHeadline: this.alternativeHeadline,
       datePublished: this.datePublished,
       image: this.image,
       audio: {

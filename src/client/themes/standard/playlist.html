@@ -28,16 +28,11 @@
               </div>
               <div class="content">
                 <div class="info">
-                  <a href.bind="content.audio.contentUrl">
-                    <i class="fal fa-download"></i> Download
-                  </a>
-                  <span style="margin-left: 10px" class="font-secondary" repeat.for="genre of content.genres">${genre}</span>
+                  <visualizer></visualizer>
                 </div>
               </div>
             </main>
             <aside css="background: ${theme.coverColor}">
-              <h1 class="title uk-light">${content.headline}</h1>
-              <visualizer></visualizer>
               <div class="tracklist">
                 <ul class="plain">
                   <li repeat.for="track of content.tracks" click.delegate="player.togglePlay(post, $index)" 
