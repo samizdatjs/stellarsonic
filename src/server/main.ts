@@ -72,6 +72,7 @@ bootstrap(Application, {
       '/':                   [...rootMiddleware, requestLogger()],
       '/api/posts':          resource({collection: 'articles', readOnly: false}),
       '/api/authors':        resource({collection: 'authors', readOnly: false}),
+      '/api/page-settings':  resource({collection: 'page-settings', readOnly: false}),
       '/api/theme-settings': resource({collection: 'theme-settings', readOnly: false}),
       '/api/tags':           resource({collection: 'tags', readOnly: true}),
       '/api/genres':         resource({collection: 'genres', readOnly: true}),

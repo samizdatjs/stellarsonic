@@ -14,7 +14,7 @@ export const editorConfig: EditorConfig = {
   home: {
     items: [
       { title: 'Page' },
-      { title: 'Settings', icon: 'settings', component: theme },
+      { title: 'Style', icon: 'settings', component: theme },
       { title: 'Assets', icon: 'cloud-upload', component: assets },
       { title: 'Site' },
       { title: 'Posts', icon: 'file-edit', component: postList },
@@ -28,7 +28,8 @@ export const editorConfig: EditorConfig = {
     ],
     items: [
       { title: 'Page' },
-      { title: 'Settings', icon: 'settings', component: theme },
+      { title: 'Settings', icon: 'cog', component: theme },
+      { title: 'Style', icon: 'settings', component: theme },
       { title: 'Assets', icon: 'cloud-upload', component: assets },
       { title: 'Content' },
       { title: 'General', icon: 'file-edit', component: playlistContent },
