@@ -5,7 +5,7 @@ import {FileSystemConfig} from '@ziqquratu/nabu';
 import {terminal} from '@ziqquratu/terminal';
 import {Server, get} from '@ziqquratu/tashmetu';
 import * as yargs from 'yargs';
-import { databaseConfig } from './databaseConfig';
+import {databaseConfig} from './databaseConfig';
 import {diskContent, DiskContentRouterFactory} from './routers/diskContent';
 
 @component({

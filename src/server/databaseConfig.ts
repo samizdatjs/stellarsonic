@@ -3,11 +3,6 @@ import {logging} from '@ziqquratu/ziqquratu';
 import {caching} from '@ziqquratu/caching';
 import {validation, ValidationPipeStrategy} from '@ziqquratu/schema';
 import {aggregation, relationship} from '@ziqquratu/aggregation';
-import {markdown} from '@ziqquratu/markdown';
-import * as showdown from 'showdown';
-
-require('showdown-youtube');
-
 
 export const databaseConfig = {
   collections: {
@@ -28,14 +23,6 @@ export const databaseConfig = {
       use: [
         logging(),
         caching(),
-        /*
-        markdown({
-          key: 'text',
-          converter: new showdown.Converter({
-            extensions: ['youtube', require('showdown-target-blank')]
-          }),
-        }),
-        */
         relationship({
           to: 'authors',
           localField: 'author',
