@@ -17,15 +17,25 @@
       <label for="track-year">Year</label>
       <input class="uk-input" id="track-year" type="number" value.bind="track.copyrightYear | integerFromInput">
     </div>
-    <div class="uk-child-width-1-2@s uk-margin" uk-grid>
-      <div>
-        <label for="track-minutes">Minutes</label>
-        <input class="uk-input" id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
+    <div if.bind="content.audio.contentUrl">
+      <div class="uk-child-width-1-2@s uk-margin" uk-grid>
+        <div>
+          <label for="track-minutes">Minutes</label>
+          <input class="uk-input" id="track-minutes" type="number" value.bind="track.duration.minutes | integerFromInput">
+        </div>
+        <div>
+          <label for="track-seconds">Seconds</label>
+          <input class="uk-input" id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
+        </div>
       </div>
-      <div>
-        <label for="track-seconds">Seconds</label>
-        <input class="uk-input" id="track-seconds" type="number" value.bind="track.duration.seconds | integerFromInput" step="0.1">
-      </div>
+    </div>
+    <div if.bind="!content.audio.contentUrl">
+      <label for="track-audio">Audio</label>
+      <select class="uk-input" id="track-audio" value.bind="track.audio.contentUrl">
+        <option repeat.for="file of audio.files" model.bind="file">
+          ${file}
+        </option>
+      </select>
     </div>
     <div class="uk-padding uk-padding-remove-horizontal">
       <button class="uk-button uk-box-shadow-small" click.delegate="removeSelectedTrack()">

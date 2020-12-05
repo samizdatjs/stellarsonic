@@ -5,6 +5,7 @@ import {Duration} from '@domain/models/duration';
 import {action, ContentEditorComponent, EditorComponentConfig} from '@client/interfaces';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {Editor} from '@client/services/editor';
+import {Assets} from '@client/services/assets';
 
 @transient()
 @autoinject
@@ -12,6 +13,7 @@ export class MusicPlaylistTracksCustomElement extends ContentEditorComponent<Mus
   trackIndex: number = 0;
   trackWidths: string[] = [];
   subscription: Disposable | undefined;
+  audio: Assets;
 
   constructor(
     private player: Player,
@@ -20,6 +22,7 @@ export class MusicPlaylistTracksCustomElement extends ContentEditorComponent<Mus
     editor: Editor,
   ) {
     super(editor);
+    this.audio = editor.page.audio;
   }
 
   activate() {

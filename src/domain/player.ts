@@ -72,7 +72,9 @@ export abstract class Player {
 
   public play(playlist: MusicPlaylist, track = 0) {
     if (!this.isLoaded(playlist)) {
-      this.audio.src = playlist.audio.contentUrl;
+      this.audio.src = playlist.audio.contentUrl !== ''
+        ? playlist.audio.contentUrl
+        : playlist.tracks[track].audio.contentUrl;
       this.audio.load();
       this.playlist = playlist;
       this.timestamps = playlist.timestamps;
