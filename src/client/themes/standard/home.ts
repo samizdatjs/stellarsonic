@@ -4,11 +4,10 @@ import {RouteConfig} from 'aurelia-router';
 
 @autoinject
 export class Home {
-  public settings: any;
+  settings: any;
+  bottom!: HTMLElement;
 
-  public constructor(
-    private postFeed: PostFeed,
-  ) {}
+  constructor(public postFeed: PostFeed) {}
 
   async activate(params: any, routeConfig: RouteConfig) {
     this.postFeed.limit = 6;
