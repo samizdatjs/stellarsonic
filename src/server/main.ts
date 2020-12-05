@@ -70,10 +70,10 @@ bootstrap(Application, {
   c.register(Provider.ofInstance<ServerConfig>('tashmetu.ServerConfig', {
     middleware: {
       '/':                   [...rootMiddleware, requestLogger()],
-      '/api/posts':          resource({collection: 'articles', readOnly: false}),
-      '/api/authors':        resource({collection: 'authors', readOnly: false}),
-      '/api/page-settings':  resource({collection: 'page-settings', readOnly: false}),
-      '/api/theme-settings': resource({collection: 'theme-settings', readOnly: false}),
+      '/api/posts':          resource({collection: 'articles', readOnly: !argv.dev}),
+      '/api/authors':        resource({collection: 'authors', readOnly: !argv.dev}),
+      '/api/page-settings':  resource({collection: 'page-settings', readOnly: !argv.dev}),
+      '/api/theme-settings': resource({collection: 'theme-settings', readOnly: !argv.dev}),
       '/api/tags':           resource({collection: 'tags', readOnly: true}),
       '/api/genres':         resource({collection: 'genres', readOnly: true}),
 
