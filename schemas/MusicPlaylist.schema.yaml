@@ -9,7 +9,6 @@ properties:
     properties:
       contentUrl:
         type: string
-        format: uri
         description: Actual bytes of the media object
       duration:
         type: string
@@ -22,7 +21,6 @@ properties:
     description: The author of this content
   datePublished:
     type: string
-    format: date-time
     description: Date of first broadcast/publication.
   description:
     type: string
@@ -56,11 +54,7 @@ properties:
           type: string
       required: 
         - name
+        - byArtist
         - duration
 required: 
-  - audio
-  - author
-  - datePublished
   - headline
-  - image
-  - text

@@ -30,10 +30,16 @@
         <div class="uk-margin">
           <label for="post-audio">Headline</label>
           <input class="uk-input" id="post-headline" type="text" value.bind="selected.headline">
+          <label for="post-audio">Author</label>
+          <select class="uk-input" id="post-author" value.bind="author">
+            <option repeat.for="author of authors.data" model.bind="author">
+              ${author.givenName} ${author.familyName}
+            </option>
+          </select>
         </div>
         <p class="uk-text-right">
           <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="posts.save(selected)">Create</button>
+          <button class="uk-button uk-button-primary uk-modal-close" type="button" click.delegate="save()">Create</button>
         </p>
     </div>
   </div>
