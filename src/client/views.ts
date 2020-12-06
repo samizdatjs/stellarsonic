@@ -19,8 +19,8 @@ export class PostGenres extends ItemSet {}
 
 @view({collection: 'articles'})
 export class PostFeed extends Feed<MusicPlaylist> {
-  limit = 3;
-  increment = 3;
+  limit = 6;
+  increment = 6;
 
   @sortBy('datePublished')
   dateSort = SortingDirection.Descending;
