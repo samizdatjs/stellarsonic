@@ -51,10 +51,14 @@
         <div class="segment pad-medium-up">
           <div class="spread">
             <main class="content-main">
+              <div class="article-content">
+                <h1 class="title">${content.headline}</h1>
+                <h2 class="subtitle">${content.alternativeHeadline}</h2>
+              </div>
               <div class="excerpt">
                 <p>${content.description}</p>
               </div>
-              <article>
+              <article class="article-content">
                 <markdown text.bind="content.text"></markdown>
               </article>
             </main>

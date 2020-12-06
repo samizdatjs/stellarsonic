@@ -180,20 +180,21 @@
 // Title
 //-----------------------------------------------------------------------------
 .title
-  font-family: 'Open Sans Condensed', sans-serif;
-  border-bottom: 1px solid rgba(255,255,255,.1);
-  color: #d6b09b;
+  font-family: font-secondary
+  color: rgba(0,0,0,.62);
   font-size: 2.5em;
   text-align: center;
-  font-weight: bold;
-
-  @media screen and (min-width: bp-large)
-    text-align: left;
+  margin-top: 60px;
+  text-align: left;
 
 .subtitle
-  font-family: 'Raleway', sans-serif;
+  font-family: font-primary
   font-size: 1.5em;
   margin-top: -20px;
+  color: rgba(0,0,0,.3);
+  text-transform: uppercase;
+  /* margin-left: 20px; */
+  border-top: 1px solid rgba(0,0,0,.1);
 
 
 // Tracklist
@@ -272,11 +273,8 @@
 // Player
 //-----------------------------------------------------------------------------
 .cover-content
-  margin-top: -100px;
+  margin-top: -60px;
   
-  @media screen and (min-width: bp-medium)
-    margin-top: -150px;
-
 player
   display: block;
   width: 100%;

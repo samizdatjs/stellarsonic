@@ -1,10 +1,6 @@
 <template>
   <require from="value-converters"></require>
 
-  <section class="track-details content uk-light">
-    <h1>${playlist.headline}</h1>
-    <h2>${playlist.alternativeHeadline}</h2>
-  </section>
   <section class="track-controls">
     <span class="timestamp time">${currentTime | time}</span>
     <a click.delegate="player.skipBackward()" class="skip-backward button">

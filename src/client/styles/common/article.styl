@@ -1,17 +1,19 @@
 @import '../settings';
 
-article
-  color: color-text;
-  font-family: font-primary;
-  position: relative;
-  margin: 50px auto;
+.article-content
   padding: 0 content-padding;
+  margin: 50px auto;
 
   @media screen and (min-width: bp-small)
     padding: 0 (2 * content-padding);
   
   @media screen and (min-width: bp-medium) and (max-width: bp-large)
     padding: 0 (3 * content-padding);
+
+article
+  color: color-text;
+  font-family: font-primary;
+  position: relative;
 
   a
     color: #cd9023;
