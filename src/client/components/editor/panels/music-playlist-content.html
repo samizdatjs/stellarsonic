@@ -5,6 +5,13 @@
 
   <div class="uk-padding">
     <div class="uk-margin">
+      <label for="post-status">Status</label>
+      <select class="uk-input" id="post-status" value.bind="status">
+        <option value="published">Published</option>
+        <option value="draft">Draft</option>
+      </select>
+    </div>
+    <div class="uk-margin">
       <label for="post-headline">Headline</label>
       <input class="uk-input" id="post-headline" type="text" value.bind="content.headline">
     </div>

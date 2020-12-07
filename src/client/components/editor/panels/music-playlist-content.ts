@@ -6,10 +6,21 @@ import { Assets } from '@client/services/assets';
 @autoinject
 export class MusicPlaylistContentCustomElement extends ContentEditorComponent {
   audio: Assets;
+  status: string;
 
   public constructor(editor: Editor) {
     super(editor);
     this.audio = editor.page.audio;
+    this.status = this.content.datePublished !== '' ? 'published' : 'draft';
+  }
+
+  save() {
+    if (this.status === 'published' && this.content.datePublished === '') {
+      this.content.datePublished = new Date().toISOString();
+    } else if (this.status === 'draft') {
+      this.content.datePublished = '';
+    }
+    super.save();
   }
 }
 

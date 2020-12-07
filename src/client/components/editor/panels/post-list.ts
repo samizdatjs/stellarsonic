@@ -32,6 +32,14 @@ export class PostListCustomElement extends EditorComponent {
       this.posts.save(this.selected);
     }
   }
+
+  get published() {
+    return this.posts.data.filter(post => post.datePublished !== '');
+  }
+
+  get drafts() {
+    return this.posts.data.filter(post => post.datePublished === '');
+  }
 }
 
 export const postList: EditorComponentConfig = {

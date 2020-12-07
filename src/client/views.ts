@@ -30,6 +30,11 @@ export class PostFeed extends Feed<MusicPlaylist> {
     disableOn: 'all'
   })
   genre = 'all';
+
+  @filter({
+    compile: () => ({datePublished: {$ne: ''}})
+  })
+  published = true;
 }
 
 @view({collection: 'articles'})

@@ -124,7 +124,7 @@ export abstract class ContentEditorComponent<T = any> extends EditorComponent {
   }
 
   @action({title: 'save', icon: 'cloud-upload'})
-  saveContent() {
+  save() {
     this.editor.saveContent();
   }
 }

@@ -3,28 +3,60 @@
 
   <navbar actions.bind="actions"></navbar>
 
-  <div class="uk-padding">
-    <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="post of posts.data">
-      <div class="uk-card-header">
-        <div class="uk-grid-small uk-flex-middle" uk-grid>
-          <div class="uk-width-auto">
-            <span uk-icon="file-edit" class="uk-margin-small-right"></span>
-          </div>
-          <div class="uk-width-expand">
-            <a href="#playlists/${post._id}">
-              <h4 class="uk-card-title uk-margin-remove-bottom">${post.headline}</h4>
-            </a>
-            <p class="uk-text-meta uk-margin-remove-top">${post.datePublished}</p>
-          </div>
-          <div class="uk-width-auto">
-            <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
-              uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
-            <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #post-remove-modal" click.delegate="select(post)"></a>
+  <ul uk-tab="animation: uk-animation-fade" class="uk-padding uk-box-shadow-small">
+    <li><a href="#">Published</a></li>
+    <li><a href="#">Drafts</a></li>
+  </ul>
+  <ul class="uk-switcher">
+    <li>
+      <div class="uk-padding">
+        <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="post of published">
+          <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+              <div class="uk-width-auto">
+                <span uk-icon="file-edit" class="uk-margin-small-right"></span>
+              </div>
+              <div class="uk-width-expand">
+                <a href="#playlists/${post._id}">
+                  <h4 class="uk-card-title uk-margin-remove-bottom">${post.headline}</h4>
+                </a>
+                <p class="uk-text-meta uk-margin-remove-top">${post.datePublished}</p>
+              </div>
+              <div class="uk-width-auto">
+                <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
+                  uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
+                <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #post-remove-modal" click.delegate="select(post)"></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </li>
+    <li>
+      <div class="uk-padding">
+        <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="post of drafts">
+          <div class="uk-card-header">
+            <div class="uk-grid-small uk-flex-middle" uk-grid>
+              <div class="uk-width-auto">
+                <span uk-icon="file-edit" class="uk-margin-small-right"></span>
+              </div>
+              <div class="uk-width-expand">
+                <a href="#playlists/${post._id}">
+                  <h4 class="uk-card-title uk-margin-remove-bottom">${post.headline}</h4>
+                </a>
+                <p class="uk-text-meta uk-margin-remove-top">${post.datePublished}</p>
+              </div>
+              <div class="uk-width-auto">
+                <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
+                  uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
+                <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #post-remove-modal" click.delegate="select(post)"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
 
   <div id="post-remove-modal" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
