@@ -1,5 +1,6 @@
 <template>
   <require from="components/editor/navbar"></require>
+  <require from="value-converters"></require>
 
   <navbar actions.bind="actions"></navbar>
 
@@ -10,7 +11,7 @@
   <ul class="uk-switcher">
     <li>
       <div class="uk-padding">
-        <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="post of published">
+        <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" style="max-height: 200px; transition: max-height 0.2s;" repeat.for="post of published">
           <div class="uk-card-header">
             <div class="uk-grid-small uk-flex-middle" uk-grid>
               <div class="uk-width-auto">
@@ -20,14 +21,17 @@
                 <a href="#playlists/${post._id}">
                   <h4 class="uk-card-title uk-margin-remove-bottom">${post.headline}</h4>
                 </a>
-                <p class="uk-text-meta uk-margin-remove-top">${post.datePublished}</p>
+                <p class="uk-text-meta uk-margin-remove-top">${post.datePublished | dateFormat}</p>
               </div>
               <div class="uk-width-auto">
-                <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
-                  uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
-                <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #post-remove-modal" click.delegate="select(post)"></a>
+                <a uk-icon="menu" class="uk-icon-link" click.delegate="select(post)"></a>
               </div>
             </div>
+          </div>
+          <div class="uk-card-footer uk-animation-slide-top-small" if.bind="selected === post">
+            <a href="#playlists/${post._id}" class="uk-button uk-button-text uk-margin-right">Edit</a>
+            <a href="#" class="uk-button uk-button-text uk-margin-right" click.delegate="publish(false)">Unpublish</a>
+            <a href="#" class="uk-button uk-button-text" uk-toggle="target: #post-remove-modal">Remove</a>
           </div>
         </div>
       </div>
@@ -47,11 +51,14 @@
                 <p class="uk-text-meta uk-margin-remove-top">${post.datePublished}</p>
               </div>
               <div class="uk-width-auto">
-                <a href="" uk-icon="pencil" class="uk-icon-link uk-margin-small-right"
-                  uk-toggle="target: #author-edit-modal" click.delegate="edit({author})"></a>
-                <a href="" uk-icon="trash" class="uk-icon-link" uk-toggle="target: #post-remove-modal" click.delegate="select(post)"></a>
+                <a uk-icon="menu" class="uk-icon-link" click.delegate="select(post)"></a>
               </div>
             </div>
+          </div>
+          <div class="uk-card-footer uk-animation-slide-top-small" if.bind="selected === post">
+            <a href="#playlists/${post._id}" class="uk-button uk-button-text uk-margin-right">Edit</a>
+            <a href="#" class="uk-button uk-button-text uk-margin-right" click.delegate="publish(true)">Publish</a>
+            <a href="#" class="uk-button uk-button-text" uk-toggle="target: #post-remove-modal">Remove</a>
           </div>
         </div>
       </div>

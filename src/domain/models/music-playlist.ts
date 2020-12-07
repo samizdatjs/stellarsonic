@@ -33,6 +33,14 @@ export class MusicPlaylist {
     );
   }
 
+  public publish() {
+    this.datePublished = new Date().toISOString();
+  }
+
+  public unpublish() {
+    this.datePublished = '';
+  }
+
   public get timestamps(): number[] {
     const timestamps: number[] = [0];
     let prev = 0;

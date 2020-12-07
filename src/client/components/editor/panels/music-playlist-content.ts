@@ -1,10 +1,11 @@
 import {autoinject, PLATFORM} from 'aurelia-framework';
 import {ContentEditorComponent, EditorComponentConfig} from '@client/interfaces';
 import {Editor} from '@client/services/editor';
-import { Assets } from '@client/services/assets';
+import {Assets} from '@client/services/assets';
+import {MusicPlaylist} from '@domain/models/music-playlist';
 
 @autoinject
-export class MusicPlaylistContentCustomElement extends ContentEditorComponent {
+export class MusicPlaylistContentCustomElement extends ContentEditorComponent<MusicPlaylist> {
   audio: Assets;
   status: string;
 
@@ -16,9 +17,9 @@ export class MusicPlaylistContentCustomElement extends ContentEditorComponent {
 
   save() {
     if (this.status === 'published' && this.content.datePublished === '') {
-      this.content.datePublished = new Date().toISOString();
+      this.content.publish();
     } else if (this.status === 'draft') {
-      this.content.datePublished = '';
+      this.content.unpublish();
     }
     super.save();
   }

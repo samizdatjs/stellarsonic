@@ -16,7 +16,7 @@ export class PostListCustomElement extends EditorComponent {
   }
 
   select(post: MusicPlaylist) {
-    this.selected = post;
+    this.selected = post === this.selected ? undefined : post;
   }
 
   @action({title: 'create', icon: 'plus'})
@@ -29,6 +29,17 @@ export class PostListCustomElement extends EditorComponent {
   async save() {
     if (this.selected) {
       this.selected.author = this.author;
+      this.posts.save(this.selected);
+    }
+  }
+
+  publish(value: boolean) {
+    if (this.selected) {
+      if (value) {
+        this.selected.publish();
+      } else {
+        this.selected.unpublish();
+      }
       this.posts.save(this.selected);
     }
   }
