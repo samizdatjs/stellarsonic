@@ -55,7 +55,7 @@
                 <h1 class="title">${content.headline}</h1>
                 <h2 class="subtitle">${content.alternativeHeadline}</h2>
               </div>
-              <div class="excerpt">
+              <div if.bind="content.description" class="excerpt">
                 <p>${content.description}</p>
               </div>
               <article class="article-content">
