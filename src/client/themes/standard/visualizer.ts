@@ -28,6 +28,10 @@ export class VisualizerCustomElement {
   drawBars (ctx: CanvasRenderingContext2D, array: Uint8Array) {
     const c = this.canvas;
 
+    if (!c) {
+      return;
+    }
+
     var threshold = 0;
     ctx.clearRect(0, 0, c.width, c.height);
     var maxBinCount = array.length;
