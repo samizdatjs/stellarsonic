@@ -1,0 +1,50 @@
+<template>
+  <require from="value-converters"></require>
+  <require from="components/markdown"></require>
+  <require from="../standard/player"></require>
+  <require from="../standard/visualizer"></require>
+  <require from="styles/common/article.styl"></require>
+  <require from="./playlist.styl"></require>
+
+  <div class="saiph-playlist page au-animate">
+    <div class="uk-padding-large uk-light" css="background: ${theme.backgroundColor}">
+      <div class="background-image" css="background: url(${content.image}) 50% 50% / cover no-repeat; opacity: ${theme.backgroundOpacity}"></div>
+      <div class="uk-container">
+        <div uk-grid>
+          <div class="uk-width-expand@m">
+            <div>
+              <h1 class="title">${content.headline}</h1>
+              <h2 class="subtitle">${content.alternativeHeadline}</h2>
+            </div>
+            <visualizer></visualizer>
+            <player playlist.bind="content"></player>
+          </div>
+          <div class="uk-width-1-3@m">
+            <div class="aspect-square uk-box-shadow-medium">
+              <img src.bind="content.image" class="object-fit-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="uk-padding-large uk-dark" style="background: #fff;">
+      <div class="uk-container">
+        <div uk-grid>
+          <div class="uk-width-expand@m">
+            <article class="article-content">
+              <markdown text.bind="content.text"></markdown>
+            </article>
+          </div>
+          <div class="uk-width-1-3@m">
+            <ul class="uk-list uk-list-striped">
+              <li repeat.for="track of content.tracks">
+                <span uk-icon="play" class="uk-margin-right"></span>
+                <span class="track-name">${track.name}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
