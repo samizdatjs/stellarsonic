@@ -45,8 +45,10 @@
           <div class="uk-width-1-3@m">
             <ul class="uk-list uk-list-striped">
               <li repeat.for="track of content.tracks">
-                <span uk-icon="play" class="uk-margin-right"></span>
-                <span class="track-name">${track.name}</span>
+                <a click.delegate="player.togglePlay(content, $index)">
+                  <span uk-icon="play" class="uk-margin-right"></span>
+                  <span class="track-name">${track.name}</span>
+                </a>
               </li>
             </ul>
           </div>
