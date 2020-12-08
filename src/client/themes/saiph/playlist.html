@@ -13,12 +13,12 @@
       <div class="uk-container uk-padding-large">
         <div uk-grid>
           <div class="uk-width-expand@m" style="position: relative;">
-            <h1 class="title">${content.headline}</h1>
-            <h2 class="subtitle">${content.alternativeHeadline}</h2>
+            <h1 class="title uk-animation-slide-top-small">${content.headline}</h1>
+            <h2 class="subtitle uk-animation-slide-bottom-small">${content.alternativeHeadline}</h2>
             <div>
               <visualizer style="position: absolute; width: 100%;"></visualizer>
               <a click.delegate="player.togglePlay(content)" class="play-button"> <i class="${icon}"></i></a>
-              <div if.bind="loaded" class="player-info">
+              <div if.bind="loaded" class="player-info uk-animation-slide-bottom-small">
                 <div class="time">${currentTime | time}</div>
                 <div class="current-track">${currentTrack.byArtist} <span class="track-name uk-margin-small-left">${currentTrack.name}</span></div>
                 <div class="time">${duration | time}</div>
@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="uk-width-1-3@m">
-            <div class="aspect-square uk-box-shadow-medium">
+            <div class="aspect-square uk-box-shadow-medium uk-animation-slide-right-small">
               <img src.bind="content.image" class="object-fit-cover">
             </div>
           </div>
