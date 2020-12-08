@@ -34,7 +34,6 @@ import { Player } from '@domain/player';
       },
       use: [caching()]
     }),
-    Provider.ofInstance('disqus.Shortname', siteConfig.disqus),
     Provider.ofInstance('stellarsonic.SiteConfig', siteConfig),
     Provider.ofInstance('stellarsonic.Themes', ['standard'])
   ],
@@ -55,19 +54,6 @@ export async function configure(aurelia: Aurelia): Promise<void> {
       container.register(Provider.ofInstance('stellarsonic.EditorConfiguration', editorConfModule.editorConfig));
     }
     container.register(Provider.ofInstance('stellarsonic.Environment', process.env.NODE_ENV))
-    container.register(Provider.ofFactory({
-      key: 'stellarsonic.Analyser',
-      inject: [Player],
-      create: (player: Player) => {
-        const context = new AudioContext();
-        const src = context.createMediaElementSource(player.audio);
-        const analyser = context.createAnalyser();
-        src.connect(analyser);
-        analyser.connect(context.destination);
-        analyser.fftSize = 256;
-        return analyser;
-      }
-    }))
   });
 
   await aurelia.start();

@@ -1,25 +1,26 @@
 import {inject} from 'aurelia-framework';
 import {Player} from '@domain/player';
 
-@inject(Player, 'stellarsonic.Analyser')
+@inject(Player)
 export class VisualizerCustomElement {
   canvas!: HTMLCanvasElement;
   value: any;
 
   public constructor(
     public player: Player,
-    private analyser: AnalyserNode,
   ) {}
 
   bind() {
     const ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-    const bufferLength = this.analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
+    const dataArray = new Uint8Array(128);
 
     const renderFrame = () => {
-      this.analyser.getByteFrequencyData(dataArray);
       requestAnimationFrame(renderFrame);
-      this.drawBars(ctx, dataArray);
+
+      if (this.player.analyser) {
+        this.player.analyser.getByteFrequencyData(dataArray);
+        this.drawBars(ctx, dataArray);
+      }
     }
 
     renderFrame();

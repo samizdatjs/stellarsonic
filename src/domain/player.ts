@@ -42,6 +42,7 @@ export class HtmlAudio implements Audio {
 export abstract class Player {
   public playlist: MusicPlaylist | undefined;
   public audio: HTMLAudioElement;
+  public analyser: AnalyserNode | undefined;
   private timestamps: number[] = [];
 
   public constructor() {
@@ -78,6 +79,15 @@ export abstract class Player {
       this.audio.load();
       this.playlist = playlist;
       this.timestamps = playlist.timestamps;
+
+      if (!this.analyser) {
+        const context = new AudioContext();
+        const src = context.createMediaElementSource(this.audio);
+        this.analyser = context.createAnalyser();
+        src.connect(this.analyser);
+        this.analyser.connect(context.destination);
+        this.analyser.fftSize = 256;
+      }
     }
     this.audio.currentTime = this.offset(track);
     this.audio.crossOrigin = "anonymous";
