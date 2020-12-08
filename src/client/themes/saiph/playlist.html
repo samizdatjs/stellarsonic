@@ -8,7 +8,7 @@
   <require from="./playlist.styl"></require>
 
   <div class="saiph-playlist page au-animate">
-    <div class="uk-light" css="background: ${background}">
+    <div class="uk-light" css="background: ${background}; position: relative;">
       <div class="background-image" css="background: url(${content.image}) 50% 50% / cover no-repeat; opacity: ${theme.backgroundOpacity}"></div>
       <div class="uk-container uk-padding-large">
         <div uk-grid>
@@ -17,8 +17,8 @@
             <h2 class="subtitle uk-animation-slide-bottom-small">${content.alternativeHeadline}</h2>
             <div>
               <visualizer style="position: absolute; width: 100%;"></visualizer>
-              <a click.delegate="player.togglePlay(content)" class="play-button"> <i class="${icon}"></i></a>
-              <div if.bind="loaded" class="player-info uk-animation-slide-bottom-small">
+              <a click.delegate="player.togglePlay(content)" class="play-button ${loaded && !player.audio.paused ? 'playing' : ''}"> <i class="${icon}"></i></a>
+              <div class="player-info uk-animation-slide-bottom-small">
                 <div class="time">${currentTime | time}</div>
                 <div class="current-track">${currentTrack.byArtist} <span class="track-name uk-margin-small-left">${currentTrack.name}</span></div>
                 <div class="time">${duration | time}</div>
