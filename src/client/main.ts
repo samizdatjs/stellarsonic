@@ -32,7 +32,7 @@ import {PostTransformer} from './lib';
       },
       use: [caching()]
     }),
-    Provider.ofInstance('stellarsonic.Themes', ['standard'])
+    Provider.ofInstance('stellarsonic.Themes', ['standard', 'saiph'])
   ],
 })
 export class Application {}

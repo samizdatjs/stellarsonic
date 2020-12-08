@@ -28,7 +28,7 @@ export class Theming {
       // No settings stored, proceed with defaults
     }
 
-    return { name: 'standard', settings };
+    return { name: siteConfig.theme, settings };
   }
 
   public async saveConfig(config: any, contentId?: string) {

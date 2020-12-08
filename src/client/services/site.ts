@@ -17,7 +17,11 @@ export class Site {
 
   public async saveConfig(config: SiteConfig) {
     await fetch('/api/site', {
-      method: 'PUT',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(config),
     });
   }

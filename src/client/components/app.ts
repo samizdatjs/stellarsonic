@@ -53,6 +53,10 @@ export class App {
       instruction.config.settings = page;
       instruction.config.href = instruction.fragment
 
+      let viewPorts = instruction.config.viewPorts;
+      if (viewPorts) {
+        viewPorts.default.moduleId = instruction.config.moduleId;
+      }
     };
     config.map([
       { route: '', name: 'home', navigationStrategy: navStrat },
