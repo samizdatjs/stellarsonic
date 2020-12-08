@@ -5,10 +5,6 @@ import {ThemeAnnotation, ThemeConfig} from "@client/interfaces";
 import {NotificationService} from "./notification";
 import {Site} from "./site";
 
-export const themes = [
-  'standard',
-];
-
 @inject('ziqquratu.Database', Site, NotificationService)
 export class Theming {
   public constructor(
@@ -35,20 +31,6 @@ export class Theming {
     return { name: 'standard', settings };
   }
 
-  private getTheme(themeModule: Record<string, Newable<any>>, type: string): any {
-    for (const t of Object.values(themeModule)) {
-      const config = this.getThemeMeta(t);
-      if (config.type === type) {
-        return t;
-      }
-    }
-    throw Error('No theme defined for type: ' + type);
-  }
-
-  private getThemeMeta(ctr: Newable<any>): ThemeConfig {
-    return ThemeAnnotation.onClass(ctr)[0];
-  }
-
   public async saveConfig(config: any, contentId?: string) {
     try {
       const meta = this.getThemeMeta(config.constructor);
@@ -71,14 +53,6 @@ export class Theming {
     }
   }
 
-  private async loadConfig(target: any, themeId: string, type: string, contentId?: string) {
-    const collection = await this.database.collection('theme-settings');
-    const data = await collection.findOne({themeId, type, contentId});
-    for (const key of Object.keys(target)) {
-      target[key] = data.settings[key];
-    }
-  }
-
   public async revertConfig(config: any, contentId?: string) {
     try {
       const meta = this.getThemeMeta(config.constructor);
@@ -86,6 +60,29 @@ export class Theming {
       this.notification.success('Theme settings reverted');
     } catch (err) {
       this.notification.error(err.message);
+    }
+  }
+
+
+  private getTheme(themeModule: Record<string, Newable<any>>, type: string): any {
+    for (const t of Object.values(themeModule)) {
+      const config = this.getThemeMeta(t);
+      if (config.type === type) {
+        return t;
+      }
+    }
+    throw Error('No theme defined for type: ' + type);
+  }
+
+  private getThemeMeta(ctr: Newable<any>): ThemeConfig {
+    return ThemeAnnotation.onClass(ctr)[0];
+  }
+
+  private async loadConfig(target: any, themeId: string, type: string, contentId?: string) {
+    const collection = await this.database.collection('theme-settings');
+    const data = await collection.findOne({themeId, type, contentId});
+    for (const key of Object.keys(target)) {
+      target[key] = data.settings[key];
     }
   }
 }

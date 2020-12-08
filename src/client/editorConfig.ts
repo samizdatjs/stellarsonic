@@ -20,7 +20,7 @@ export const editorConfig: EditorConfig = {
       { title: 'Site' },
       { title: 'Posts', icon: 'file-edit', component: postList },
       { title: 'Authors', icon: 'users', component: authorList },
-      { title: 'Themes', icon: 'users', component: themeList },
+      { title: 'Themes', icon: 'cog', component: themeList },
     ]
   },
   playlist: {
