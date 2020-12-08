@@ -4,6 +4,7 @@ import {MusicPlaylist} from '@domain/models/music-playlist';
 import {SaiphPlaylistTheme} from '.';
 import {PageView} from '@client/interfaces';
 import {Color} from '@client/services/color';
+import { Track } from '@domain/models/track';
 
 @autoinject
 export class Playlist extends PageView<MusicPlaylist, SaiphPlaylistTheme> {
@@ -19,6 +20,22 @@ export class Playlist extends PageView<MusicPlaylist, SaiphPlaylistTheme> {
   }
 
   get background(): string {
-    return `radial-gradient(${this.color.lighten(this.theme.backgroundColor, 20)}, ${this.theme.backgroundColor})`
+    return `radial-gradient(${this.color.lighten(this.theme.backgroundColor, 30)}, ${this.theme.backgroundColor})`
+  }
+
+  get currentTrack(): Track | undefined {
+    return this.loaded ? this.player.currentTrack : this.content.tracks[0];
+  }
+
+  get duration(): number {
+    return this.content.durationInSeconds;
+  }
+
+  get currentTime(): number {
+    return this.loaded ? this.player.audio.currentTime : 0;
+  }
+
+  get loaded(): boolean {
+    return this.player.isLoaded(this.content);
   }
 }

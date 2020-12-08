@@ -32,10 +32,31 @@
 
 .play-button
   position: absolute;
-  left: calc(50% - 28px);
-  top: 154px;
+  left: calc(50% + 12px);
+  top: 260px;
   font-size: 3.5em;
   color: #e9d1a3;
 
 .track-name
   font-family: font-secondary;
+
+.player-info
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em;
+  margin-top: -20px;
+  width: 100%;
+
+  .time
+    width: 80px;
+
+  .current-track
+    flex: 1
+    flex-grow: 1;
+    text-align: center;
+
+  .track-name
+    color: #e9d1a3
