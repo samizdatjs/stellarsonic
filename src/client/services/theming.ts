@@ -3,28 +3,31 @@ import {inject} from "aurelia-framework";
 import {NavigationInstruction} from "aurelia-router";
 import {ThemeAnnotation, ThemeConfig} from "@client/interfaces";
 import {NotificationService} from "./notification";
+import {Site} from "./site";
 
 export const themes = [
   'standard',
 ];
 
-@inject('ziqquratu.Database', 'stellarsonic.SiteConfig', NotificationService)
+@inject('ziqquratu.Database', Site, NotificationService)
 export class Theming {
   public constructor(
     private database: Database,
-    private siteConfig: any,
+    private site: Site,
     private notification: NotificationService
   ) {}
 
   public async settings(instruction: NavigationInstruction) {
-    const themeModule = await import(`@client/themes/${this.siteConfig.theme}`);
+    const siteConfig = await this.site.getConfig();
+
+    const themeModule = await import(`@client/themes/${siteConfig.theme}`);
     const type = instruction.config.name as string;
 
     const theme = this.getTheme(themeModule, type);
     const settings = new theme();
 
     try {
-      await this.loadConfig(settings, this.themeName, type, instruction.params.id);
+      await this.loadConfig(settings, siteConfig.theme, type, instruction.params.id);
     } catch (err) {
       // No settings stored, proceed with defaults
     }
@@ -44,10 +47,6 @@ export class Theming {
 
   private getThemeMeta(ctr: Newable<any>): ThemeConfig {
     return ThemeAnnotation.onClass(ctr)[0];
-  }
-
-  public get themeName(): string {
-    return this.siteConfig.theme;
   }
 
   public async saveConfig(config: any, contentId?: string) {

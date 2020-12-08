@@ -7,6 +7,7 @@ import {Server} from '@ziqquratu/tashmetu';
 import * as yargs from 'yargs';
 import {databaseConfig} from './databaseConfig';
 import {diskContent, DiskContentRouterFactory} from './routers/diskContent';
+import {yamlFile, YamlFileRouterFactory} from './routers/yamlFile';
 
 @component({
   dependencies: [
@@ -18,7 +19,8 @@ import {diskContent, DiskContentRouterFactory} from './routers/diskContent';
     Provider.ofInstance('ziqquratu.DatabaseConfig', databaseConfig),
   ],
   factories: [
-    DiskContentRouterFactory
+    DiskContentRouterFactory,
+    YamlFileRouterFactory,
   ],
   inject: ['tashmetu.Server'],
 })
@@ -76,6 +78,7 @@ bootstrap(Application, {
       '/api/theme-settings': resource({collection: 'theme-settings', readOnly: !argv.dev}),
       '/api/tags':           resource({collection: 'tags', readOnly: true}),
       '/api/genres':         resource({collection: 'genres', readOnly: true}),
+      '/api/site':           yamlFile('./content/site.yaml'),
 
       '/images': diskContent({
         destination: (postId) => `./public/uploads/${postId}/images`,

@@ -5,11 +5,9 @@ import {io} from '@ziqquratu/pipe';
 import {
   bootstrap, component, http, DatabaseConfig, Provider
 } from '@ziqquratu/ziqquratu';
-import siteConfig from '../config';
 import 'aurelia-animator-css';
 import {AuthorListView, PostFeed, PostGenres, PostListView, PostView, SettingsView} from './views';
 import {PostTransformer} from './lib';
-import { Player } from '@domain/player';
 
 @component({
   providers: [
@@ -34,7 +32,6 @@ import { Player } from '@domain/player';
       },
       use: [caching()]
     }),
-    Provider.ofInstance('stellarsonic.SiteConfig', siteConfig),
     Provider.ofInstance('stellarsonic.Themes', ['standard'])
   ],
 })

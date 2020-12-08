@@ -13,11 +13,10 @@ export class Assets {
   public async uploadFile(file: File) {
     const formData = new FormData();
     formData.append(this.field, file);
-    const resp = await fetch(this.url, {
+    await fetch(this.url, {
       method: 'POST',
       body: formData,
     });
-    console.log(resp);
     this.files = await this.listFiles();
   }
 
