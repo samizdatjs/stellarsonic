@@ -16,7 +16,7 @@
             <h1 class="title uk-animation-slide-top-small">${content.headline}</h1>
             <h2 class="subtitle uk-animation-slide-bottom-small">${content.alternativeHeadline}</h2>
             <div>
-              <visualizer if.bind="loaded" style="position: absolute; width: 100%;"></visualizer>
+              <visualizer if.bind="loaded" color.bind="theme.visualizerColor" opacity.bind="theme.visualizerOpacity" style="position: absolute; width: 100%;"></visualizer>
               <a click.delegate="player.togglePlay(content)" class="play-button ${loaded && !player.audio.paused ? 'playing' : ''}"> <i class="${icon}"></i></a>
               <div class="player-info uk-animation-slide-bottom-small">
                 <div class="time">${currentTime | time}</div>

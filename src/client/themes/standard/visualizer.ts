@@ -1,13 +1,17 @@
-import {inject} from 'aurelia-framework';
+import {inject, bindable} from 'aurelia-framework';
 import {Player} from '@domain/player';
+import {Color} from '@client/services/color';
 
-@inject(Player)
+@inject(Player, Color)
 export class VisualizerCustomElement {
+  @bindable color!: string;
+  @bindable opacity!: number;
   canvas!: HTMLCanvasElement;
   value: any;
 
   public constructor(
     public player: Player,
+    private colorService: Color,
   ) {}
 
   bind() {
@@ -43,7 +47,10 @@ export class VisualizerCustomElement {
 
     ctx.scale(0.5, 0.5);
     ctx.translate(c.width, c.height);
-    ctx.fillStyle = "rgba(214,176,155,.4)";
+    const color = this.colorService.hexToRgb(this.color);
+    if (color) {
+      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${this.opacity})`
+    }
 
     var bass = Math.floor(array[1]); //1Hz Frequenz 
     var radius = 0.2 * -(bass * 0.25 + 0.45 * c.width);

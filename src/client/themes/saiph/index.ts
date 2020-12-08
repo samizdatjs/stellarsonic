@@ -14,14 +14,21 @@ export class SaiphHomeTheme {}
   id: 'saiph',
   type: 'playlist',
   moduleId: PLATFORM.moduleName('themes/saiph/playlist'),
+  groups: {
+    'Background': ['backgroundColor', 'backgroundOpacity'],
+    'Visualizer': ['visualizerColor', 'visualizerOpacity'],
+  }
 })
 export class SaiphPlaylistTheme {
   @color('Color')
-  coverColor = 'rgb(0,0,0)';
+  visualizerColor = 'rgb(214,176,155)';
+  
+  @rangePercent('Opacity')
+  visualizerOpacity = 0.4;
 
   @color('Color')
-  backgroundColor = 'rgb(0,0,0)';
+  backgroundColor = '#444';
 
-  @rangePercent('Opacity')
+  @rangePercent('Overlay opacity')
   backgroundOpacity = 0.03;
 }
