@@ -6,13 +6,15 @@ import {Theming} from '@client/services/theming';
 import {Page} from '@client/interfaces';
 import {SEO} from '@client/services/seo';
 import {Content} from '@client/services/content';
-import { Assets } from '@client/services/assets';
+import {Assets} from '@client/services/assets';
+import {Site} from '@client/services/site';
 
-@inject(Editor, Theming, Content, SEO, 'stellarsonic.Environment')
+@inject(Site, Editor, Theming, Content, SEO, 'stellarsonic.Environment')
 export class App {
   router!: Router;
 
   constructor(
+    public site: Site,
     public editor: Editor,
     private theming: Theming,
     private contentProvider: Content,
@@ -20,9 +22,11 @@ export class App {
     public env: string,
   ) {}
 
-  configureRouter(config: RouterConfiguration, router: Router): void {
+  async configureRouter(config: RouterConfiguration, router: Router) {
     this.router = router;
-    config.title = 'Stellarsonic';
+
+    const siteConfig = await this.site.getConfig();
+    config.title = siteConfig.title;
 
     const navStrat = async (instruction: NavigationInstruction) => {
       const content = await this.contentProvider.content(instruction);
