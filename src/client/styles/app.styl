@@ -268,3 +268,30 @@ ul.plain
       position: absolute;
       width: 100%;
       height: 100%;
+
+.timeline
+  .timestamps
+    position: relative;
+    cursor: pointer;
+
+    .progress
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(46,170,183,.22);
+      transition: width 0.2s;
+      transition-timing-function: ease-in-out;
+
+    ul
+      display: flex
+
+      li
+        height: 40px
+        display: block
+        background: rgba(0,0,0,.02)
+        border-bottom: 1px solid rgba(0,0,0,.1);
+        box-sizing: border-box;
+
+        &:not(:last-child)
+          border-right: 1px solid rgba(0,0,0,.2)

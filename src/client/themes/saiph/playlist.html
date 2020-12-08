@@ -1,23 +1,24 @@
 <template>
   <require from="value-converters"></require>
   <require from="components/markdown"></require>
+  <require from="components/timeline"></require>
   <require from="../standard/player"></require>
   <require from="../standard/visualizer"></require>
   <require from="styles/common/article.styl"></require>
   <require from="./playlist.styl"></require>
 
   <div class="saiph-playlist page au-animate">
-    <div class="uk-padding-large uk-light" css="background: ${theme.backgroundColor}">
+    <div class="uk-light" css="background: ${theme.backgroundColor}">
       <div class="background-image" css="background: url(${content.image}) 50% 50% / cover no-repeat; opacity: ${theme.backgroundOpacity}"></div>
-      <div class="uk-container">
+      <div class="uk-container uk-padding-large">
         <div uk-grid>
           <div class="uk-width-expand@m">
-            <div>
-              <h1 class="title">${content.headline}</h1>
-              <h2 class="subtitle">${content.alternativeHeadline}</h2>
+            <h1 class="title">${content.headline}</h1>
+            <h2 class="subtitle">${content.alternativeHeadline}</h2>
+            <div style="position: relative;">
+              <visualizer style="position: absolute; width: 100%;"></visualizer>
+              <a click.delegate="player.togglePlay(content)" class="play-button"> <i class="${icon}"></i></a>
             </div>
-            <visualizer></visualizer>
-            <player playlist.bind="content"></player>
           </div>
           <div class="uk-width-1-3@m">
             <div class="aspect-square uk-box-shadow-medium">
@@ -26,6 +27,7 @@
           </div>
         </div>
       </div>
+      <timeline playlist.bind="content"></timeline>
     </div>
     <div class="uk-padding-large uk-dark" style="background: #fff;">
       <div class="uk-container">

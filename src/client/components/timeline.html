@@ -1,0 +1,12 @@
+<template>
+  <require from="styles/app.styl"></require>
+
+  <div class="timeline">
+    <div class="timestamps" click.trigger="seek($event)">
+      <ul id="timestamp-list" class="plain">
+        <li repeat.for="track of playlist.tracks" css="width: ${trackWidths[$index]}"></li>
+      </ul>
+      <div class="progress" css="width: ${progressWidth}"></div>
+    </div>
+  </div>
+</template>
