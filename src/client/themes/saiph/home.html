@@ -1,7 +1,23 @@
 <template>
   <require from="styles/app.styl"></require>
+  <require from="./home.styl"></require>
 
  <div class="home page au-animate">
-   <h1>Saiph</h1>
+    <div class="uk-container uk-container-large uk-padding-large">
+      <div class="uk-child-width-1-3@s" uk-grid>
+        <div repeat.for="post of posts">
+          <div>
+            <a href="#playlists/${post._id}" class="uk-transition-toggle aspect-square uk-box-shadow-medium uk-animation-slide-top-small" tabindex.bind="$index" style="overflow: hidden; display: block">
+              <img class="uk-transition-scale-up uk-transition-opaque object-fit-cover" src.bind="post.image">
+            </a>
+            <div class="uk-padding-small uk-padding-remove-bottom uk-dark" style="color: rgba(0,0,0,.65)">
+              <h1>${post.headline}</h1>
+              <i class="fa fa-tags"></i>
+              <span style="margin-left: 10px" class="font-secondary" repeat.for="genre of post.genres">${genre}</span>
+          </div>
+        </div>
+      </div>
+      <div uk-scrollspy inview.delegate="postFeed.loadMore()"></div>
+    </div>
  </div> 
 </template>

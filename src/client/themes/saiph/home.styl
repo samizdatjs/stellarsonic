@@ -1,0 +1,21 @@
+@import '../../styles/settings';
+
+.home
+  background: #f5f3f0;
+  overflow-y: scroll;
+
+// Animation
+//-----------------------------------------------------------------------------
+@keyframes homeEnter
+  0% {transform: translateY(-100%);}
+  100% {transform: translateY(0);}
+
+@keyframes homeLeave
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100%);}
+
+.home.au-enter-active
+  animation: homeEnter 0.5s ease-in-out;
+
+.home.au-leave-active
+  animation: homeLeave 1.5s ease-in-out;
