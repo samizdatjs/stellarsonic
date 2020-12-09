@@ -17,62 +17,63 @@
     opacity: 0.03;
     transform: scaleX(-1);
 
-// Title
-//-----------------------------------------------------------------------------
-.title
-  font-family: font-secondary
-  color: rgba(0,0,0,.62);
-  font-size: 2.5em;
-  text-align: center;
-  text-align: left;
-
-.subtitle
-  font-family: font-primary
-  font-size: 1.3em;
-  margin-top: -20px;
-  color: #e9d1a3!important;
-  text-transform: uppercase;
-  border-top: 1px solid rgba(0,0,0,.1);
-
-.visualizer-canvas
-  width: 100%;
-
-.play-button
-  position: absolute;
-  left: calc(50%);
-  font-size: 5.5em;
-  top: 150px;
-  transition: all 0.4s;
-
-  &:hover
-    color: #e9d1a3!important;
-
-  &.playing
-    left: calc(50% + 12px);
-    font-size: 3.5em;
-    top: 260px;
-
-
-.track-name
-  font-family: font-secondary;
-
-.player-info
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-family: 'Raleway', sans-serif;
-  font-size: 1em;
-  margin-top: -20px;
-  width: 100%;
-
-  .time
-    width: 80px;
-
-  .current-track
-    flex: 1
-    flex-grow: 1;
+  .title
+    font-family: font-secondary
+    color: #fff;
+    font-size: 2.5em;
     text-align: center;
+    text-align: left;
+
+  .subtitle
+    font-family: font-primary
+    font-size: 1.3em;
+    margin-top: -20px;
+    color: #e9d1a3!important;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(0,0,0,.1);
+
+  .semi-circle-visualizer
+    position: absolute;
+    width: 100%;
+
+    .semi-circle-visualizer-canvas
+      width: 100%;
+
+  .play-button
+    position: absolute;
+    left: calc(50%);
+    font-size: 5.5em;
+    top: 150px;
+    transition: all 0.4s;
+
+    &:hover
+      color: #e9d1a3!important;
+
+    &.playing
+      left: calc(50% + 12px);
+      font-size: 3.5em;
+      top: 260px;
 
   .track-name
-    color: #e9d1a3
+    font-family: font-secondary;
+
+  .player-info
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1em;
+    margin-top: -20px;
+    width: 100%;
+
+    .time
+      width: 80px;
+
+    .current-track
+      flex: 1
+      flex-grow: 1;
+      text-align: center;
+
+    .track-name
+      color: #e9d1a3

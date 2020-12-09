@@ -3,7 +3,7 @@ import {Player} from '@domain/player';
 import {Color} from '@client/services/color';
 
 @inject(Player, Color)
-export class VisualizerCustomElement {
+export class SemiCircleVisualizerCustomElement {
   @bindable color!: string;
   @bindable opacity!: number;
   canvas!: HTMLCanvasElement;
