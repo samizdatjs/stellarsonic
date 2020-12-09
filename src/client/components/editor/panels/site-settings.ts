@@ -1,5 +1,5 @@
 import {inject, PLATFORM} from 'aurelia-framework';
-import {EditorComponent, EditorComponentConfig} from '@client/interfaces';
+import {EditorComponent, EditorComponentConfig, action} from '@client/interfaces';
 import {Router} from 'aurelia-router';
 import {Site, SiteConfig} from '@client/services/site';
 
@@ -20,24 +20,16 @@ export class SiteSettingsCustomElement extends EditorComponent {
   }
 
   async selectTheme() {
-    // console.log(this.config.theme);
-    // console.log(this.router);
     this.router.navigate(this.router.currentInstruction.fragment, {
       replace:true,
       trigger:true,
-    })
+    });
   }
-/*
-  async select(name: string) {
-    const config = await this.site.getConfig()
-    config.theme = name;
-    await this.site.saveConfig(config);
-    this.router.navigate('/', {
-      replace:true,
-      trigger:true,
-    })
+
+  @action({ title: 'save', icon: 'cloud-upload' })
+  save() {
+    this.site.saveConfig(this.config);
   }
-  */
 }
 
 export const siteSettings: EditorComponentConfig = {
