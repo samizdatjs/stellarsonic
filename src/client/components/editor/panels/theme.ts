@@ -35,7 +35,8 @@ export class ThemeCustomElement extends EditorComponent {
 
   @action({title: 'revert', icon: 'reply'})
   public async revert() {
-    this.theming.revertConfig(this.data, this.contentId)
+    // TODO: Fix!
+    // this.theming.revertConfig(this.data, this.contentId)
   }
 }
 

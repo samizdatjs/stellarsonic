@@ -2,13 +2,26 @@ import {Annotation, classDecorator, methodDecorator, Newable} from '@ziqquratu/c
 import { RouteConfig } from 'aurelia-router';
 import {Editor} from './services/editor';
 import { Assets } from './services/assets';
+import { Identifiable } from '@domain/interfaces';
 
 export interface Page {
-  route?: string;
   content?: any;
   theme: any;
   images: Assets;
   audio: Assets;
+  config: PageConfig;
+}
+
+export interface ContentQuery {
+  collection: string;
+  id: string;
+}
+
+export interface PageConfig extends Identifiable {
+  name: string;
+  type: string;
+  route?: string;
+  content?: ContentQuery;
 }
 
 type Model<T> = T | ((page: Page, editor: Editor) => T);

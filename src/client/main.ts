@@ -6,7 +6,7 @@ import {
   bootstrap, component, http, DatabaseConfig, Provider
 } from '@ziqquratu/ziqquratu';
 import 'aurelia-animator-css';
-import {AuthorListView, PostFeed, PostGenres, PostListView, PostView, SettingsView} from './views';
+import {AuthorListView, PostFeed, PostGenres, PostListView, PostView, SettingsView, PagesView} from './views';
 import {PostTransformer} from './lib';
 
 @component({
@@ -17,15 +17,17 @@ import {PostTransformer} from './lib';
     AuthorListView,
     PostListView,
     SettingsView,
+    PagesView,
     Provider.ofInstance<DatabaseConfig>('ziqquratu.DatabaseConfig', {
       collections: {
         'articles': {
           source: http({path: '/api/posts'}),
           useBefore: [
-            io(new PostTransformer())
+            io(new PostTransformer()),
           ],
         },
         'authors': http({path: '/api/authors'}),
+        'pages': http({path: '/api/pages'}),
         'theme-settings': http({path: '/api/theme-settings'}),
         'genres': http({path: '/api/genres'}),
         'tags': http({path: '/api/tags'}),

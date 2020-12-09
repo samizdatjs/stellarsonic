@@ -1,15 +1,16 @@
-import {inject, PLATFORM} from 'aurelia-framework';
+import {PLATFORM, autoinject} from 'aurelia-framework';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {PostListView, AuthorListView} from '@client/views';
 import {action, EditorComponent, EditorComponentConfig} from '@client/interfaces';
 import UIkit from 'uikit';
+import {Editor} from '@client/services/editor';
 
-@inject(PostListView, AuthorListView)
+@autoinject
 export class PostListCustomElement extends EditorComponent {
   public selected: MusicPlaylist | undefined;
   author: any;
 
-  constructor(public posts: PostListView, public authors: AuthorListView) { super(); }
+  constructor(public posts: PostListView, public authors: AuthorListView, private editor: Editor) { super(); }
 
   async bind() {
     this.posts.refresh();
@@ -29,7 +30,7 @@ export class PostListCustomElement extends EditorComponent {
   async save() {
     if (this.selected) {
       this.selected.author = this.author;
-      this.posts.save(this.selected);
+      await this.editor.createPost(this.selected);
     }
   }
 

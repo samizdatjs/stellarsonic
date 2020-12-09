@@ -27,7 +27,7 @@ export class SaiphPlaylistTheme {
   visualizerOpacity = 0.4;
 
   @color('Color')
-  backgroundColor = '#444';
+  backgroundColor = '#444444';
 
   @rangePercent('Overlay opacity')
   backgroundOpacity = 0.03;

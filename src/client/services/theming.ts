@@ -1,48 +1,40 @@
 import {Database, Newable} from "@ziqquratu/ziqquratu";
 import {inject} from "aurelia-framework";
-import {NavigationInstruction} from "aurelia-router";
-import {ThemeAnnotation, ThemeConfig} from "@client/interfaces";
+import {ThemeAnnotation, ThemeConfig, PageConfig} from "@client/interfaces";
 import {NotificationService} from "./notification";
-import {Site} from "./site";
 
-@inject('ziqquratu.Database', Site, NotificationService)
+@inject('ziqquratu.Database', NotificationService)
 export class Theming {
   public constructor(
     private database: Database,
-    private site: Site,
     private notification: NotificationService
   ) {}
 
-  public async settings(instruction: NavigationInstruction) {
-    const siteConfig = await this.site.getConfig();
+  public async settings(pageConfig: PageConfig, themeName: string) {
+    const themeModule = await import(`@client/themes/${themeName}`);
 
-    const themeModule = await import(`@client/themes/${siteConfig.theme}`);
-    const type = instruction.config.name as string;
-
-    const theme = this.getTheme(themeModule, type);
+    const theme = this.getTheme(themeModule, pageConfig.type);
     const settings = new theme();
 
     try {
-      await this.loadConfig(settings, siteConfig.theme, type, instruction.params.id);
+      await this.loadConfig(settings, themeName, pageConfig._id as string);
     } catch (err) {
       // No settings stored, proceed with defaults
     }
 
-    return { name: siteConfig.theme, settings };
+    return { name: themeName, settings };
   }
 
-  public async saveConfig(config: any, contentId?: string) {
+  public async saveConfig(config: any, pageId?: string) {
     try {
       const meta = this.getThemeMeta(config.constructor);
       const collection = await this.database.collection('theme-settings');
       collection.replaceOne({
         themeId: meta.id,
-        contentId: contentId,
-        type: meta.type
+        pageId,
       }, {
         themeId: meta.id,
-        contentId: contentId,
-        type: meta.type,
+        pageId,
         settings: config
       }, {
         upsert: true
@@ -53,10 +45,10 @@ export class Theming {
     }
   }
 
-  public async revertConfig(config: any, contentId?: string) {
+  public async revertConfig(config: any, pageId: string) {
     try {
       const meta = this.getThemeMeta(config.constructor);
-      await this.loadConfig(config, meta.id, meta.type, contentId);
+      await this.loadConfig(config, meta.id, pageId);
       this.notification.success('Theme settings reverted');
     } catch (err) {
       this.notification.error(err.message);
@@ -78,9 +70,9 @@ export class Theming {
     return ThemeAnnotation.onClass(ctr)[0];
   }
 
-  private async loadConfig(target: any, themeId: string, type: string, contentId?: string) {
+  private async loadConfig(target: any, themeId: string, pageId: string) {
     const collection = await this.database.collection('theme-settings');
-    const data = await collection.findOne({themeId, type, contentId});
+    const data = await collection.findOne({themeId, pageId});
     for (const key of Object.keys(target)) {
       target[key] = data.settings[key];
     }

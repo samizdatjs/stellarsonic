@@ -19,7 +19,7 @@
                   <span uk-icon="file-edit" class="uk-margin-small-right"></span>
                 </div>
                 <div class="uk-width-expand">
-                  <a href="#playlists/${post._id}">
+                  <a href.bind="post.url">
                     <h4 class="uk-card-title uk-margin-remove-bottom">${post.headline}</h4>
                   </a>
                   <p class="uk-text-meta uk-margin-remove-top">${post.datePublished | dateFormat}</p>
@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="uk-card-footer uk-animation-slide-top-small" if.bind="selected === post">
-              <a href="#playlists/${post._id}" class="uk-button uk-button-text uk-margin-right">Edit</a>
+              <a href.bind="post.url" class="uk-button uk-button-text uk-margin-right">Edit</a>
               <a href="#" class="uk-button uk-button-text uk-margin-right" click.delegate="publish(false)">Unpublish</a>
               <a href="#" class="uk-button uk-button-text" uk-toggle="target: #post-remove-modal">Remove</a>
             </div>

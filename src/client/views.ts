@@ -3,6 +3,7 @@ import {SortingDirection} from '@ziqquratu/ziqquratu';
 import {MusicPlaylist} from '@domain/models/music-playlist';
 import {Person} from '@domain/interfaces';
 import {WritableItemSet} from './lib';
+import {PageConfig} from './interfaces';
 
 @view({collection: 'articles'})
 export class PostView extends Item<MusicPlaylist> {
@@ -43,3 +44,6 @@ export class PostListView extends WritableItemSet<MusicPlaylist> {}
 
 @view({collection: 'authors'})
 export class AuthorListView extends WritableItemSet<Person> {}
+
+@view({collection: 'pages'})
+export class PagesView extends WritableItemSet<PageConfig> {}

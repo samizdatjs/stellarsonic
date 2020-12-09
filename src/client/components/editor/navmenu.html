@@ -7,12 +7,11 @@
     </h1>
     <ul class="uk-breadcrumb">
       <li><a href="#">Home</a></li>
-      <li class="uk-disabled"><span>${editor.page.route}</span></li>
-      <li><span>${editor.page.content._id}</span></li>
+      <li><span>${editor.page.config.name}</span></li>
     </ul>
   </div>
 
-  <div if.bind="editor.page.route === 'home'" class="uk-margin-large-bottom">
+  <div if.bind="editor.page.config.name === 'home'" class="uk-margin-large-bottom">
     <h1>
       ${title}
     </h1>

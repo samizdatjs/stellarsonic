@@ -3,6 +3,7 @@ import { Duration } from "./duration";
 import { AudioObject, Person } from '../interfaces';
 
 export class MusicPlaylist {
+
   public constructor(
     public _id?: string,
     public headline: string = '',
@@ -15,6 +16,7 @@ export class MusicPlaylist {
     public keywords: string[] = [],
     public author: Person = { givenName: '', familyName: '', email: '' },
     public text: string = '',
+    public url: string = '',
   ) {}
 
   public static fromJSONLD(data: any) {
@@ -30,6 +32,7 @@ export class MusicPlaylist {
       data.keywords.split(', '),
       data.author,
       data.text,
+      data.url,
     );
   }
 
@@ -87,6 +90,7 @@ export class MusicPlaylist {
       keywords: this.keywords.join(', '),
       author: this.author,
       text: this.text,
+      url: this.url,
     }
   }
 }

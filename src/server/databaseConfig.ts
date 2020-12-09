@@ -40,8 +40,8 @@ export const databaseConfig = {
       extension: 'yaml',
       serializer: yaml()
     }),
-    'page-settings': file({
-      path: 'content/page-settings.yaml',
+    'pages': file({
+      path: 'content/pages.yaml',
       serializer: yaml()
     }),
     'theme-settings': file({

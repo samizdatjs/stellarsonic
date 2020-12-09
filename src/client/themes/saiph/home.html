@@ -7,7 +7,7 @@
       <div class="uk-child-width-1-3@s" uk-grid>
         <div repeat.for="post of posts">
           <div>
-            <a href="#playlists/${post._id}" class="uk-transition-toggle aspect-square uk-box-shadow-medium uk-animation-slide-top-small" tabindex.bind="$index" style="overflow: hidden; display: block">
+            <a href.bind="post.url" class="uk-transition-toggle aspect-square uk-box-shadow-medium uk-animation-slide-top-small" tabindex.bind="$index" style="overflow: hidden; display: block">
               <img class="uk-transition-scale-up uk-transition-opaque object-fit-cover" src.bind="post.image">
             </a>
             <div class="uk-padding-small uk-padding-remove-bottom uk-dark" style="color: rgba(0,0,0,.65)">
