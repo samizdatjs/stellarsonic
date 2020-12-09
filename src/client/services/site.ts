@@ -1,4 +1,4 @@
-interface SiteConfig {
+export interface SiteConfig {
   title: string;
   url: string;
   theme: string;

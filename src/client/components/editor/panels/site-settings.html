@@ -4,6 +4,21 @@
   <navbar actions.bind="actions"></navbar>
 
   <div class="uk-padding">
+    <div class="uk-margin">
+      <label for="site-title">Title</label>
+      <input class="uk-input" id="site-title" type="text" value.bind="config.title">
+    </div>
+    <div class="uk-margin">
+      <label for="site-url">URL</label>
+      <input class="uk-input" id="site-url" type="text" value.bind="config.url">
+    </div>
+    <div class="uk-margin">
+      <label for="site-theme">Theme</label>
+      <select class="uk-input" id="site-theme" value.bind="config.theme" change.delegate="selectTheme()">
+        <option repeat.for="theme of themes" value.bind="theme">${theme}</option>
+      </select>
+    </div>
+    <!--
     <div class="uk-card uk-card-default uk-width-1-1@s uk-margin-small uk-box-shadow-small uk-animation-slide-left-small" repeat.for="theme of themes">
       <div class="uk-card-header">
         <div class="uk-grid-small uk-flex-middle" uk-grid>
@@ -19,5 +34,6 @@
         </div>
       </div>
     </div>
+  -->
   </div>
 </template>

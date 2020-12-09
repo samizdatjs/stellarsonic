@@ -4,7 +4,7 @@ import {pageSettings} from './components/editor/panels/page-settings';
 import {assets} from './components/editor/panels/assets';
 import {postList} from './components/editor/panels/post-list';
 import {authorList} from './components/editor/panels/author-list';
-import {themeList} from './components/editor/panels/theme-list';
+import {siteSettings} from './components/editor/panels/site-settings';
 import {playlistContent} from './components/editor/panels/music-playlist-content';
 import {playlistTracks} from './components/editor/panels/music-playlist-tracks';
 import {tagList} from './components/editor/panels/tag-list';
@@ -20,7 +20,7 @@ export const editorConfig: EditorConfig = {
       { title: 'Site' },
       { title: 'Posts', icon: 'file-edit', component: postList },
       { title: 'Authors', icon: 'users', component: authorList },
-      { title: 'Themes', icon: 'cog', component: themeList },
+      { title: 'Settings', icon: 'cog', component: siteSettings },
     ]
   },
   playlist: {
@@ -28,6 +28,8 @@ export const editorConfig: EditorConfig = {
       { title: 'Home', icon: 'chevron-left', route: 'home' }
     ],
     items: [
+      { title: 'Site' },
+      { title: 'Settings', icon: 'cog', component: siteSettings },
       { title: 'Page' },
       { title: 'Settings', icon: 'cog', component: pageSettings },
       { title: 'Style', icon: 'settings', component: theme },
