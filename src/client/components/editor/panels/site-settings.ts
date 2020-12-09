@@ -20,7 +20,9 @@ export class SiteSettingsCustomElement extends EditorComponent {
   }
 
   async selectTheme() {
-    this.router.navigate(this.router.currentInstruction.fragment, {
+    const inst = this.router.currentInstruction;
+
+    this.router.navigateToRoute(inst.config.name as string, Object.assign({}, inst.params, inst.queryParams), {
       replace:true,
       trigger:true,
     });

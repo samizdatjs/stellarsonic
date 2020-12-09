@@ -2,12 +2,12 @@ import {Menu, MenuAction, MenuItem, EditorConfig} from "@client/interfaces";
 import {Page} from "@client/interfaces";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {inject} from "aurelia-framework";
-import {NavigationInstruction, PipelineResult, RouterEvent} from "aurelia-router";
+import {Router, NavigationInstruction, PipelineResult, RouterEvent} from "aurelia-router";
 import {EventEmitter} from 'eventemitter3';
 import {Content} from "./content";
 import {Assets} from "./assets";
 
-@inject(EventAggregator, Content, 'stellarsonic.EditorConfiguration')
+@inject(EventAggregator, Content, Router, 'stellarsonic.EditorConfiguration')
 export class Editor extends EventEmitter {
   public active: boolean = false;
   public toolbar: boolean = false;
@@ -17,14 +17,15 @@ export class Editor extends EventEmitter {
   public page: Page = { theme: {}, images: new Assets('image', ''), audio: new Assets('audio', '')};
   public activeMenuItem: MenuItem | undefined;
 
-  constructor(ea: EventAggregator, private contentProvider: Content, configuration: EditorConfig) {
+  constructor(
+    ea: EventAggregator,
+    private contentProvider: Content,
+    private router: Router,
+    private configuration: EditorConfig
+  ) {
     super();
     ea.subscribe(RouterEvent.Complete, (event: { instruction: NavigationInstruction; result: PipelineResult }) => {
-      const route = event.instruction.config.name;
-      if (route) {
-        this.menu = (configuration as any)[route];
-        this.navigate(undefined);
-      }
+      this.onNavigation(event.instruction);
     });
   }
 
@@ -43,10 +44,23 @@ export class Editor extends EventEmitter {
   }
 
   navigate(to?: number) {
-    this.nav = to;
-    const component = to !== undefined ? this.menu.items[to].component : undefined;
-    this.toolbar = component !== undefined && component.toolbar !== undefined;
-    this.activeMenuItem = this.nav !== undefined ? this.menu.items[this.nav] : undefined;
-    this.emit('navigate', to);
+    const inst = this.router.currentInstruction;
+    this.router.navigateToRoute(inst.config.name as string, Object.assign({}, inst.params, {editorNav: to }));
+  }
+
+  private onNavigation(instruction: NavigationInstruction) {
+    const route = instruction.config.name;
+    if (route) {
+      this.menu = (this.configuration as any)[route];
+      if (instruction.queryParams.editorNav) {
+        this.nav = instruction.queryParams.editorNav;
+      } else {
+        this.nav = undefined;
+      }
+      const component = this.nav !== undefined ? this.menu.items[this.nav].component : undefined;
+      this.toolbar = component !== undefined && component.toolbar !== undefined;
+      this.activeMenuItem = this.nav !== undefined ? this.menu.items[this.nav] : undefined;
+      this.emit('navigate', this.nav);
+    }
   }
 }
