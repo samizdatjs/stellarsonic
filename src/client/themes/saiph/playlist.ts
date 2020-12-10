@@ -20,7 +20,7 @@ export class Playlist extends PageView<MusicPlaylist, SaiphPlaylistTheme> {
   }
 
   get background(): string {
-    return `radial-gradient(${this.color.lighten(this.theme.backgroundColor, 30)}, ${this.theme.backgroundColor})`
+    return `radial-gradient(${this.color.lighten(this.palette[1], 30)}, ${this.palette[1]})`
   }
 
   get currentTrack(): Track | undefined {

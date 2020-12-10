@@ -17,7 +17,7 @@ export class Editor extends EventEmitter {
   public nav: number | undefined;
   public menu: Menu = { items: [] };
   public actions: MenuAction[] = [];
-  public page: Page = { theme: {}, images: new Assets('image', ''), audio: new Assets('audio', ''), config: { name: '', type: 'home'}};
+  public page: Page = { theme: {}, images: new Assets('image', ''), audio: new Assets('audio', ''), palette: [], config: { name: '', type: 'home', palette: []}};
   public activeMenuItem: MenuItem | undefined;
 
   constructor(
@@ -58,7 +58,8 @@ export class Editor extends EventEmitter {
         content: {
           collection: 'articles',
           id: postResult._id as string,
-        }
+        },
+        palette: [],
       });
     }
     await this.reconfigureRouter();

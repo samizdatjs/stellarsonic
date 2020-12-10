@@ -1,6 +1,7 @@
 import {textEditor} from './components/editor/panels/text';
 import {theme} from './components/editor/panels/theme';
 import {pageSettings} from './components/editor/panels/page-settings';
+import {pagePalette} from './components/editor/panels/page-palette';
 import {assets} from './components/editor/panels/assets';
 import {postList} from './components/editor/panels/post-list';
 import {authorList} from './components/editor/panels/author-list';
@@ -32,7 +33,8 @@ export const editorConfig: EditorConfig = {
       { title: 'Settings', icon: 'cog', component: siteSettings },
       { title: 'Page' },
       { title: 'Settings', icon: 'cog', component: pageSettings },
-      { title: 'Style', icon: 'settings', component: theme },
+      { title: 'Palette', icon: 'paint-bucket', component: pagePalette },
+      { title: 'Templete', icon: 'settings', component: theme },
       { title: 'Assets', icon: 'cloud-upload', component: assets },
       { title: 'Content' },
       { title: 'General', icon: 'file-edit', component: playlistContent },

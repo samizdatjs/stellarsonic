@@ -7,6 +7,7 @@ import { Identifiable } from '@domain/interfaces';
 export interface Page {
   content?: any;
   theme: any;
+  palette: string[];
   images: Assets;
   audio: Assets;
   config: PageConfig;
@@ -22,6 +23,7 @@ export interface PageConfig extends Identifiable {
   type: string;
   route?: string;
   content?: ContentQuery;
+  palette: string[];
 }
 
 type Model<T> = T | ((page: Page, editor: Editor) => T);
@@ -162,5 +164,9 @@ export class PageView<Content, Theme> {
 
   get theme(): Theme {
     return this.page.theme;
+  }
+
+  get palette(): string[] {
+    return this.page.config.palette;
   }
 }

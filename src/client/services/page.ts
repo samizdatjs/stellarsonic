@@ -41,6 +41,7 @@ export class PageService {
       content: content,
       images: new Assets('image', urlImages),
       audio: new Assets('audio', urlAudio),
+      palette: config.palette,
       config,
     }
   }

@@ -1,0 +1,17 @@
+<template>
+  <require from="components/editor/navbar"></require>
+  <require from="components/editor/color-picker"></require>
+  <require from="styles/editor.styl"></require>
+
+  <navbar actions.bind="actions"></navbar>
+
+  <div class="uk-padding">
+    <div class="uk-margin">
+      <div class="uk-child-width-1-1@s uk-grid-collapse uk-text-center" uk-grid>
+        <div class="uk-margin-small" repeat.for="color of palette">
+          <color-picker color.bind="color" change.call="setColor($index, hex)"></color-picker>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
