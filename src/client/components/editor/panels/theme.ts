@@ -8,12 +8,10 @@ import {Editor} from '@client/services/editor';
 export class ThemeCustomElement extends EditorComponent {
   settings: any;
   data: any;
-  contentId: string | undefined;
   themeMeta!: ThemeAnnotation;
 
-  public constructor(private theming: Theming, editor: Editor) {
+  public constructor(private theming: Theming, private editor: Editor) {
     super();
-    this.contentId = editor.page.content ? editor.page.content._id : null;
     this.data = editor.page.theme;
     this.settings = SettingAnnotation.onClass(this.data.constructor);
     this.themeMeta = ThemeAnnotation.onClass(this.data.constructor)[0];
@@ -30,13 +28,12 @@ export class ThemeCustomElement extends EditorComponent {
 
   @action({title: 'save', icon: 'cloud-upload'})
   public async save() {
-    this.theming.saveConfig(this.data, this.contentId);
+    this.theming.saveConfig(this.data, this.editor.page.config._id as string);
   }
 
   @action({title: 'revert', icon: 'reply'})
   public async revert() {
-    // TODO: Fix!
-    // this.theming.revertConfig(this.data, this.contentId)
+    this.theming.revertConfig(this.data, this.editor.page.config._id as string)
   }
 }
 
