@@ -5,6 +5,7 @@ import {MenuAction} from '@client/interfaces';
 
 @autoinject
 export class NavbarCustomElement {
+  @bindable title: string = 'Title';
   @bindable actions: MenuAction[] = [];
 
   public constructor(public router: Router, public editor: Editor) {}

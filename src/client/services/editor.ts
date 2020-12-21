@@ -1,4 +1,4 @@
-import {Menu, MenuAction, MenuItem, EditorConfig} from "@client/interfaces";
+import {MenuAction, MenuItem} from "@client/interfaces";
 import {Page} from "@client/interfaces";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {inject} from "aurelia-framework";
@@ -15,7 +15,7 @@ export class Editor extends EventEmitter {
   public active: boolean = false;
   public toolbar: boolean = false;
   public nav: number | undefined;
-  public menu: Menu = { items: [] };
+  public navTab: number = 0;
   public actions: MenuAction[] = [];
   public page: Page = { theme: {}, images: new Assets('image', ''), audio: new Assets('audio', ''), palette: [], config: { name: '', type: 'home', palette: []}};
   public activeMenuItem: MenuItem | undefined;
@@ -26,7 +26,7 @@ export class Editor extends EventEmitter {
     private contentProvider: Content,
     private router: Router,
     private pageService: PageService,
-    private configuration: EditorConfig
+    public menu: MenuItem[],
   ) {
     super();
     ea.subscribe(RouterEvent.Complete, (event: { instruction: NavigationInstruction; result: PipelineResult }) => {
@@ -84,15 +84,14 @@ export class Editor extends EventEmitter {
 
     const route = instruction.config.name;
     if (route) {
-      this.menu = (this.configuration as any)[this.page.config.type];
       if (instruction.queryParams.editorNav) {
         this.nav = instruction.queryParams.editorNav;
       } else {
         this.nav = undefined;
       }
-      const component = this.nav !== undefined ? this.menu.items[this.nav].component : undefined;
+      const component = this.nav !== undefined ? this.menu[this.nav].component : undefined;
       this.toolbar = component !== undefined && component.toolbar !== undefined;
-      this.activeMenuItem = this.nav !== undefined ? this.menu.items[this.nav] : undefined;
+      this.activeMenuItem = this.nav !== undefined ? this.menu[this.nav] : undefined;
       this.emit('navigate', this.nav);
     }
   }

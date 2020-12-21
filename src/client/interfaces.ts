@@ -1,8 +1,8 @@
 import {Annotation, classDecorator, methodDecorator, Newable} from '@ziqquratu/core';
-import { RouteConfig } from 'aurelia-router';
+import {RouteConfig} from 'aurelia-router';
 import {Editor} from './services/editor';
-import { Assets } from './services/assets';
-import { Identifiable } from '@domain/interfaces';
+import {Assets} from './services/assets';
+import {Identifiable} from '@domain/interfaces';
 
 export interface Page {
   content?: any;
@@ -88,6 +88,7 @@ export interface MenuAction {
 }
 
 export interface MenuItem {
+  type?: string;
   title: string;
   icon?: string;
   component?: EditorComponentConfig;
@@ -97,9 +98,6 @@ export interface Menu {
   actions?: MenuAction[];
   items: MenuItem[];
 }
-
-export type EditorConfig = Record<string, Menu>;
-
 
 export interface ActionConfig {
   title: string;

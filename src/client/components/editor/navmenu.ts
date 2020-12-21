@@ -1,6 +1,7 @@
 import {autoinject} from 'aurelia-framework';
 import {Editor} from '@client/services/editor';
 import {Site} from '@client/services/site';
+import {MenuItem} from '@client/interfaces';
 
 @autoinject
 export class NavmenuCustomElement {
@@ -10,5 +11,9 @@ export class NavmenuCustomElement {
 
   async bind() {
     this.title = (await this.site.getConfig()).title;
+  }
+
+  navigate(item: MenuItem) {
+    this.editor.navigate(this.editor.menu.indexOf(item));
   }
 }

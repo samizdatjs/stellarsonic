@@ -2,13 +2,8 @@
   <require from="components/editor/setting"></require>
   <require from="components/editor/navbar"></require>
 
-  <navbar actions.bind="actions"></navbar>
-<!--
-  <label for="post-image">Theme</label>
-  <select class="uk-select" value.bind="setings.theme">
-    <option repeat.for="t of theming.themes(theme.type)" value.bind="t.id">${t.name}</option>
-  </select>
--->
+  <navbar title="Page Template" actions.bind="actions"></navbar>
+
   <div if.bind="themeMeta.groups">
     <ul uk-tab="animation: uk-animation-fade" class="uk-padding uk-box-shadow-small">
       <li repeat.for="name of groupNames"><a href="#">${name}</a></li>

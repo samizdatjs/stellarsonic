@@ -1,7 +1,10 @@
 <template>
   <require from="components/editor/navitem.html"></require>
 
-  <div class="uk-navbar-left uk-animation-slide-top-small"">
+  <div class="uk-padding uk-padding-remove-bottom" style="padding-top: 70px;">
+    <h1>
+      ${title}
+    </h1>
     <ul class="uk-navbar-nav">
       <li>
         <a click.delegate="editor.navigate()">
@@ -23,4 +26,5 @@
         </a>
       </li>
     </ul>
+  </div>
 </template>

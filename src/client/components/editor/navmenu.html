@@ -1,7 +1,7 @@
 <template>
   <require from="components/editor/navitem.html"></require>
 
-  <div if.bind="editor.page.content" class="uk-margin-large-bottom">
+  <div if.bind="editor.page.content" class="uk-padding-large uk-padding-remove-bottom">
     <h1>
       ${editor.page.content.headline}
     </h1>
@@ -11,7 +11,7 @@
     </ul>
   </div>
 
-  <div if.bind="editor.page.config.name === 'home'" class="uk-margin-large-bottom">
+  <div if.bind="editor.page.config.name === 'home'" class="uk-padding-large uk-padding-remove-bottom">
     <h1>
       ${title}
     </h1>
@@ -20,10 +20,10 @@
     </ul>
   </div>
 
-  <div class="uk-width-1-1@s">
+  <div class="uk-width-1-1@s uk-padding-large">
     <ul class="uk-nav uk-nav-default">
-      <li repeat.for="item of editor.menu.items" class="${!item.component ? 'uk-nav-header' : ''}">
-        <a if.bind="item.component" click.delegate="editor.navigate($index)">
+      <li repeat.for="item of editor.menu" class="${!item.component ? 'uk-nav-header' : ''}">
+        <a if.bind="item.component" click.delegate="navigate(item)">
           <navitem item.bind="item"></navitem>
         </a>
         <span if.bind="!item.component">${item.title}</span>
