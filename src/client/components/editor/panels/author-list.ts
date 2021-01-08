@@ -23,7 +23,7 @@ export class AuthorListCustomElement extends EditorComponent {
     UIkit.modal('#author-edit-modal').show();
   }
 
-  @action({ title: 'create', icon: 'plus' })
+  @action({ title: 'add', icon: 'plus' })
   public add() {
     this.edit({ givenName: '', familyName: '', email: '' })
   }
