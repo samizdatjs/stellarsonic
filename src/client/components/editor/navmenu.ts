@@ -13,6 +13,10 @@ export class NavmenuCustomElement {
     this.title = (await this.site.getConfig()).title;
   }
 
+  get items() {
+    return this.editor.menu.filter(item => item.type ? item.type === this.editor.page.config.type : true);
+  }
+
   navigate(item: MenuItem) {
     this.editor.navigate(this.editor.menu.indexOf(item));
   }
